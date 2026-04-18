@@ -1,11 +1,55 @@
 import { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { TRACKS } from '../../data/platforms.js'
 import NeonText from './NeonText.jsx'
 
-// Maps to /public/videos/<track-id>.mp4
-const CLIPS = TRACKS.map(t => `/videos/${t.id}.mp4`)
+// Shuffle helper
+function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
+
+const RAW_CLIPS = [
+  'open skies.mp4',
+  'neonify cyan.mp4',
+  'open seas.mp4',
+  'fried circuits 2.mp4',
+  'neonify orange.mp4',
+  'purple thunder.mp4',
+  'blue thunder.mp4',
+  'desk lamp.mp4',
+  'but stop.mp4',
+  'stillness.mp4',
+  'unsent messages.mp4',
+  'intersection.mp4',
+  '111AM.mp4',
+  'ocean pkwy.mp4',
+  'skipped exit.mp4',
+  'stop sign.mp4',
+  'streetlights.mp4',
+  'rearview mirror.mp4',
+  'latte art.mp4',
+  'page turner.mp4',
+  'light.mp4',
+  'softie.mp4',
+  'morning buffer.mp4',
+  'commute.mp4',
+  'water bodies.mp4',
+  'focus mode.mp4',
+  "you're late.mp4",
+  'bright AF.mp4',
+  'lo finance.mp4',
+  'silence.mp4',
+  'morning buffer 2.mp4',
+  'page turner 2.mp4',
+  'latte art 2.mp4',
+]
+
+const CLIPS = shuffle(RAW_CLIPS).map(f => '/' + encodeURIComponent(f))
 
 function VideoSphere({ src }) {
   const matRef = useRef()
