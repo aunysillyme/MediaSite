@@ -1,30 +1,19 @@
-import { useState } from 'react'
-import { Canvas } from '@react-three/fiber'
-import { PerformanceMonitor } from '@react-three/drei'
+import { useState, Suspense, lazy } from 'react'
 import LoadingScreen from './components/ui/LoadingScreen.jsx'
 import PlatformOverlay from './components/ui/PlatformOverlay.jsx'
-import CameraController from './components/camera/CameraController.jsx'
-import Venue from './components/venue/Venue.jsx'
+
+const VenueCanvas = lazy(() => import('./VenueCanvas.jsx'))
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
-  const [dpr, setDpr] = useState(1.5)
 
   return (
     <div style={{ width: '100%', height: '100%', background: '#0A0005' }}>
       {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
 
-      <Canvas
-        dpr={dpr}
-        camera={{ position: [0, 5, 16], fov: 70, near: 0.1, far: 200 }}
-        gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }}
-        style={{ position: 'absolute', inset: 0 }}
-        shadows={false}
-      >
-        <PerformanceMonitor onDecline={() => setDpr(1)} onIncline={() => setDpr(1.5)} />
-        <CameraController />
-        <Venue />
-      </Canvas>
+      <Suspense fallback={null}>
+        <VenueCanvas />
+      </Suspense>
 
       <PlatformOverlay />
 

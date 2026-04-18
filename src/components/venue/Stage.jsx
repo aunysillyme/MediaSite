@@ -20,10 +20,8 @@ function PulsingBar({ position, color, delay = 0 }) {
 }
 
 export default function Stage() {
-  const barColors = ['#FF6B00', '#7B00FF', '#FFD700', '#FF6B00', '#7B00FF',
-                     '#FFD700', '#FF6B00', '#7B00FF', '#FFD700', '#FF6B00',
-                     '#7B00FF', '#FFD700', '#FF6B00', '#7B00FF', '#FFD700',
-                     '#FF6B00', '#7B00FF', '#FFD700', '#FF6B00', '#7B00FF']
+  const barColors = ['#FF6B00', '#7B00FF', '#FFD700', '#FF6B00',
+                     '#7B00FF', '#FFD700', '#FF6B00', '#7B00FF']
 
   return (
     <group position={[0, 0, -5]}>
@@ -79,7 +77,7 @@ export default function Stage() {
       {barColors.map((color, i) => (
         <PulsingBar
           key={i}
-          position={[-4.75 + i * 0.5, 0.6, 2.5]}
+          position={[-1.75 + i * 0.5, 0.6, 2.5]}
           color={color}
           delay={i * 0.25}
         />

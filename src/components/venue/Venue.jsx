@@ -16,14 +16,14 @@ export default function Venue() {
       <fog attach="fog" args={['#0A0005', 30, 65]} />
 
       {/* Stars */}
-      <Stars radius={80} depth={50} count={1000} factor={3} saturation={0} fade speed={0.5} />
+      <Stars radius={80} depth={40} count={400} factor={3} saturation={0} fade speed={0.3} />
 
       <Suspense fallback={null}>
         <Floor />
         <Ceiling />
         <Stage />
         <Walls />
-        <Particles count={250} />
+        <Particles count={120} />
         <BoothsCarousel />
       </Suspense>
     </>

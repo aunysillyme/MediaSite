@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Float, Text } from '@react-three/drei'
+import { Text } from '@react-three/drei'
 import { useVenueStore } from '../../store.js'
 import NeonText from './NeonText.jsx'
 
@@ -14,7 +14,6 @@ export default function PlatformBooth({ platform, orbitPosition, orbitRotationY 
   const isActive = activePlatform?.id === id
 
   const groupRef = useRef()
-  const glowRef = useRef()
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return
@@ -24,15 +23,7 @@ export default function PlatformBooth({ platform, orbitPosition, orbitRotationY 
     groupRef.current.scale.setScalar(
       groupRef.current.scale.x + (targetScale - groupRef.current.scale.x) * 0.1
     )
-    if (glowRef.current) {
-      glowRef.current.emissiveIntensity = hovered ? 6 : isActive ? 5 : 2.5 + Math.sin(t * 1.5) * 0.5
-    }
   })
-
-  const handleClick = (e) => {
-    e.stopPropagation()
-    setActivePlatform(platform)
-  }
 
   return (
     <group
@@ -41,15 +32,15 @@ export default function PlatformBooth({ platform, orbitPosition, orbitRotationY 
       rotation={[0, orbitRotationY, 0]}
       onPointerEnter={(e) => { e.stopPropagation(); setHovered(true); document.body.style.cursor = 'pointer' }}
       onPointerLeave={(e) => { e.stopPropagation(); setHovered(false); document.body.style.cursor = 'default' }}
-      onClick={handleClick}
+      onClick={(e) => { e.stopPropagation(); setActivePlatform(platform) }}
     >
-      {/* Booth base platform */}
-      <mesh position={[0, 0.15, 0]} receiveShadow>
+      {/* Base */}
+      <mesh position={[0, 0.15, 0]}>
         <boxGeometry args={[3.2, 0.3, 2.2]} />
         <meshStandardMaterial color="#0D0010" roughness={0.3} metalness={0.8} />
       </mesh>
 
-      {/* Booth back panel */}
+      {/* Back panel */}
       <mesh position={[0, 1.8, -1]}>
         <boxGeometry args={[3.2, 3.3, 0.12]} />
         <meshStandardMaterial color="#0A0008" roughness={0.5} metalness={0.6} />
@@ -67,55 +58,31 @@ export default function PlatformBooth({ platform, orbitPosition, orbitRotationY 
         <meshStandardMaterial color="#0D0010" roughness={0.2} metalness={0.9} />
       </mesh>
 
-      {/* Top arch */}
+      {/* Top arch — colored neon */}
       <mesh position={[0, 3.5, -1]}>
         <boxGeometry args={[3.4, 0.15, 0.15]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={4} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={hovered ? 6 : 4} />
       </mesh>
 
-      {/* Neon border lines on back panel */}
-      <mesh ref={glowRef} position={[0, 1.8, -0.94]}>
+      {/* Neon border strip */}
+      <mesh position={[0, 1.8, -0.94]}>
         <boxGeometry args={[3.0, 0.04, 0.04]} />
         <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
       </mesh>
-      <mesh position={[0, 0.35, -0.94]}>
-        <boxGeometry args={[3.0, 0.04, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
-      </mesh>
-      <mesh position={[-1.48, 1.075, -0.94]}>
-        <boxGeometry args={[0.04, 1.45, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
-      </mesh>
-      <mesh position={[1.48, 1.075, -0.94]}>
-        <boxGeometry args={[0.04, 1.45, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
-      </mesh>
 
-      {/* Platform name neon sign */}
-      <Float speed={2} rotationIntensity={0.02} floatIntensity={0.15}>
-        <NeonText color={color} fontSize={0.45} position={[0, 2.9, -0.9]}>
-          {name.toUpperCase()}
-        </NeonText>
-      </Float>
+      {/* Platform name */}
+      <NeonText color={color} fontSize={0.45} position={[0, 2.9, -0.9]}>
+        {name.toUpperCase()}
+      </NeonText>
 
       {/* Icon */}
-      <Text font="/font.ttf"
-        fontSize={0.6}
-        position={[0, 2.15, -0.9]}
-        anchorX="center"
-        anchorY="middle"
-      >
+      <Text font="/font.ttf" fontSize={0.6} position={[0, 2.15, -0.9]} anchorX="center" anchorY="middle">
         {icon}
         <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} />
       </Text>
 
-      {/* "Click to Enter" label */}
-      <Text font="/font.ttf"
-        fontSize={0.2}
-        position={[0, 0.7, -0.9]}
-        anchorX="center"
-        anchorY="middle"
-      >
+      {/* Label */}
+      <Text font="/font.ttf" fontSize={0.2} position={[0, 0.7, -0.9]} anchorX="center" anchorY="middle">
         {isPlaceholder ? 'COMING SOON' : 'CLICK TO ENTER'}
         <meshStandardMaterial
           color={hovered ? color : '#666666'}
@@ -124,20 +91,11 @@ export default function PlatformBooth({ platform, orbitPosition, orbitRotationY 
         />
       </Text>
 
-      {/* Ground glow halo */}
+      {/* Ground glow */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]}>
-        <circleGeometry args={[2.2, 32]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={hovered ? 1.5 : 0.6}
-          transparent
-          opacity={0.15}
-        />
+        <circleGeometry args={[2.2, 24]} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.6} transparent opacity={0.12} />
       </mesh>
-
-      {/* Point light for this booth */}
-      <pointLight color={color} intensity={hovered ? 4 : 1.5} distance={6} position={[0, 2, 0]} />
     </group>
   )
 }
