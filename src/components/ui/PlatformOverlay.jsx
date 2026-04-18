@@ -3,11 +3,6 @@ import { useVenueStore } from '../../store.js'
 import { TRACKS } from '../../data/platforms.js'
 import TrackCard from './TrackCard.jsx'
 
-const PLATFORM_EMBEDS = {
-  spotify: (id) =>
-    `https://open.spotify.com/embed/artist/${id}?utm_source=generator&theme=0`,
-}
-
 export default function PlatformOverlay() {
   const overlayOpen = useVenueStore((s) => s.overlayOpen)
   const activePlatform = useVenueStore((s) => s.activePlatform)
@@ -15,10 +10,8 @@ export default function PlatformOverlay() {
 
   if (!activePlatform) return null
 
-  const { name, color, url, embedId, embedType, icon, description, isPlaceholder } = activePlatform
-  const embedUrl = embedType === 'spotify-artist' && embedId
-    ? PLATFORM_EMBEDS.spotify(embedId)
-    : null
+  const { name, color, url, embedType, albums, icon, description, isPlaceholder } = activePlatform
+  const isSpotifyAlbums = embedType === 'spotify-albums' && albums?.length > 0
 
   return (
     <AnimatePresence>
@@ -127,19 +120,41 @@ export default function PlatformOverlay() {
             {/* Body */}
             <div style={{ flex: 1, padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-              {/* Spotify embed */}
-              {embedUrl && (
-                <div style={{ borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}>
-                  <iframe
-                    src={embedUrl}
-                    width="100%"
-                    height="152"
-                    frameBorder="0"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"
-                    style={{ display: 'block' }}
-                  />
-                </div>
+              {/* Spotify album embeds */}
+              {isSpotifyAlbums && (
+                <>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.25em',
+                      color: '#555',
+                      textTransform: 'uppercase',
+                      paddingBottom: '0.25rem',
+                      borderBottom: `1px solid #ffffff0a`,
+                    }}
+                  >
+                    Albums
+                  </div>
+                  {albums.map((albumId, i) => (
+                    <motion.div
+                      key={albumId}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      style={{ borderRadius: '12px', overflow: 'hidden', flexShrink: 0 }}
+                    >
+                      <iframe
+                        src={`https://open.spotify.com/embed/album/${albumId}?utm_source=generator&theme=0`}
+                        width="100%"
+                        height="352"
+                        frameBorder="0"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        style={{ display: 'block' }}
+                      />
+                    </motion.div>
+                  ))}
+                </>
               )}
 
               {/* Placeholder notice */}
@@ -162,38 +177,40 @@ export default function PlatformOverlay() {
                 </motion.div>
               )}
 
-              {/* Track list header */}
-              <div
-                style={{
-                  fontSize: '0.7rem',
-                  letterSpacing: '0.25em',
-                  color: '#555',
-                  textTransform: 'uppercase',
-                  paddingBottom: '0.25rem',
-                  borderBottom: `1px solid #ffffff0a`,
-                }}
-              >
-                Tracks
-              </div>
-
-              {/* Track cards */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {TRACKS.map((track, i) => (
-                  <motion.div
-                    key={track.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.04 }}
+              {/* Track list for non-Spotify platforms */}
+              {!isSpotifyAlbums && !isPlaceholder && (
+                <>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.25em',
+                      color: '#555',
+                      textTransform: 'uppercase',
+                      paddingBottom: '0.25rem',
+                      borderBottom: `1px solid #ffffff0a`,
+                    }}
                   >
-                    <TrackCard
-                      track={track}
-                      platformColor={color}
-                      platformUrl={url}
-                      platformId={activePlatform.id}
-                    />
-                  </motion.div>
-                ))}
-              </div>
+                    Tracks
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {TRACKS.map((track, i) => (
+                      <motion.div
+                        key={track.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.04 }}
+                      >
+                        <TrackCard
+                          track={track}
+                          platformColor={color}
+                          platformUrl={url}
+                          platformId={activePlatform.id}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* CTA footer */}
