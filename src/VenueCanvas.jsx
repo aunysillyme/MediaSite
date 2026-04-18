@@ -10,7 +10,7 @@ export default function VenueCanvas() {
     <Canvas
       dpr={dpr}
       camera={{ position: [0, 5, 16], fov: 70, near: 0.1, far: 200 }}
-      gl={{ antialias: true, powerPreference: 'high-performance', alpha: false }}
+      gl={{ antialias: true, powerPreference: 'default', alpha: false, failIfMajorPerformanceCaveat: false }}
       style={{ position: 'absolute', inset: 0 }}
       shadows={false}
     >
