@@ -117,7 +117,7 @@ export const PLATFORMS = [
     id: 'youtube',
     name: 'YouTube',
     color: '#FF0000',
-    url: 'https://youtube.com/@aunysillyme',
+    url: 'https://www.youtube.com/@aunysillyme',
     position: [10, 0, 6],
     cameraPos: [14, 2, 6],
     cameraLook: [10, 1, 6],
