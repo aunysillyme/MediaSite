@@ -5,17 +5,17 @@ export default function Floor() {
     <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]} receiveShadow>
       <planeGeometry args={[60, 60]} />
       <MeshReflectorMaterial
-        blur={[300, 100]}
-        resolution={1024}
-        mixBlur={0.8}
-        mixStrength={40}
+        blur={[200, 100]}
+        resolution={256}
+        mixBlur={1}
+        mixStrength={20}
         roughness={1}
-        depthScale={1.2}
+        depthScale={1.0}
         minDepthThreshold={0.4}
         maxDepthThreshold={1.4}
         color="#0A0005"
-        metalness={0.6}
-        mirror={0.5}
+        metalness={0.5}
+        mirror={0.4}
       />
     </mesh>
   )

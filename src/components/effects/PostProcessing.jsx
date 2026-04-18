@@ -6,10 +6,10 @@ export default function PostProcessing() {
   return (
     <EffectComposer>
       <Bloom
-        luminanceThreshold={0.15}
+        luminanceThreshold={0.1}
         luminanceSmoothing={0.9}
-        intensity={2.5}
-        radius={0.8}
+        intensity={3.5}
+        radius={0.85}
         mipmapBlur
       />
       <ChromaticAberration

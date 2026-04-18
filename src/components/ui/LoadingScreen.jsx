@@ -16,13 +16,13 @@ export default function LoadingScreen({ onDone }) {
           clearInterval(interval)
           setTimeout(() => {
             setVisible(false)
-            setTimeout(onDone, 600)
-          }, 400)
+            setTimeout(onDone, 400)
+          }, 200)
           return 100
         }
-        return p + Math.random() * 8
+        return p + Math.random() * 15
       })
-    }, 80)
+    }, 50)
     return () => clearInterval(interval)
   }, [onDone])
 

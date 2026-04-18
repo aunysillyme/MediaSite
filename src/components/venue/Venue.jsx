@@ -16,8 +16,8 @@ export default function Venue() {
       <CameraController />
 
       {/* Scene lighting */}
-      <ambientLight intensity={new URLSearchParams(window.location.search).has('skip') ? 0.4 : 0.05} color="#1a0030" />
-      <fog attach="fog" args={['#0A0005', new URLSearchParams(window.location.search).has('skip') ? 30 : 18, 55]} />
+      <ambientLight intensity={0.35} color="#2a0050" />
+      <fog attach="fog" args={['#0A0005', 28, 60]} />
 
       {/* Stars visible through ceiling gaps */}
       <Stars radius={80} depth={50} count={1000} factor={3} saturation={0} fade speed={0.5} />
@@ -28,7 +28,7 @@ export default function Venue() {
         <Ceiling />
         <Stage />
         <Walls />
-        <Particles count={600} />
+        <Particles count={250} />
 
         {/* All platform booths */}
         {PLATFORMS.map((platform) => (
