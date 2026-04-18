@@ -1,7 +1,42 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useVenueStore } from '../../store.js'
-import { TRACKS } from '../../data/platforms.js'
+import { TRACKS, PLATFORMS, SOCIALS } from '../../data/platforms.js'
 import TrackCard from './TrackCard.jsx'
+
+const MUSIC_PLATFORMS = PLATFORMS.filter(p => p.type !== 'connect' && !p.isPlaceholder && p.url !== '#')
+
+function LinkCard({ name, color, url, icon, delay = 0 }) {
+  return (
+    <motion.a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay }}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.75rem',
+        padding: '0.7rem 1rem',
+        borderRadius: '10px',
+        background: `${color}12`,
+        border: `1px solid ${color}33`,
+        color: '#fff',
+        textDecoration: 'none',
+        fontSize: '0.9rem',
+        fontWeight: 600,
+        transition: 'background 0.2s, border-color 0.2s',
+      }}
+      onMouseEnter={e => { e.currentTarget.style.background = `${color}28`; e.currentTarget.style.borderColor = `${color}88` }}
+      onMouseLeave={e => { e.currentTarget.style.background = `${color}12`; e.currentTarget.style.borderColor = `${color}33` }}
+    >
+      <span style={{ fontSize: '1.1rem', color }}>{icon}</span>
+      <span>{name}</span>
+      <span style={{ marginLeft: 'auto', color: '#555', fontSize: '0.75rem' }}>↗</span>
+    </motion.a>
+  )
+}
 
 export default function PlatformOverlay() {
   const overlayOpen = useVenueStore((s) => s.overlayOpen)
@@ -10,8 +45,9 @@ export default function PlatformOverlay() {
 
   if (!activePlatform) return null
 
-  const { name, color, url, embedType, albums, icon, description, isPlaceholder } = activePlatform
+  const { name, color, url, embedType, albums, icon, description, isPlaceholder, type } = activePlatform
   const isSpotifyAlbums = embedType === 'spotify-albums' && albums?.length > 0
+  const isConnect = type === 'connect'
 
   return (
     <AnimatePresence>
@@ -120,8 +156,30 @@ export default function PlatformOverlay() {
             {/* Body */}
             <div style={{ flex: 1, padding: '1.25rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
+              {/* Connect: all links & socials */}
+              {isConnect && (
+                <>
+                  <div style={{ fontSize: '0.7rem', letterSpacing: '0.25em', color: '#555', textTransform: 'uppercase', paddingBottom: '0.25rem', borderBottom: '1px solid #ffffff0a' }}>
+                    Music Platforms
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {MUSIC_PLATFORMS.map((p, i) => (
+                      <LinkCard key={p.id} name={p.name} color={p.color} url={p.url} icon={p.icon} delay={i * 0.04} />
+                    ))}
+                  </div>
+                  <div style={{ fontSize: '0.7rem', letterSpacing: '0.25em', color: '#555', textTransform: 'uppercase', paddingBottom: '0.25rem', borderBottom: '1px solid #ffffff0a', marginTop: '0.5rem' }}>
+                    Socials
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {SOCIALS.map((s, i) => (
+                      <LinkCard key={s.name} name={s.name} color={s.color} url={s.url} icon={s.icon} delay={MUSIC_PLATFORMS.length * 0.04 + i * 0.04} />
+                    ))}
+                  </div>
+                </>
+              )}
+
               {/* Spotify album embeds */}
-              {isSpotifyAlbums && (
+              {!isConnect && isSpotifyAlbums && (
                 <>
                   <div
                     style={{
@@ -158,7 +216,7 @@ export default function PlatformOverlay() {
               )}
 
               {/* Placeholder notice */}
-              {isPlaceholder && (
+              {!isConnect && isPlaceholder && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -178,7 +236,7 @@ export default function PlatformOverlay() {
               )}
 
               {/* Track list for non-Spotify platforms */}
-              {!isSpotifyAlbums && !isPlaceholder && (
+              {!isConnect && !isSpotifyAlbums && !isPlaceholder && (
                 <>
                   <div
                     style={{
@@ -213,39 +271,35 @@ export default function PlatformOverlay() {
               )}
             </div>
 
-            {/* CTA footer */}
-            <div
-              style={{
-                padding: '1.25rem',
-                borderTop: `1px solid ${color}22`,
-                flexShrink: 0,
-              }}
-            >
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  padding: '0.9rem',
-                  borderRadius: '10px',
-                  background: color,
-                  color: '#fff',
-                  textAlign: 'center',
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
-                  letterSpacing: '0.05em',
-                  textDecoration: 'none',
-                  boxShadow: `0 0 25px ${color}66`,
-                  transition: 'box-shadow 0.2s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.boxShadow = `0 0 45px ${color}99`)}
-                onMouseLeave={(e) => (e.currentTarget.style.boxShadow = `0 0 25px ${color}66`)}
-              >
-                Open in {name} →
-              </a>
-            </div>
+            {/* CTA footer — hidden for Connect booth */}
+            {!isConnect && (
+              <div style={{ padding: '1.25rem', borderTop: `1px solid ${color}22`, flexShrink: 0 }}>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '0.9rem',
+                    borderRadius: '10px',
+                    background: color,
+                    color: '#fff',
+                    textAlign: 'center',
+                    fontWeight: 700,
+                    fontSize: '0.95rem',
+                    letterSpacing: '0.05em',
+                    textDecoration: 'none',
+                    boxShadow: `0 0 25px ${color}66`,
+                    transition: 'box-shadow 0.2s',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.boxShadow = `0 0 45px ${color}99`)}
+                  onMouseLeave={(e) => (e.currentTarget.style.boxShadow = `0 0 25px ${color}66`)}
+                >
+                  Open in {name} →
+                </a>
+              </div>
+            )}
           </motion.div>
         </>
       )}

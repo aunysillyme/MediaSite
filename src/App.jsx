@@ -1,7 +1,6 @@
 import { useState, Suspense, lazy, Component } from 'react'
 import LoadingScreen from './components/ui/LoadingScreen.jsx'
 import PlatformOverlay from './components/ui/PlatformOverlay.jsx'
-import { useVenueStore } from './store.js'
 
 const VenueCanvas = lazy(() => import('./VenueCanvas.jsx'))
 
@@ -33,7 +32,6 @@ class CanvasErrorBoundary extends Component {
 
 export default function App() {
   const [loaded, setLoaded] = useState(false)
-  const overlayOpen = useVenueStore((s) => s.overlayOpen)
 
   return (
     <div style={{ width: '100%', height: '100%', background: '#0A0005' }}>
@@ -44,35 +42,6 @@ export default function App() {
           <VenueCanvas />
         </Suspense>
       </CanvasErrorBoundary>
-
-      {/* Venue title — fades out when overlay is open */}
-      {loaded && (
-        <div style={{
-          position: 'fixed',
-          top: '36%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          pointerEvents: 'none',
-          userSelect: 'none',
-          opacity: overlayOpen ? 0 : 1,
-          transition: 'opacity 0.4s ease',
-          fontFamily: '"Arial Black", "Impact", Arial, sans-serif',
-          fontSize: 'clamp(1.2rem, 3vw, 2.4rem)',
-          fontWeight: 900,
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
-          background: 'linear-gradient(90deg, #FF6B00 0%, #FFD700 30%, #ffffff 50%, #FFD700 70%, #FF6B00 100%)',
-          backgroundSize: '250% auto',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          filter: 'drop-shadow(0 0 14px rgba(255,107,0,0.9))',
-          animation: 'titleShimmer 4s linear infinite',
-        }}>
-          AunySillyMe Music
-        </div>
-      )}
 
       <PlatformOverlay />
 
@@ -95,10 +64,6 @@ export default function App() {
       )}
 
       <style>{`
-        @keyframes titleShimmer {
-          0%   { background-position: 0%   center; }
-          100% { background-position: 250% center; }
-        }
         @keyframes fadeInHint {
           from { opacity: 0; transform: translateX(-50%) translateY(8px); }
           to   { opacity: 1; transform: translateX(-50%) translateY(0); }

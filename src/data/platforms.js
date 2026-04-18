@@ -205,6 +205,22 @@ export const PLATFORMS = [
     description: 'Listen on iHeart',
     isPlaceholder: true,
   },
+  {
+    id: 'connect',
+    name: 'Connect',
+    color: '#FFD700',
+    url: 'https://www.auny.media/',
+    icon: '✧',
+    description: 'All links & socials',
+    type: 'connect',
+  },
+]
+
+export const SOCIALS = [
+  { name: 'Instagram',  color: '#E1306C', url: 'https://www.instagram.com/aunysillyme/', icon: '◈' },
+  { name: 'TikTok',     color: '#69C9D0', url: 'https://www.tiktok.com/@aunysillyme',    icon: '◉' },
+  { name: 'Twitter / X',color: '#1DA1F2', url: 'https://x.com/aunysillyme',              icon: '✦' },
+  { name: 'Website',    color: '#FFD700', url: 'https://www.auny.media/',                icon: '⬡' },
 ]
 
 export const ENTRANCE_CAMERA = { pos: [0, 3, 15], look: [0, 1, 0] }
