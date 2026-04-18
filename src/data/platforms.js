@@ -207,4 +207,4 @@ export const PLATFORMS = [
   },
 ]
 
-export const ENTRANCE_CAMERA = { pos: [0, 3, 20], look: [0, 1, 0] }
+export const ENTRANCE_CAMERA = { pos: [0, 3, 15], look: [0, 1, 0] }
