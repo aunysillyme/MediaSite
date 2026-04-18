@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { Html } from '@react-three/drei'
 import * as THREE from 'three'
-import NeonText from './NeonText.jsx'
 
-// Shuffle helper
 function shuffle(arr) {
   const a = [...arr]
   for (let i = a.length - 1; i > 0; i--) {
@@ -76,7 +75,7 @@ function VideoSphere({ src }) {
     }
 
     video.addEventListener('loadeddata', onReady)
-    video.addEventListener('error', () => {}) // silently keep fallback
+    video.addEventListener('error', () => {})
     video.load()
 
     return () => {
@@ -92,7 +91,6 @@ function VideoSphere({ src }) {
   return (
     <mesh>
       <sphereGeometry args={[3, 48, 32]} />
-      {/* Starts as glowing purple fallback; video texture replaces it on load */}
       <meshStandardMaterial
         ref={matRef}
         color="#0d0020"
@@ -109,7 +107,6 @@ export default function SphereStage() {
     Math.floor(Math.random() * CLIPS.length)
   )
 
-  // Rotate between clips every 25 seconds
   useEffect(() => {
     const t = setInterval(
       () => setClipIndex(i => (i + 1) % CLIPS.length),
@@ -129,13 +126,13 @@ export default function SphereStage() {
         <VideoSphere key={clipIndex} src={CLIPS[clipIndex]} />
       </group>
 
-      {/* LED wireframe grid (static, Vegas Sphere look) */}
+      {/* LED wireframe grid */}
       <mesh>
         <sphereGeometry args={[3.06, 18, 12]} />
         <meshStandardMaterial wireframe color="#ffffff" transparent opacity={0.07} />
       </mesh>
 
-      {/* Outer glass shell (snowglobe effect) */}
+      {/* Outer glass shell */}
       <mesh>
         <sphereGeometry args={[3.28, 32, 32]} />
         <meshStandardMaterial
@@ -148,41 +145,37 @@ export default function SphereStage() {
         />
       </mesh>
 
-      {/* Equator ring */}
-      <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[3.12, 0.045, 8, 64]} />
-        <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={5} />
-      </mesh>
-
-      {/* Upper latitude ring */}
-      <mesh position={[0, 2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.26, 0.03, 8, 48]} />
-        <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={4} />
-      </mesh>
-
-      {/* Lower latitude ring */}
-      <mesh position={[0, -2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[2.26, 0.03, 8, 48]} />
-        <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={4} />
-      </mesh>
-
-      {/* Title */}
-      <NeonText color="#FF6B00" fontSize={0.65} position={[0, 3.9, 0]}>
-        AunySillyMe Music
-      </NeonText>
+      {/* Title — CSS shimmer, always faces camera */}
+      <Html center position={[0, 3.9, 0]} style={{ pointerEvents: 'none', userSelect: 'none' }}>
+        <div style={{
+          fontFamily: '"Arial Black", "Impact", Arial, sans-serif',
+          fontSize: '2.6rem',
+          fontWeight: 900,
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          whiteSpace: 'nowrap',
+          background: 'linear-gradient(90deg, #FF6B00 0%, #FFD700 30%, #ffffff 50%, #FFD700 70%, #FF6B00 100%)',
+          backgroundSize: '250% auto',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          filter: 'drop-shadow(0 0 14px rgba(255,107,0,0.9)) drop-shadow(0 0 40px rgba(255,107,0,0.4))',
+          animation: 'titleShimmer 4s linear infinite',
+        }}>
+          AunySillyMe Music
+        </div>
+        <style>{`
+          @keyframes titleShimmer {
+            0%   { background-position: 0%   center; }
+            100% { background-position: 250% center; }
+          }
+        `}</style>
+      </Html>
 
       {/* Pedestal */}
       <mesh position={[0, -3.6, 0]}>
         <cylinderGeometry args={[1.2, 1.65, 1.2, 32]} />
         <meshStandardMaterial color="#0D0010" metalness={0.9} roughness={0.1} />
-      </mesh>
-      <mesh position={[0, -3.0, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.25, 0.03, 8, 32]} />
-        <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={3} />
-      </mesh>
-      <mesh position={[0, -4.2, 0]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.65, 0.03, 8, 32]} />
-        <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={3} />
       </mesh>
 
       {/* Sphere glow lights */}
