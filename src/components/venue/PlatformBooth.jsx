@@ -4,8 +4,10 @@ import { Float, Text } from '@react-three/drei'
 import { useVenueStore } from '../../store.js'
 import NeonText from './NeonText.jsx'
 
-export default function PlatformBooth({ platform }) {
-  const { id, name, color, position, icon, isPlaceholder } = platform
+export default function PlatformBooth({ platform, orbitPosition, orbitRotationY = 0 }) {
+  const { id, name, color, position: platformPos, icon, isPlaceholder } = platform
+  const position = orbitPosition || platformPos
+
   const [hovered, setHovered] = useState(false)
   const setActivePlatform = useVenueStore((s) => s.setActivePlatform)
   const activePlatform = useVenueStore((s) => s.activePlatform)
@@ -17,15 +19,11 @@ export default function PlatformBooth({ platform }) {
   useFrame(({ clock }) => {
     if (!groupRef.current) return
     const t = clock.getElapsedTime()
-
-    // Idle pulse
     const pulse = 1 + Math.sin(t * 2 + position[0]) * 0.015
     const targetScale = hovered ? 1.08 : isActive ? 1.05 : pulse
     groupRef.current.scale.setScalar(
       groupRef.current.scale.x + (targetScale - groupRef.current.scale.x) * 0.1
     )
-
-    // Glow intensity
     if (glowRef.current) {
       glowRef.current.emissiveIntensity = hovered ? 6 : isActive ? 5 : 2.5 + Math.sin(t * 1.5) * 0.5
     }
@@ -40,6 +38,7 @@ export default function PlatformBooth({ platform }) {
     <group
       ref={groupRef}
       position={position}
+      rotation={[0, orbitRotationY, 0]}
       onPointerEnter={(e) => { e.stopPropagation(); setHovered(true); document.body.style.cursor = 'pointer' }}
       onPointerLeave={(e) => { e.stopPropagation(); setHovered(false); document.body.style.cursor = 'default' }}
       onClick={handleClick}
@@ -71,25 +70,25 @@ export default function PlatformBooth({ platform }) {
       {/* Top arch */}
       <mesh position={[0, 3.5, -1]}>
         <boxGeometry args={[3.4, 0.15, 0.15]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={4} toneMapped={false} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={4} />
       </mesh>
 
       {/* Neon border lines on back panel */}
       <mesh ref={glowRef} position={[0, 1.8, -0.94]}>
         <boxGeometry args={[3.0, 0.04, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} toneMapped={false} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
       </mesh>
       <mesh position={[0, 0.35, -0.94]}>
         <boxGeometry args={[3.0, 0.04, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} toneMapped={false} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
       </mesh>
       <mesh position={[-1.48, 1.075, -0.94]}>
         <boxGeometry args={[0.04, 1.45, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} toneMapped={false} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
       </mesh>
       <mesh position={[1.48, 1.075, -0.94]}>
         <boxGeometry args={[0.04, 1.45, 0.04]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} toneMapped={false} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={3} />
       </mesh>
 
       {/* Platform name neon sign */}
@@ -107,7 +106,7 @@ export default function PlatformBooth({ platform }) {
         anchorY="middle"
       >
         {icon}
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} toneMapped={false} />
+        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} />
       </Text>
 
       {/* "Click to Enter" label */}
@@ -116,14 +115,12 @@ export default function PlatformBooth({ platform }) {
         position={[0, 0.7, -0.9]}
         anchorX="center"
         anchorY="middle"
-        color={hovered ? '#FFFFFF' : '#888888'}
       >
         {isPlaceholder ? 'COMING SOON' : 'CLICK TO ENTER'}
         <meshStandardMaterial
           color={hovered ? color : '#666666'}
           emissive={hovered ? color : '#333333'}
           emissiveIntensity={hovered ? 2 : 0.5}
-          toneMapped={false}
         />
       </Text>
 
@@ -134,7 +131,6 @@ export default function PlatformBooth({ platform }) {
           color={color}
           emissive={color}
           emissiveIntensity={hovered ? 1.5 : 0.6}
-          toneMapped={false}
           transparent
           opacity={0.15}
         />
