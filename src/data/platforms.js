@@ -99,7 +99,7 @@ export const PLATFORMS = [
     position: [0, 0, 10],
     cameraPos: [0, 2, 14],
     cameraLook: [0, 1, 10],
-    icon: '🎵',
+    icon: '♫',
     description: 'Stream on Spotify',
   },
   {
@@ -110,7 +110,7 @@ export const PLATFORMS = [
     position: [-10, 0, 6],
     cameraPos: [-14, 2, 6],
     cameraLook: [-10, 1, 6],
-    icon: '🎶',
+    icon: '♬',
     description: 'Listen on Apple Music',
   },
   {

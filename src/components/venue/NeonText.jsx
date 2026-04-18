@@ -13,7 +13,7 @@ export default function NeonText({
   return (
     <group position={position} rotation={rotation}>
       {/* Glow layer — slightly larger, same color, high emissive */}
-      <Text
+      <Text font="/font.ttf"
         fontSize={fontSize * 1.02}
         color={color}
         anchorX={anchorX}
@@ -32,7 +32,7 @@ export default function NeonText({
         />
       </Text>
       {/* Sharp layer */}
-      <Text
+      <Text font="/font.ttf"
         fontSize={fontSize}
         color={color}
         anchorX={anchorX}

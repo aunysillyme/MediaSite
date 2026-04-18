@@ -6,6 +6,10 @@ export default function LoadingScreen({ onDone }) {
   const [visible, setVisible] = useState(true)
 
   useEffect(() => {
+    if (new URLSearchParams(window.location.search).has('skip')) {
+      onDone()
+      return
+    }
     const interval = setInterval(() => {
       setProgress((p) => {
         if (p >= 100) {

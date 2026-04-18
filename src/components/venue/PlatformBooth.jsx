@@ -100,7 +100,7 @@ export default function PlatformBooth({ platform }) {
       </Float>
 
       {/* Icon */}
-      <Text
+      <Text font="/font.ttf"
         fontSize={0.6}
         position={[0, 2.15, -0.9]}
         anchorX="center"
@@ -111,7 +111,7 @@ export default function PlatformBooth({ platform }) {
       </Text>
 
       {/* "Click to Enter" label */}
-      <Text
+      <Text font="/font.ttf"
         fontSize={0.2}
         position={[0, 0.7, -0.9]}
         anchorX="center"

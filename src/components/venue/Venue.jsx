@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Environment, Stars } from '@react-three/drei'
+import { Stars } from '@react-three/drei'
 import Floor from './Floor.jsx'
 import Ceiling from './Ceiling.jsx'
 import Stage from './Stage.jsx'
@@ -16,8 +16,8 @@ export default function Venue() {
       <CameraController />
 
       {/* Scene lighting */}
-      <ambientLight intensity={0.05} color="#1a0030" />
-      <fog attach="fog" args={['#0A0005', 18, 55]} />
+      <ambientLight intensity={new URLSearchParams(window.location.search).has('skip') ? 0.4 : 0.05} color="#1a0030" />
+      <fog attach="fog" args={['#0A0005', new URLSearchParams(window.location.search).has('skip') ? 30 : 18, 55]} />
 
       {/* Stars visible through ceiling gaps */}
       <Stars radius={80} depth={50} count={1000} factor={3} saturation={0} fade speed={0.5} />
@@ -35,12 +35,11 @@ export default function Venue() {
           <PlatformBooth key={platform.id} platform={platform} />
         ))}
 
-        {/* Environment for reflections */}
-        <Environment preset="night" />
+
       </Suspense>
 
-      {/* Post-processing */}
-      <PostProcessing />
+      {/* Post-processing — skip in preview mode for headless rendering */}
+      {!new URLSearchParams(window.location.search).has('skip') && <PostProcessing />}
     </>
   )
 }
