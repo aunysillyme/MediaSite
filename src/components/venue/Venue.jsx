@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { Stars } from '@react-three/drei'
 import Floor from './Floor.jsx'
 import Ceiling from './Ceiling.jsx'
-import Stage from './Stage.jsx'
+import SphereStage from './SphereStage.jsx'
 import Walls from './Walls.jsx'
 import Particles from './Particles.jsx'
 import BoothsCarousel from './BoothsCarousel.jsx'
@@ -21,7 +21,7 @@ export default function Venue() {
       <Suspense fallback={null}>
         <Floor />
         <Ceiling />
-        <Stage />
+        <SphereStage />
         <Walls />
         <Particles count={120} />
         <BoothsCarousel />
