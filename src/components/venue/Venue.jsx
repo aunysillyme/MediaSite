@@ -6,7 +6,6 @@ import Stage from './Stage.jsx'
 import Walls from './Walls.jsx'
 import Particles from './Particles.jsx'
 import PlatformBooth from './PlatformBooth.jsx'
-import PostProcessing from '../effects/PostProcessing.jsx'
 import CameraController from '../camera/CameraController.jsx'
 import { PLATFORMS } from '../../data/platforms.js'
 
@@ -16,8 +15,9 @@ export default function Venue() {
       <CameraController />
 
       {/* Scene lighting */}
-      <ambientLight intensity={0.35} color="#2a0050" />
-      <fog attach="fog" args={['#0A0005', 28, 60]} />
+      <ambientLight intensity={0.4} color="#ffffff" />
+      <directionalLight position={[0, 10, 10]} intensity={0.6} color="#aa66ff" />
+      <fog attach="fog" args={['#0A0005', 30, 65]} />
 
       {/* Stars visible through ceiling gaps */}
       <Stars radius={80} depth={50} count={1000} factor={3} saturation={0} fade speed={0.5} />
@@ -34,12 +34,7 @@ export default function Venue() {
         {PLATFORMS.map((platform) => (
           <PlatformBooth key={platform.id} platform={platform} />
         ))}
-
-
       </Suspense>
-
-      {/* Post-processing — skip in preview mode for headless rendering */}
-      {!new URLSearchParams(window.location.search).has('skip') && <PostProcessing />}
     </>
   )
 }
