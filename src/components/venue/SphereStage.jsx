@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 
 function shuffle(arr) {
@@ -144,33 +143,6 @@ export default function SphereStage() {
           side={THREE.BackSide}
         />
       </mesh>
-
-      {/* Title — CSS shimmer, always faces camera */}
-      <Html center position={[0, 3.9, 0]} style={{ pointerEvents: 'none', userSelect: 'none' }}>
-        <div style={{
-          fontFamily: '"Arial Black", "Impact", Arial, sans-serif',
-          fontSize: '2.6rem',
-          fontWeight: 900,
-          letterSpacing: '0.18em',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap',
-          background: 'linear-gradient(90deg, #FF6B00 0%, #FFD700 30%, #ffffff 50%, #FFD700 70%, #FF6B00 100%)',
-          backgroundSize: '250% auto',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          filter: 'drop-shadow(0 0 14px rgba(255,107,0,0.9)) drop-shadow(0 0 40px rgba(255,107,0,0.4))',
-          animation: 'titleShimmer 4s linear infinite',
-        }}>
-          AunySillyMe Music
-        </div>
-        <style>{`
-          @keyframes titleShimmer {
-            0%   { background-position: 0%   center; }
-            100% { background-position: 250% center; }
-          }
-        `}</style>
-      </Html>
 
       {/* Pedestal */}
       <mesh position={[0, -3.6, 0]}>

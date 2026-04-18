@@ -25,7 +25,7 @@ export default function BoothsCarousel() {
   useEffect(() => {
     const onWheel = (e) => {
       e.preventDefault()
-      target.current += e.deltaY * 0.003
+      target.current -= e.deltaY * 0.003
       resetSnap()
     }
 
@@ -36,7 +36,7 @@ export default function BoothsCarousel() {
       if (lastTouch.current === null) return
       const delta = lastTouch.current - e.touches[0].clientX
       lastTouch.current = e.touches[0].clientX
-      target.current += delta * 0.006
+      target.current -= delta * 0.006
       resetSnap()
     }
     const onTouchEnd = () => { lastTouch.current = null }
@@ -50,7 +50,7 @@ export default function BoothsCarousel() {
       if (lastMouse.current === null) return
       const delta = lastMouse.current - e.clientX
       lastMouse.current = e.clientX
-      target.current += delta * 0.005
+      target.current -= delta * 0.005
       resetSnap()
     }
     const onMouseUp = () => {
