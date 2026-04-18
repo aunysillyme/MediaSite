@@ -49,7 +49,7 @@ const RAW_CLIPS = [
   'latte art 2.mp4',
 ]
 
-const CLIPS = shuffle(RAW_CLIPS).map(f => '/' + encodeURIComponent(f))
+const CLIPS = shuffle(RAW_CLIPS).map(f => '/video/' + encodeURIComponent(f))
 
 function VideoSphere({ src }) {
   const matRef = useRef()
