@@ -119,7 +119,7 @@ export default function SphereStage() {
   })
 
   return (
-    <group position={[0, 7, 0]}>
+    <group position={[0, 5, 0]}>
       {/* Spinning video sphere */}
       <group ref={spinRef}>
         <VideoSphere key={clipIndex} src={CLIPS[clipIndex]} />
