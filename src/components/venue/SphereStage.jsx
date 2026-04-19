@@ -65,6 +65,8 @@ function VideoSphere({ src }) {
       if (!matRef.current) return
       const tex = new THREE.VideoTexture(video)
       tex.colorSpace = THREE.SRGBColorSpace
+      tex.rotation = Math.PI / 2
+      tex.center.set(0.5, 0.5)
       matRef.current.map = tex
       matRef.current.emissiveMap = tex
       matRef.current.color.set('#ffffff')

@@ -25,43 +25,40 @@ export default function Venue() {
         <Particles count={120} />
         <BoothsCarousel />
 
-        {/* Neon billboard behind sphere */}
-        <group position={[0, 11, -9]}>
+        {/* Neon billboard on back wall */}
+        <group position={[0, 6.2, -17.6]}>
           {/* Frame backing */}
           <mesh>
-            <boxGeometry args={[11.5, 3.2, 0.22]} />
+            <boxGeometry args={[22, 4.5, 0.18]} />
             <meshStandardMaterial color="#08000f" metalness={0.9} roughness={0.15} />
           </mesh>
           {/* Top bar */}
-          <mesh position={[0, 1.6, 0.14]}>
-            <boxGeometry args={[11.5, 0.09, 0.09]} />
+          <mesh position={[0, 2.25, 0.12]}>
+            <boxGeometry args={[22, 0.1, 0.1]} />
             <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={6} />
           </mesh>
           {/* Bottom bar */}
-          <mesh position={[0, -1.6, 0.14]}>
-            <boxGeometry args={[11.5, 0.09, 0.09]} />
+          <mesh position={[0, -2.25, 0.12]}>
+            <boxGeometry args={[22, 0.1, 0.1]} />
             <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={6} />
           </mesh>
           {/* Left post */}
-          <mesh position={[-5.75, 0, 0.14]}>
-            <boxGeometry args={[0.09, 3.2, 0.09]} />
+          <mesh position={[-11, 0, 0.12]}>
+            <boxGeometry args={[0.1, 4.5, 0.1]} />
             <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={5} />
           </mesh>
           {/* Right post */}
-          <mesh position={[5.75, 0, 0.14]}>
-            <boxGeometry args={[0.09, 3.2, 0.09]} />
+          <mesh position={[11, 0, 0.12]}>
+            <boxGeometry args={[0.1, 4.5, 0.1]} />
             <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={5} />
           </mesh>
-          {/* Artist name */}
-          <NeonText color="#FF6B00" fontSize={1.35} position={[0, 0.4, 0.18]}>
+          <NeonText color="#FF6B00" fontSize={2.1} position={[0, 0.6, 0.16]}>
             AunySillyMe
           </NeonText>
-          {/* Subtitle */}
-          <NeonText color="#FFD700" fontSize={0.42} position={[0, -0.75, 0.18]}>
+          <NeonText color="#FFD700" fontSize={0.6} position={[0, -0.95, 0.16]}>
             — MUSIC —
           </NeonText>
-          {/* Billboard glow */}
-          <pointLight color="#FF6B00" intensity={4} distance={14} position={[0, 0, 2]} />
+          <pointLight color="#FF6B00" intensity={5} distance={18} position={[0, 0, 2]} />
         </group>
       </Suspense>
     </>
