@@ -209,7 +209,7 @@ export const PLATFORMS = [
     id: 'connect',
     name: 'Connect',
     color: '#FFD700',
-    url: 'https://www.auny.media/',
+    url: 'https://aunysillyme.com',
     icon: '✧',
     description: 'All links & socials',
     type: 'connect',
@@ -217,10 +217,14 @@ export const PLATFORMS = [
 ]
 
 export const SOCIALS = [
-  { name: 'Instagram',  color: '#E1306C', url: 'https://www.instagram.com/aunysillyme/', icon: '◈' },
-  { name: 'TikTok',     color: '#69C9D0', url: 'https://www.tiktok.com/@aunysillyme',    icon: '◉' },
-  { name: 'Twitter / X',color: '#1DA1F2', url: 'https://x.com/aunysillyme',              icon: '✦' },
-  { name: 'Website',    color: '#FFD700', url: 'https://www.auny.media/',                icon: '⬡' },
+  { name: 'Website',    color: '#FFD700', url: 'https://aunysillyme.com',                                    icon: '⬡' },
+  { name: 'Instagram',  color: '#E1306C', url: 'https://www.instagram.com/aunysillyme/',                     icon: '◈' },
+  { name: 'TikTok',     color: '#69C9D0', url: 'https://www.tiktok.com/@aunysillyme',                        icon: '◉' },
+  { name: 'X (Twitter)',color: '#1DA1F2', url: 'https://x.com/AunySillyMe',                                  icon: '✦' },
+  { name: 'Threads',    color: '#aaaaaa', url: 'https://www.threads.com/@aunysillyme',                        icon: '⊕' },
+  { name: 'Bluesky',    color: '#0085FF', url: 'https://bsky.app/profile/aunysillyme.bsky.social',            icon: '◎' },
+  { name: 'YouTube',    color: '#FF0000', url: 'https://www.youtube.com/@aunysillyme',                        icon: '▶' },
+  { name: 'LinkedIn',   color: '#0077B5', url: 'https://www.linkedin.com/in/auny-hossain-782949238/',         icon: '◈' },
 ]
 
 export const ENTRANCE_CAMERA = { pos: [0, 3, 15], look: [0, 1, 0] }
