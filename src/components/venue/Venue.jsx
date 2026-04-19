@@ -25,40 +25,48 @@ export default function Venue() {
         <Particles count={120} />
         <BoothsCarousel />
 
-        {/* Neon billboard on back wall */}
-        <group position={[0, 6.2, -17.6]}>
-          {/* Frame backing */}
-          <mesh>
-            <boxGeometry args={[22, 4.5, 0.18]} />
-            <meshStandardMaterial color="#08000f" metalness={0.9} roughness={0.15} />
+        {/* Freestanding billboard — left corner, angled toward camera */}
+        <group position={[-11, 0, -13]} rotation={[0, -0.32, 0]}>
+          {/* Left support post */}
+          <mesh position={[-2.8, 3.5, 0]}>
+            <boxGeometry args={[0.22, 7, 0.22]} />
+            <meshStandardMaterial color="#1a1a1a" metalness={0.9} roughness={0.2} />
           </mesh>
-          {/* Top bar */}
-          <mesh position={[0, 2.25, 0.12]}>
-            <boxGeometry args={[22, 0.1, 0.1]} />
-            <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={6} />
+          {/* Right support post */}
+          <mesh position={[2.8, 3.5, 0]}>
+            <boxGeometry args={[0.22, 7, 0.22]} />
+            <meshStandardMaterial color="#1a1a1a" metalness={0.9} roughness={0.2} />
           </mesh>
-          {/* Bottom bar */}
-          <mesh position={[0, -2.25, 0.12]}>
-            <boxGeometry args={[22, 0.1, 0.1]} />
-            <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={6} />
-          </mesh>
-          {/* Left post */}
-          <mesh position={[-11, 0, 0.12]}>
-            <boxGeometry args={[0.1, 4.5, 0.1]} />
-            <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={5} />
-          </mesh>
-          {/* Right post */}
-          <mesh position={[11, 0, 0.12]}>
-            <boxGeometry args={[0.1, 4.5, 0.1]} />
-            <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={5} />
-          </mesh>
-          <NeonText color="#FF6B00" fontSize={2.1} position={[0, 0.6, 0.16]}>
-            AunySillyMe
-          </NeonText>
-          <NeonText color="#FFD700" fontSize={0.6} position={[0, -0.95, 0.16]}>
-            — MUSIC —
-          </NeonText>
-          <pointLight color="#FF6B00" intensity={5} distance={18} position={[0, 0, 2]} />
+          {/* Billboard face */}
+          <group position={[0, 6.2, 0]}>
+            <mesh>
+              <boxGeometry args={[7.2, 2.6, 0.18]} />
+              <meshStandardMaterial color="#08000f" metalness={0.9} roughness={0.15} />
+            </mesh>
+            <mesh position={[0, 1.3, 0.12]}>
+              <boxGeometry args={[7.2, 0.08, 0.08]} />
+              <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={7} />
+            </mesh>
+            <mesh position={[0, -1.3, 0.12]}>
+              <boxGeometry args={[7.2, 0.08, 0.08]} />
+              <meshStandardMaterial color="#FF6B00" emissive="#FF6B00" emissiveIntensity={7} />
+            </mesh>
+            <mesh position={[-3.6, 0, 0.12]}>
+              <boxGeometry args={[0.08, 2.6, 0.08]} />
+              <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={6} />
+            </mesh>
+            <mesh position={[3.6, 0, 0.12]}>
+              <boxGeometry args={[0.08, 2.6, 0.08]} />
+              <meshStandardMaterial color="#7B00FF" emissive="#7B00FF" emissiveIntensity={6} />
+            </mesh>
+            <NeonText color="#FF6B00" fontSize={0.95} position={[0, 0.28, 0.14]}>
+              AunySillyMe
+            </NeonText>
+            <NeonText color="#FFD700" fontSize={0.3} position={[0, -0.6, 0.14]}>
+              — MUSIC —
+            </NeonText>
+            <pointLight color="#FF6B00" intensity={3} distance={10} position={[0, 0, 2]} />
+          </group>
         </group>
       </Suspense>
     </>
