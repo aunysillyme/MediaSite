@@ -2,10 +2,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useVenueStore } from '../../store.js'
 import { TRACKS, PLATFORMS, SOCIALS } from '../../data/platforms.js'
 import TrackCard from './TrackCard.jsx'
+import BrandIcon from './BrandIcon.jsx'
 
 const MUSIC_PLATFORMS = PLATFORMS.filter(p => p.type !== 'connect' && !p.isPlaceholder && p.url !== '#')
 
-function LinkCard({ name, color, url, icon, delay = 0 }) {
+function LinkCard({ name, color, url, delay = 0 }) {
   return (
     <motion.a
       href={url}
@@ -31,7 +32,7 @@ function LinkCard({ name, color, url, icon, delay = 0 }) {
       onMouseEnter={e => { e.currentTarget.style.background = `${color}28`; e.currentTarget.style.borderColor = `${color}88` }}
       onMouseLeave={e => { e.currentTarget.style.background = `${color}12`; e.currentTarget.style.borderColor = `${color}33` }}
     >
-      <span style={{ fontSize: '1.1rem', color }}>{icon}</span>
+      <BrandIcon name={name} color={color} size={22} />
       <span>{name}</span>
       <span style={{ marginLeft: 'auto', color: '#555', fontSize: '0.75rem' }}>↗</span>
     </motion.a>
@@ -45,8 +46,9 @@ export default function PlatformOverlay() {
 
   if (!activePlatform) return null
 
-  const { name, color, url, embedType, albums, icon, description, isPlaceholder, type } = activePlatform
+  const { name, color, url, embedType, albums, videos, icon, description, isPlaceholder, type } = activePlatform
   const isSpotifyAlbums = embedType === 'spotify-albums' && albums?.length > 0
+  const isYoutubeVideos = embedType === 'youtube-videos'
   const isConnect = type === 'connect'
 
   return (
@@ -164,7 +166,7 @@ export default function PlatformOverlay() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {MUSIC_PLATFORMS.map((p, i) => (
-                      <LinkCard key={p.id} name={p.name} color={p.color} url={p.url} icon={p.icon} delay={i * 0.04} />
+                      <LinkCard key={p.id} name={p.name} color={p.color} url={p.url} delay={i * 0.04} />
                     ))}
                   </div>
                   <div style={{ fontSize: '0.7rem', letterSpacing: '0.25em', color: '#555', textTransform: 'uppercase', paddingBottom: '0.25rem', borderBottom: '1px solid #ffffff0a', marginTop: '0.5rem' }}>
@@ -172,9 +174,64 @@ export default function PlatformOverlay() {
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {SOCIALS.map((s, i) => (
-                      <LinkCard key={s.name} name={s.name} color={s.color} url={s.url} icon={s.icon} delay={MUSIC_PLATFORMS.length * 0.04 + i * 0.04} />
+                      <LinkCard key={s.name} name={s.name} color={s.color} url={s.url} delay={MUSIC_PLATFORMS.length * 0.04 + i * 0.04} />
                     ))}
                   </div>
+                </>
+              )}
+
+              {/* YouTube video embeds */}
+              {!isConnect && isYoutubeVideos && (
+                <>
+                  <div
+                    style={{
+                      fontSize: '0.7rem',
+                      letterSpacing: '0.25em',
+                      color: '#555',
+                      textTransform: 'uppercase',
+                      paddingBottom: '0.25rem',
+                      borderBottom: `1px solid #ffffff0a`,
+                    }}
+                  >
+                    Videos
+                  </div>
+                  {videos?.length > 0 ? (
+                    videos.map((videoId, i) => (
+                      <motion.div
+                        key={videoId}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.08 }}
+                        style={{ borderRadius: '10px', overflow: 'hidden', flexShrink: 0 }}
+                      >
+                        <iframe
+                          src={`https://www.youtube.com/embed/${videoId}`}
+                          width="100%"
+                          height="215"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          style={{ display: 'block' }}
+                        />
+                      </motion.div>
+                    ))
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      style={{
+                        padding: '1rem',
+                        borderRadius: '8px',
+                        background: `${color}11`,
+                        border: `1px dashed ${color}44`,
+                        color: color,
+                        fontSize: '0.85rem',
+                        textAlign: 'center',
+                      }}
+                    >
+                      No videos yet — check the channel!
+                    </motion.div>
+                  )}
                 </>
               )}
 
@@ -235,8 +292,8 @@ export default function PlatformOverlay() {
                 </motion.div>
               )}
 
-              {/* Track list for non-Spotify platforms */}
-              {!isConnect && !isSpotifyAlbums && !isPlaceholder && (
+              {/* Track list for non-Spotify, non-YouTube platforms */}
+              {!isConnect && !isSpotifyAlbums && !isYoutubeVideos && !isPlaceholder && (
                 <>
                   <div
                     style={{

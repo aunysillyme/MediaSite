@@ -118,6 +118,8 @@ export const PLATFORMS = [
     name: 'YouTube',
     color: '#FF0000',
     url: 'https://www.youtube.com/@aunysillyme',
+    embedType: 'youtube-videos',
+    videos: ['EukBwQyeW88', 'p88_u71m94U', 'CMte3W_KBGk', 'EsgBBZtD-V8', 'KUmV9_60gf8'],
     position: [10, 0, 6],
     cameraPos: [14, 2, 6],
     cameraLook: [10, 1, 6],
