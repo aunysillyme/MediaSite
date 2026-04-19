@@ -25,7 +25,8 @@ export default function BoothsCarousel() {
   useEffect(() => {
     const onWheel = (e) => {
       e.preventDefault()
-      target.current -= e.deltaY * 0.003
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY
+      target.current -= delta * 0.003
       resetSnap()
     }
 
