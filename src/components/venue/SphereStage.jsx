@@ -65,8 +65,6 @@ function VideoSphere({ src }) {
       if (!matRef.current) return
       const tex = new THREE.VideoTexture(video)
       tex.colorSpace = THREE.SRGBColorSpace
-      tex.rotation = Math.PI / 2
-      tex.center.set(0.5, 0.5)
       matRef.current.map = tex
       matRef.current.emissiveMap = tex
       matRef.current.color.set('#ffffff')
@@ -91,7 +89,7 @@ function VideoSphere({ src }) {
 
   return (
     <mesh>
-      <sphereGeometry args={[3, 48, 32]} />
+      <sphereGeometry args={[3.5, 48, 32]} />
       <meshStandardMaterial
         ref={matRef}
         color="#0d0020"
@@ -121,7 +119,7 @@ export default function SphereStage() {
   })
 
   return (
-    <group position={[0, 4, 0]}>
+    <group position={[0, 7, 0]}>
       {/* Spinning video sphere */}
       <group ref={spinRef}>
         <VideoSphere key={clipIndex} src={CLIPS[clipIndex]} />
@@ -129,13 +127,13 @@ export default function SphereStage() {
 
       {/* LED wireframe grid */}
       <mesh>
-        <sphereGeometry args={[3.06, 18, 12]} />
+        <sphereGeometry args={[3.57, 18, 12]} />
         <meshStandardMaterial wireframe color="#ffffff" transparent opacity={0.07} />
       </mesh>
 
       {/* Outer glass shell */}
       <mesh>
-        <sphereGeometry args={[3.28, 32, 32]} />
+        <sphereGeometry args={[3.85, 32, 32]} />
         <meshStandardMaterial
           color="#9966ff"
           transparent
@@ -146,15 +144,15 @@ export default function SphereStage() {
         />
       </mesh>
 
-      {/* Pedestal */}
-      <mesh position={[0, -3.6, 0]}>
-        <cylinderGeometry args={[1.2, 1.65, 1.2, 32]} />
+      {/* Pillar from floor to sphere bottom */}
+      <mesh position={[0, -5.5, 0]}>
+        <cylinderGeometry args={[1.4, 1.9, 4, 32]} />
         <meshStandardMaterial color="#0D0010" metalness={0.9} roughness={0.1} />
       </mesh>
 
       {/* Sphere glow lights */}
-      <pointLight color="#FF6B00" intensity={5} distance={28} position={[0, 0, 0]} />
-      <pointLight color="#7B00FF" intensity={2} distance={18} position={[0, 2, 3]} />
+      <pointLight color="#FF6B00" intensity={5} distance={32} position={[0, 0, 0]} />
+      <pointLight color="#7B00FF" intensity={2} distance={22} position={[0, 2, 3]} />
     </group>
   )
 }
