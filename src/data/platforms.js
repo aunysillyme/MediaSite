@@ -126,17 +126,7 @@ export const PLATFORMS = [
     icon: '▶',
     description: 'Watch on YouTube',
   },
-  {
-    id: 'soundcloud',
-    name: 'SoundCloud',
-    color: '#FF5500',
-    url: 'https://soundcloud.com/aunyuan',
-    position: [-10, 0, -2],
-    cameraPos: [-14, 2, -2],
-    cameraLook: [-10, 1, -2],
-    icon: '☁',
-    description: 'Stream on SoundCloud',
-  },
+
   {
     id: 'suno',
     name: 'Suno',
