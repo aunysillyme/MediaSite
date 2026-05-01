@@ -31,6 +31,9 @@ export default function BrandIcon({ name, color, size = 20 }) {
     case 'Deezer':
       return <svg {...p}><rect x="1.5" y="2" width="21" height="20" rx="3.5" fill={color}/><rect x="4" y="13" width="3" height="5.5" rx="1" fill="white"/><rect x="8.5" y="10" width="3" height="8.5" rx="1" fill="white"/><rect x="13" y="7.5" width="3" height="11" rx="1" fill="white"/><rect x="17.5" y="11" width="3" height="7.5" rx="1" fill="white"/></svg>
 
+    case 'Audiomack':
+      return <svg {...p}><rect x="2" y="2" width="20" height="20" rx="4.5" fill={color}/><path d="M7 16V9l9-2v7" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/><circle cx="7" cy="16.5" r="2" fill="white"/><circle cx="16" cy="14.5" r="2" fill="white"/></svg>
+
     case 'Amazon Music':
       return <svg {...p}><circle cx="12" cy="12" r="10.5" fill={color}/><path d="M7.5 15.5C9.5 16.5 12 16.8 15.5 15.5" stroke="white" strokeWidth="1.8" strokeLinecap="round"/><path d="M14.5 14.2C15 15 15.7 15.5 16.5 15.5" stroke="white" strokeWidth="1.8" strokeLinecap="round"/><path d="M8 11l4-3 4 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/><line x1="12" y1="8" x2="12" y2="14" stroke="white" strokeWidth="1.8" strokeLinecap="round"/></svg>
 
