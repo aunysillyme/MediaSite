@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
+import { useVenueStore } from '../../store.js'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -102,9 +103,19 @@ function VideoSphere({ src }) {
 
 export default function SphereStage() {
   const spinRef = useRef()
+  const wireframeMeshRef = useRef()
+  const wireframeMatRef = useRef()
+  const glassMeshRef = useRef()
+  const glassMatRef = useRef()
+  const portalProgress = useRef(0)
+
   const [clipIndex, setClipIndex] = useState(() =>
     Math.floor(Math.random() * CLIPS.length)
   )
+
+  const portalOpen = useVenueStore((s) => s.portalOpen)
+  const portalOpenRef = useRef(false)
+  portalOpenRef.current = portalOpen
 
   useEffect(() => {
     const t = setInterval(
@@ -114,8 +125,19 @@ export default function SphereStage() {
     return () => clearInterval(t)
   }, [])
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (spinRef.current) spinRef.current.rotation.y += 0.0015
+
+    const target = portalOpenRef.current ? 1 : 0
+    const factor = 1 - Math.pow(0.018, delta)
+    portalProgress.current += (target - portalProgress.current) * factor
+    const p = portalProgress.current
+
+    if (wireframeMeshRef.current) wireframeMeshRef.current.scale.setScalar(1 + p * 0.35)
+    if (wireframeMatRef.current)  wireframeMatRef.current.opacity = Math.max(0, 0.07 * (1 - p))
+
+    if (glassMeshRef.current) glassMeshRef.current.scale.setScalar(1 + p * 0.6)
+    if (glassMatRef.current)  glassMatRef.current.opacity = Math.max(0, 0.04 * (1 - p))
   })
 
   return (
@@ -126,15 +148,16 @@ export default function SphereStage() {
       </group>
 
       {/* LED wireframe grid */}
-      <mesh>
+      <mesh ref={wireframeMeshRef}>
         <sphereGeometry args={[3.57, 18, 12]} />
-        <meshStandardMaterial wireframe color="#ffffff" transparent opacity={0.07} />
+        <meshStandardMaterial ref={wireframeMatRef} wireframe color="#ffffff" transparent opacity={0.07} />
       </mesh>
 
       {/* Outer glass shell */}
-      <mesh>
+      <mesh ref={glassMeshRef}>
         <sphereGeometry args={[3.85, 32, 32]} />
         <meshStandardMaterial
+          ref={glassMatRef}
           color="#9966ff"
           transparent
           opacity={0.04}

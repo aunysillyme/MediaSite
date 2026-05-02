@@ -39,10 +39,37 @@ function LinkCard({ name, color, url, delay = 0 }) {
   )
 }
 
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+  exit: { opacity: 0, transition: { delay: 0.3 } },
+}
+
+const panelVariants = {
+  hidden: { clipPath: 'circle(0% at 50% 38%)', opacity: 0 },
+  visible: {
+    clipPath: 'circle(150% at 50% 38%)',
+    opacity: 1,
+    transition: {
+      clipPath: { type: 'spring', damping: 28, stiffness: 120 },
+      opacity: { duration: 0.1 },
+    },
+  },
+  exit: {
+    clipPath: 'circle(0% at 50% 38%)',
+    opacity: 0,
+    transition: {
+      clipPath: { type: 'spring', damping: 32, stiffness: 180 },
+      opacity: { delay: 0.2, duration: 0.1 },
+    },
+  },
+}
+
 export default function PlatformOverlay() {
   const overlayOpen = useVenueStore((s) => s.overlayOpen)
   const activePlatform = useVenueStore((s) => s.activePlatform)
   const closeOverlay = useVenueStore((s) => s.closeOverlay)
+  const clearActivePlatform = useVenueStore((s) => s.clearActivePlatform)
 
   if (!activePlatform) return null
 
@@ -52,44 +79,48 @@ export default function PlatformOverlay() {
   const isConnect = type === 'connect'
 
   return (
-    <AnimatePresence>
+    <AnimatePresence onExitComplete={clearActivePlatform}>
       {overlayOpen && (
         <>
           {/* Backdrop */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            variants={backdropVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             onClick={closeOverlay}
             style={{
               position: 'fixed',
               inset: 0,
-              background: 'rgba(0,0,0,0.5)',
+              background: 'rgba(0,0,0,0.65)',
               zIndex: 100,
-              backdropFilter: 'blur(2px)',
+              backdropFilter: 'blur(12px)',
             }}
           />
 
           {/* Panel */}
           <motion.div
-            initial={{ x: '100%', opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
-            transition={{ type: 'spring', damping: 26, stiffness: 200 }}
+            variants={panelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            onClick={(e) => e.stopPropagation()}
             style={{
               position: 'fixed',
-              top: 0,
-              right: 0,
-              bottom: 0,
-              width: 'min(420px, 100vw)',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: 'min(640px, 92vw)',
+              maxHeight: '85vh',
               background: 'linear-gradient(180deg, #0D0015 0%, #0A0005 100%)',
-              borderLeft: `1px solid ${color}33`,
+              borderRadius: '16px',
+              border: `1px solid ${color}33`,
+              boxShadow: `0 0 80px ${color}22`,
               zIndex: 101,
               display: 'flex',
               flexDirection: 'column',
               fontFamily: 'system-ui, sans-serif',
               overflowY: 'auto',
-              boxShadow: `-20px 0 60px ${color}22`,
             }}
           >
             {/* Header */}
