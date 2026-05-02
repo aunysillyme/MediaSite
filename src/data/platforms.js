@@ -93,7 +93,7 @@ export const PLATFORMS = [
     id: 'youtube-music',
     name: 'YouTube Music',
     color: '#FF0040',
-    url: 'https://music.youtube.com/',
+    url: 'https://music.youtube.com/@aunysillyme',
     position: [7, 0, -8],
     cameraPos: [11, 2, -8],
     cameraLook: [7, 1, -8],

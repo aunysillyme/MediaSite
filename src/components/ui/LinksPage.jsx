@@ -3,7 +3,7 @@ import { useEffect, useRef, useLayoutEffect } from 'react'
 const INNER = [
   { name: 'Spotify',       color: '#1DB954', icon: 'spotify',      url: 'https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI' },
   { name: 'Apple Music',   color: '#FC3C44', icon: 'applemusic',   url: 'https://music.apple.com/us/artist/auny/1866039713' },
-  { name: 'YouTube Music', color: '#FF0000', icon: 'youtubemusic', url: 'https://music.youtube.com/' },
+  { name: 'YouTube Music', color: '#FF0000', icon: 'youtubemusic', url: 'https://music.youtube.com/@aunysillyme' },
   { name: 'Deezer',        color: '#00C7F2', icon: 'deezer',       url: 'https://www.deezer.com/us/artist/365193422' },
   { name: 'Amazon Music',  color: '#FF9900', icon: 'amazonmusic',  url: 'https://music.amazon.com/artists/B0GDL275G8/auny' },
   { name: 'Pandora',       color: '#3668FF', icon: 'pandora',      url: 'https://www.pandora.com/artist/auny/AR2rwlqqccbVhhq' },
