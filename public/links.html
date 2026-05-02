@@ -11,7 +11,7 @@
 <meta property="og:url"          content="https://auny.media/links" />
 <meta property="og:title"        content="AunySillyMe — Links" />
 <meta property="og:description"  content="Stream AunySillyMe on every platform. All links in one place." />
-<meta property="og:image"        content="https://auny.media/images/auny%20pfp%205.png" />
+<meta property="og:image"        content="https://auny.media/images/auny-pfp-5.png" />
 <meta property="og:image:width"  content="1000" />
 <meta property="og:image:height" content="1000" />
 
@@ -20,7 +20,7 @@
 <meta name="twitter:site"        content="@AunySillyMe" />
 <meta name="twitter:title"       content="AunySillyMe — Links" />
 <meta name="twitter:description" content="Stream AunySillyMe on every platform. All links in one place." />
-<meta name="twitter:image"       content="https://auny.media/images/auny%20pfp%205.png" />
+<meta name="twitter:image"       content="https://auny.media/images/auny-pfp-5.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -415,11 +415,7 @@
   pfpWrap.style.backgroundPosition = 'center top';
   orbit.appendChild(pfpWrap);
 
-  // Try paths with encoded spaces for the pfp filename
-  var pfpPaths = [
-    '/images/auny%20pfp%205.png',
-    '/images/auny pfp 5.png',
-  ];
+  var pfpPaths = ['/images/auny-pfp-5.png'];
   (function tryPfp(i) {
     if (i >= pfpPaths.length) return;
     var t = new Image();
