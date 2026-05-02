@@ -1,202 +1,238 @@
-import { motion } from 'framer-motion'
-import BrandIcon from './BrandIcon.jsx'
-import { PLATFORMS, SOCIALS } from '../../data/platforms.js'
+import { useEffect, useRef } from 'react'
 
-const MUSIC = PLATFORMS.filter(p => p.type !== 'connect' && !p.isPlaceholder && p.url !== '#')
+const INNER = [
+  { name: 'Spotify',       color: '#1DB954', icon: 'spotify',      url: 'https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI' },
+  { name: 'Apple Music',   color: '#FC3C44', icon: 'applemusic',   url: 'https://music.apple.com/us/artist/auny/1866039713' },
+  { name: 'YouTube Music', color: '#FF0000', icon: 'youtubemusic', url: 'https://music.youtube.com/' },
+  { name: 'Deezer',        color: '#00C7F2', icon: 'deezer',       url: 'https://www.deezer.com/us/artist/365193422' },
+  { name: 'Amazon Music',  color: '#FF9900', icon: 'amazonmusic',  url: 'https://music.amazon.com/artists/B0GDL275G8/auny' },
+  { name: 'Pandora',       color: '#3668FF', icon: 'pandora',      url: 'https://www.pandora.com/artist/auny/AR2rwlqqccbVhhq' },
+  { name: 'Audiomack',     color: '#FF6A00', icon: 'audiomack',    url: 'https://audiomack.com/aunysillyme-69e90d000942a' },
+  { name: 'Suno',          color: '#9B5CFF', icon: null,           url: 'https://suno.com/@aunysillyme' },
+]
 
-function LinkCard({ name, color, url, delay }) {
-  return (
-    <motion.a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.35 }}
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.85rem',
-        padding: '0.85rem 1.1rem',
-        borderRadius: '12px',
-        background: `${color}0d`,
-        border: `1px solid ${color}28`,
-        color: '#fff',
-        textDecoration: 'none',
-        fontSize: '0.9rem',
-        fontWeight: 600,
-        letterSpacing: '0.02em',
-        fontFamily: 'system-ui, sans-serif',
-        transition: 'background 0.18s, border-color 0.18s, box-shadow 0.18s',
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.background = `${color}1e`
-        e.currentTarget.style.borderColor = `${color}66`
-        e.currentTarget.style.boxShadow = `0 0 18px ${color}22`
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.background = `${color}0d`
-        e.currentTarget.style.borderColor = `${color}28`
-        e.currentTarget.style.boxShadow = 'none'
-      }}
-    >
-      <BrandIcon name={name} color={color} size={22} />
-      <span style={{ flex: 1 }}>{name}</span>
-      <span style={{ color: '#3a3a3a', fontSize: '0.75rem' }}>↗</span>
-    </motion.a>
-  )
+const OUTER = [
+  { name: 'X',        color: 'rgba(240,240,240,0.9)', icon: 'x',         url: 'https://x.com/AunySillyMe' },
+  { name: 'Instagram', color: '#E1306C',              icon: 'instagram',  url: 'https://www.instagram.com/aunysillyme/' },
+  { name: 'TikTok',    color: '#00E5FF',              icon: 'tiktok',     url: 'https://www.tiktok.com/@aunysillyme' },
+  { name: 'Website',   color: '#FF6B1A',              icon: null,         url: 'https://aunysillyme.com' },
+  { name: 'Threads',   color: 'rgba(210,210,210,0.8)', icon: 'threads',   url: 'https://www.threads.com/@aunysillyme' },
+  { name: 'Bluesky',   color: '#0096FF',              icon: 'bluesky',    url: 'https://bsky.app/profile/aunysillyme.bsky.social' },
+]
+
+const CDN = 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/'
+
+const MUSIC_NOTE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="#9B5CFF"><path d="M9 18V5l12-2v13" stroke="#9B5CFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="6" cy="18" r="3" fill="#9B5CFF"/><circle cx="18" cy="16" r="3" fill="#9B5CFF"/></svg>`
+
+const GLOBE = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF6B1A" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2C9.5 6 8 9 8 12s1.5 6 4 9.5M12 2C14.5 6 16 9 16 12s-1.5 6-4 9.5"/></svg>`
+
+function bgColor(c) {
+  if (c.startsWith('rgba(')) {
+    const m = c.match(/rgba\((\d+),\s*(\d+),\s*(\d+)/)
+    return m ? `rgba(${m[1]},${m[2]},${m[3]},0.05)` : 'rgba(255,255,255,0.05)'
+  }
+  return c + '2e'
 }
 
-function SectionLabel({ children, delay }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay }}
-      style={{
-        fontSize: '0.62rem',
-        letterSpacing: '0.3em',
-        color: '#3a3a3a',
-        textTransform: 'uppercase',
-        fontFamily: 'system-ui, sans-serif',
-        marginBottom: '0.6rem',
-      }}
-    >
-      {children}
-    </motion.div>
-  )
+function shadowColor(c) {
+  if (c.startsWith('rgba(')) {
+    const m = c.match(/rgba\((\d+),\s*(\d+),\s*(\d+)/)
+    return m ? `rgba(${m[1]},${m[2]},${m[3]},0.2)` : 'rgba(255,255,255,0.2)'
+  }
+  return c + '33'
+}
+
+function labelColor(c) {
+  return c.startsWith('rgba(') ? '#d2d2d2' : c
 }
 
 export default function LinksPage() {
+  const innerPlanetRefs = useRef([])
+  const outerPlanetRefs = useRef([])
+  const innerIconRefs   = useRef([])
+  const outerIconRefs   = useRef([])
+  const vinylRef        = useRef()
+  const rafRef          = useRef()
+  const innerAngle      = useRef(0)
+  const outerAngle      = useRef(Math.PI / 5)
+  const vinylAngle      = useRef(0)
+  const lastTime        = useRef(null)
+
+  useEffect(() => {
+    const load = (el, iconName, color) => {
+      fetch(`${CDN}${iconName}.svg`)
+        .then(r => r.text())
+        .then(svg => {
+          el.innerHTML = svg
+            .replace(/<svg/, `<svg width="14" height="14"`)
+            .replace(/fill="[^"]*"/g, `fill="${color}"`)
+        })
+        .catch(() => {})
+    }
+
+    INNER.forEach((p, i) => {
+      const el = innerIconRefs.current[i]
+      if (!el) return
+      if (!p.icon) { el.innerHTML = MUSIC_NOTE; return }
+      load(el, p.icon, p.color)
+    })
+
+    OUTER.forEach((p, i) => {
+      const el = outerIconRefs.current[i]
+      if (!el) return
+      if (!p.icon) { el.innerHTML = p.name === 'Website' ? GLOBE : MUSIC_NOTE; return }
+      load(el, p.icon, labelColor(p.color))
+    })
+  }, [])
+
+  useEffect(() => {
+    const animate = (ts) => {
+      if (lastTime.current === null) lastTime.current = ts
+      const dt = Math.min((ts - lastTime.current) / 1000, 0.05)
+      lastTime.current = ts
+
+      innerAngle.current += dt * (2 * Math.PI / 30)
+      outerAngle.current -= dt * (2 * Math.PI / 46)
+      vinylAngle.current += dt * (360 / 14)
+
+      INNER.forEach((_, i) => {
+        const el = innerPlanetRefs.current[i]
+        if (!el) return
+        const a = innerAngle.current + (i / INNER.length) * 2 * Math.PI
+        el.style.left = (170 + 104 * Math.cos(a) - 17) + 'px'
+        el.style.top  = (170 + 104 * Math.sin(a) - 17) + 'px'
+      })
+
+      OUTER.forEach((_, i) => {
+        const el = outerPlanetRefs.current[i]
+        if (!el) return
+        const a = outerAngle.current + (i / OUTER.length) * 2 * Math.PI
+        el.style.left = (170 + 150 * Math.cos(a) - 17) + 'px'
+        el.style.top  = (170 + 150 * Math.sin(a) - 17) + 'px'
+      })
+
+      if (vinylRef.current) {
+        vinylRef.current.style.transform = `rotate(${vinylAngle.current % 360}deg)`
+      }
+
+      rafRef.current = requestAnimationFrame(animate)
+    }
+
+    rafRef.current = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(rafRef.current)
+  }, [])
+
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#0A0005',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '3.5rem 1.25rem 5rem',
-      overflowY: 'auto',
-      position: 'relative',
-    }}>
+    <div style={{ minHeight: '100vh', background: '#05050D', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <style>{`
-        @font-face { font-family: 'AunyFont'; src: url('/font.ttf') format('truetype'); }
-        @keyframes blob1 { 0%,100%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.15) translate(4%,3%)} }
-        @keyframes blob2 { 0%,100%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.1) translate(-3%,-4%)} }
-        @keyframes blob3 { 0%,100%{transform:scale(1) translate(0,0)} 50%{transform:scale(1.08) translate(2%,-2%)} }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Space+Mono&family=DM+Sans&display=swap');
+        @keyframes pulse-role { 0%,100%{opacity:0.5} 50%{opacity:1} }
+        @keyframes ring-inner { 0%,100%{border-color:rgba(0,229,255,0.12)} 50%{border-color:rgba(0,229,255,0.30)} }
+        @keyframes ring-outer { 0%,100%{border-color:rgba(255,45,120,0.10)} 50%{border-color:rgba(255,45,120,0.25)} }
+        @keyframes fade-up    { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes fade-in    { from{opacity:0} to{opacity:1} }
+        .planet { position:absolute; display:flex; flex-direction:column; align-items:center; cursor:pointer; text-decoration:none; width:34px; }
+        .planet-circle { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; overflow:hidden; transition:transform 0.18s; }
+        .planet:hover .planet-circle { transform:scale(1.28); }
+        .planet-label { opacity:0; white-space:nowrap; font-family:'Space Mono',monospace; font-size:11px; background:rgba(5,5,13,0.92); padding:2px 6px; border-radius:3px; margin-top:4px; position:absolute; top:100%; transition:opacity 0.18s; pointer-events:none; }
+        .planet:hover .planet-label { opacity:1; }
       `}</style>
 
-      {/* Ambient blobs */}
-      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', overflow: 'hidden', zIndex: 0 }}>
-        <div style={{ position: 'absolute', top: '-15%', left: '-15%', width: '55vw', height: '55vw', borderRadius: '50%', background: 'radial-gradient(circle, #FF6B0014 0%, transparent 65%)', animation: 'blob1 9s ease-in-out infinite' }} />
-        <div style={{ position: 'absolute', bottom: '-20%', right: '-10%', width: '50vw', height: '50vw', borderRadius: '50%', background: 'radial-gradient(circle, #7B00FF12 0%, transparent 65%)', animation: 'blob2 12s ease-in-out infinite' }} />
-        <div style={{ position: 'absolute', top: '40%', right: '20%', width: '30vw', height: '30vw', borderRadius: '50%', background: 'radial-gradient(circle, #FFD70009 0%, transparent 65%)', animation: 'blob3 15s ease-in-out infinite' }} />
+      {/* Scanline overlay */}
+      <div style={{ position:'fixed', inset:0, zIndex:999, pointerEvents:'none', background:'repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px)', opacity:0.25 }} />
+
+      {/* Background blobs */}
+      <div style={{ position:'absolute', width:270, height:270, borderRadius:'50%', background:'rgba(0,229,255,0.06)',  top:-90,  left:-80, zIndex:0, pointerEvents:'none' }} />
+      <div style={{ position:'absolute', width:220, height:220, borderRadius:'50%', background:'rgba(168,85,247,0.08)', top:40,   right:-80, zIndex:0, pointerEvents:'none' }} />
+      <div style={{ position:'absolute', width:200, height:200, borderRadius:'50%', background:'rgba(255,45,120,0.06)', bottom:50, left:-60, zIndex:0, pointerEvents:'none' }} />
+      <div style={{ position:'absolute', width:160, height:160, borderRadius:'50%', background:'rgba(255,107,26,0.07)', top:100,  left:95,  zIndex:0, pointerEvents:'none' }} />
+
+      {/* Hero */}
+      <div style={{ position:'relative', zIndex:4, textAlign:'center', paddingTop:28, animation:'fade-up 500ms ease-out both' }}>
+        <h1 style={{ fontFamily:"'Cormorant Garamond', Georgia, serif", fontWeight:700, fontSize:42, color:'#fff', letterSpacing:'-0.3px', margin:0, lineHeight:1.1 }}>
+          AunySillyMe
+        </h1>
+        <p style={{ fontFamily:"'Space Mono', monospace", fontSize:11, letterSpacing:'4px', textTransform:'uppercase', color:'#00E5FF', margin:'8px 0 0', animation:'pulse-role 3s ease-in-out infinite' }}>
+          Artist · Producer
+        </p>
       </div>
 
-      {/* Content */}
-      <div style={{
-        position: 'relative',
-        zIndex: 1,
-        width: '100%',
-        maxWidth: 460,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '2.25rem',
-      }}>
+      {/* Orbit system */}
+      <div style={{ position:'relative', width:340, height:340, margin:'4px auto', zIndex:4, animation:'fade-in 500ms ease-out 200ms both', flexShrink:0 }}>
 
-        {/* Profile */}
-        <motion.div
-          initial={{ opacity: 0, y: -12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}
-        >
-          <div style={{
-            width: 88,
-            height: 88,
-            borderRadius: '50%',
-            border: '2px solid #FF6B00',
-            boxShadow: '0 0 28px #FF6B0055, 0 0 60px #FF6B0018',
-            overflow: 'hidden',
-            flexShrink: 0,
-          }}>
-            <img
-              src="/images/auny pfp 5.png"
-              alt="AunySillyMe"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          </div>
+        {/* Ring tracks */}
+        <div style={{ position:'absolute', width:208, height:208, left:'50%', top:'50%', marginLeft:-104, marginTop:-104, borderRadius:'50%', border:'1px solid rgba(0,229,255,0.14)', animation:'ring-inner 4s ease-in-out infinite', pointerEvents:'none' }} />
+        <div style={{ position:'absolute', width:302, height:302, left:'50%', top:'50%', marginLeft:-151, marginTop:-151, borderRadius:'50%', border:'1px solid rgba(255,45,120,0.10)', animation:'ring-outer 4s ease-in-out infinite 2s', pointerEvents:'none' }} />
 
-          <div style={{ textAlign: 'center' }}>
-            <div style={{
-              fontFamily: 'AunyFont, system-ui, sans-serif',
-              fontSize: '1.75rem',
-              color: '#FF6B00',
-              textShadow: '0 0 24px #FF6B0077',
-              letterSpacing: '0.04em',
-              lineHeight: 1,
-            }}>
-              AunySillyMe
-            </div>
-            <div style={{
-              fontSize: '0.7rem',
-              letterSpacing: '0.35em',
-              color: '#FFD700',
-              textTransform: 'uppercase',
-              marginTop: '0.45rem',
-              opacity: 0.75,
-              fontFamily: 'system-ui, sans-serif',
-            }}>
-              artist
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Divider */}
-        <div style={{ width: '100%', height: '1px', background: 'linear-gradient(90deg, transparent, #FF6B0033, transparent)' }} />
-
-        {/* Streaming platforms */}
-        <div style={{ width: '100%' }}>
-          <SectionLabel delay={0.2}>Stream</SectionLabel>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-            {MUSIC.map((p, i) => (
-              <LinkCard key={p.id} name={p.name} color={p.color} url={p.url} delay={0.25 + i * 0.05} />
-            ))}
-          </div>
+        {/* Vinyl center */}
+        <div ref={vinylRef} style={{ position:'absolute', width:82, height:82, left:'50%', top:'50%', marginLeft:-41, marginTop:-41, zIndex:5, willChange:'transform' }}>
+          <svg width="82" height="82" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="41" cy="41" r="40" fill="#0c0c16"/>
+            <circle cx="41" cy="41" r="37" stroke="#181824" strokeWidth="1.5"/>
+            <circle cx="41" cy="41" r="34" stroke="#121218" strokeWidth="1"/>
+            <circle cx="41" cy="41" r="31" stroke="#181824" strokeWidth="1.5"/>
+            <circle cx="41" cy="41" r="28" stroke="#121218" strokeWidth="1"/>
+            <circle cx="41" cy="41" r="25" stroke="#181824" strokeWidth="1.5"/>
+            <circle cx="41" cy="41" r="22" stroke="#00E5FF" strokeWidth="0.6" opacity="0.3"/>
+            <circle cx="41" cy="41" r="18" fill="#07070F"/>
+            <circle cx="41" cy="41" r="15" stroke="#00E5FF" strokeWidth="1" opacity="0.45"/>
+            <circle cx="41" cy="41" r="13" fill="#FF6B1A"/>
+            <defs>
+              <clipPath id="pfpClip">
+                <circle cx="41" cy="41" r="12.5"/>
+              </clipPath>
+            </defs>
+            <image href="/images/auny pfp 5.png" x="28.5" y="28.5" width="25" height="25" clipPath="url(#pfpClip)" preserveAspectRatio="xMidYMid slice"/>
+            <circle cx="41" cy="41" r="2.5" fill="#05050D"/>
+          </svg>
         </div>
 
-        {/* Socials */}
-        <div style={{ width: '100%' }}>
-          <SectionLabel delay={0.5}>Socials</SectionLabel>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
-            {SOCIALS.map((s, i) => (
-              <LinkCard key={s.name} name={s.name} color={s.color} url={s.url} delay={0.55 + i * 0.05} />
-            ))}
-          </div>
-        </div>
+        {/* Inner ring — streaming platforms */}
+        {INNER.map((p, i) => (
+          <a
+            key={p.name}
+            ref={el => { innerPlanetRefs.current[i] = el }}
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="planet"
+            style={{ left:153, top:153 }}
+          >
+            <div
+              className="planet-circle"
+              style={{ background:bgColor(p.color), border:`1px solid ${p.color}`, boxShadow:`0 0 8px ${shadowColor(p.color)}` }}
+            >
+              <div ref={el => { innerIconRefs.current[i] = el }} style={{ display:'flex', alignItems:'center', justifyContent:'center', width:14, height:14 }} />
+            </div>
+            <span className="planet-label" style={{ color:p.color }}>{p.name}</span>
+          </a>
+        ))}
 
-        {/* Back to venue */}
-        <motion.a
-          href="/"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          style={{
-            fontSize: '0.72rem',
-            color: '#2a2a2a',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            textDecoration: 'none',
-            fontFamily: 'system-ui, sans-serif',
-            marginTop: '0.5rem',
-            transition: 'color 0.2s',
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = '#FF6B00'}
-          onMouseLeave={e => e.currentTarget.style.color = '#2a2a2a'}
-        >
-          ← Enter the Venue
-        </motion.a>
+        {/* Outer ring — social platforms */}
+        {OUTER.map((p, i) => (
+          <a
+            key={p.name}
+            ref={el => { outerPlanetRefs.current[i] = el }}
+            href={p.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="planet"
+            style={{ left:153, top:153 }}
+          >
+            <div
+              className="planet-circle"
+              style={{ background:bgColor(p.color), border:`1px solid ${p.color}`, boxShadow:`0 0 8px ${shadowColor(p.color)}` }}
+            >
+              <div ref={el => { outerIconRefs.current[i] = el }} style={{ display:'flex', alignItems:'center', justifyContent:'center', width:14, height:14 }} />
+            </div>
+            <span className="planet-label" style={{ color:labelColor(p.color) }}>{p.name}</span>
+          </a>
+        ))}
+      </div>
+
+      {/* Footer */}
+      <div style={{ position:'relative', zIndex:4, textAlign:'center', paddingBottom:24, paddingTop:8 }}>
+        <span style={{ fontSize:18, color:'rgba(255,107,26,0.4)' }}>🧡</span>
       </div>
     </div>
   )
