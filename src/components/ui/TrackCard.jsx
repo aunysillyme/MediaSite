@@ -45,7 +45,7 @@ export default function TrackCard({ track, platformColor, platformUrl, platformI
           justifyContent: 'center',
         }}
       >
-        {!imgError ? (
+        {track.art && !imgError ? (
           <img
             src={track.art}
             alt={track.title}

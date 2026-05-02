@@ -1,87 +1,27 @@
 export const TRACKS = [
-  {
-    id: 'focus-with-me',
-    title: 'Focus with Me (Study Edition)',
-    year: 2026,
-    art: '/album-art/focus-with-me.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'fafo',
-    title: 'F A F O',
-    year: 2026,
-    art: '/album-art/fafo.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'work-with-me',
-    title: 'Work with Me',
-    year: 2026,
-    art: '/album-art/work-with-me.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'candy-coated-smile',
-    title: 'Candy-Coated Smile',
-    year: 2026,
-    art: '/album-art/candy-coated-smile.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'run-away',
-    title: 'Run Away',
-    year: 2025,
-    art: '/album-art/run-away.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'drowning',
-    title: 'Drowning',
-    year: 2025,
-    art: '/album-art/drowning.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'why-do-we-pretend',
-    title: 'Why Do We Pretend?',
-    year: 2025,
-    art: '/album-art/why-do-we-pretend.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'tick-tock',
-    title: 'Tick Tock',
-    year: 2025,
-    art: '/album-art/tick-tock.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'lost-in-the-city',
-    title: 'Lost in the City',
-    year: 2025,
-    art: '/album-art/lost-in-the-city.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'blue',
-    title: 'BLUE',
-    year: 2025,
-    art: '/album-art/blue.svg',
-    spotifyTrackId: null,
-  },
-  {
-    id: 'you-in-a-song',
-    title: 'You in a Song',
-    year: 2025,
-    art: '/album-art/you-in-a-song.svg',
-    spotifyTrackId: null,
-  },
+  { id: 'yellow',               title: 'YELLOW',                   year: 2026, spotifyTrackId: '54dcfCPRxydXRMAVkC5Kv1' },
+  { id: 'run-away',             title: 'Run Away',                  year: 2026, spotifyTrackId: '3Po9q6nVGurb60uOfVSFfi' },
+  { id: 'drowning',             title: 'Drowning',                  year: 2026, spotifyTrackId: '3mJQtUFLrqZs1erDtF6oeP' },
+  { id: 'why-do-we-pretend',    title: 'Why Do We Pretend?',        year: 2026, spotifyTrackId: '7JunDZR4Mr4vkxmI7ofAZZ' },
+  { id: 'tick-tock',            title: 'Tick Tock',                 year: 2026, spotifyTrackId: '45HllYwWEtFM4QMZasx7rQ' },
+  { id: 'lost-in-the-city',     title: 'Lost in the City',          year: 2026, spotifyTrackId: '5XKWG3ncNtfTEmKXpFdHD9' },
+  { id: 'candy-coated-smile',   title: 'Candy-Coated Smile',        year: 2026, spotifyTrackId: '6U69QRtHUmOcFQ1hUEDpYp' },
+  { id: 'blue',                 title: 'BLUE',                      year: 2026, spotifyTrackId: '20G7s9waUjuUvQ9eQjIIYy' },
+  { id: 'you-in-a-song',        title: 'You in a Song',             year: 2026, spotifyTrackId: '56BtuXtta9X8BYVBEH8UXm' },
+  { id: 'from-the-ashes',       title: 'From The Ashes',            year: 2026, spotifyTrackId: '1nsT3pA8m6u89QMbfZ4L2v' },
+  { id: 'love-is',              title: 'Love is...',                year: 2026, spotifyTrackId: '5ucMIdcMVSivPbzRAFOTZW' },
+  { id: 'orange',               title: 'ORANGE',                    year: 2026, spotifyTrackId: '2u1IH3gkX6OOq4pMGnA4L9' },
+  { id: 'story-of-you',         title: 'Story of You',              year: 2026, spotifyTrackId: '5OLYrGYvU8JcEnbbLeWGwZ' },
+  { id: 'red',                  title: 'RED',                       year: 2026, spotifyTrackId: '0MXn6C6WxVkOVcukj8Er7j' },
+  { id: 'escape',               title: 'ESCAPE',                    year: 2026, spotifyTrackId: '190TkvRI7szZB75Ut0M2hE' },
+  { id: 'dreams-that-run-away', title: 'Dreams That Run Away',      year: 2026, spotifyTrackId: '17wS11KuQEsL8OuX3evSdS' },
+  { id: 'black',                title: 'BLACK',                     year: 2026, spotifyTrackId: '3aCnbpJf5A7fV0o1qbyR77' },
+  { id: 'feel-again-pt-2',      title: 'Feel Again, Pt. 2',         year: 2026, spotifyTrackId: '4lL6FEVkHvSpUTzLqPV9OV' },
+  { id: 'monster-no-one-sees',  title: 'Monster No One Sees',       year: 2026, spotifyTrackId: '7jRqOOHLeDrJHRq41EVfwr' },
+  { id: 'the-void',             title: 'The Void',                  year: 2026, spotifyTrackId: '0GGA9PUiM4IuuQ2ZVKnBM6' },
+  { id: 'heart-inside-2',       title: 'Heart inside of Me, Pt. 2', year: 2026, spotifyTrackId: '7l61hwV0dnpmITTRtH1veF' },
+  { id: 'fafo',                 title: 'F A F O',                   year: 2026, spotifyTrackId: '5FDYzkYvgSGiQp3N6CAT9P' },
 ]
-
-// Venue layout: each booth has a 3D position and the camera target when selected
-// Layout (top-down, Z is depth, X is left-right, Y is height):
-//   Entrance at Z=+14, Stage at Z=-8
-//   Booths arc around the stage
 
 export const PLATFORMS = [
   {
@@ -91,10 +31,11 @@ export const PLATFORMS = [
     url: 'https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI',
     embedType: 'spotify-albums',
     albums: [
-      '27HeS1tHoz3hNWdt6WIfy9',
-      '01ILnU5CjbBSU1YFMg7k6V',
-      '5AtAMHjAcihsSbY90kP0Kj',
-      '6c4X31NVvYkIhp4REBkgdh',
+      '27HeS1tHoz3hNWdt6WIfy9',  // Afterglow
+      '01ILnU5CjbBSU1YFMg7k6V',  // Blue Lightning
+      '5AtAMHjAcihsSbY90kP0Kj',  // Focus with Me (Study Edition)
+      '6c4X31NVvYkIhp4REBkgdh',  // 11:11
+      '3Y57JfSKcnYTAd6W6dlYvN',  // Work with Me
     ],
     position: [0, 0, 10],
     cameraPos: [0, 2, 14],
@@ -119,14 +60,13 @@ export const PLATFORMS = [
     color: '#FF0000',
     url: 'https://www.youtube.com/@aunysillyme',
     embedType: 'youtube-videos',
-    videos: ['EukBwQyeW88', 'p88_u71m94U', 'CMte3W_KBGk', 'EsgBBZtD-V8', 'KUmV9_60gf8'],
+    videos: ['czUMSh8FAhQ', 'EukBwQyeW88', 'p88_u71m94U', 'CMte3W_KBGk', 'EsgBBZtD-V8', 'KUmV9_60gf8'],
     position: [10, 0, 6],
     cameraPos: [14, 2, 6],
     cameraLook: [10, 1, 6],
     icon: '▶',
     description: 'Watch on YouTube',
   },
-
   {
     id: 'suno',
     name: 'Suno',
@@ -218,14 +158,14 @@ export const PLATFORMS = [
 ]
 
 export const SOCIALS = [
-  { name: 'Website',    color: '#FFD700', url: 'https://aunysillyme.com',                                    icon: '⬡' },
-  { name: 'Instagram',  color: '#E1306C', url: 'https://www.instagram.com/aunysillyme/',                     icon: '◈' },
-  { name: 'TikTok',     color: '#69C9D0', url: 'https://www.tiktok.com/@aunysillyme',                        icon: '◉' },
-  { name: 'X (Twitter)',color: '#1DA1F2', url: 'https://x.com/AunySillyMe',                                  icon: '✦' },
-  { name: 'Threads',    color: '#aaaaaa', url: 'https://www.threads.com/@aunysillyme',                        icon: '⊕' },
-  { name: 'Bluesky',    color: '#0085FF', url: 'https://bsky.app/profile/aunysillyme.bsky.social',            icon: '◎' },
-  { name: 'YouTube',    color: '#FF0000', url: 'https://www.youtube.com/@aunysillyme',                        icon: '▶' },
-  { name: 'LinkedIn',   color: '#0077B5', url: 'https://www.linkedin.com/in/auny-hossain-782949238/',         icon: '◈' },
+  { name: 'Website',     color: '#FFD700', url: 'https://aunysillyme.com',                                   icon: '⬡' },
+  { name: 'Instagram',   color: '#E1306C', url: 'https://www.instagram.com/aunysillyme/',                    icon: '◈' },
+  { name: 'TikTok',      color: '#69C9D0', url: 'https://www.tiktok.com/@aunysillyme',                       icon: '◉' },
+  { name: 'X (Twitter)', color: '#1DA1F2', url: 'https://x.com/AunySillyMe',                                 icon: '✦' },
+  { name: 'Threads',     color: '#aaaaaa', url: 'https://www.threads.com/@aunysillyme',                      icon: '⊕' },
+  { name: 'Bluesky',     color: '#0085FF', url: 'https://bsky.app/profile/aunysillyme.bsky.social',          icon: '◎' },
+  { name: 'YouTube',     color: '#FF0000', url: 'https://www.youtube.com/@aunysillyme',                      icon: '▶' },
+  { name: 'LinkedIn',    color: '#0077B5', url: 'https://www.linkedin.com/in/auny-hossain-782949238/',       icon: '◈' },
 ]
 
 export const ENTRANCE_CAMERA = { pos: [0, 3, 15], look: [0, 1, 0] }
