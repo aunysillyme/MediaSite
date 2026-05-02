@@ -17,7 +17,6 @@
     align-items: center;
     justify-content: center;
     font-family: 'Space Mono', monospace;
-    overflow-x: hidden;
   }
 
   body::after {
@@ -250,10 +249,14 @@
 <script>
 (function () {
 
-  var ICON = 60;
-  var HALF = 30;
-  var IR   = 125;
-  var OR   = 252;
+  // Responsive sizing — scale orbit to fit the viewport
+  var vw = window.innerWidth;
+  var vh = window.innerHeight;
+  var S  = Math.max(280, Math.min(560, vw - 24, vh - 180));
+  var ICON = Math.max(44, Math.round(S * 0.105));
+  var HALF = Math.round(ICON / 2);
+  var IR   = Math.round(S * 0.219);
+  var OR   = Math.round(S * 0.442);
   var W    = (OR + HALF) * 2 + 6;
   var CX   = W / 2;
   var CY   = W / 2;
