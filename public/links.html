@@ -347,7 +347,7 @@
     .left-panel {
       width: 100%;
       min-width: unset;
-      padding: 60px 28px 20px;
+      padding: 90px 28px 20px;
       align-items: center;
       text-align: center;
       flex: unset;
@@ -356,10 +356,9 @@
     .hero-lines { align-items: center; }
     .page-footer { padding-top: 16px; text-align: center; }
     .right-panel { width: 100%; padding-bottom: 32px; }
-    .orbit-arrow { content: '↓'; }
     @keyframes arrow-nudge {
-      0%, 100% { transform: translateY(0);   opacity: 0.65; }
-      50%       { transform: translateY(6px); opacity: 1;    }
+      0%, 100% { transform: translateY(0);   opacity: 0.65; text-shadow: 0 0 8px #FF6B1A88; }
+      50%       { transform: translateY(6px); opacity: 1;    text-shadow: 0 0 18px #FF6B1A, 0 0 36px #FF6B1A66; }
     }
   }
 </style>
@@ -422,6 +421,13 @@
 
   // Responsive sizing — orbit lives in the 70% right panel on desktop
   var isMobile = window.innerWidth < 640;
+
+  // Swap arrow direction on mobile (CSS content: doesn't work on text nodes)
+  if (isMobile) {
+    var arrowEl = document.querySelector('.orbit-arrow');
+    if (arrowEl) arrowEl.textContent = '↓';
+  }
+
   var vw = isMobile ? window.innerWidth : window.innerWidth * 0.68;
   var vh = window.innerHeight;
   var S  = Math.max(360, Math.min(780, vw - 24, vh - 40));
