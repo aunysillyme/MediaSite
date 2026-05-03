@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -42,7 +42,7 @@
     position: fixed;
     inset: 0;
     background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
-    opacity: 0.55;
+    opacity: 0.4;
     z-index: 0;
     pointer-events: none;
   }
@@ -99,56 +99,60 @@
     text-align: center;
     position: relative;
     z-index: 4;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     animation: fadeup 0.6s ease-out both;
   }
 
-  .hero-name {
-    font-family: 'Space Mono', monospace;
-    font-size: clamp(26px, 5vw, 42px);
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: -0.5px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .hero-role {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: #00E5FF;
-    text-transform: uppercase;
-    animation: pulse-role 3s ease-in-out infinite;
-    margin-bottom: 6px;
-  }
-
-  .hero-tagline {
+  .hero-label {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
-    color: rgba(255, 107, 26, 0.55);
-    letter-spacing: 1.5px;
+    letter-spacing: 5px;
+    color: #00E5FF;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 14px;
+    animation: pulse-role 3s ease-in-out infinite;
+  }
+
+  .hero-lines {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .hero-line {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(22px, 4.5vw, 40px);
+    font-weight: 700;
+    color: #f0ece4;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 0 6px;
-    line-height: 1.8;
+    gap: 10px;
   }
 
-  .hero-tagline .sep {
-    color: rgba(255, 107, 26, 0.3);
+  .hero-line .dot {
+    color: #FF6B1A;
+    font-size: 0.6em;
+    line-height: 1;
   }
 
-  .hero-tagline .highlight {
-    color: rgba(255, 107, 26, 0.9);
+  .hero-accent {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
     font-weight: 700;
-    letter-spacing: 2px;
+    font-size: clamp(30px, 6vw, 54px);
+    color: #FF6B1A;
+    line-height: 1.1;
+    margin-top: 6px;
+    letter-spacing: 0;
   }
 
   @keyframes pulse-role {
     0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+    50% { opacity: 0.85; }
   }
 
   @keyframes fadeup {
@@ -276,11 +280,11 @@
 <body>
 
 <div class="bg-art">
-  <div class="bg-blob" style="width:280px;height:280px;background:rgba(255,107,26,0.07);top:-80px;left:-100px;"></div>
-  <div class="bg-blob" style="width:240px;height:240px;background:rgba(255,107,26,0.05);top:30%;right:-100px;"></div>
-  <div class="bg-blob" style="width:220px;height:220px;background:rgba(255,107,26,0.06);bottom:10%;left:-80px;"></div>
-  <div class="bg-blob" style="width:180px;height:180px;background:rgba(255,80,0,0.04);bottom:15%;right:-60px;"></div>
-  <div class="bg-blob" style="width:160px;height:160px;background:rgba(0,229,255,0.04);top:5%;right:0;"></div>
+  <div class="bg-blob" style="width:280px;height:280px;background:rgba(0,0,0,0.35);top:-80px;left:-100px;"></div>
+  <div class="bg-blob" style="width:240px;height:240px;background:rgba(0,0,0,0.25);top:30%;right:-100px;"></div>
+  <div class="bg-blob" style="width:220px;height:220px;background:rgba(0,0,0,0.3);bottom:10%;left:-80px;"></div>
+  <div class="bg-blob" style="width:180px;height:180px;background:rgba(0,0,0,0.2);bottom:15%;right:-60px;"></div>
+  <div class="bg-blob" style="width:160px;height:160px;background:rgba(0,0,0,0.2);top:5%;right:0;"></div>
 
   <svg class="bg-svg" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
     <path d="M-40 72 Q 90 12 185 98"   fill="none" stroke="#FF6B1A" stroke-width="1"   opacity="0.28"/>
@@ -308,17 +312,13 @@
 
 <div class="page">
   <div class="hero">
-    <h1 class="hero-name">AunySillyMe</h1>
-    <p class="hero-role">Artist &nbsp;·&nbsp; Producer</p>
-    <p class="hero-tagline">
-      <span>the music</span>
-      <span class="sep">•</span>
-      <span>the socials</span>
-      <span class="sep">•</span>
-      <span>all of me</span>
-      <span class="sep">|</span>
-      <span class="highlight">right here</span>
-    </p>
+    <p class="hero-label">✦ &nbsp; AunySillyMe</p>
+    <div class="hero-lines">
+      <div class="hero-line">the music <span class="dot">●</span></div>
+      <div class="hero-line">the socials <span class="dot">●</span></div>
+      <div class="hero-line">all of me</div>
+      <div class="hero-accent">right here ✦</div>
+    </div>
   </div>
 
   <div class="orbit-system" id="orbit"></div>
@@ -332,7 +332,7 @@
   // Responsive sizing — scale orbit to fit the viewport
   var vw = window.innerWidth;
   var vh = window.innerHeight;
-  var S  = Math.max(300, Math.min(620, vw - 24, vh - 120));
+  var S  = Math.max(280, Math.min(560, vw - 24, vh - 220));
   var ICON = Math.max(44, Math.round(S * 0.105));
   var HALF = Math.round(ICON / 2);
   var IR   = Math.round(S * 0.219);
