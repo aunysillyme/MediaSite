@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Lightning — Auny</title>
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="16x16"   href="/images/favicon-16.png" />
+<link rel="icon" type="image/png" sizes="32x32"   href="/images/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="48x48"   href="/images/favicon-48.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png" />
+<link rel="icon" type="image/png" sizes="256x256" href="/images/favicon-256.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/images/favicon-512.png" />
+<link rel="apple-touch-icon"                      href="/images/apple-touch-icon.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: #030312;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Blue Lightning tint overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,100,200,0.12) 0%, transparent 70%),
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0px, transparent 3px,
+        rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px
+      );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.9;
+  }
+
+  .page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: relative;
+    overflow: visible;
+  }
+
+  .left-panel {
+    width: 32%;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 52px 36px 52px 56px;
+    position: relative;
+    z-index: 4;
+    animation: fadeup 0.6s ease-out both;
+  }
+
+  .right-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 4;
+    overflow: visible;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 4;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: #7DF9FF;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 18px;
+  }
+
+  .hero-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: clamp(36px, 4.2vw, 67px);
+    color: #ffffff;
+    line-height: 0.95;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+  }
+
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #7DF9FF;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 28px;
+    animation: pulse-role 3s ease-in-out infinite;
+  }
+
+  .album-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+    border-left: 1px solid rgba(125, 249, 255, 0.18);
+    padding-left: 16px;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .meta-key {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(125, 249, 255, 0.38);
+    text-transform: uppercase;
+    min-width: 72px;
+    flex-shrink: 0;
+  }
+
+  .meta-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.5px;
+  }
+
+  .hero-accent {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(25px, 3.1vw, 42px);
+    color: #7DF9FF;
+    line-height: 1.2;
+    margin-top: 8px;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .orbit-arrow {
+    display: inline-block;
+    font-style: normal;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75em;
+    color: #7DF9FF;
+    animation: arrow-nudge 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px #7DF9FFaa;
+    line-height: 1;
+  }
+
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(0);   opacity: 0.65; text-shadow: 0 0 8px #7DF9FF88; }
+    50%       { transform: translateX(6px); opacity: 1;    text-shadow: 0 0 18px #7DF9FF, 0 0 36px #7DF9FF55; }
+  }
+
+  .page-footer {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.18);
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 32px;
+    white-space: nowrap;
+  }
+
+  @keyframes pulse-role {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.7; }
+  }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .orbit-system {
+    position: relative;
+    z-index: 4;
+    animation: fadeup 0.6s 0.15s ease-out both;
+  }
+
+  .planet {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 6;
+    transition: transform 0.22s ease;
+    transform-origin: center top;
+  }
+
+  .planet:hover { transform: scale(1.28); }
+
+  .planet-icon {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: #030312;
+    transition: box-shadow 0.22s ease;
+  }
+
+  .planet-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 7.5px;
+    margin-top: 5px;
+    white-space: nowrap;
+    opacity: 0.42;
+    transition: opacity 0.18s ease;
+    pointer-events: none;
+    padding: 2px 5px;
+    border-radius: 3px;
+    letter-spacing: 0.3px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .planet:hover .planet-name { opacity: 1; }
+
+  .vinyl-wrap {
+    position: absolute;
+    z-index: 4;
+    animation: vspin 20s linear infinite;
+  }
+
+  @keyframes vspin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .ring-track {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    pointer-events: none;
+  }
+
+  .ring-inner  { animation: ring-i 5s ease-in-out infinite; }
+  .ring-middle { animation: ring-m 5s ease-in-out 1.2s infinite; }
+  .ring-outer  { animation: ring-o 5s ease-in-out 2.4s infinite; }
+
+  @keyframes ring-i {
+    0%, 100% { border-color: rgba(125, 249, 255, 0.18); }
+    50%       { border-color: rgba(125, 249, 255, 0.52); }
+  }
+  @keyframes ring-m {
+    0%, 100% { border-color: rgba(68, 153, 255, 0.14); }
+    50%       { border-color: rgba(68, 153, 255, 0.42); }
+  }
+  @keyframes ring-o {
+    0%, 100% { border-color: rgba(170, 85, 255, 0.12); }
+    50%       { border-color: rgba(170, 85, 255, 0.36); }
+  }
+
+  .venue-btn {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 10000;
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    background: rgba(3, 3, 18, 0.85);
+    border: 1px solid rgba(125, 249, 255, 0.33);
+    color: #7DF9FF;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .venue-btn:hover {
+    border-color: #7DF9FF;
+    box-shadow: 0 0 14px rgba(125, 249, 255, 0.3);
+  }
+
+  /* Decorative bg lines */
+  .bg-art {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+  .bg-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .page { flex-direction: column; align-items: center; }
+    .left-panel {
+      width: 100%;
+      min-width: unset;
+      padding: 90px 28px 20px;
+      align-items: center;
+      text-align: center;
+      flex: unset;
+    }
+    .hero { flex: unset; align-items: center; }
+    .album-meta { align-items: flex-start; }
+    .page-footer { padding-top: 16px; text-align: center; }
+    .right-panel { width: 100%; padding-bottom: 32px; }
+    @keyframes arrow-nudge {
+      0%, 100% { transform: translateY(0);   opacity: 0.65; text-shadow: 0 0 8px #7DF9FF88; }
+      50%       { transform: translateY(6px); opacity: 1;    text-shadow: 0 0 18px #7DF9FF, 0 0 36px #7DF9FF55; }
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Decorative lines (Blue Lightning palette) -->
+<div class="bg-art">
+  <svg class="bg-svg" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
+    <path d="M-40 72 Q 90 12 185 98"    fill="none" stroke="#7DF9FF" stroke-width="1"   opacity="0.22"/>
+    <path d="M-26 96 Q 93 32 190 122"   fill="none" stroke="#7DF9FF" stroke-width="0.5" opacity="0.10"/>
+    <path d="M 490 22 Q 610 100 578 215" fill="none" stroke="#4499FF" stroke-width="1"   opacity="0.18"/>
+    <path d="M 506 18 Q 626 96 594 212"  fill="none" stroke="#4499FF" stroke-width="0.5" opacity="0.09"/>
+    <line x1="0"   y1="355" x2="65"  y2="355" stroke="#7DF9FF" stroke-width="1"   opacity="0.22"/>
+    <line x1="0"   y1="363" x2="42"  y2="363" stroke="#7DF9FF" stroke-width="0.5" opacity="0.10"/>
+    <line x1="535" y1="480" x2="610" y2="480" stroke="#4499FF" stroke-width="1"   opacity="0.18"/>
+    <line x1="552" y1="488" x2="610" y2="488" stroke="#4499FF" stroke-width="0.5" opacity="0.09"/>
+    <line x1="556" y1="70"  x2="580" y2="70"  stroke="#7DF9FF" stroke-width="1"   opacity="0.38"/>
+    <line x1="568" y1="58"  x2="568" y2="82"  stroke="#7DF9FF" stroke-width="1"   opacity="0.38"/>
+    <line x1="26"  y1="730" x2="52"  y2="730" stroke="#AA55FF" stroke-width="1"   opacity="0.3"/>
+    <line x1="39"  y1="718" x2="39"  y2="742" stroke="#AA55FF" stroke-width="1"   opacity="0.3"/>
+    <polygon points="568,108 586,132 568,156 550,132" fill="none" stroke="#7DF9FF" stroke-width="1" opacity="0.2"/>
+    <circle cx="574" cy="780" r="2.5" fill="#4499FF" opacity="0.4"/>
+    <circle cx="584" cy="770" r="1.5" fill="#4499FF" opacity="0.24"/>
+    <circle cx="583" cy="790" r="1"   fill="#4499FF" opacity="0.15"/>
+    <polygon points="26,845 58,795 90,845" fill="none" stroke="#AA55FF" stroke-width="1" opacity="0.2"/>
+    <!-- lightning bolt accents -->
+    <polygon points="30,40 22,60 28,58 26,80 34,60 28,62" fill="#7DF9FF" opacity="0.12"/>
+    <polygon points="570,300 562,322 568,320 566,344 574,322 568,324" fill="#4499FF" opacity="0.1"/>
+  </svg>
+</div>
+
+<a class="venue-btn" href="https://auny.media">← Venue</a>
+
+<div class="page">
+  <div class="left-panel">
+    <div class="hero">
+      <p class="hero-label">✦ &nbsp; AunySillyMe &nbsp;·&nbsp; 2026</p>
+      <h1 class="hero-name">Blue<br>Lightning</h1>
+      <p class="hero-subtitle">Album &nbsp;·&nbsp; 26 Songs</p>
+
+      <div class="album-meta">
+        <div class="meta-row">
+          <span class="meta-key">Released</span>
+          <span class="meta-val">March 25, 2026</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Duration</span>
+          <span class="meta-val">1 hr 28 min</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Label</span>
+          <span class="meta-val">11119560 Records DK</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Artist</span>
+          <span class="meta-val">Auny</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Written</span>
+          <span class="meta-val">Auny</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Produced</span>
+          <span class="meta-val">Auny</span>
+        </div>
+      </div>
+
+      <div class="hero-accent">26 tracks <span class="orbit-arrow">→</span></div>
+    </div>
+    <p class="page-footer">Stream &nbsp;·&nbsp; Listen &nbsp;·&nbsp; Explore</p>
+  </div>
+
+  <div class="right-panel">
+    <div class="orbit-system" id="orbit"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  var isMobile = window.innerWidth < 640;
+
+  if (isMobile) {
+    var arrowEl = document.querySelector('.orbit-arrow');
+    if (arrowEl) arrowEl.textContent = '↓';
+  }
+
+  var vw   = isMobile ? window.innerWidth : window.innerWidth * 0.68;
+  var vh   = window.innerHeight;
+  var S    = Math.max(360, Math.min(820, vw - 24, vh - 40));
+  var ICON = Math.max(32, Math.round(S * 0.073));
+  var HALF = Math.round(ICON / 2);
+  var IR   = Math.round(S * 0.175);  // inner  — 8 tracks
+  var MR   = Math.round(S * 0.315);  // middle — 9 tracks
+  var OR   = Math.round(S * 0.455);  // outer  — 9 tracks
+  var W    = (OR + HALF) * 2 + 6;
+  var CX   = W / 2;
+  var CY   = W / 2;
+
+  var ALBUM_URL = 'https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI';
+
+  var C1 = '#7DF9FF';  // cyan  — inner ring
+  var C2 = '#4499FF';  // blue  — middle ring
+  var C3 = '#AA55FF';  // purple — outer ring
+
+  var TRACKS = [
+    // ── Inner ring (1–8) ──────────────────────────────────────
+    { n: '01', label: 'Blue Lightning',   c: C1 },
+    { n: '02', label: 'Night Lanes',      c: C1 },
+    { n: '03', label: 'Night Lanes 2',    c: C1 },
+    { n: '04', label: 'Static Hearts',    c: C1 },
+    { n: '05', label: 'Static Hearts 2',  c: C1 },
+    { n: '06', label: 'Made of Glass',    c: C1 },
+    { n: '07', label: 'Fried Circuits',   c: C1 },
+    { n: '08', label: 'Fried Circuits 2', c: C1 },
+    // ── Middle ring (9–17) ────────────────────────────────────
+    { n: '09', label: 'Electric Bloom',   c: C2 },
+    { n: '10', label: 'Pre Glow-up',      c: C2 },
+    { n: '11', label: 'Post Glow-up',     c: C2 },
+    { n: '12', label: 'Slow Orbit',       c: C2 },
+    { n: '13', label: 'Pulsing Star',     c: C2 },
+    { n: '14', label: 'Shooting Star',    c: C2 },
+    { n: '15', label: 'Ride at Dawn',     c: C2 },
+    { n: '16', label: 'Ride at Dusk',     c: C2 },
+    { n: '17', label: 'Hold the Light',   c: C2 },
+    // ── Outer ring (18–26) ────────────────────────────────────
+    { n: '18', label: 'Hold the Light 2', c: C3 },
+    { n: '19', label: 'Past Echoes',      c: C3 },
+    { n: '20', label: 'Future Echoes',    c: C3 },
+    { n: '21', label: 'Open Seas',        c: C3 },
+    { n: '22', label: 'Open Skies',       c: C3 },
+    { n: '23', label: 'Neonify Cyan',     c: C3 },
+    { n: '24', label: 'Neonify Orange',   c: C3 },
+    { n: '25', label: 'Purple Thunder',   c: C3 },
+    { n: '26', label: 'Blue Thunder',     c: C3 },
+  ];
+
+  var RING1 = TRACKS.slice(0, 8);
+  var RING2 = TRACKS.slice(8, 17);
+  var RING3 = TRACKS.slice(17, 26);
+
+  // Build container
+  var orbit = document.getElementById('orbit');
+  orbit.style.cssText = 'width:' + W + 'px;height:' + W + 'px;position:relative;';
+
+  // Ring tracks
+  function makeRing(r, cls) {
+    var d = document.createElement('div');
+    d.className = 'ring-track ' + cls;
+    d.style.width  = (r * 2) + 'px';
+    d.style.height = (r * 2) + 'px';
+    d.style.left   = (CX - r) + 'px';
+    d.style.top    = (CY - r) + 'px';
+    orbit.appendChild(d);
+  }
+  makeRing(IR, 'ring-inner');
+  makeRing(MR, 'ring-middle');
+  makeRing(OR, 'ring-outer');
+
+  // Vinyl — blue lightning grooves
+  var vsz = Math.round(ICON * 2.1);
+  var vWrap = document.createElement('div');
+  vWrap.className = 'vinyl-wrap';
+  vWrap.style.cssText = 'width:' + vsz + 'px;height:' + vsz + 'px;top:50%;left:50%;margin-left:' + (-(vsz/2)) + 'px;margin-top:' + (-(vsz/2)) + 'px;';
+  vWrap.innerHTML =
+    '<svg viewBox="0 0 100 100" width="' + vsz + '" height="' + vsz + '">'
+    + '<circle cx="50" cy="50" r="49" fill="#05050f"/>'
+    + '<circle cx="50" cy="50" r="46" fill="none" stroke="#0d1a30" stroke-width="1.5"/>'
+    + '<circle cx="50" cy="50" r="42" fill="none" stroke="#0a1222" stroke-width="1"/>'
+    + '<circle cx="50" cy="50" r="38" fill="none" stroke="#0d1a30" stroke-width="1.5"/>'
+    + '<circle cx="50" cy="50" r="34" fill="none" stroke="#0a1222" stroke-width="1"/>'
+    + '<circle cx="50" cy="50" r="30" fill="none" stroke="#0d1a30" stroke-width="1"/>'
+    + '<circle cx="50" cy="50" r="25" fill="none" stroke="#7DF9FF" stroke-width="0.8" opacity="0.28"/>'
+    + '<circle cx="50" cy="50" r="21" fill="#05050f"/>'
+    + '<circle cx="50" cy="50" r="18" fill="none" stroke="#7DF9FF" stroke-width="1.5" opacity="0.65"/>'
+    + '</svg>';
+  orbit.appendChild(vWrap);
+
+  // Center lightning bolt (static, above vinyl)
+  var csz = Math.round(vsz * 0.55);
+  var cWrap = document.createElement('div');
+  cWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + csz + 'px;height:' + csz + 'px;margin-left:' + (-(csz/2)) + 'px;margin-top:' + (-(csz/2)) + 'px;z-index:9;display:flex;align-items:center;justify-content:center;pointer-events:none;';
+  var bsz = Math.round(csz * 0.7);
+  cWrap.innerHTML =
+    '<svg viewBox="0 0 24 24" width="' + bsz + '" height="' + bsz + '" fill="none">'
+    + '<polygon points="13,2 4,13.5 11,13.5 11,22 20,10.5 13,10.5" fill="#7DF9FF" opacity="0.92"/>'
+    + '<polygon points="13,2 4,13.5 11,13.5 11,22 20,10.5 13,10.5" fill="none" stroke="#7DF9FF" stroke-width="0.5" opacity="0.5"/>'
+    + '</svg>';
+  orbit.appendChild(cWrap);
+
+  // Planet factory
+  function makePlanet(t) {
+    var a = document.createElement('a');
+    a.href      = ALBUM_URL;
+    a.target    = '_blank';
+    a.rel       = 'noopener noreferrer';
+    a.className = 'planet';
+    a.setAttribute('aria-label', t.label);
+    var numPx = Math.round(ICON * 0.28);
+    a.innerHTML =
+      '<div class="planet-icon" style="width:' + ICON + 'px;height:' + ICON + 'px;border:1.5px solid ' + t.c + ';box-shadow:0 0 10px ' + t.c + '45,inset 0 0 14px ' + t.c + '18;">'
+      + '<span style="font-family:\'Space Mono\',monospace;font-size:' + numPx + 'px;font-weight:700;color:' + t.c + ';line-height:1;">' + t.n + '</span>'
+      + '</div>'
+      + '<span class="planet-name" style="color:' + t.c + ';">' + t.label + '</span>';
+    orbit.appendChild(a);
+    return a;
+  }
+
+  var els1 = RING1.map(makePlanet);
+  var els2 = RING2.map(makePlanet);
+  var els3 = RING3.map(makePlanet);
+
+  // Animate — alternating directions, different speeds
+  var a1 = 0;
+  var a2 = Math.PI / 9;
+  var a3 = Math.PI / 4;
+  var last = null;
+
+  function tick(ts) {
+    if (!last) last = ts;
+    var dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+
+    a1 -= dt * (2 * Math.PI / 44);   // inner  CCW — 44s/rev
+    a2 += dt * (2 * Math.PI / 62);   // middle CW  — 62s/rev
+    a3 -= dt * (2 * Math.PI / 84);   // outer  CCW — 84s/rev
+
+    els1.forEach(function(el, i) {
+      var ang = a1 + (i / els1.length) * 2 * Math.PI;
+      el.style.left = (CX + IR * Math.cos(ang) - HALF) + 'px';
+      el.style.top  = (CY + IR * Math.sin(ang) - HALF) + 'px';
+    });
+    els2.forEach(function(el, i) {
+      var ang = a2 + (i / els2.length) * 2 * Math.PI;
+      el.style.left = (CX + MR * Math.cos(ang) - HALF) + 'px';
+      el.style.top  = (CY + MR * Math.sin(ang) - HALF) + 'px';
+    });
+    els3.forEach(function(el, i) {
+      var ang = a3 + (i / els3.length) * 2 * Math.PI;
+      el.style.left = (CX + OR * Math.cos(ang) - HALF) + 'px';
+      el.style.top  = (CY + OR * Math.sin(ang) - HALF) + 'px';
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>
