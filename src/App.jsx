@@ -37,7 +37,7 @@ export default function App() {
   if (window.location.pathname === '/links') return <LinksPage />
 
   return (
-    <div style={{ width: '100%', height: '100%', background: "#0A0005 url('/images/background-site-1920x1080.png') center/cover no-repeat fixed" }}>
+    <div style={{ width: '100%', height: '100%', background: '#0A0005' }}>
       {!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}
 
       <CanvasErrorBoundary>
