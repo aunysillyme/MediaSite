@@ -26,14 +26,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  @font-face {
-    font-family: 'AunyFont';
-    src: url('/font.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   html, body {
@@ -67,7 +59,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 0 50px;
+    padding: 16px 0 16px;
+    gap: 4px;
     position: relative;
     overflow: visible;
   }
@@ -96,18 +89,18 @@
     text-align: center;
     position: relative;
     z-index: 4;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     animation: fadeup 0.6s ease-out both;
   }
 
   .hero-name {
-    font-family: 'AunyFont', 'Syne', sans-serif;
-    font-size: clamp(38px, 6.5vw, 56px);
-    font-weight: normal;
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 700;
     color: #ffffff;
-    letter-spacing: 0px;
+    letter-spacing: -0.5px;
     line-height: 1;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .hero-role {
@@ -302,7 +295,7 @@
   // Responsive sizing — scale orbit to fit the viewport
   var vw = window.innerWidth;
   var vh = window.innerHeight;
-  var S  = Math.max(280, Math.min(560, vw - 24, vh - 180));
+  var S  = Math.max(300, Math.min(620, vw - 24, vh - 120));
   var ICON = Math.max(44, Math.round(S * 0.105));
   var HALF = Math.round(ICON / 2);
   var IR   = Math.round(S * 0.219);
