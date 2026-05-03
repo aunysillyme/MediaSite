@@ -115,8 +115,24 @@
   .hero-tagline {
     font-family: 'Space Mono', monospace;
     font-size: 10px;
-    color: rgba(255, 107, 26, 0.6);
-    letter-spacing: 1px;
+    color: rgba(255, 107, 26, 0.55);
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0 6px;
+    line-height: 1.8;
+  }
+
+  .hero-tagline .sep {
+    color: rgba(255, 107, 26, 0.3);
+  }
+
+  .hero-tagline .highlight {
+    color: rgba(255, 107, 26, 0.9);
+    font-weight: 700;
+    letter-spacing: 2px;
   }
 
   @keyframes pulse-role {
@@ -256,7 +272,15 @@
   <div class="hero">
     <h1 class="hero-name">AunySillyMe</h1>
     <p class="hero-role">Artist &nbsp;·&nbsp; Producer</p>
-    <p class="hero-tagline">all of me, in orbit ✦</p>
+    <p class="hero-tagline">
+      <span>the music</span>
+      <span class="sep">•</span>
+      <span>the socials</span>
+      <span class="sep">•</span>
+      <span>all of me</span>
+      <span class="sep">|</span>
+      <span class="highlight">right here</span>
+    </p>
   </div>
 
   <div class="orbit-system" id="orbit"></div>
