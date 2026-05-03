@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@800&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -133,12 +133,12 @@
   }
 
   .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(32px, 3.8vw, 60px);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: clamp(26px, 3.05vw, 48px);
     color: #ffffff;
     line-height: 0.95;
-    letter-spacing: -1px;
+    letter-spacing: -0.5px;
     margin-bottom: 10px;
   }
 
@@ -186,6 +186,25 @@
     line-height: 1.2;
     margin-top: 8px;
     letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .orbit-arrow {
+    display: inline-block;
+    font-style: normal;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75em;
+    color: #FF6B1A;
+    animation: arrow-nudge 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px #FF6B1Aaa;
+    line-height: 1;
+  }
+
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(0);   opacity: 0.65; text-shadow: 0 0 8px #FF6B1A88; }
+    50%       { transform: translateX(6px); opacity: 1;    text-shadow: 0 0 18px #FF6B1A, 0 0 36px #FF6B1A66; }
   }
 
   .page-footer {
@@ -325,6 +344,11 @@
     .hero-lines { align-items: center; }
     .page-footer { padding-top: 16px; text-align: center; }
     .right-panel { width: 100%; padding-bottom: 32px; }
+    .orbit-arrow { content: '↓'; }
+    @keyframes arrow-nudge {
+      0%, 100% { transform: translateY(0);   opacity: 0.65; }
+      50%       { transform: translateY(6px); opacity: 1;    }
+    }
   }
 </style>
 </head>
@@ -370,7 +394,7 @@
       <div class="hero-lines">
         <div class="hero-line">the music <span class="dot">●</span> the socials <span class="dot">●</span></div>
         <div class="hero-line">all of me</div>
-        <div class="hero-accent">right here ✦</div>
+        <div class="hero-accent">right here <span class="orbit-arrow">→</span></div>
       </div>
     </div>
     <p class="page-footer">Stream &nbsp;·&nbsp; Follow &nbsp;·&nbsp; Listen</p>
