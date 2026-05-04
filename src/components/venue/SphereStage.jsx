@@ -51,7 +51,7 @@ const RAW_CLIPS = [
 const CLIPS = shuffle(RAW_CLIPS).map(f => '/video/' + encodeURIComponent(f))
 
 const PANEL_COUNT = 12
-const SPHERE_R = 3.5
+const SPHERE_R = 3.6
 
 // Alternating portrait/landscape sizes for collage variety
 const PANEL_SIZES = [
@@ -173,12 +173,6 @@ export default function SphereStage() {
     <group position={[0, 5, 0]}>
       {/* Spinning collage */}
       <group ref={spinRef}>
-        {/* Dark base sphere fills gaps between panels */}
-        <mesh>
-          <sphereGeometry args={[3.48, 48, 32]} />
-          <meshStandardMaterial color="#0d0020" />
-        </mesh>
-
         {/* Video panels distributed across sphere surface */}
         {LAYOUT.map((panel, i) => (
           <VideoPanel
