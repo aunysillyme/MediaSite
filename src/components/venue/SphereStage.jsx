@@ -50,23 +50,17 @@ const RAW_CLIPS = [
 
 const CLIPS = shuffle(RAW_CLIPS).map(f => '/video/' + encodeURIComponent(f))
 
-const PANEL_COUNT = 12
+const PANEL_COUNT = 22
 const SPHERE_R = 3.6
 
-// Alternating portrait/landscape sizes for collage variety
+// Mix of portrait and landscape, larger for denser coverage
 const PANEL_SIZES = [
-  [1.55, 1.0],
-  [1.0,  1.55],
-  [1.4,  0.9],
-  [0.9,  1.4],
-  [1.5,  1.05],
-  [1.05, 1.5],
-  [1.35, 0.9],
-  [0.9,  1.35],
-  [1.45, 1.0],
-  [1.0,  1.45],
-  [1.3,  0.85],
-  [0.85, 1.3],
+  [2.2, 1.4], [1.4, 2.2], [2.0, 1.3], [1.3, 2.0],
+  [2.1, 1.4], [1.4, 2.1], [1.9, 1.3], [1.3, 1.9],
+  [2.2, 1.5], [1.5, 2.2], [2.0, 1.4], [1.4, 2.0],
+  [2.1, 1.3], [1.3, 2.1], [2.0, 1.5], [1.5, 2.0],
+  [2.2, 1.4], [1.4, 2.2], [2.1, 1.5], [1.5, 2.1],
+  [2.0, 1.3], [1.3, 2.0],
 ]
 
 // Fibonacci sphere distribution — evenly spaces N points across a sphere
@@ -91,7 +85,7 @@ function buildLayout() {
 
     panels.push({
       pos: [nx * SPHERE_R, y * SPHERE_R, nz * SPHERE_R],
-      rot: [euler.x, euler.y, euler.z + (Math.random() - 0.5) * 0.55],
+      rot: [euler.x, euler.y, euler.z + (Math.random() - 0.5) * 0.15],
       w: PANEL_SIZES[i][0],
       h: PANEL_SIZES[i][1],
     })
@@ -138,7 +132,7 @@ function VideoPanel({ src, width, height, position, rotation }) {
   return (
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={[width, height]} />
-      <meshBasicMaterial ref={matRef} color="#2a0050" side={THREE.DoubleSide} />
+      <meshBasicMaterial ref={matRef} color="#ffffff" side={THREE.DoubleSide} />
     </mesh>
   )
 }
