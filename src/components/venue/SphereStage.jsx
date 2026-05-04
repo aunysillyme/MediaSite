@@ -138,7 +138,7 @@ function VideoPanel({ src, width, height, position, rotation }) {
   return (
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={[width, height]} />
-      <meshBasicMaterial ref={matRef} color="#1a0030" />
+      <meshBasicMaterial ref={matRef} color="#2a0050" side={THREE.DoubleSide} />
     </mesh>
   )
 }
