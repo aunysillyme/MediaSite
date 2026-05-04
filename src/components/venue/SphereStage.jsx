@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useVenueStore } from '../../store.js'
@@ -50,14 +50,66 @@ const RAW_CLIPS = [
 
 const CLIPS = shuffle(RAW_CLIPS).map(f => '/video/' + encodeURIComponent(f))
 
-function VideoSphere({ src }) {
+const PANEL_COUNT = 12
+const SPHERE_R = 3.5
+
+// Alternating portrait/landscape sizes for collage variety
+const PANEL_SIZES = [
+  [1.55, 1.0],
+  [1.0,  1.55],
+  [1.4,  0.9],
+  [0.9,  1.4],
+  [1.5,  1.05],
+  [1.05, 1.5],
+  [1.35, 0.9],
+  [0.9,  1.35],
+  [1.45, 1.0],
+  [1.0,  1.45],
+  [1.3,  0.85],
+  [0.85, 1.3],
+]
+
+// Fibonacci sphere distribution — evenly spaces N points across a sphere
+function buildLayout() {
+  const phi = Math.PI * (3 - Math.sqrt(5))
+  const zAxis = new THREE.Vector3(0, 0, 1)
+  const panels = []
+
+  for (let i = 0; i < PANEL_COUNT; i++) {
+    const y  = 1 - (i / (PANEL_COUNT - 1)) * 2
+    const r  = Math.sqrt(Math.max(0, 1 - y * y))
+    const th = phi * i
+    const nx = r * Math.cos(th)
+    const nz = r * Math.sin(th)
+
+    // Rotate plane so its face points outward from sphere center
+    const q = new THREE.Quaternion().setFromUnitVectors(
+      zAxis,
+      new THREE.Vector3(nx, y, nz).normalize()
+    )
+    const euler = new THREE.Euler().setFromQuaternion(q)
+
+    panels.push({
+      pos: [nx * SPHERE_R, y * SPHERE_R, nz * SPHERE_R],
+      rot: [euler.x, euler.y, euler.z + (Math.random() - 0.5) * 0.55],
+      w: PANEL_SIZES[i][0],
+      h: PANEL_SIZES[i][1],
+    })
+  }
+  return panels
+}
+
+const LAYOUT  = buildLayout()
+const SELECTED = CLIPS.slice(0, PANEL_COUNT)
+
+function VideoPanel({ src, width, height, position, rotation }) {
   const matRef = useRef()
 
   useEffect(() => {
     const video = document.createElement('video')
-    video.src = src
-    video.loop = true
-    video.muted = true
+    video.src      = src
+    video.loop     = true
+    video.muted    = true
     video.playsInline = true
     video.crossOrigin = 'anonymous'
 
@@ -67,15 +119,10 @@ function VideoSphere({ src }) {
       const tex = new THREE.VideoTexture(video)
       tex.colorSpace = THREE.SRGBColorSpace
       matRef.current.map = tex
-      matRef.current.emissiveMap = tex
-      matRef.current.color.set('#ffffff')
-      matRef.current.emissive.set('#444444')
-      matRef.current.emissiveIntensity = 0.6
       matRef.current.needsUpdate = true
     }
 
     video.addEventListener('loadeddata', onReady)
-    video.addEventListener('error', () => {})
     video.load()
 
     return () => {
@@ -89,41 +136,24 @@ function VideoSphere({ src }) {
   }, [src])
 
   return (
-    <mesh>
-      <sphereGeometry args={[3.5, 48, 32]} />
-      <meshStandardMaterial
-        ref={matRef}
-        color="#0d0020"
-        emissive="#6600cc"
-        emissiveIntensity={0.7}
-      />
+    <mesh position={position} rotation={rotation}>
+      <planeGeometry args={[width, height]} />
+      <meshBasicMaterial ref={matRef} color="#1a0030" />
     </mesh>
   )
 }
 
 export default function SphereStage() {
-  const spinRef = useRef()
+  const spinRef         = useRef()
   const wireframeMeshRef = useRef()
-  const wireframeMatRef = useRef()
-  const glassMeshRef = useRef()
-  const glassMatRef = useRef()
-  const portalProgress = useRef(0)
+  const wireframeMatRef  = useRef()
+  const glassMeshRef     = useRef()
+  const glassMatRef      = useRef()
+  const portalProgress   = useRef(0)
 
-  const [clipIndex, setClipIndex] = useState(() =>
-    Math.floor(Math.random() * CLIPS.length)
-  )
-
-  const portalOpen = useVenueStore((s) => s.portalOpen)
+  const portalOpen    = useVenueStore((s) => s.portalOpen)
   const portalOpenRef = useRef(false)
   portalOpenRef.current = portalOpen
-
-  useEffect(() => {
-    const t = setInterval(
-      () => setClipIndex(i => (i + 1) % CLIPS.length),
-      25000
-    )
-    return () => clearInterval(t)
-  }, [])
 
   useFrame((_, delta) => {
     if (spinRef.current) spinRef.current.rotation.y += 0.0015
@@ -135,19 +165,34 @@ export default function SphereStage() {
 
     if (wireframeMeshRef.current) wireframeMeshRef.current.scale.setScalar(1 + p * 0.35)
     if (wireframeMatRef.current)  wireframeMatRef.current.opacity = Math.max(0, 0.07 * (1 - p))
-
-    if (glassMeshRef.current) glassMeshRef.current.scale.setScalar(1 + p * 0.6)
-    if (glassMatRef.current)  glassMatRef.current.opacity = Math.max(0, 0.04 * (1 - p))
+    if (glassMeshRef.current)     glassMeshRef.current.scale.setScalar(1 + p * 0.6)
+    if (glassMatRef.current)      glassMatRef.current.opacity = Math.max(0, 0.04 * (1 - p))
   })
 
   return (
     <group position={[0, 5, 0]}>
-      {/* Spinning video sphere */}
+      {/* Spinning collage */}
       <group ref={spinRef}>
-        <VideoSphere key={clipIndex} src={CLIPS[clipIndex]} />
+        {/* Dark base sphere fills gaps between panels */}
+        <mesh>
+          <sphereGeometry args={[3.48, 48, 32]} />
+          <meshStandardMaterial color="#0d0020" />
+        </mesh>
+
+        {/* Video panels distributed across sphere surface */}
+        {LAYOUT.map((panel, i) => (
+          <VideoPanel
+            key={i}
+            src={SELECTED[i]}
+            width={panel.w}
+            height={panel.h}
+            position={panel.pos}
+            rotation={panel.rot}
+          />
+        ))}
       </group>
 
-      {/* LED wireframe grid */}
+      {/* LED wireframe — stays still */}
       <mesh ref={wireframeMeshRef}>
         <sphereGeometry args={[3.57, 18, 12]} />
         <meshStandardMaterial ref={wireframeMatRef} wireframe color="#ffffff" transparent opacity={0.07} />
@@ -167,13 +212,12 @@ export default function SphereStage() {
         />
       </mesh>
 
-      {/* Pillar from floor to sphere bottom */}
+      {/* Stage pillar */}
       <mesh position={[0, -5.5, 0]}>
         <cylinderGeometry args={[1.4, 1.9, 4, 32]} />
         <meshStandardMaterial color="#0D0010" metalness={0.9} roughness={0.1} />
       </mesh>
 
-      {/* Sphere glow lights */}
       <pointLight color="#FF6B00" intensity={5} distance={32} position={[0, 0, 0]} />
       <pointLight color="#7B00FF" intensity={2} distance={22} position={[0, 2, 3]} />
     </group>
