@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afterglow — Auny</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: #080604;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Mono', monospace;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.25;
+    z-index: 0;
+    pointer-events: none;
+    filter: hue-rotate(340deg) saturate(1.6) brightness(0.9);
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0px, transparent 3px,
+      rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.22;
+  }
+
+  .page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: relative;
+    overflow: visible;
+  }
+
+  .left-panel {
+    width: 32%;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 52px 36px 52px 56px;
+    position: relative;
+    z-index: 4;
+    animation: fadeup 0.6s ease-out both;
+  }
+
+  .right-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 4;
+    overflow: visible;
+  }
+
+  .bg-art {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .bg-blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .bg-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero {
+    position: relative;
+    z-index: 4;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #FF8C42;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 14px;
+  }
+
+  .hero-name {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: clamp(32px, 3.8vw, 60px);
+    color: #ffffff;
+    line-height: 0.95;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    text-shadow: 0 0 40px rgba(255, 140, 66, 0.4);
+  }
+
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: #FF8C42;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 24px;
+    animation: pulse-role 3s ease-in-out infinite;
+  }
+
+  .meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+    border-left: 2px solid rgba(255, 140, 66, 0.25);
+    padding-left: 14px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .meta-key {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #FF8C42;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+
+  .meta-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: #c8c4bc;
+    letter-spacing: 0;
+  }
+
+  .hero-accent {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(22px, 2.8vw, 38px);
+    color: #FF8C42;
+    line-height: 1.2;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .orbit-arrow {
+    display: inline-block;
+    font-style: normal;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75em;
+    color: #FF8C42;
+    animation: arrow-nudge 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px #FF8C42aa;
+    line-height: 1;
+  }
+
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(0);   opacity: 0.65; text-shadow: 0 0 8px #FF8C4288; }
+    50%       { transform: translateX(6px); opacity: 1;    text-shadow: 0 0 18px #FF8C42, 0 0 36px #FF8C4266; }
+  }
+
+  .page-footer {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.18);
+    text-transform: uppercase;
+    margin-top: auto;
+    padding-top: 28px;
+    white-space: nowrap;
+  }
+
+  @keyframes pulse-role {
+    0%, 100% { opacity: 0.4; }
+    50%       { opacity: 0.7; }
+  }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .orbit-system {
+    position: relative;
+    z-index: 4;
+    animation: fadeup 0.6s 0.15s ease-out both;
+  }
+
+  .planet {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 6;
+    transition: transform 0.22s ease;
+    transform-origin: center top;
+  }
+
+  .planet:hover { transform: scale(1.25); }
+
+  .planet-icon {
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.22s ease;
+    flex-shrink: 0;
+    background: #080604;
+  }
+
+  .planet-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    margin-top: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    pointer-events: none;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .planet:hover .planet-name { opacity: 1; }
+
+  .track-dur {
+    font-family: 'Space Mono', monospace;
+    font-size: 7px;
+    margin-top: 1px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    pointer-events: none;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+  }
+
+  .planet:hover .track-dur { opacity: 1; }
+
+  .vinyl-wrap {
+    position: absolute;
+    z-index: 4;
+    animation: vspin 18s linear infinite;
+  }
+
+  @keyframes vspin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .ring-track {
+    position: absolute;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    pointer-events: none;
+  }
+
+  .ring-1 { animation: ring-1a 4s ease-in-out infinite; }
+  .ring-2 { animation: ring-2a 4s ease-in-out 1s infinite; }
+  .ring-3 { animation: ring-3a 4s ease-in-out 2s infinite; }
+
+  @keyframes ring-1a {
+    0%, 100% { border-color: rgba(255, 179, 71, 0.15); }
+    50%       { border-color: rgba(255, 179, 71, 0.42); }
+  }
+  @keyframes ring-2a {
+    0%, 100% { border-color: rgba(255, 107, 53, 0.13); }
+    50%       { border-color: rgba(255, 107, 53, 0.38); }
+  }
+  @keyframes ring-3a {
+    0%, 100% { border-color: rgba(232, 72, 85, 0.12); }
+    50%       { border-color: rgba(232, 72, 85, 0.35); }
+  }
+
+  .back-btn {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.5rem;
+    z-index: 200;
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    background: rgba(14, 6, 0, 0.82);
+    border: 1px solid rgba(255, 140, 66, 0.33);
+    color: #FF8C42;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .back-btn:hover {
+    border-color: #FF8C42;
+    box-shadow: 0 0 14px rgba(255, 140, 66, 0.3);
+  }
+
+  @media (max-width: 640px) {
+    .page { flex-direction: column; align-items: center; }
+    .left-panel {
+      width: 100%;
+      min-width: unset;
+      padding: 90px 28px 20px;
+      align-items: center;
+      text-align: center;
+      flex: unset;
+    }
+    .hero { flex: unset; align-items: center; }
+    .meta-block { align-items: flex-start; width: 100%; max-width: 300px; }
+    .page-footer { padding-top: 16px; text-align: center; }
+    .right-panel { width: 100%; padding-bottom: 32px; }
+    @keyframes arrow-nudge {
+      0%, 100% { transform: translateY(0);   opacity: 0.65; }
+      50%       { transform: translateY(6px); opacity: 1; }
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-art">
+  <div class="bg-blob" style="width:320px;height:320px;background:rgba(120,50,0,0.18);top:-80px;left:-100px;filter:blur(60px);"></div>
+  <div class="bg-blob" style="width:260px;height:260px;background:rgba(180,60,0,0.12);top:30%;right:-100px;filter:blur(50px);"></div>
+  <div class="bg-blob" style="width:240px;height:240px;background:rgba(200,40,60,0.1);bottom:10%;left:-80px;filter:blur(50px);"></div>
+  <div class="bg-blob" style="width:200px;height:200px;background:rgba(255,100,30,0.1);bottom:15%;right:-60px;filter:blur(40px);"></div>
+
+  <svg class="bg-svg" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
+    <!-- Road / horizon line decorations -->
+    <path d="M-40 72 Q 90 12 185 98"   fill="none" stroke="#FF8C42" stroke-width="1"   opacity="0.2"/>
+    <path d="M-26 96 Q 93 32 190 122"  fill="none" stroke="#FF8C42" stroke-width="0.5" opacity="0.1"/>
+    <path d="M 490 22 Q 610 100 578 215" fill="none" stroke="#FFB347" stroke-width="1"   opacity="0.18"/>
+    <path d="M 506 18 Q 626 96 594 212"  fill="none" stroke="#FFB347" stroke-width="0.5" opacity="0.09"/>
+    <!-- Horizontal sparks -->
+    <line x1="0"   y1="355" x2="65"  y2="355" stroke="#FF8C42" stroke-width="1"   opacity="0.22"/>
+    <line x1="0"   y1="363" x2="42"  y2="363" stroke="#FF8C42" stroke-width="0.5" opacity="0.11"/>
+    <line x1="535" y1="480" x2="610" y2="480" stroke="#FF8C42" stroke-width="1"   opacity="0.2"/>
+    <!-- Crosshairs -->
+    <line x1="556" y1="70"  x2="580" y2="70"  stroke="#FFB347" stroke-width="1"   opacity="0.35"/>
+    <line x1="568" y1="58"  x2="568" y2="82"  stroke="#FFB347" stroke-width="1"   opacity="0.35"/>
+    <line x1="26"  y1="730" x2="52"  y2="730" stroke="#FF8C42" stroke-width="1"   opacity="0.28"/>
+    <line x1="39"  y1="718" x2="39"  y2="742" stroke="#FF8C42" stroke-width="1"   opacity="0.28"/>
+    <!-- Diamond -->
+    <polygon points="568,108 586,132 568,156 550,132" fill="none" stroke="#FF8C42" stroke-width="1" opacity="0.2"/>
+    <!-- Dots -->
+    <circle cx="574" cy="780" r="2.5" fill="#FFB347" opacity="0.35"/>
+    <circle cx="584" cy="770" r="1.5" fill="#FFB347" opacity="0.22"/>
+    <circle cx="583" cy="790" r="1"   fill="#FFB347" opacity="0.15"/>
+    <!-- Triangle -->
+    <polygon points="26,845 58,795 90,845" fill="none" stroke="#E84855" stroke-width="1" opacity="0.2"/>
+    <path d="M 525 848 Q 615 772 598 692" fill="none" stroke="#E84855" stroke-width="0.8" opacity="0.18"/>
+  </svg>
+</div>
+
+<a class="back-btn" href="/links">&#8592; auny.media/links</a>
+
+<div class="page">
+  <div class="left-panel">
+    <div class="hero">
+      <p class="hero-label">&#10022; &nbsp; album</p>
+      <h1 class="hero-name">Afterglow</h1>
+      <p class="hero-subtitle">Auny &nbsp;&middot;&nbsp; 2025</p>
+
+      <div class="meta-block">
+        <div class="meta-row">
+          <span class="meta-key">Tracks</span>
+          <span class="meta-val">20 songs &nbsp;&middot;&nbsp; 1 hr 5 min</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Released</span>
+          <span class="meta-val">2025</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Written &amp; Produced</span>
+          <span class="meta-val">Auny</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Label</span>
+          <span class="meta-val">11119560 Records DK</span>
+        </div>
+      </div>
+
+      <div class="hero-accent">listen now <span class="orbit-arrow">&rarr;</span></div>
+    </div>
+    <p class="page-footer">Afterglow &nbsp;&middot;&nbsp; Auny &nbsp;&middot;&nbsp; 2025</p>
+  </div>
+
+  <div class="right-panel">
+    <div class="orbit-system" id="orbit"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  var isMobile = window.innerWidth < 640;
+  if (isMobile) {
+    var arrowEl = document.querySelector('.orbit-arrow');
+    if (arrowEl) arrowEl.textContent = '↓';
+  }
+
+  var vw = isMobile ? window.innerWidth : window.innerWidth * 0.68;
+  var vh = window.innerHeight;
+  var S  = Math.max(340, Math.min(820, vw - 24, vh - 40));
+  var ICON = Math.max(34, Math.round(S * 0.082));
+  var HALF = Math.round(ICON / 2);
+  var R1   = Math.round(S * 0.18);
+  var R2   = Math.round(S * 0.33);
+  var R3   = Math.round(S * 0.47);
+  var W    = (R3 + HALF) * 2 + 8;
+  var CX   = W / 2;
+  var CY   = W / 2;
+
+  // ── RING 1 — tracks 1–7 (counter-clockwise, golden amber) ──
+  var RING1 = [
+    { n: 'Ignition On',      dur: '3:03', num: 1,  c: '#FFB347' },
+    { n: '1:11AM',            dur: '3:12', num: 2,  c: '#FFB347' },
+    { n: 'Random Turn',       dur: '2:15', num: 3,  c: '#FFB347' },
+    { n: 'No Destination',    dur: '3:05', num: 4,  c: '#FFB347' },
+    { n: 'Streetlights',      dur: '4:01', num: 5,  c: '#FFB347' },
+    { n: 'Groovy',            dur: '3:12', num: 6,  c: '#FFB347' },
+    { n: 'Red Lights',        dur: '2:33', num: 7,  c: '#FFB347' },
+  ];
+
+  // ── RING 2 — tracks 8–14 (clockwise, deep orange) ──
+  var RING2 = [
+    { n: 'Rearview Mirror',   dur: '3:16', num: 8,  c: '#FF6B35' },
+    { n: 'Stop Sign',         dur: '3:26', num: 9,  c: '#FF6B35' },
+    { n: 'Flickering Lights', dur: '3:28', num: 10, c: '#FF6B35' },
+    { n: 'Intersection',      dur: '3:19', num: 11, c: '#FF6B35' },
+    { n: 'Reflections',       dur: '2:58', num: 12, c: '#FF6B35' },
+    { n: 'Late Nights',       dur: '3:34', num: 13, c: '#FF6B35' },
+    { n: 'Ocean Pkwy',        dur: '3:44', num: 14, c: '#FF6B35' },
+  ];
+
+  // ── RING 3 — tracks 15–20 (counter-clockwise, warm rose) ──
+  var RING3 = [
+    { n: 'Skipped Exit',      dur: '3:24', num: 15, c: '#E84855' },
+    { n: 'Still Driving',     dur: '3:59', num: 16, c: '#E84855' },
+    { n: 'Gas Station Coffee',dur: '3:03', num: 17, c: '#E84855' },
+    { n: 'Mileage',           dur: '3:33', num: 18, c: '#E84855' },
+    { n: 'Almost Morning',    dur: '2:33', num: 19, c: '#E84855' },
+    { n: 'Engine Off',        dur: '3:29', num: 20, c: '#FFB347' },
+  ];
+
+  var ALBUM_URL = 'https://open.spotify.com/album/27HeS1tHoz3hNWdt6WIfy9';
+
+  var orbit = document.getElementById('orbit');
+  orbit.style.width    = W + 'px';
+  orbit.style.height   = W + 'px';
+  orbit.style.position = 'relative';
+
+  function makeRing(r, cls) {
+    var d = document.createElement('div');
+    d.className = 'ring-track ' + cls;
+    d.style.width  = (r * 2) + 'px';
+    d.style.height = (r * 2) + 'px';
+    d.style.left   = (CX - r) + 'px';
+    d.style.top    = (CY - r) + 'px';
+    orbit.appendChild(d);
+  }
+  makeRing(R1, 'ring-1');
+  makeRing(R2, 'ring-2');
+  makeRing(R3, 'ring-3');
+
+  // ── Vinyl / album art center ──
+  var vsz = 110;
+  var vWrap = document.createElement('div');
+  vWrap.className = 'vinyl-wrap';
+  vWrap.style.cssText = 'width:' + vsz + 'px;height:' + vsz + 'px;margin-left:' + (-(vsz/2)) + 'px;margin-top:' + (-(vsz/2)) + 'px;top:50%;left:50%;';
+  vWrap.innerHTML = '<svg viewBox="0 0 110 110" width="110" height="110">'
+    + '<circle cx="55" cy="55" r="53" fill="#0a0604"/>'
+    + '<circle cx="55" cy="55" r="51" fill="none" stroke="#1a0e06" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="47" fill="none" stroke="#120a04" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="43" fill="none" stroke="#1a0e06" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="39" fill="none" stroke="#120a04" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="35" fill="none" stroke="#1a0e06" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="30" fill="none" stroke="#FF8C42" stroke-width="0.8" opacity="0.35"/>'
+    + '<circle cx="55" cy="55" r="24" fill="#0a0604"/>'
+    + '<circle cx="55" cy="55" r="22" fill="none" stroke="#FF8C42" stroke-width="1.5" opacity="0.7"/>'
+    + '<circle cx="55" cy="55" r="18" fill="none" stroke="#FFB347" stroke-width="0.5" opacity="0.4"/>'
+    /* Sunset / glow icon in center */
+    + '<circle cx="55" cy="58" r="10" fill="#FF8C42" opacity="0.25"/>'
+    + '<path d="M42 58 Q48 44 55 42 Q62 44 68 58 Z" fill="#FF6B35" opacity="0.7"/>'
+    + '<line x1="42" y1="58" x2="68" y2="58" stroke="#FFB347" stroke-width="1" opacity="0.6"/>'
+    + '<line x1="44" y1="61" x2="66" y2="61" stroke="#FF8C42" stroke-width="0.5" opacity="0.3"/>'
+    + '<line x1="46" y1="64" x2="64" y2="64" stroke="#E84855" stroke-width="0.5" opacity="0.2"/>'
+    + '<circle cx="55" cy="55" r="3" fill="#FF8C42" opacity="0.8"/>'
+    + '</svg>';
+  orbit.appendChild(vWrap);
+
+  // ── Album label (non-spinning, sits over vinyl center) ──
+  var lblSize = 36;
+  var lblWrap = document.createElement('div');
+  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#0a0604;z-index:8;display:flex;align-items:center;justify-content:center;';
+  orbit.appendChild(lblWrap);
+
+  // ── Planet factory ──
+  function makePlanet(p) {
+    var a = document.createElement('a');
+    a.href   = ALBUM_URL;
+    a.target = '_blank';
+    a.rel    = 'noopener noreferrer';
+    a.className = 'planet';
+    a.setAttribute('aria-label', p.n);
+
+    var numStr = (p.num < 10 ? '0' : '') + p.num;
+    var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
+      + '<text x="14" y="19" text-anchor="middle" font-family="Space Mono,monospace" font-size="11" font-weight="700" fill="' + p.c + '" opacity="0.9">' + numStr + '</text>'
+      + '</svg>';
+
+    a.innerHTML =
+      '<div class="planet-icon" style="width:' + ICON + 'px;height:' + ICON + 'px;border:1.5px solid ' + p.c + ';box-shadow:0 0 12px ' + p.c + '55,inset 0 0 18px ' + p.c + '28;">' + iconSvg + '</div>'
+      + '<span class="planet-name" style="color:' + p.c + ';">' + p.n + '</span>'
+      + '<span class="track-dur">' + p.dur + '</span>';
+
+    orbit.appendChild(a);
+    return a;
+  }
+
+  var ring1Els = RING1.map(makePlanet);
+  var ring2Els = RING2.map(makePlanet);
+  var ring3Els = RING3.map(makePlanet);
+
+  // ── Animation ──
+  var a1 = 0;
+  var a2 = Math.PI / 7;
+  var a3 = Math.PI / 4;
+  var last = null;
+
+  function tick(ts) {
+    if (!last) last = ts;
+    var dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+
+    a1 -= dt * (2 * Math.PI / 40);
+    a2 += dt * (2 * Math.PI / 55);
+    a3 -= dt * (2 * Math.PI / 48);
+
+    ring1Els.forEach(function (el, i) {
+      var a = a1 + (i / ring1Els.length) * 2 * Math.PI;
+      el.style.left = (CX + R1 * Math.cos(a) - HALF) + 'px';
+      el.style.top  = (CY + R1 * Math.sin(a) - HALF) + 'px';
+    });
+
+    ring2Els.forEach(function (el, i) {
+      var a = a2 + (i / ring2Els.length) * 2 * Math.PI;
+      el.style.left = (CX + R2 * Math.cos(a) - HALF) + 'px';
+      el.style.top  = (CY + R2 * Math.sin(a) - HALF) + 'px';
+    });
+
+    ring3Els.forEach(function (el, i) {
+      var a = a3 + (i / ring3Els.length) * 2 * Math.PI;
+      el.style.left = (CX + R3 * Math.cos(a) - HALF) + 'px';
+      el.style.top  = (CY + R3 * Math.sin(a) - HALF) + 'px';
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>
