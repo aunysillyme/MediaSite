@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Auny — Music · Lyrics · The Lighthouse You Build For Yourself</title>
-<meta name="description" content="Auny — instrumental albums, vocal singles, and the Color Series. Stream everywhere. 30 releases. 159 tracks.">
+<meta name="description" content="Auny — instrumental albums, vocal singles, and the Color Series. 31 releases · 160 tracks. Stream everywhere.">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Auny — Music · Lyrics · The Lighthouse You Build For Yourself">
-<meta property="og:description" content="30 releases · 7 albums · 23 singles · 159 tracks. Stream on every platform.">
+<meta property="og:description" content="31 releases · 7 albums · 24 singles · 160 tracks. Stream on every platform.">
 <meta property="og:image" content="https://www.auny.media/images/link-preview-thumbnail-1200x630.png">
 <meta property="og:url" content="https://www.auny.media/">
 <meta property="og:site_name" content="auny.media">
@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AunySillyMe">
 <meta name="twitter:title" content="Auny — Music · Lyrics · The Lighthouse You Build For Yourself">
-<meta name="twitter:description" content="30 releases · 7 albums · 23 singles. Stream everywhere.">
+<meta name="twitter:description" content="31 releases · 7 albums · 24 singles. Stream everywhere.">
 <meta name="twitter:image" content="https://www.auny.media/images/link-preview-thumbnail-1200x630.png">
 
 <link rel="canonical" href="https://www.auny.media/">
@@ -372,6 +372,17 @@
   .series-row {
     display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
     max-width: 920px; margin: 0 auto;
+  }
+  .series-row .mini-card { position: relative; }
+  .series-row .mini-card::before {
+    content: ''; position: absolute; inset: -2px; border-radius: 12px;
+    background: radial-gradient(circle at 50% 0%, var(--card-accent, var(--accent)) 0%, transparent 65%);
+    opacity: 0.22; z-index: -1; pointer-events: none;
+    filter: blur(8px);
+  }
+  .series-row .mini-card .cover {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06),
+                inset 0 -30px 50px -25px var(--card-accent, var(--accent));
   }
   .series-row .mini-card .body { padding: 8px 10px 10px; }
   .series-row .mini-card-title { font-size: 12px; }

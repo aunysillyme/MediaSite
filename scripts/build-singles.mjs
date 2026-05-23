@@ -150,10 +150,38 @@ function renderList() {
     ...series.map((s, i) => cardHtml(s, { badgeText: `${s.emoji} ${i + 1}/5` })),
   ].join('\n');
   const allCards = SINGLES.map((s) => cardHtml(s)).join('\n');
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    'name': 'Singles — Auny',
+    'url': 'https://www.auny.media/singles',
+    'description': `All ${SINGLES.length} vocal singles by Auny.`,
+    'isPartOf': { '@id': 'https://www.auny.media/#website' },
+    'mainEntity': {
+      '@type': 'ItemList',
+      'numberOfItems': SINGLES.length,
+      'itemListElement': SINGLES.map((s, i) => ({
+        '@type': 'ListItem',
+        'position': i + 1,
+        'item': {
+          '@type': 'MusicRecording',
+          'name': s.title,
+          'url': `https://www.auny.media/singles/${s.slug}`,
+          'image': `https://www.auny.media/album-art/singles/${s.slug}.jpg`,
+          'datePublished': s.releaseDate,
+          'genre': s.genre,
+          'byArtist': { '@type': 'MusicGroup', '@id': 'https://www.auny.media/#artist' },
+          'sameAs': s.spotifyTrackId ? `https://open.spotify.com/track/${s.spotifyTrackId}` : undefined,
+        },
+      })),
+    },
+  }, null, 2);
+
   return LIST_TPL
     .replaceAll('{{SERIES_CARDS}}', seriesCards)
     .replaceAll('{{ALL_CARDS}}', allCards)
     .replaceAll('{{TOTAL_SINGLES}}', String(SINGLES.length))
+    .replaceAll('{{LIST_JSONLD}}', jsonLd)
     .replaceAll('{{NAV}}', navFor('singles'))
     .replaceAll('{{NAV_CSS}}', NAV_CSS);
 }

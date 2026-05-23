@@ -83,6 +83,7 @@ const html = render(HOME_TPL, {
   LATEST_BLURB: esc(latestBlurb),
   TOTAL_SINGLES: String(SINGLES.length),
   TOTAL_ALBUMS: String(ALBUMS.length),
+  TOTAL_RELEASES: String(SINGLES.length + ALBUMS.length),
   TOTAL_TRACKS: String(SINGLES.length + ALBUMS.reduce((n, a) => n + a.tracks.length, 0)),
   MONTHLY_LISTENERS,
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),

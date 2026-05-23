@@ -56,9 +56,39 @@ function cardHtml(album) {
       </a>`;
 }
 
+function listJsonLd() {
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    'name': 'Albums — Auny',
+    'url': 'https://www.auny.media/albums',
+    'description': `All ${ALBUMS.length} albums by Auny — instrumental atmospheric music.`,
+    'isPartOf': { '@id': 'https://www.auny.media/#website' },
+    'mainEntity': {
+      '@type': 'ItemList',
+      'numberOfItems': ALBUMS.length,
+      'itemListElement': ALBUMS.map((a, i) => ({
+        '@type': 'ListItem',
+        'position': i + 1,
+        'item': {
+          '@type': 'MusicAlbum',
+          'name': a.title,
+          'url': `https://www.auny.media/albums/${a.slug}`,
+          'image': `https://www.auny.media/album-art/${a.slug}.jpg`,
+          'datePublished': a.releaseDate,
+          'numTracks': a.tracks.length,
+          'byArtist': { '@type': 'MusicGroup', '@id': 'https://www.auny.media/#artist' },
+          'sameAs': a.spotifyAlbumId ? `https://open.spotify.com/album/${a.spotifyAlbumId}` : undefined,
+        },
+      })),
+    },
+  }, null, 2);
+}
+
 function renderList() {
   return render(LIST_TPL, {
     ALBUM_CARDS: ALBUMS.map(cardHtml).join('\n'),
+    LIST_JSONLD: listJsonLd(),
     NAV: navFor('albums'),
     NAV_CSS: NAV_CSS,
   });
