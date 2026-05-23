@@ -219,9 +219,9 @@
     <h1 class="hero-name">AUNY</h1>
     <p class="hero-tagline">Music for the in-between hours. Drive music. Focus. The void. The warm light that survives it.</p>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-num">7</span><span class="stat-label">Albums</span></div>
-      <div class="stat"><span class="stat-num">23</span><span class="stat-label">Singles</span></div>
-      <div class="stat"><span class="stat-num">159</span><span class="stat-label">Tracks</span></div>
+      <div class="stat"><span class="stat-num">{{TOTAL_ALBUMS}}</span><span class="stat-label">Albums</span></div>
+      <div class="stat"><span class="stat-num">{{TOTAL_SINGLES}}</span><span class="stat-label">Singles</span></div>
+      <div class="stat"><span class="stat-num">{{TOTAL_TRACKS}}</span><span class="stat-label">Tracks</span></div>
       <div class="stat"><span class="stat-num">2,249</span><span class="stat-label">Monthly listeners</span></div>
     </div>
     <div class="hero-cta-row">
@@ -232,10 +232,10 @@
 
   <div class="featured">
     <span class="featured-label">latest release</span>
-    <a class="featured-card" href="/albums/{{LATEST_SLUG}}">
-      <div class="featured-cover"><img src="/album-art/{{LATEST_SLUG}}.jpg" alt="{{LATEST_TITLE}} cover" width="640" height="640"></div>
+    <a class="featured-card" href="{{LATEST_URL}}">
+      <div class="featured-cover"><img src="{{LATEST_COVER}}" alt="{{LATEST_TITLE}} cover" width="640" height="640"></div>
       <div class="featured-meta">
-        <p class="featured-tag">Album · {{LATEST_DATE}}</p>
+        <p class="featured-tag">{{LATEST_TYPE}} · {{LATEST_DATE}}</p>
         <h2 class="featured-title">{{LATEST_TITLE}}</h2>
         <p class="featured-sub">{{LATEST_BLURB}}</p>
       </div>

@@ -12,7 +12,15 @@ import { dirname } from 'node:path';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const HOME_TPL = tpl('home.html');
 
-const latest = ALBUMS[0];
+// Pick the most recent release across albums + singles
+const latestAlbum  = ALBUMS[0];
+const latestSingle = SINGLES[0];
+const latestIsAlbum = latestAlbum.releaseDate >= latestSingle.releaseDate;
+const latest = latestIsAlbum ? latestAlbum : latestSingle;
+const latestUrl = latestIsAlbum ? `/albums/${latest.slug}` : `/singles/${latest.slug}`;
+const latestCover = latestIsAlbum ? `/album-art/${latest.slug}.jpg` : `/album-art/singles/${latest.slug}.jpg`;
+const latestType = latestIsAlbum ? 'Album' : 'Single';
+const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
 
 function miniAlbum(a) {
   return `    <a class="mini-card" href="/albums/${a.slug}">
@@ -37,10 +45,15 @@ function miniSeries(slug) {
 }
 
 const html = render(HOME_TPL, {
-  LATEST_SLUG: latest.slug,
+  LATEST_URL: latestUrl,
+  LATEST_COVER: latestCover,
+  LATEST_TYPE: latestType,
   LATEST_TITLE: esc(latest.title),
   LATEST_DATE: esc(latest.releaseDisplay),
-  LATEST_BLURB: esc(latest.blurb),
+  LATEST_BLURB: esc(latestBlurb),
+  TOTAL_SINGLES: String(SINGLES.length),
+  TOTAL_ALBUMS: String(ALBUMS.length),
+  TOTAL_TRACKS: String(SINGLES.length + ALBUMS.reduce((n, a) => n + a.tracks.length, 0)),
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
   SERIES_TILES: COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug)).join('\n'),
   NAV: navFor(),

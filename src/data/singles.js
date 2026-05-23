@@ -14,6 +14,58 @@ export const COLOR_SERIES_ORDER = [
 
 export const SINGLES = [
   {
+    slug: 'let-go',
+    title: 'Let Go',
+    releaseDate: '2026-05-16',
+    releaseDisplay: 'May 16, 2026',
+    year: 2026,
+    spotifyTrackId: '2mzp9QxzUINa3XeVbJ7r00',
+    hyperfollowSlug: 'let-go',
+    genre: 'Lyrical · EDM · Golden Hour',
+    era: 3,
+    colorSeries: null,
+    emoji: '',
+    accent: { color: '#F2C078', rgb: '242,192,120' },
+    themes: 'Letting go as becoming — not grief, not triumph, just exhale. The thing you have been carrying, set down.',
+    anchorLyric: "But it doesn't matter now — it's time to let go",
+    lyrics: `If you only knew
+The things I endured
+If you only knew
+The things I held back
+If you only knew
+The things I wanna let go of
+If you only knew
+The things that were out of my control
+
+But it doesn't matter now
+It's time to let go
+
+They say
+It's time to let go
+Be the new self
+You truly wanna be
+
+It's now time to let go
+To be the version
+Everyone needs you to be
+
+Even when you're broken
+Even when you don't care
+Even when the world
+Is the cruel one
+
+Take my hand
+Takeover my mind
+Because it's time
+It's time to let go
+
+I wanna let go
+I wanna be
+Who the world
+Wants me to be
+Once I let go`,
+  },
+  {
     slug: 'pink',
     title: 'PINK',
     releaseDate: '2026-05-04',
