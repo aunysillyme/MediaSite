@@ -1,0 +1,42 @@
+name: update-stats
+
+# Fetches latest Spotify monthly listeners + followers weekly and commits
+# the change to main, which triggers a Vercel production redeploy.
+#
+# Manual run: Actions tab → "update-stats" → Run workflow.
+
+on:
+  schedule:
+    # Every Monday at 14:00 UTC (10am ET, 7am PT)
+    - cron: '0 14 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch latest Spotify stats
+        run: node scripts/update-stats.mjs
+
+      - name: Commit if stats.json changed
+        run: |
+          if git diff --quiet src/data/stats.json; then
+            echo "No change — skipping commit."
+            exit 0
+          fi
+          git config user.name  "auny-stats-bot"
+          git config user.email "stats-bot@users.noreply.github.com"
+          git add src/data/stats.json
+          NEW_ML=$(node -p "require('./src/data/stats.json').spotify.monthlyListeners")
+          NEW_F=$(node -p  "require('./src/data/stats.json').spotify.followers")
+          git commit -m "stats: ${NEW_ML} monthly listeners, ${NEW_F} followers"
+          git push
