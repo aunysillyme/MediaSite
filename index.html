@@ -145,14 +145,23 @@
 }
 .site-nav .nav-link.disabled:hover { color: rgba(255,255,255,0.32); }
 .site-nav .nav-link.disabled .nav-link-sub { color: rgba(255,255,255,0.45); }
-.site-nav .nav-spotify {
+.site-nav .nav-ctas { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-spotify,
+.site-nav .nav-suno {
   font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
   text-transform: uppercase; color: rgba(255,255,255,0.62);
   text-decoration: none; padding: 6px 12px; border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+.site-nav .nav-spotify:hover {
+  color: #1DB954; border-color: #1DB954;
+  box-shadow: 0 0 14px rgba(29,185,84,0.35);
+}
+.site-nav .nav-suno:hover {
+  color: #FF7A29; border-color: #FF7A29;
+  box-shadow: 0 0 14px rgba(255,122,41,0.45);
+}
 
 @media (max-width: 720px) {
   .site-nav { padding: 10px 14px; }
@@ -160,7 +169,9 @@
   .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
   .site-nav .nav-link-stack .nav-link-sub { font-size: 6px; letter-spacing: 1.4px; }
   .site-nav .nav-link-stack .nav-link-main { font-size: 9px; letter-spacing: 2px; }
-  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .nav-ctas { gap: 6px; }
+  .site-nav .nav-spotify,
+  .site-nav .nav-suno { padding: 5px 9px; font-size: 9px; letter-spacing: 2px; }
   .site-nav .brand-word { display: none; }
   .site-nav .brand { font-size: 22px; }
 }
@@ -378,7 +389,10 @@
       <span class="nav-link-main">collabs</span>
     </span>
   </div>
-  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+  <div class="nav-ctas">
+    <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+    <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
+  </div>
 </nav>
 
 
