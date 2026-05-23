@@ -14,8 +14,8 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   background: radial-gradient(circle,
-    rgba(var(--accent-rgb, 30,144,255), 0.14) 0%,
-    rgba(var(--accent-rgb, 30,144,255), 0.06) 28%,
+    rgba(var(--accent-rgb, 30,144,255), 0.10) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.04) 28%,
     transparent 65%);
   will-change: transform;
 }
