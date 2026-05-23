@@ -99,6 +99,63 @@
   position: fixed; inset: 0; z-index: 1;
   pointer-events: none;
 }
+
+/* Custom cursor — opted in via <html class="custom-cursor-active"> from JS */
+.custom-cursor-active,
+.custom-cursor-active a,
+.custom-cursor-active button,
+.custom-cursor-active [role="button"],
+.custom-cursor-active .mini-card,
+.custom-cursor-active .card,
+.custom-cursor-active .platform {
+  cursor: none;
+}
+.custom-cursor-active input,
+.custom-cursor-active textarea,
+.custom-cursor-active [contenteditable="true"] {
+  cursor: text;
+}
+#custom-cursor {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+#custom-cursor .cursor-core,
+#custom-cursor .cursor-halo {
+  position: fixed; top: 0; left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+#custom-cursor .cursor-core {
+  width: 8px; height: 8px; margin: -4px 0 0 -4px;
+  background: var(--accent, #1E90FF);
+  box-shadow:
+    0 0 10px rgba(var(--accent-rgb, 30,144,255), 0.9),
+    0 0 26px rgba(var(--accent-rgb, 30,144,255), 0.5);
+  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
+}
+#custom-cursor .cursor-halo {
+  width: 30px; height: 30px; margin: -15px 0 0 -15px;
+  border: 1px solid rgba(var(--accent-rgb, 30,144,255), 0.45);
+  opacity: 0.7;
+  transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease, opacity 0.2s, border-color 0.2s;
+}
+#custom-cursor.hover .cursor-core {
+  width: 12px; height: 12px; margin: -6px 0 0 -6px;
+}
+#custom-cursor.hover .cursor-halo {
+  width: 48px; height: 48px; margin: -24px 0 0 -24px;
+  opacity: 1; border-color: rgba(var(--accent-rgb, 30,144,255), 0.8);
+}
+@media (pointer: coarse) {
+  #custom-cursor { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #custom-cursor .cursor-core,
+  #custom-cursor .cursor-halo { transition: none; }
+}
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
@@ -424,6 +481,7 @@
 <body>
 
 <canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
+<div id="custom-cursor" aria-hidden="true"><div class="cursor-core"></div><div class="cursor-halo"></div></div>
 <nav class="site-nav" aria-label="Primary">
   <a class="brand" href="/" aria-label="Auny — home">
     <span class="brand-mark">A</span><span class="brand-word">UNY</span>
@@ -457,7 +515,12 @@
     var v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
     return v || '#1E90FF';
   }
+  function readAccentRgb() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+    return v || '30,144,255';
+  }
   var accent = readAccent();
+  var accentRgb = readAccentRgb();
 
   var W = 0, H = 0;
   function resize() {
@@ -469,6 +532,7 @@
   resize();
   addEventListener('resize', resize, { passive: true });
 
+  // ─── Dust particles ──────────────────────────────────────────
   var COUNT = reduce ? 22 : 60;
   var particles = [];
   for (var i = 0; i < COUNT; i++) {
@@ -476,10 +540,10 @@
       x: Math.random() * W,
       y: Math.random() * H,
       glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
-      size: (14 + Math.random() * 10) * dpr,
+      size: (12 + Math.random() * 8.5) * dpr,
       vx: (Math.random() - 0.5) * 0.4 * dpr,
       vy: (Math.random() - 0.5) * 0.4 * dpr,
-      opacity: 0.22 + Math.random() * 0.28,
+      opacity: 0.19 + Math.random() * 0.24,
       rotation: (Math.random() - 0.5) * 0.6,
     });
   }
@@ -493,8 +557,31 @@
     addEventListener('mouseleave', function () { mouseX = mouseY = -9999; }, { passive: true });
   }
 
-  var REPULSE_RADIUS = 170 * dpr;
-  var REPULSE_STRENGTH = reduce ? 0 : 1.4;
+  var REPULSE_RADIUS = 230 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 2.2;
+
+  // ─── Click burst ─────────────────────────────────────────────
+  var bursts = [];
+  if (!coarse && !reduce) {
+    addEventListener('click', function (e) {
+      var cx = e.clientX * dpr, cy = e.clientY * dpr;
+      var n = 9;
+      for (var k = 0; k < n; k++) {
+        var a = (k / n) * Math.PI * 2 + (Math.random() - 0.5) * 0.8;
+        var sp = (2.6 + Math.random() * 3.2) * dpr;
+        bursts.push({
+          x: cx, y: cy,
+          vx: Math.cos(a) * sp,
+          vy: Math.sin(a) * sp,
+          spawnedAt: performance.now(),
+          maxLife: 650 + Math.random() * 250,
+          glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+          size: (13 + Math.random() * 7) * dpr,
+          rot: (Math.random() - 0.5) * 1.2,
+        });
+      }
+    }, { passive: true });
+  }
 
   var running = true;
   document.addEventListener('visibilitychange', function () {
@@ -502,13 +589,16 @@
     if (running) requestAnimationFrame(loop);
   });
 
-  // Re-read accent when route/template changes; cheap to refresh occasionally
   var accentTick = 0;
-
   function loop() {
     if (!running) return;
-    if ((accentTick++ & 31) === 0) accent = readAccent();
+    if ((accentTick++ & 31) === 0) {
+      accent = readAccent();
+      accentRgb = readAccentRgb();
+    }
     ctx.clearRect(0, 0, W, H);
+
+    // dust
     for (var j = 0; j < particles.length; j++) {
       var p = particles[j];
       p.x += p.vx;
@@ -523,8 +613,8 @@
       if (dist2 < r2 && dist2 > 1) {
         var dist = Math.sqrt(dist2);
         var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
-        p.x += (dx / dist) * force * 6;
-        p.y += (dy / dist) * force * 6;
+        p.x += (dx / dist) * force * 10;
+        p.y += (dy / dist) * force * 10;
       }
       ctx.save();
       ctx.globalAlpha = p.opacity;
@@ -537,9 +627,82 @@
       ctx.fillText(p.glyph, 0, 0);
       ctx.restore();
     }
+
+    // bursts
+    var now = performance.now();
+    for (var b = bursts.length - 1; b >= 0; b--) {
+      var bp = bursts[b];
+      var age = now - bp.spawnedAt;
+      if (age > bp.maxLife) { bursts.splice(b, 1); continue; }
+      bp.x += bp.vx;
+      bp.y += bp.vy;
+      bp.vx *= 0.93;
+      bp.vy *= 0.93;
+      bp.rot += 0.04;
+      var t = age / bp.maxLife;
+      var alpha = (1 - t) * 0.85;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(bp.x, bp.y);
+      ctx.rotate(bp.rot);
+      ctx.fillStyle = accent;
+      ctx.font = bp.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(bp.glyph, 0, 0);
+      ctx.restore();
+    }
+
     requestAnimationFrame(loop);
   }
   requestAnimationFrame(loop);
+
+  // ─── Custom cursor ───────────────────────────────────────────
+  var cursorEl = document.getElementById('custom-cursor');
+  if (cursorEl && !coarse) {
+    document.documentElement.classList.add('custom-cursor-active');
+    var cxTarget = -9999, cyTarget = -9999;
+    var cxNow = -9999, cyNow = -9999;
+    var haloX = -9999, haloY = -9999;
+    var coreEl = cursorEl.querySelector('.cursor-core');
+    var haloEl = cursorEl.querySelector('.cursor-halo');
+
+    addEventListener('mousemove', function (e) {
+      cxTarget = e.clientX;
+      cyTarget = e.clientY;
+      if (cxNow < -1000) { cxNow = cxTarget; cyNow = cyTarget; haloX = cxTarget; haloY = cyTarget; }
+    }, { passive: true });
+
+    addEventListener('mouseleave', function () {
+      cursorEl.style.opacity = '0';
+    }, { passive: true });
+    addEventListener('mouseenter', function () {
+      cursorEl.style.opacity = '1';
+    }, { passive: true });
+
+    // hover state — when over interactive elements
+    document.addEventListener('mouseover', function (e) {
+      var t = e.target;
+      if (t && t.closest && t.closest('a, button, [role="button"], .featured-cover-link, .mini-card, .card, .platform')) {
+        cursorEl.classList.add('hover');
+      } else {
+        cursorEl.classList.remove('hover');
+      }
+    }, { passive: true });
+
+    function cursorLoop() {
+      // Core: snappy follow (small lag)
+      cxNow += (cxTarget - cxNow) * 0.55;
+      cyNow += (cyTarget - cyNow) * 0.55;
+      // Halo: lazy follow (more lag) — comet effect
+      haloX += (cxTarget - haloX) * 0.18;
+      haloY += (cyTarget - haloY) * 0.18;
+      coreEl.style.transform = 'translate3d(' + cxNow + 'px,' + cyNow + 'px,0)';
+      haloEl.style.transform = 'translate3d(' + haloX + 'px,' + haloY + 'px,0)';
+      requestAnimationFrame(cursorLoop);
+    }
+    requestAnimationFrame(cursorLoop);
+  }
 })();
 </script>
 
