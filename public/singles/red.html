@@ -124,36 +124,36 @@
 
   /* hero */
   .hero {
-    width: 100%; min-height: 100vh; display: grid;
+    width: 100%; display: grid;
     grid-template-columns: 1fr 1.1fr; align-items: center;
-    padding: 110px 64px 60px; position: relative; z-index: 4; gap: 40px;
+    padding: 88px 64px 36px; position: relative; z-index: 4; gap: 36px;
   }
   .hero-left { display: flex; flex-direction: column; justify-content: center; max-width: 540px; }
   .hero-label {
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
-    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 12px;
   }
   .hero-title {
     font-family: 'Outfit', sans-serif; font-weight: 700;
-    font-size: clamp(56px, 7.5vw, 128px); line-height: 0.9;
-    letter-spacing: -2px; margin-bottom: 6px;
+    font-size: clamp(48px, 6vw, 96px); line-height: 0.92;
+    letter-spacing: -1.5px; margin-bottom: 6px;
     text-shadow: 0 0 60px rgba(var(--accent-rgb),0.5);
   }
   .hero-byline {
-    font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px;
-    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 36px;
+    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 24px;
   }
   .pull-quote {
     font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
-    font-size: clamp(24px, 2.6vw, 38px); line-height: 1.2;
-    color: var(--text); margin-bottom: 40px; max-width: 520px;
+    font-size: clamp(20px, 2vw, 30px); line-height: 1.22;
+    color: var(--text); margin-bottom: 24px; max-width: 520px;
     text-shadow: 0 0 24px rgba(var(--accent-rgb),0.3);
   }
   .pull-quote::before { content: '\201C'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-right: 4px; }
   .pull-quote::after  { content: '\201D'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-left: 4px; }
 
   .meta-block {
-    display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px;
+    display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;
     border-left: 2px solid rgba(var(--accent-rgb),0.25); padding-left: 14px;
   }
   .meta-row { display: flex; flex-direction: column; gap: 1px; }
@@ -165,9 +165,14 @@
 
   .listen-now {
     font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
-    font-size: clamp(24px, 2.4vw, 34px); line-height: 1.2;
+    font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
     color: var(--accent); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px;
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .spotify-embed {
+    border: 0; border-radius: 12px; display: block;
+    width: 100%; max-width: 540px; height: 80px; margin-bottom: 22px;
+    background: rgba(0,0,0,0.4);
   }
   .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
   @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
@@ -194,7 +199,7 @@
   /* cover stage */
   .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
   .cover-frame {
-    width: min(86%, 540px); aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
+    width: min(80%, 460px); aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
     box-shadow: 0 0 80px rgba(var(--accent-rgb),0.45), 0 0 200px rgba(var(--accent-rgb),0.18), inset 0 0 0 1px rgba(255,255,255,0.06);
     position: relative;
   }
@@ -320,6 +325,8 @@
     </div>
 
     <a class="listen-now" href="https://open.spotify.com/track/1nsT3pA8m6u89QMbfZ4L2v" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+
+    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/1nsT3pA8m6u89QMbfZ4L2v?utm_source=auny_media&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Spotify preview player for RED"></iframe>
 
     <p class="series-label">part of the color series →</p>
     <div class="series-chips">
