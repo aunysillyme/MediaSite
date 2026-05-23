@@ -12,6 +12,10 @@ import { dirname } from 'node:path';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const HOME_TPL = tpl('home.html');
 
+// Monthly Spotify listeners — manual until we wire up Spotify for Artists API.
+// Update this one number when the stat moves materially.
+const MONTHLY_LISTENERS = '2,249';
+
 // Pick the most recent release across albums + singles
 const latestAlbum  = ALBUMS[0];
 const latestSingle = SINGLES[0];
@@ -28,6 +32,16 @@ function miniAlbum(a) {
       <div class="body">
         <div class="mini-card-title">${esc(a.title)}</div>
         <div class="mini-card-meta">${esc(a.releaseDisplay)}</div>
+      </div>
+    </a>`;
+}
+
+function miniSingle(s) {
+  return `    <a class="mini-card" href="/singles/${s.slug}">
+      <div class="cover"><img src="/album-art/singles/${s.slug}.jpg" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title">${esc(s.title)}</div>
+        <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
       </div>
     </a>`;
 }
@@ -54,7 +68,9 @@ const html = render(HOME_TPL, {
   TOTAL_SINGLES: String(SINGLES.length),
   TOTAL_ALBUMS: String(ALBUMS.length),
   TOTAL_TRACKS: String(SINGLES.length + ALBUMS.reduce((n, a) => n + a.tracks.length, 0)),
+  MONTHLY_LISTENERS,
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
+  SINGLE_TILES: SINGLES.slice(0, 5).map(miniSingle).join('\n'),
   SERIES_TILES: COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug)).join('\n'),
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
