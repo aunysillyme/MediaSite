@@ -327,6 +327,8 @@
       vy: (Math.random() - 0.5) * 0.4 * dpr,
       opacity: 0.13 + Math.random() * 0.17,
       rotation: (Math.random() - 0.5) * 0.6,
+      // displacement offset from natural drift — decays back to 0 (spring-back)
+      ox: 0, oy: 0,
     });
   }
 
@@ -398,24 +400,31 @@
     // ambient dust
     for (var j = 0; j < particles.length; j++) {
       var p = particles[j];
+      // Natural drift along the home path
       p.x += p.vx;
       p.y += p.vy;
       if (p.x < -24) p.x = W + 24;
       if (p.x > W + 24) p.x = -24;
       if (p.y < -24) p.y = H + 24;
       if (p.y > H + 24) p.y = -24;
-      var dx = p.x - mouseX, dy = p.y - mouseY;
+      // Composite position = home path + cursor displacement
+      var fx = p.x + p.ox, fy = p.y + p.oy;
+      // Cursor repulse — accumulates into displacement offset, not position
+      var dx = fx - mouseX, dy = fy - mouseY;
       var dist2 = dx * dx + dy * dy;
       var r2 = REPULSE_RADIUS * REPULSE_RADIUS;
       if (dist2 < r2 && dist2 > 1) {
         var dist = Math.sqrt(dist2);
         var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
-        p.x += (dx / dist) * force * 15;
-        p.y += (dy / dist) * force * 15;
+        p.ox += (dx / dist) * force * 15;
+        p.oy += (dy / dist) * force * 15;
       }
+      // Spring back: damp the displacement toward 0 every frame
+      p.ox *= 0.93;
+      p.oy *= 0.93;
       ctx.save();
       ctx.globalAlpha = p.opacity;
-      ctx.translate(p.x, p.y);
+      ctx.translate(p.x + p.ox, p.y + p.oy);
       ctx.rotate(p.rotation);
       ctx.fillStyle = accent;
       ctx.font = p.size + 'px serif';
