@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blue Lightning — Auny</title>
+<meta name="description" content="Blue Lightning — a 26-track instrumental album by Auny. Electric, atmospheric, built for night drives and deep focus.">
+
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="Blue Lightning — Auny">
+<meta property="og:description" content="26 tracks. 1 hr 28 min. Electric atmospheric instrumental.">
+<meta property="og:image" content="https://auny.media/album-art/blue-lightning.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://auny.media/blue-lightning">
+<meta property="og:site_name" content="auny.media">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="Blue Lightning — Auny">
+<meta name="twitter:description" content="26 tracks. 1 hr 28 min. Electric atmospheric instrumental.">
+<meta name="twitter:image" content="https://auny.media/album-art/blue-lightning.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +58,7 @@
       rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
     );
     pointer-events: none;
-    z-index: 9999;
+    z-index: 50;
     opacity: 0.22;
   }
 
@@ -322,7 +339,7 @@
     position: fixed;
     top: 1.25rem;
     right: 1.5rem;
-    z-index: 200;
+    z-index: 300;
     padding: 0.45rem 1rem;
     border-radius: 8px;
     background: rgba(4, 0, 14, 0.82);
@@ -341,6 +358,18 @@
   .back-btn:hover {
     border-color: #1E90FF;
     box-shadow: 0 0 14px rgba(30, 144, 255, 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-arrow,
+    .vinyl-wrap,
+    .ring-1, .ring-2, .ring-3,
+    .hero-subtitle,
+    .left-panel,
+    .orbit-system {
+      animation: none !important;
+    }
+    .planet { transition: none !important; }
   }
 
   @media (max-width: 640px) {
@@ -458,45 +487,48 @@
   var CX   = W / 2;
   var CY   = W / 2;
 
+  var SP = 'https://open.spotify.com/track/';
+
   // ── RING 1 — tracks 1–8 (counter-clockwise, cyan) ──
   var RING1 = [
-    { n: 'Blue Lightning',  dur: '2:59', num: 1,  c: '#00BFFF' },
-    { n: 'Night Lanes',     dur: '3:53', num: 2,  c: '#00BFFF' },
-    { n: 'Night Lanes 2',   dur: '3:09', num: 3,  c: '#00BFFF' },
-    { n: 'Static Hearts',   dur: '3:22', num: 4,  c: '#00BFFF' },
-    { n: 'Static Hearts 2', dur: '3:54', num: 5,  c: '#00BFFF' },
-    { n: 'Made of Glass',   dur: '2:54', num: 6,  c: '#00BFFF' },
-    { n: 'Fried Circuits',  dur: '3:07', num: 7,  c: '#00BFFF' },
-    { n: 'Fried Circuits 2',dur: '1:58', num: 8,  c: '#00BFFF' },
+    { n: 'Blue Lightning',   dur: '2:59', num: 1,  c: '#00BFFF', u: SP + '5ybHXchRl5ELb7RdRnK7Cm' },
+    { n: 'Night Lanes',      dur: '3:53', num: 2,  c: '#00BFFF', u: SP + '0UAE8oCJXvrGMk3O0OlROI' },
+    { n: 'Night Lanes 2',    dur: '3:09', num: 3,  c: '#00BFFF', u: SP + '4OltGR2hKvEmgOamgYtpNP' },
+    { n: 'Static Hearts',    dur: '3:22', num: 4,  c: '#00BFFF', u: SP + '2yVMph9wxKOxVVOHLqayRB' },
+    { n: 'Static Hearts 2',  dur: '3:54', num: 5,  c: '#00BFFF', u: SP + '0k4kGg7pzrKqGrQK4kURfy' },
+    { n: 'Made of Glass',    dur: '2:54', num: 6,  c: '#00BFFF', u: SP + '4uyLNFxXAKMIxOjMNRccLe' },
+    { n: 'Fried Circuits',   dur: '3:07', num: 7,  c: '#00BFFF', u: SP + '2FdAS3rcWWIyoudTTD8IDQ' },
+    { n: 'Fried Circuits 2', dur: '1:58', num: 8,  c: '#00BFFF', u: SP + '4y6lj6U4rGxdzDWH9yseRF' },
   ];
 
   // ── RING 2 — tracks 9–17 (clockwise, blue) ──
   var RING2 = [
-    { n: 'Electric Bloom',  dur: '3:39', num: 9,  c: '#1E90FF' },
-    { n: 'Pre Glow-up',     dur: '1:56', num: 10, c: '#1E90FF' },
-    { n: 'Post Glow-up',    dur: '3:03', num: 11, c: '#1E90FF' },
-    { n: 'Slow Orbit',      dur: '3:39', num: 12, c: '#1E90FF' },
-    { n: 'Pulsing Star',    dur: '4:38', num: 13, c: '#1E90FF' },
-    { n: 'Shooting Star',   dur: '5:38', num: 14, c: '#1E90FF' },
-    { n: 'Ride at Dawn',    dur: '2:55', num: 15, c: '#1E90FF' },
-    { n: 'Ride at Dusk',    dur: '2:57', num: 16, c: '#1E90FF' },
-    { n: 'Hold the Light',  dur: '3:37', num: 17, c: '#1E90FF' },
+    { n: 'Electric Bloom',   dur: '3:39', num: 9,  c: '#1E90FF', u: SP + '5Gglg5NQ3BPyKAIxjkXcdX' },
+    { n: 'Pre Glow-up',      dur: '1:56', num: 10, c: '#1E90FF', u: SP + '1HkrPMfFZ9iKkIUbX86ljY' },
+    { n: 'Post Glow-up',     dur: '3:03', num: 11, c: '#1E90FF', u: SP + '5gQeKBVPxImff4F0mD26pG' },
+    { n: 'Slow Orbit',       dur: '3:39', num: 12, c: '#1E90FF', u: SP + '5iFZlFORcjr8dyKohdiOuO' },
+    { n: 'Pulsing Star',     dur: '4:38', num: 13, c: '#1E90FF', u: SP + '7KOdCz1YhLVgdt89D0kraE' },
+    { n: 'Shooting Star',    dur: '5:38', num: 14, c: '#1E90FF', u: SP + '1R4nXauTPLeCAsHUNvMQ9Y' },
+    { n: 'Ride at Dawn',     dur: '2:55', num: 15, c: '#1E90FF', u: SP + '0r6EvPtxZRNmTN4JOvSFlf' },
+    { n: 'Ride at Dusk',     dur: '2:57', num: 16, c: '#1E90FF', u: SP + '6plgrLPZl1gcZJEbrWdh6x' },
+    { n: 'Hold the Light',   dur: '3:37', num: 17, c: '#1E90FF', u: SP + '6F9NlaNJfwqGDQizacZMvK' },
   ];
 
   // ── RING 3 — tracks 18–26 (counter-clockwise, violet) ──
   var RING3 = [
-    { n: 'Hold the Light 2',dur: '3:07', num: 18, c: '#8B5CF6' },
-    { n: 'Past Echoes',     dur: '3:20', num: 19, c: '#8B5CF6' },
-    { n: 'Future Echoes',   dur: '3:50', num: 20, c: '#8B5CF6' },
-    { n: 'Open Seas',       dur: '2:28', num: 21, c: '#8B5CF6' },
-    { n: 'Open Skies',      dur: '4:38', num: 22, c: '#8B5CF6' },
-    { n: 'Neonify Cyan',    dur: '2:42', num: 23, c: '#8B5CF6' },
-    { n: 'Neonify Orange',  dur: '4:50', num: 24, c: '#8B5CF6' },
-    { n: 'Purple Thunder',  dur: '2:43', num: 25, c: '#9B59FF' },
-    { n: 'Blue Thunder',    dur: '2:59', num: 26, c: '#00BFFF' },
+    { n: 'Hold the Light 2', dur: '3:07', num: 18, c: '#8B5CF6', u: SP + '2Oa2tglXdFc6ZcPS4veG04' },
+    { n: 'Past Echoes',      dur: '3:20', num: 19, c: '#8B5CF6', u: SP + '53Ivbq4kXJVddISlyOiPnD' },
+    { n: 'Future Echoes',    dur: '3:50', num: 20, c: '#8B5CF6', u: SP + '3a6RT0i3SdY7en9uQPE0mC' },
+    { n: 'Open Seas',        dur: '2:28', num: 21, c: '#8B5CF6', u: SP + '11JG2yvqdywbS8Zt2uUUm5' },
+    { n: 'Open Skies',       dur: '4:38', num: 22, c: '#8B5CF6', u: SP + '0rig3SkeFNAiV5RgrIej7h' },
+    { n: 'Neonify Cyan',     dur: '2:42', num: 23, c: '#8B5CF6', u: SP + '2YC3bqzDjKodCQ6sk1vKx9' },
+    { n: 'Neonify Orange',   dur: '4:50', num: 24, c: '#8B5CF6', u: SP + '0GyXNoy8BhA8kWr80gq3nv' },
+    { n: 'Purple Thunder',   dur: '2:43', num: 25, c: '#9B59FF', u: SP + '52E7TzC9UQhEW6xHAK11Aq' },
+    { n: 'Blue Thunder',     dur: '2:59', num: 26, c: '#00BFFF', u: SP + '2lvtKDnC5tVIHlAXhG3iQA' },
   ];
 
   var ALBUM_URL = 'https://open.spotify.com/album/01ILnU5CjbBSU1YFMg7k6V';
+  var ALBUM_ART = '/album-art/blue-lightning.jpg';
 
   var orbit = document.getElementById('orbit');
   orbit.style.width    = W + 'px';
@@ -532,26 +564,29 @@
     + '<circle cx="55" cy="55" r="24" fill="#050510"/>'
     + '<circle cx="55" cy="55" r="22" fill="none" stroke="#1E90FF" stroke-width="1.5" opacity="0.7"/>'
     + '<circle cx="55" cy="55" r="18" fill="none" stroke="#00BFFF" stroke-width="0.5" opacity="0.4"/>'
-    /* Lightning bolt in center */
-    + '<path d="M59 38 L50 52 L56 52 L51 72 L64 54 L58 54 L66 38 Z" fill="#FFD700" opacity="0.9"/>'
     + '<circle cx="55" cy="55" r="3" fill="#1E90FF" opacity="0.8"/>'
     + '</svg>';
   orbit.appendChild(vWrap);
 
-  // ── Album label (non-spinning, sits over vinyl center) ──
-  var lblSize = 36;
-  var lblWrap = document.createElement('div');
-  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;';
+  // ── Album cover (non-spinning, clickable, sits over vinyl center) ──
+  var lblSize = 64;
+  var lblWrap = document.createElement('a');
+  lblWrap.href = ALBUM_URL;
+  lblWrap.target = '_blank';
+  lblWrap.rel = 'noopener';
+  lblWrap.setAttribute('aria-label', 'Blue Lightning — open full album on Spotify');
+  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(30,144,255,0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
+  lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="Blue Lightning album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
   orbit.appendChild(lblWrap);
 
   // ── Planet factory ──
   function makePlanet(p) {
     var a = document.createElement('a');
-    a.href   = ALBUM_URL;
+    a.href   = p.u;
     a.target = '_blank';
-    a.rel    = 'noopener noreferrer';
+    a.rel    = 'noopener';
     a.className = 'planet';
-    a.setAttribute('aria-label', p.n);
+    a.setAttribute('aria-label', p.n + ' — open track on Spotify');
 
     var numStr = (p.num < 10 ? '0' : '') + p.num;
     var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
