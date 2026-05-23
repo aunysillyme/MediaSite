@@ -587,8 +587,8 @@
     }, { passive: true });
   }
 
-  var REPULSE_RADIUS = 230 * dpr;
-  var REPULSE_STRENGTH = reduce ? 0 : 2.2;
+  var REPULSE_RADIUS = 300 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 3.2;
 
   var running = true;
   document.addEventListener('visibilitychange', function () {
@@ -624,8 +624,8 @@
       if (dist2 < r2 && dist2 > 1) {
         var dist = Math.sqrt(dist2);
         var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
-        p.x += (dx / dist) * force * 10;
-        p.y += (dy / dist) * force * 10;
+        p.x += (dx / dist) * force * 15;
+        p.y += (dy / dist) * force * 15;
       }
       ctx.save();
       ctx.globalAlpha = p.opacity;
