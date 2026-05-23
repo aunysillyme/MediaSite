@@ -95,14 +95,23 @@
 }
 .site-nav .nav-link.disabled:hover { color: rgba(255,255,255,0.32); }
 .site-nav .nav-link.disabled .nav-link-sub { color: rgba(255,255,255,0.45); }
-.site-nav .nav-spotify {
+.site-nav .nav-ctas { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-spotify,
+.site-nav .nav-suno {
   font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
   text-transform: uppercase; color: rgba(255,255,255,0.62);
   text-decoration: none; padding: 6px 12px; border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.18);
-  transition: border-color 0.2s, color 0.2s;
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
 }
-.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+.site-nav .nav-spotify:hover {
+  color: #1DB954; border-color: #1DB954;
+  box-shadow: 0 0 14px rgba(29,185,84,0.35);
+}
+.site-nav .nav-suno:hover {
+  color: #FF7A29; border-color: #FF7A29;
+  box-shadow: 0 0 14px rgba(255,122,41,0.45);
+}
 
 @media (max-width: 720px) {
   .site-nav { padding: 10px 14px; }
@@ -110,7 +119,9 @@
   .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
   .site-nav .nav-link-stack .nav-link-sub { font-size: 6px; letter-spacing: 1.4px; }
   .site-nav .nav-link-stack .nav-link-main { font-size: 9px; letter-spacing: 2px; }
-  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .nav-ctas { gap: 6px; }
+  .site-nav .nav-spotify,
+  .site-nav .nav-suno { padding: 5px 9px; font-size: 9px; letter-spacing: 2px; }
   .site-nav .brand-word { display: none; }
   .site-nav .brand { font-size: 22px; }
 }
@@ -217,15 +228,19 @@
 
   /* cover stage */
   .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+  .cover-wrap {
+    position: relative;
+    width: min(80%, 460px); aspect-ratio: 1/1;
+  }
   .cover-frame {
-    width: min(80%, 460px); aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
+    width: 100%; height: 100%; border-radius: 6px; overflow: hidden;
     box-shadow: 0 0 80px rgba(var(--accent-rgb),0.45), 0 0 200px rgba(var(--accent-rgb),0.18), inset 0 0 0 1px rgba(255,255,255,0.06);
     position: relative;
   }
   .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .vinyl-small {
-    position: absolute; right: -64px; bottom: -64px;
-    width: 180px; height: 180px;
+    position: absolute; left: -56px; bottom: -56px;
+    width: 170px; height: 170px;
     animation: vspin 18s linear infinite;
     z-index: 5;
     filter: drop-shadow(0 0 24px rgba(var(--accent-rgb),0.5));
@@ -273,8 +288,8 @@
     .hero { grid-template-columns: 1fr; padding: 80px 24px 40px; gap: 32px; }
     .hero-left { order: 2; max-width: unset; }
     .cover-stage { order: 1; }
-    .cover-frame { width: min(88%, 420px); }
-    .vinyl-small { width: 120px; height: 120px; right: -32px; bottom: -32px; }
+    .cover-wrap { width: min(88%, 420px); }
+    .vinyl-small { width: 120px; height: 120px; left: -38px; bottom: -38px; }
     .pull-quote { font-size: 22px; }
     .lyrics-section { padding: 20px 20px 80px; }
     .lyrics-body { font-size: 19px; line-height: 1.5; }
@@ -326,7 +341,10 @@
       <span class="nav-link-main">collabs</span>
     </span>
   </div>
-  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+  <div class="nav-ctas">
+    <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+    <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
+  </div>
 </nav>
 
 
@@ -355,6 +373,7 @@
   </div>
 
   <div class="cover-stage">
+   <div class="cover-wrap">
     <div class="cover-frame">
       <img src="/album-art/singles/tick-tock.jpg" alt="Tick Tock cover art by Auny" width="640" height="640">
     </div>
@@ -377,6 +396,7 @@
         <circle cx="90" cy="90" r="1.6" fill="#1E90FF" opacity="0.9"/>
       </svg>
     </div>
+   </div>
   </div>
 </section>
 
