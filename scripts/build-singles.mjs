@@ -51,8 +51,7 @@ function bgHueFor(single) {
 
 function heroLabelFor(single) {
   if (single.colorSeries === 'member') {
-    const i = COLOR_SERIES_ORDER.findIndex((c) => c.slug === single.slug);
-    return `${single.emoji} &nbsp; single · color series · ${i + 1} of 5`;
+    return `${single.emoji} &nbsp; single · color series`;
   }
   if (single.slug === 'pink') return '🩷 &nbsp; single · standalone';
   return '✦ &nbsp; single';
@@ -135,6 +134,7 @@ function pinkCard() {
   const p = SINGLES.find((s) => s.slug === 'pink');
   if (!p) return '';
   return `      <a class="card series" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
+        <span class="badge" style="color:${p.accent.color}">${p.emoji}</span>
         <div class="cover"><img src="/album-art/singles/${p.slug}.jpg" alt="${escAttr(p.title)} cover" loading="lazy" width="640" height="640"></div>
         <div class="body">
           <div class="card-title">${escHtml(p.title)}</div>
@@ -147,7 +147,7 @@ function renderList() {
   const series = colorSeriesMembers();
   const seriesCards = [
     pinkCard(),
-    ...series.map((s, i) => cardHtml(s, { badgeText: `${s.emoji} ${i + 1}/5` })),
+    ...series.map((s) => cardHtml(s, { badgeText: s.emoji })),
   ].join('\n');
   const allCards = SINGLES.map((s) => cardHtml(s)).join('\n');
   const jsonLd = JSON.stringify({
