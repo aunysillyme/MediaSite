@@ -517,7 +517,7 @@
   addEventListener('resize', resize, { passive: true });
 
   // ─── Ambient dust particles ──────────────────────────────────
-  var COUNT = reduce ? 22 : 60;
+  var COUNT = reduce ? 22 : (coarse ? 30 : 60);
   var particles = [];
   for (var i = 0; i < COUNT; i++) {
     particles.push({
@@ -806,7 +806,7 @@
     <div class="featured-card">
       <a class="featured-cover-link" href="/singles/let-go" aria-label="View Let Go details">
         <div class="featured-cover">
-          <img src="/album-art/singles/let-go.jpg" alt="Let Go cover" width="640" height="640">
+          <img src="/album-art/singles/let-go.jpg" alt="Let Go cover" width="640" height="640" fetchpriority="high" decoding="async">
           <div class="featured-play-overlay" aria-hidden="true">
             <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
