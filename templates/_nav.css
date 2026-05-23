@@ -3,6 +3,28 @@
   position: fixed; inset: 0; z-index: 1;
   pointer-events: none;
 }
+
+/* Cursor spotlight — soft accent glow that follows the cursor */
+#cursor-spotlight {
+  position: fixed; top: 0; left: 0; z-index: 2;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle,
+    rgba(var(--accent-rgb, 30,144,255), 0.14) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.06) 28%,
+    transparent 65%);
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  #cursor-spotlight { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cursor-spotlight { display: none; }
+}
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
