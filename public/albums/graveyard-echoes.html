@@ -607,59 +607,56 @@
     });
   }
 
-  // Grid version: 2D radial push (handles wrap layouts correctly)
-  function initGrid(grid, opts) {
-    opts = opts || {};
-    var scale     = opts.scale     || 1.15;
-    var pushMax   = opts.pushMax   || 26;     // strongest push, px
-    var radius    = opts.radius    || 340;    // beyond this, no push
-    var skipDisabled = opts.skipDisabled || false;
-
+  // Grid: group cards into visual rows (by Y-center), then apply
+  // the same horizontal-domino push as homepage rows within each row.
+  function initGrid(grid) {
     var cards = Array.prototype.slice.call(grid.children).filter(function (el) {
-      if (el.tagName !== 'A' && el.tagName !== 'DIV' && el.tagName !== 'SPAN') return false;
-      if (skipDisabled && el.classList.contains('disabled')) return false;
-      return true;
+      return el.tagName === 'A' || el.tagName === 'DIV' || el.tagName === 'SPAN';
     });
-
-    function centers() {
+    function refreshRows() {
+      var rows = [];
       cards.forEach(function (c) {
         var r = c.getBoundingClientRect();
-        c._cx = r.left + r.width  / 2;
-        c._cy = r.top  + r.height / 2;
+        var cy = r.top + r.height / 2;
+        var bucket = rows.find(function (row) { return Math.abs(row.y - cy) < r.height / 2; });
+        if (bucket) bucket.items.push(c);
+        else rows.push({ y: cy, items: [c] });
+      });
+      cards.forEach(function (c) { c._slamRow = null; });
+      rows.forEach(function (r) {
+        var sorted = r.items.sort(function (a, b) {
+          return a.getBoundingClientRect().left - b.getBoundingClientRect().left;
+        });
+        sorted.forEach(function (c) { c._slamRow = sorted; });
       });
     }
-    centers();
-    addEventListener('resize', centers, { passive: true });
-
-    cards.forEach(function (card) {
-      card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      card.addEventListener('mouseenter', function () {
-        centers();
-        var hx = card._cx, hy = card._cy;
-        cards.forEach(function (other) {
-          if (other === card) {
-            other.style.transform = 'scale(' + scale + ')';
+    cards.forEach(function (c) {
+      c.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      c.addEventListener('mouseenter', function () {
+        var row = c._slamRow;
+        if (!row) return;
+        var i = row.indexOf(c);
+        row.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(1.18)';
             other.style.zIndex = '10';
           } else {
-            var dx = other._cx - hx, dy = other._cy - hy;
-            var dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 1 || dist > radius) {
-              other.style.transform = '';
-              other.style.zIndex = '';
-              return;
-            }
-            var t = 1 - dist / radius;       // 0..1, 1 closest
-            var push = t * pushMax;
-            var shrink = Math.max(0.94, 1 - t * 0.04);
-            other.style.transform = 'translate(' + (dx / dist) * push + 'px,' + (dy / dist) * push + 'px) scale(' + shrink + ')';
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, 28 - (dist - 1) * 8);
+            var shrink = Math.max(0.88, 1 - dist * 0.025);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
             other.style.zIndex = '';
           }
         });
       });
-      card.addEventListener('mouseleave', function () {
-        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      c.addEventListener('mouseleave', function () {
+        var row = c._slamRow;
+        if (row) row.forEach(function (o) { o.style.transform = ''; o.style.zIndex = ''; });
       });
     });
+    refreshRows();
+    addEventListener('resize', refreshRows, { passive: true });
   }
 
   function init() {
