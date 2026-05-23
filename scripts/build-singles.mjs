@@ -138,6 +138,7 @@ function renderList() {
   return LIST_TPL
     .replaceAll('{{SERIES_CARDS}}', seriesCards)
     .replaceAll('{{ALL_CARDS}}', allCards)
+    .replaceAll('{{TOTAL_SINGLES}}', String(SINGLES.length))
     .replaceAll('{{NAV}}', navFor('singles'))
     .replaceAll('{{NAV_CSS}}', NAV_CSS);
 }
