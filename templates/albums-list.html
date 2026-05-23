@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albums — Auny</title>
+<meta name="description" content="Every instrumental album by Auny. 7 albums spanning drive music, focus, study, ambient and dark techno.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Albums — Auny">
+<meta property="og:description" content="Seven instrumental albums. Drive music. Focus. Atmospheric depth. Dark techno.">
+<meta property="og:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+<meta property="og:url" content="https://auny.media/albums">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:title" content="Albums — Auny">
+<meta name="twitter:description" content="Seven instrumental albums.">
+<meta name="twitter:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+
+<link rel="canonical" href="https://auny.media/albums">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; --nav-accent: #1E90FF; }
+  html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.18; filter: hue-rotate(220deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); }
+
+{{NAV_CSS}}
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 100px 32px 100px; position: relative; z-index: 4; }
+  .page-head { margin-bottom: 56px; max-width: 760px; }
+  .page-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px; }
+  .page-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: clamp(56px, 7vw, 112px); line-height: 0.92; letter-spacing: -2px; margin-bottom: 18px; text-shadow: 0 0 60px rgba(var(--accent-rgb),0.4); }
+  .page-blurb { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.35; color: rgba(255,255,255,0.88); max-width: 680px; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .album-card {
+    position: relative; display: block; text-decoration: none; color: inherit;
+    background: rgba(8,8,16,0.55); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .album-card:hover { transform: translateY(-6px); border-color: var(--card-accent, rgba(255,255,255,0.22)); box-shadow: 0 16px 60px rgba(0,0,0,0.55), 0 0 60px rgba(var(--card-accent-rgb, 255,255,255), 0.15); }
+  .album-card .cover { width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative; }
+  .album-card .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .album-card:hover .cover img { transform: scale(1.05); }
+  .album-card .badge {
+    position: absolute; top: 12px; left: 12px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 999px;
+    background: rgba(0,0,0,0.66); color: var(--card-accent, #fff);
+    border: 1px solid var(--card-accent, rgba(255,255,255,0.2));
+  }
+  .album-card .body { padding: 18px 18px 20px; border-top: 1px solid var(--card-accent, rgba(255,255,255,0.08)); }
+  .album-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; color: #fff; margin-bottom: 6px; }
+  .album-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+  .album-card-blurb { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: 15px; line-height: 1.35; color: rgba(255,255,255,0.72); }
+
+  .footer-note { margin-top: 80px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .album-card, .album-card .cover img { transition: none !important; }
+    .album-card:hover { transform: none; }
+    .album-card:hover .cover img { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+{{NAV}}
+
+<div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:30%;"></div>
+<div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
+
+<main class="container">
+  <header class="page-head">
+    <p class="page-label">✦ &nbsp; albums · 7 instrumental records</p>
+    <h1 class="page-title">Albums</h1>
+    <p class="page-blurb">Two parallel bodies of work — albums are instrumental, singles are vocal. Each one a complete world.</p>
+  </header>
+
+  <div class="grid">
+{{ALBUM_CARDS}}
+  </div>
+
+  <p class="footer-note">7 albums &nbsp;·&nbsp; auny &nbsp;·&nbsp; 11119560 Records DK</p>
+</main>
+
+</body>
+</html>

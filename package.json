@@ -4,8 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "npm run build:site && vite",
+    "build": "npm run build:site && vite build",
+    "build:site": "npm run build:singles && npm run build:albums && npm run build:home",
+    "build:singles": "node scripts/build-singles.mjs",
+    "build:albums": "node scripts/build-albums.mjs",
+    "build:home": "node scripts/build-home.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

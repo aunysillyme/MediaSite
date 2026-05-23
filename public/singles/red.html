@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RED — Auny</title>
+<meta name="description" content="RED by Auny — Passion that permanently marks the body, love and danger fused into one color. Released January 12, 2026.">
+
+<meta property="og:type" content="music.song">
+<meta property="og:title" content="RED — Auny">
+<meta property="og:description" content="Passion that permanently marks the body, love and danger fused into one color">
+<meta property="og:image" content="https://auny.media/album-art/singles/red.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://auny.media/singles/red">
+<meta property="og:site_name" content="auny.media">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="RED — Auny">
+<meta name="twitter:description" content="Red is where I fall in love — red is the color I bleed">
+<meta name="twitter:image" content="https://auny.media/album-art/singles/red.jpg">
+
+<link rel="canonical" href="https://auny.media/singles/red">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #E84855;
+    --accent-rgb: 232,72,85;
+    --nav-accent: #E84855;
+    --bg: #030308;
+    --text: #ffffff;
+    --text-soft: rgba(255,255,255,0.86);
+    --text-mute: rgba(255,255,255,0.55);
+  }
+/* Global site nav — included on every static page. */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-spotify {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s;
+}
+.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+
+@media (max-width: 720px) {
+  .site-nav { padding: 12px 18px; }
+  .site-nav .nav-links { gap: 16px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+  html, body { min-height: 100%; background: var(--bg); font-family: 'Space Mono', monospace; color: var(--text); }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.16; filter: hue-rotate(340deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(70px); }
+
+  .back-btn {
+    position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
+    padding: 0.45rem 1rem; border-radius: 8px;
+    background: rgba(3,3,8,0.82);
+    border: 1px solid rgba(var(--accent-rgb),0.33);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-decoration: none; text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
+
+  /* hero */
+  .hero {
+    width: 100%; min-height: 100vh; display: grid;
+    grid-template-columns: 1fr 1.1fr; align-items: center;
+    padding: 110px 64px 60px; position: relative; z-index: 4; gap: 40px;
+  }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; max-width: 540px; }
+  .hero-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(56px, 7.5vw, 128px); line-height: 0.9;
+    letter-spacing: -2px; margin-bottom: 6px;
+    text-shadow: 0 0 60px rgba(var(--accent-rgb),0.5);
+  }
+  .hero-byline {
+    font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 36px;
+  }
+  .pull-quote {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(24px, 2.6vw, 38px); line-height: 1.2;
+    color: var(--text); margin-bottom: 40px; max-width: 520px;
+    text-shadow: 0 0 24px rgba(var(--accent-rgb),0.3);
+  }
+  .pull-quote::before { content: '\201C'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-right: 4px; }
+  .pull-quote::after  { content: '\201D'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-left: 4px; }
+
+  .meta-block {
+    display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.25); padding-left: 14px;
+  }
+  .meta-row { display: flex; flex-direction: column; gap: 1px; }
+  .meta-key {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.6;
+  }
+  .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
+
+  .listen-now {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(24px, 2.4vw, 34px); line-height: 1.2;
+    color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  }
+  .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
+
+  .series-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 16px; margin-bottom: 10px;
+  }
+  .series-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .chip:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .chip.this { border-color: var(--accent); color: var(--accent); }
+  .standalone-note {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.42); margin-top: 16px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.4); padding-left: 10px;
+  }
+
+  /* cover stage */
+  .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+  .cover-frame {
+    width: min(86%, 540px); aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
+    box-shadow: 0 0 80px rgba(var(--accent-rgb),0.45), 0 0 200px rgba(var(--accent-rgb),0.18), inset 0 0 0 1px rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vinyl-small {
+    position: absolute; right: -64px; bottom: -64px;
+    width: 180px; height: 180px;
+    animation: vspin 18s linear infinite;
+    z-index: 5;
+    filter: drop-shadow(0 0 24px rgba(var(--accent-rgb),0.5));
+  }
+  @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+  /* lyrics */
+  .lyrics-section { position: relative; z-index: 4; padding: 40px 24px 100px; display: flex; flex-direction: column; align-items: center; }
+  .lyrics-divider {
+    width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
+    color: rgba(var(--accent-rgb),0.6); text-transform: uppercase;
+  }
+  .lyrics-divider::before, .lyrics-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb),0.3), transparent);
+  }
+  .lyrics-body {
+    max-width: 640px; width: 100%;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 26px); line-height: 1.55;
+    color: var(--text-soft); text-align: center;
+    text-shadow: 0 0 18px rgba(var(--accent-rgb),0.18);
+    user-select: text;
+  }
+  .lyrics-body p { margin-bottom: 1.4em; }
+  .lyrics-body p:last-child { margin-bottom: 0; }
+  .lyrics-body .accent { color: var(--accent); }
+  .lyrics-footer {
+    margin-top: 64px;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.36);
+    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 720px;
+  }
+  .lyrics-footer span strong {
+    color: rgba(255,255,255,0.72); font-weight: 700; letter-spacing: 0;
+    text-transform: none; font-size: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl-small, .listen-now .arrow { animation: none !important; }
+  }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding: 80px 24px 40px; gap: 32px; }
+    .hero-left { order: 2; max-width: unset; }
+    .cover-stage { order: 1; }
+    .cover-frame { width: min(88%, 420px); }
+    .vinyl-small { width: 120px; height: 120px; right: -32px; bottom: -32px; }
+    .pull-quote { font-size: 22px; }
+    .lyrics-section { padding: 20px 20px 80px; }
+    .lyrics-body { font-size: 19px; line-height: 1.5; }
+    .lyrics-footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "RED",
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Auny",
+    "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI"
+  },
+  "datePublished": "2026-01-12",
+  "genre": "EDM · Dark",
+  "url": "https://auny.media/singles/red",
+  "sameAs": [
+    "https://open.spotify.com/track/1nsT3pA8m6u89QMbfZ4L2v",
+    "https://distrokid.com/hyperfollow/auny1/red"
+  ],
+  "image": "https://auny.media/album-art/singles/red.jpg",
+  "recordingOf": {
+    "@type": "MusicComposition",
+    "name": "RED",
+    "lyrics": {
+      "@type": "CreativeWork",
+      "text": "Red as blood\nRed as my pulse\nEvery truth I never say\nBurns just under my skull\nRed is the color of love\nWhen it cuts too deep\nRed is the color of danger\nWhen your heart won't sleep\n\nRed as fire\nRed as sin\nRed is the color\nThat runs underneath my skin\n\nRed is the color of love\nWhen it's begging to stay\nRed is the color of danger\nWhen you don't walk away\nCrowded with sparks and warnings\nAnd promises said too fast\nRed is the color of moments\nYou know won't last\n\nRed as blood\nRed as heat\nRed as hunger\nUnderneath\n\nRed…\nIs where I fall in love\nRed is the color\nI bleed\n\nRed as blood\nRed as my pulse\nRed... is the love I see"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Links</a>
+  </div>
+  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+</nav>
+
+
+<div class="bg-blob" style="width:380px;height:380px;background:rgba(var(--accent-rgb),0.16);top:-100px;left:30%;"></div>
+<div class="bg-blob" style="width:280px;height:280px;background:rgba(var(--accent-rgb),0.12);bottom:5%;right:5%;"></div>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-label">❤️ &nbsp; single · color series · 4 of 5</p>
+    <h1 class="hero-title">RED</h1>
+    <p class="hero-byline">Auny &nbsp;·&nbsp; 2026</p>
+
+    <p class="pull-quote">Red is where I fall in love — red is the color I bleed</p>
+
+    <div class="meta-block">
+      <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">January 12, 2026</span></div>
+      <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">EDM · Dark</span></div>
+      <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
+    </div>
+
+    <a class="listen-now" href="https://open.spotify.com/track/1nsT3pA8m6u89QMbfZ4L2v" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+
+    <p class="series-label">part of the color series →</p>
+    <div class="series-chips">
+      <a class="chip" href="/singles/black">🖤 BLACK</a>
+      <a class="chip" href="/singles/blue">🩵 BLUE</a>
+      <a class="chip" href="/singles/yellow">💛 YELLOW</a>
+      <a class="chip this" href="/singles/red">❤️ RED</a>
+      <a class="chip" href="/singles/orange">🧡 ORANGE</a>
+    </div>
+  </div>
+
+  <div class="cover-stage">
+    <div class="cover-frame">
+      <img src="/album-art/singles/red.jpg" alt="RED cover art by Auny" width="640" height="640">
+    </div>
+    <div class="vinyl-small" aria-hidden="true">
+      <svg viewBox="0 0 180 180" width="180" height="180">
+        <circle cx="90" cy="90" r="88" fill="#050510"/>
+        <circle cx="90" cy="90" r="84" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="78" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="72" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="66" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="60" fill="none" stroke="#E84855" stroke-width="0.8" opacity="0.35"/>
+        <circle cx="90" cy="90" r="42" fill="#050510"/>
+        <circle cx="90" cy="90" r="40" fill="none" stroke="#E84855" stroke-width="1.5" opacity="0.7"/>
+        <circle cx="90" cy="90" r="4" fill="#E84855" opacity="0.8"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="lyrics-section" aria-label="Lyrics">
+  <div class="lyrics-divider">lyrics</div>
+  <article class="lyrics-body">
+    <p>Red as blood<br>Red as my pulse<br>Every truth I never say<br>Burns just under my skull<br>Red is the color of love<br>When it cuts too deep<br>Red is the color of danger<br>When your heart won't sleep</p>
+    <p>Red as fire<br>Red as sin<br>Red is the color<br>That runs underneath my skin</p>
+    <p>Red is the color of love<br>When it's begging to stay<br>Red is the color of danger<br>When you don't walk away<br>Crowded with sparks and warnings<br>And promises said too fast<br>Red is the color of moments<br>You know won't last</p>
+    <p>Red as blood<br>Red as heat<br>Red as hunger<br>Underneath</p>
+    <p>Red…<br>Is where I fall in love<br>Red is the color<br>I bleed</p>
+    <p>Red as blood<br>Red as my pulse<br>Red... is the love I see</p>
+  </article>
+  <div class="lyrics-footer">
+    <span><strong>Written &amp; Produced</strong> by Auny</span>
+    <span><strong>Released</strong> January 12, 2026</span>
+    <span><strong>©</strong> 11119560 Records DK</span>
+  </div>
+</section>
+
+</body>
+</html>

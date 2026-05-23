@@ -44,58 +44,7 @@
   }
   .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); }
 
-/* Global site nav — included on every static page. */
-.site-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 28px;
-  background: rgba(3,3,8,0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  font-family: 'Space Mono', monospace;
-}
-.site-nav .brand {
-  display: inline-flex; align-items: baseline; gap: 1px;
-  text-decoration: none; color: #fff;
-  font-family: 'Outfit', sans-serif; font-weight: 700;
-  font-size: 18px; letter-spacing: 1px;
-}
-.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
-.site-nav .brand-word { color: #fff; }
-.site-nav .nav-links {
-  display: flex; align-items: center; gap: 28px;
-}
-.site-nav .nav-link {
-  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(255,255,255,0.55);
-  text-decoration: none; padding: 8px 0; position: relative;
-  transition: color 0.2s;
-}
-.site-nav .nav-link:hover { color: #fff; }
-.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
-.site-nav .nav-link.active::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
-  height: 1px; background: var(--nav-accent, #1E90FF);
-}
-.site-nav .nav-spotify {
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(255,255,255,0.62);
-  text-decoration: none; padding: 6px 12px; border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18);
-  transition: border-color 0.2s, color 0.2s;
-}
-.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
-
-@media (max-width: 720px) {
-  .site-nav { padding: 12px 18px; }
-  .site-nav .nav-links { gap: 16px; }
-  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
-  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
-  .site-nav .brand-word { display: none; }
-  .site-nav .brand { font-size: 22px; }
-}
-
+{{NAV_CSS}}
 
   /* Hero */
   .hero {
@@ -258,18 +207,7 @@
 </head>
 <body>
 
-<nav class="site-nav" aria-label="Primary">
-  <a class="brand" href="/" aria-label="Auny — home">
-    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
-  </a>
-  <div class="nav-links">
-    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
-    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
-    <a class="nav-link" data-section="links" href="/links">Links</a>
-  </div>
-  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
-</nav>
-
+{{NAV}}
 
 <div class="bg-blob" style="width:520px;height:520px;background:rgba(30,144,255,0.22);top:-160px;left:30%;"></div>
 <div class="bg-blob" style="width:380px;height:380px;background:rgba(120,0,200,0.16);bottom:-100px;right:-80px;"></div>
@@ -281,9 +219,9 @@
     <h1 class="hero-name">AUNY</h1>
     <p class="hero-tagline">Music for the in-between hours. Drive music. Focus. The void. The warm light that survives it.</p>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-num">7</span><span class="stat-label">Albums</span></div>
-      <div class="stat"><span class="stat-num">24</span><span class="stat-label">Singles</span></div>
-      <div class="stat"><span class="stat-num">160</span><span class="stat-label">Tracks</span></div>
+      <div class="stat"><span class="stat-num">{{TOTAL_ALBUMS}}</span><span class="stat-label">Albums</span></div>
+      <div class="stat"><span class="stat-num">{{TOTAL_SINGLES}}</span><span class="stat-label">Singles</span></div>
+      <div class="stat"><span class="stat-num">{{TOTAL_TRACKS}}</span><span class="stat-label">Tracks</span></div>
       <div class="stat"><span class="stat-num">2,249</span><span class="stat-label">Monthly listeners</span></div>
     </div>
     <div class="hero-cta-row">
@@ -294,12 +232,12 @@
 
   <div class="featured">
     <span class="featured-label">latest release</span>
-    <a class="featured-card" href="/singles/let-go">
-      <div class="featured-cover"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" width="640" height="640"></div>
+    <a class="featured-card" href="{{LATEST_URL}}">
+      <div class="featured-cover"><img src="{{LATEST_COVER}}" alt="{{LATEST_TITLE}} cover" width="640" height="640"></div>
       <div class="featured-meta">
-        <p class="featured-tag">Single · May 16, 2026</p>
-        <h2 class="featured-title">Let Go</h2>
-        <p class="featured-sub">Letting go as becoming — not grief, not triumph, just exhale. The thing you have been carrying, set down.</p>
+        <p class="featured-tag">{{LATEST_TYPE}} · {{LATEST_DATE}}</p>
+        <h2 class="featured-title">{{LATEST_TITLE}}</h2>
+        <p class="featured-sub">{{LATEST_BLURB}}</p>
       </div>
     </a>
   </div>
@@ -314,41 +252,7 @@
     <a class="section-link" href="/albums">view all 7 →</a>
   </div>
   <div class="album-row">
-    <a class="mini-card" href="/albums/midnight-glitch">
-      <div class="cover"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Midnight Glitch</div>
-        <div class="mini-card-meta">May 6, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/albums/graveyard-echoes">
-      <div class="cover"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Graveyard Echoes</div>
-        <div class="mini-card-meta">April 20, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/albums/afterglow">
-      <div class="cover"><img src="/album-art/afterglow.jpg" alt="Afterglow cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Afterglow</div>
-        <div class="mini-card-meta">March 30, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/albums/blue-lightning">
-      <div class="cover"><img src="/album-art/blue-lightning.jpg" alt="Blue Lightning cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Blue Lightning</div>
-        <div class="mini-card-meta">March 25, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/albums/focus-with-me">
-      <div class="cover"><img src="/album-art/focus-with-me.jpg" alt="Focus with Me cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Focus with Me</div>
-        <div class="mini-card-meta">March 14, 2026</div>
-      </div>
-    </a>
+{{ALBUM_TILES}}
   </div>
 </section>
 
@@ -361,41 +265,7 @@
     <a class="section-link" href="/singles">all 23 singles →</a>
   </div>
   <div class="series-row">
-    <a class="mini-card" href="/singles/black" style="--card-accent:#9EA0A6">
-      <div class="cover"><img src="/album-art/singles/black.jpg" alt="BLACK cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title" style="color:#9EA0A6">🖤 BLACK</div>
-        <div class="mini-card-meta">January 8, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/blue" style="--card-accent:#1E90FF">
-      <div class="cover"><img src="/album-art/singles/blue.jpg" alt="BLUE cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title" style="color:#1E90FF">🩵 BLUE</div>
-        <div class="mini-card-meta">January 24, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/yellow" style="--card-accent:#F5C518">
-      <div class="cover"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title" style="color:#F5C518">💛 YELLOW</div>
-        <div class="mini-card-meta">April 29, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/red" style="--card-accent:#E84855">
-      <div class="cover"><img src="/album-art/singles/red.jpg" alt="RED cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title" style="color:#E84855">❤️ RED</div>
-        <div class="mini-card-meta">January 12, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/orange" style="--card-accent:#FF8C42">
-      <div class="cover"><img src="/album-art/singles/orange.jpg" alt="ORANGE cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title" style="color:#FF8C42">🧡 ORANGE</div>
-        <div class="mini-card-meta">January 15, 2026</div>
-      </div>
-    </a>
+{{SERIES_TILES}}
   </div>
 </section>
 

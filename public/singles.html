@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singles — Auny</title>
+<meta name="description" content="Every single released by Auny — 23 tracks across the descent, the becoming, and the color series.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Singles — Auny">
+<meta property="og:description" content="Every single by Auny. 23 tracks. Color Series + standalone work.">
+<meta property="og:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+<meta property="og:url" content="https://auny.media/singles/">
+<meta property="og:site_name" content="auny.media">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:title" content="Singles — Auny">
+<meta name="twitter:description" content="23 tracks across the descent, the becoming, and the color series.">
+<meta name="twitter:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+
+<link rel="canonical" href="https://auny.media/singles/">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; --nav-accent: #1E90FF; }
+  html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; }
+/* Global site nav — included on every static page. */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-spotify {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s;
+}
+.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+
+@media (max-width: 720px) {
+  .site-nav { padding: 12px 18px; }
+  .site-nav .nav-links { gap: 16px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.18; filter: hue-rotate(200deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(80px); }
+
+  .back-btn {
+    position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
+    padding: 0.45rem 1rem; border-radius: 8px;
+    background: rgba(3,3,8,0.82);
+    border: 1px solid rgba(var(--accent-rgb),0.33);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-decoration: none; text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 110px 32px 100px; position: relative; z-index: 4; }
+
+  .page-head { text-align: left; margin-bottom: 56px; max-width: 800px; }
+  .page-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+  }
+  .page-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(56px, 7vw, 112px); line-height: 0.92; letter-spacing: -2px;
+    margin-bottom: 18px;
+    text-shadow: 0 0 60px rgba(var(--accent-rgb),0.4);
+  }
+  .page-blurb {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 30px); line-height: 1.35;
+    color: rgba(255,255,255,0.88); max-width: 680px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.75;
+    margin-bottom: 6px;
+  }
+  .section-heading {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(24px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(15px, 1.4vw, 19px); color: rgba(255,255,255,0.65);
+    margin-bottom: 24px; max-width: 600px;
+  }
+
+  /* color series row */
+  .series-row {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  /* standard grid */
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    position: relative; display: block; text-decoration: none; color: inherit;
+    background: rgba(8,8,16,0.55); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.22); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  .card .cover { width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative; }
+  .card .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .card:hover .cover img { transform: scale(1.06); }
+  .card .body { padding: 14px 14px 16px; }
+  .card-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px;
+    line-height: 1.2; margin-bottom: 4px; color: #fff;
+  }
+  .card-meta {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+  }
+
+  .card.series .body { border-top: 1px solid var(--card-accent, var(--accent)); }
+  .card.series .card-title { color: var(--card-accent, #fff); }
+  .card.series .badge {
+    position: absolute; top: 10px; left: 10px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2);
+    padding: 3px 8px; border-radius: 999px; z-index: 2;
+  }
+
+  .footer-note {
+    margin-top: 80px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08);
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none !important; }
+    .card:hover { transform: none; }
+    .card .cover img { transition: none !important; }
+    .card:hover .cover img { transform: none; }
+  }
+
+  @media (max-width: 720px) {
+    .series-row { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 80px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Links</a>
+  </div>
+  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+</nav>
+
+
+<div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:20%;"></div>
+<div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
+
+<main class="container">
+  <header class="page-head">
+    <p class="page-label">✦ &nbsp; singles · 23 tracks</p>
+    <h1 class="page-title">Singles</h1>
+    <p class="page-blurb">The full vocal catalog. The Color Series at the top — a complete emotional atlas across five colors. Everything else, newest first.</p>
+  </header>
+
+  <section>
+    <p class="section-label">the color series · 5 of 5</p>
+    <h2 class="section-heading">A complete emotional atlas</h2>
+    <p class="section-sub">🖤 BLACK · 🩵 BLUE · 💛 YELLOW · ❤️ RED · 🧡 ORANGE — each color is a state. Together they map the descent and the return.</p>
+    <div class="series-row">
+      <a class="card series" href="/singles/black" style="--card-accent:#9EA0A6">
+      <span class="badge" style="color:#9EA0A6">🖤 1/5</span>
+        <div class="cover"><img src="/album-art/singles/black.jpg" alt="BLACK cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">BLACK</div>
+          <div class="card-meta">January 8, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/blue" style="--card-accent:#1E90FF">
+      <span class="badge" style="color:#1E90FF">🩵 2/5</span>
+        <div class="cover"><img src="/album-art/singles/blue.jpg" alt="BLUE cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">BLUE</div>
+          <div class="card-meta">January 24, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/yellow" style="--card-accent:#F5C518">
+      <span class="badge" style="color:#F5C518">💛 3/5</span>
+        <div class="cover"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">YELLOW</div>
+          <div class="card-meta">April 29, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/red" style="--card-accent:#E84855">
+      <span class="badge" style="color:#E84855">❤️ 4/5</span>
+        <div class="cover"><img src="/album-art/singles/red.jpg" alt="RED cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">RED</div>
+          <div class="card-meta">January 12, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/orange" style="--card-accent:#FF8C42">
+      <span class="badge" style="color:#FF8C42">🧡 5/5</span>
+        <div class="cover"><img src="/album-art/singles/orange.jpg" alt="ORANGE cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">ORANGE</div>
+          <div class="card-meta">January 15, 2026</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">all 23 singles · reverse-chronological</p>
+    <h2 class="section-heading">Everything</h2>
+    <p class="section-sub">PINK is set apart — not part of the series. Every other color was chosen or inhabited; pink was assigned and refused.</p>
+    <div class="grid">
+      <a class="card" href="/singles/let-go">
+        <div class="cover"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Let Go</div>
+          <div class="card-meta">May 16, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/pink">
+        <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">PINK</div>
+          <div class="card-meta">May 4, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/yellow" style="--card-accent:#F5C518">
+        <div class="cover"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">YELLOW</div>
+          <div class="card-meta">April 29, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/run-away">
+        <div class="cover"><img src="/album-art/singles/run-away.jpg" alt="Run Away cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Run Away</div>
+          <div class="card-meta">March 13, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/drowning">
+        <div class="cover"><img src="/album-art/singles/drowning.jpg" alt="Drowning cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Drowning</div>
+          <div class="card-meta">February 20, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/why-do-we-pretend">
+        <div class="cover"><img src="/album-art/singles/why-do-we-pretend.jpg" alt="Why Do We Pretend? cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Why Do We Pretend?</div>
+          <div class="card-meta">February 11, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/tick-tock">
+        <div class="cover"><img src="/album-art/singles/tick-tock.jpg" alt="Tick Tock cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Tick Tock</div>
+          <div class="card-meta">February 5, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/lost-in-the-city">
+        <div class="cover"><img src="/album-art/singles/lost-in-the-city.jpg" alt="Lost in the City cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Lost in the City</div>
+          <div class="card-meta">February 3, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/candy-coated-smile">
+        <div class="cover"><img src="/album-art/singles/candy-coated-smile.jpg" alt="Candy-Coated Smile cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Candy-Coated Smile</div>
+          <div class="card-meta">January 28, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/blue" style="--card-accent:#1E90FF">
+        <div class="cover"><img src="/album-art/singles/blue.jpg" alt="BLUE cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">BLUE</div>
+          <div class="card-meta">January 24, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/you-in-a-song">
+        <div class="cover"><img src="/album-art/singles/you-in-a-song.jpg" alt="You in a Song cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">You in a Song</div>
+          <div class="card-meta">January 21, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/from-the-ashes">
+        <div class="cover"><img src="/album-art/singles/from-the-ashes.jpg" alt="From The Ashes cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">From The Ashes</div>
+          <div class="card-meta">January 18, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/love-is">
+        <div class="cover"><img src="/album-art/singles/love-is.jpg" alt="Love is... cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Love is...</div>
+          <div class="card-meta">January 17, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/orange" style="--card-accent:#FF8C42">
+        <div class="cover"><img src="/album-art/singles/orange.jpg" alt="ORANGE cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">ORANGE</div>
+          <div class="card-meta">January 15, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/story-of-you">
+        <div class="cover"><img src="/album-art/singles/story-of-you.jpg" alt="Story of You cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Story of You</div>
+          <div class="card-meta">January 13, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/red" style="--card-accent:#E84855">
+        <div class="cover"><img src="/album-art/singles/red.jpg" alt="RED cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">RED</div>
+          <div class="card-meta">January 12, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/escape">
+        <div class="cover"><img src="/album-art/singles/escape.jpg" alt="ESCAPE cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">ESCAPE</div>
+          <div class="card-meta">January 11, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/dreams-that-run-away">
+        <div class="cover"><img src="/album-art/singles/dreams-that-run-away.jpg" alt="Dreams That Run Away cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Dreams That Run Away</div>
+          <div class="card-meta">January 10, 2026</div>
+        </div>
+      </a>
+      <a class="card series" href="/singles/black" style="--card-accent:#9EA0A6">
+        <div class="cover"><img src="/album-art/singles/black.jpg" alt="BLACK cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">BLACK</div>
+          <div class="card-meta">January 8, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/feel-again-pt-2">
+        <div class="cover"><img src="/album-art/singles/feel-again-pt-2.jpg" alt="Feel Again, Pt. 2 cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Feel Again, Pt. 2</div>
+          <div class="card-meta">January 7, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/monster-no-one-sees">
+        <div class="cover"><img src="/album-art/singles/monster-no-one-sees.jpg" alt="Monster No One Sees cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Monster No One Sees</div>
+          <div class="card-meta">January 7, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/the-void">
+        <div class="cover"><img src="/album-art/singles/the-void.jpg" alt="The Void cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">The Void</div>
+          <div class="card-meta">January 5, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/heart-inside-2">
+        <div class="cover"><img src="/album-art/singles/heart-inside-2.jpg" alt="Heart Inside of Me, Pt. 2 cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">Heart Inside of Me, Pt. 2</div>
+          <div class="card-meta">January 4, 2026</div>
+        </div>
+      </a>
+      <a class="card" href="/singles/fafo">
+        <div class="cover"><img src="/album-art/singles/fafo.jpg" alt="F A F O cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">F A F O</div>
+          <div class="card-meta">January 2, 2026</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <p class="footer-note">23 singles &nbsp;·&nbsp; auny &nbsp;·&nbsp; 11119560 Records DK</p>
+</main>
+
+</body>
+</html>

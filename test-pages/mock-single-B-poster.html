@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLUE — Auny (Mock B: Poster)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; background: #030308; font-family: 'Space Mono', monospace; color: #fff; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.18; filter: hue-rotate(200deg) saturate(1.4); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; }
+
+  .mock-tag { position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300; padding: 0.4rem 0.8rem; border-radius: 6px; background: rgba(30,144,255,0.15); border: 1px solid rgba(30,144,255,0.4); color: #1E90FF; font-family: 'Space Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+
+  .page { width: 100%; min-height: 100vh; display: grid; grid-template-columns: 1fr 1.1fr; align-items: center; padding: 60px 64px; position: relative; z-index: 4; gap: 40px; }
+
+  .left { display: flex; flex-direction: column; justify-content: center; height: 100%; max-width: 540px; }
+
+  /* lyrics section */
+  .lyrics-section { position: relative; z-index: 4; padding: 40px 64px 100px; display: flex; flex-direction: column; align-items: center; }
+  .lyrics-divider {
+    width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px; color: rgba(30,144,255,0.6); text-transform: uppercase;
+  }
+  .lyrics-divider::before, .lyrics-divider::after {
+    content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(30,144,255,0.3), transparent);
+  }
+  .lyrics-body {
+    max-width: 640px;
+    width: 100%;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.55;
+    color: rgba(255,255,255,0.86);
+    text-align: center;
+    text-shadow: 0 0 18px rgba(0,191,255,0.18);
+    user-select: text;
+  }
+  .lyrics-body p { margin-bottom: 1.4em; }
+  .lyrics-body p:last-child { margin-bottom: 0; }
+  .lyrics-body .accent { color: #1E90FF; font-style: italic; }
+  .lyrics-footer {
+    margin-top: 64px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center;
+  }
+  .lyrics-footer span strong { color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 0; text-transform: none; font-size: 12px; }
+
+  .hero-label  { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: #00BFFF; text-transform: uppercase; opacity: 0.6; margin-bottom: 14px; }
+  .hero-name   { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: clamp(56px, 7.5vw, 128px); color: #fff; line-height: 0.9; letter-spacing: -2px; margin-bottom: 6px; text-shadow: 0 0 60px rgba(30,144,255,0.5); }
+  .hero-subtitle { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px; color: #1E90FF; text-transform: uppercase; opacity: 0.6; margin-bottom: 36px; }
+
+  .pull-quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(26px, 2.8vw, 42px);
+    line-height: 1.18;
+    color: #ffffff;
+    margin-bottom: 40px;
+    max-width: 520px;
+    text-shadow: 0 0 28px rgba(0,191,255,0.35);
+  }
+  .pull-quote::before { content: '“'; color: #1E90FF; font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-right: 4px; }
+  .pull-quote::after  { content: '”'; color: #1E90FF; font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-left: 4px; }
+
+  .meta-block { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; border-left: 2px solid rgba(30,144,255,0.25); padding-left: 14px; }
+  .meta-key { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px; color: #1E90FF; text-transform: uppercase; opacity: 0.55; display: block; }
+  .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
+
+  .hero-accent { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: clamp(24px, 2.6vw, 36px); color: #1E90FF; line-height: 1.2; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+  .hero-accent .arrow { animation: nudge 1.6s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
+
+  .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+  .cover-frame { width: min(86%, 540px); aspect-ratio: 1/1; border-radius: 6px; overflow: hidden; box-shadow: 0 0 80px rgba(30,144,255,0.5), 0 0 200px rgba(0,191,255,0.2), inset 0 0 0 1px rgba(255,255,255,0.06); position: relative; }
+  .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cover-tape-tl { position: absolute; top: -8px; left: -8px; width: 40px; height: 12px; background: rgba(255,255,255,0.06); transform: rotate(-20deg); }
+  .cover-tape-br { position: absolute; bottom: -8px; right: -8px; width: 40px; height: 12px; background: rgba(255,255,255,0.06); transform: rotate(-20deg); }
+
+  .vinyl-small {
+    position: absolute;
+    right: -64px; bottom: -64px;
+    width: 180px; height: 180px;
+    animation: vspin 18s linear infinite;
+    z-index: 5;
+    filter: drop-shadow(0 0 24px rgba(30,144,255,0.5));
+  }
+  @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+  .series-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+  .chip { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.55); text-decoration: none; }
+  .chip.this { border-color: #1E90FF; color: #1E90FF; }
+
+  .series-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 28px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="mock-tag">Mock B · Poster</div>
+<div class="bg-blob" style="width:380px;height:380px;background:rgba(0,80,200,0.18);top:-100px;left:30%;filter:blur(80px);"></div>
+<div class="bg-blob" style="width:280px;height:280px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;filter:blur(60px);"></div>
+
+<div class="page">
+  <div class="left">
+    <p class="hero-label">✦ &nbsp; single · color series · 2 of 5</p>
+    <h1 class="hero-name">BLUE</h1>
+    <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
+
+    <p class="pull-quote">Calm on the surface — while the world breaks down.</p>
+
+    <div class="meta-block">
+      <div><span class="meta-key">Released</span><span class="meta-val">January 24, 2026</span></div>
+      <div><span class="meta-key">Genre</span><span class="meta-val">Dark Pop · Ambient EDM</span></div>
+      <div><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
+    </div>
+
+    <a class="hero-accent" href="#">listen now <span class="arrow">→</span></a>
+
+    <p class="series-label">part of the color series →</p>
+    <div class="series-chips">
+      <a class="chip" href="#">🖤 BLACK</a>
+      <a class="chip this" href="#">🩵 BLUE</a>
+      <a class="chip" href="#">💛 YELLOW</a>
+      <a class="chip" href="#">❤️ RED</a>
+      <a class="chip" href="#">🧡 ORANGE</a>
+    </div>
+  </div>
+
+  <div class="cover-stage">
+    <div class="cover-frame">
+      <span class="cover-tape-tl"></span>
+      <span class="cover-tape-br"></span>
+      <img src="/album-art/blue-single.jpg" alt="BLUE single cover"/>
+    </div>
+    <div class="vinyl-small">
+      <svg viewBox="0 0 180 180" width="180" height="180">
+        <circle cx="90" cy="90" r="88" fill="#050510"/>
+        <circle cx="90" cy="90" r="84" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="78" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="72" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="66" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="60" fill="none" stroke="#1E90FF" stroke-width="0.8" opacity="0.35"/>
+        <circle cx="90" cy="90" r="42" fill="#050510"/>
+        <circle cx="90" cy="90" r="40" fill="none" stroke="#1E90FF" stroke-width="1.5" opacity="0.7"/>
+        <circle cx="90" cy="90" r="4"  fill="#1E90FF" opacity="0.8"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section class="lyrics-section" aria-label="Lyrics">
+  <div class="lyrics-divider">lyrics</div>
+  <article class="lyrics-body" itemscope itemtype="https://schema.org/MusicRecording">
+    <meta itemprop="name" content="BLUE">
+    <meta itemprop="byArtist" content="Auny">
+    <p>
+      Blue is the color of ice<br>
+      It's the color of sky<br>
+      Blue is ocean waves<br>
+      The color of storms<br>
+      Blue is the light that glows<br>
+      When lightning strikes
+    </p>
+    <p>
+      Blue is calm<br>
+      Blue is cold<br>
+      <span class="accent">Blue is the color I walk into</span><br>
+      When I wanna…
+    </p>
+    <p>
+      Blue is the color of storms<br>
+      That pass without a sound<br>
+      Calm on the surface<br>
+      While the world breaks down
+    </p>
+    <p>
+      Blue is endless<br>
+      Blue is space<br>
+      Between the sun and the moon<br>
+      Blue is mine<br>
+      Blue is yours<br>
+      Blue is a bond
+    </p>
+    <p>
+      It's the sharpness<br>
+      That cuts through your storms
+    </p>
+    <p>
+      Blue…<br>
+      Is where I slow my breath<br>
+      Blue is the color<br>
+      I lose myself in<br>
+      Without fearing what's next
+    </p>
+    <p>
+      Blue is storms<br>
+      Blue is cold<br>
+      <span class="accent">Blue is the color I walk into</span><br>
+      When I wanna be frozen in time
+    </p>
+  </article>
+  <div class="lyrics-footer">
+    <span><strong>Written &amp; Produced</strong> by Auny</span>
+    <span><strong>Released</strong> Jan 24, 2026</span>
+    <span><strong>© 11119560 Records DK</strong></span>
+  </div>
+</section>
+
+</body>
+</html>

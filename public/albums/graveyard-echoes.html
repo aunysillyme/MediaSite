@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graveyard Echoes — Auny</title>
+<meta name="description" content="Graveyard Echoes — an instrumental album by Auny. Pressure, depth, things that don't come back to the surface.">
+
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="Graveyard Echoes — Auny">
+<meta property="og:description" content="Pressure, depth, things that don't come back to the surface.">
+<meta property="og:image" content="https://auny.media/album-art/graveyard-echoes.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://auny.media/albums/graveyard-echoes">
+<meta property="og:site_name" content="auny.media">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="Graveyard Echoes — Auny">
+<meta name="twitter:description" content="Pressure, depth, things that don't come back to the surface.">
+<meta name="twitter:image" content="https://auny.media/album-art/graveyard-echoes.jpg">
+
+<link rel="canonical" href="https://auny.media/albums/graveyard-echoes">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #4FA0B5;
+    --accent-rgb: 79,160,181;
+    --nav-accent: #4FA0B5;
+  }
+  html, body {
+    min-height: 100%;
+    background: #030308;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.22; filter: hue-rotate(180deg) saturate(1.5); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.2;
+  }
+
+/* Global site nav — included on every static page. */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-spotify {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s;
+}
+.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+
+@media (max-width: 720px) {
+  .site-nav { padding: 12px 18px; }
+  .site-nav .nav-links { gap: 16px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+
+  .page {
+    width: 100%; min-height: 100vh; display: flex; flex-direction: row;
+    align-items: stretch; position: relative; padding-top: 64px;
+  }
+  .left-panel {
+    width: 32%; min-width: 260px;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 40px 36px 40px 56px;
+    position: relative; z-index: 4;
+    animation: fadeup 0.6s ease-out both;
+  }
+  .right-panel {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 4; overflow: visible;
+    padding-right: 24px;
+  }
+  .bg-art { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .bg-blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+
+  .hero { position: relative; z-index: 4; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .hero-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+  }
+  .hero-name {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(36px, 4.2vw, 64px); line-height: 0.95; letter-spacing: -0.5px;
+    margin-bottom: 6px; text-shadow: 0 0 40px rgba(var(--accent-rgb),0.4);
+  }
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 24px;
+  }
+  .meta-block {
+    display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.28); padding-left: 14px;
+  }
+  .meta-row { display: flex; flex-direction: column; gap: 1px; }
+  .meta-key {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.6;
+  }
+  .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
+  .blurb {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(18px, 1.6vw, 22px); line-height: 1.35;
+    color: rgba(255,255,255,0.82); margin-bottom: 24px;
+  }
+  .hero-accent {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(22px, 2.8vw, 34px); line-height: 1.2;
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .orbit-arrow {
+    display: inline-block; font-style: normal; font-family: 'Space Mono', monospace;
+    font-size: 0.72em; color: var(--accent);
+    animation: arrow-nudge 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb),0.7);
+    line-height: 1;
+  }
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(0); opacity: 0.65; }
+    50% { transform: translateX(6px); opacity: 1; }
+  }
+  .page-footer {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    color: rgba(255,255,255,0.18); text-transform: uppercase;
+    margin-top: auto; padding-top: 28px; white-space: nowrap;
+  }
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Orbit system */
+  .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
+  .planet {
+    position: absolute; display: flex; flex-direction: column; align-items: center;
+    cursor: pointer; text-decoration: none; z-index: 6;
+    transition: transform 0.22s ease; transform-origin: center top;
+  }
+  .planet:hover { transform: scale(1.25); }
+  .planet-icon {
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: box-shadow 0.22s ease; flex-shrink: 0; background: rgba(3,3,8,0.85);
+  }
+  .planet-name {
+    font-family: 'Space Mono', monospace; font-size: 8px; margin-top: 4px;
+    white-space: nowrap; opacity: 0; transition: opacity 0.18s ease;
+    pointer-events: none; padding: 2px 5px; border-radius: 3px;
+    color: #fff; letter-spacing: 0.3px; max-width: 120px;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .planet:hover .planet-name { opacity: 1; }
+
+  .ring-track {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid transparent; pointer-events: none;
+  }
+  .ring-1 { animation: ring-1a 4s ease-in-out infinite; }
+  .ring-2 { animation: ring-2a 4s ease-in-out 1s infinite; }
+  .ring-3 { animation: ring-3a 4s ease-in-out 2s infinite; }
+  @keyframes ring-1a { 0%,100% { border-color: rgba(var(--accent-rgb),0.16); } 50% { border-color: rgba(var(--accent-rgb),0.4); } }
+  @keyframes ring-2a { 0%,100% { border-color: rgba(var(--accent-rgb),0.12); } 50% { border-color: rgba(var(--accent-rgb),0.34); } }
+  @keyframes ring-3a { 0%,100% { border-color: rgba(var(--accent-rgb),0.1); }  50% { border-color: rgba(var(--accent-rgb),0.3); } }
+
+  .vinyl-wrap { position: absolute; z-index: 4; animation: vspin 18s linear infinite; }
+  @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl-wrap, .ring-1, .ring-2, .ring-3, .orbit-arrow, .left-panel, .orbit-system { animation: none !important; }
+    .planet { transition: none !important; }
+  }
+
+  @media (max-width: 760px) {
+    .page { flex-direction: column; align-items: center; padding-top: 70px; }
+    .left-panel {
+      width: 100%; min-width: unset; padding: 32px 24px 16px;
+      align-items: center; text-align: center; flex: unset;
+    }
+    .hero { flex: unset; align-items: center; }
+    .meta-block { align-items: flex-start; width: 100%; max-width: 320px; }
+    .page-footer { padding-top: 16px; text-align: center; }
+    .right-panel { width: 100%; padding: 0 0 28px; }
+    @keyframes arrow-nudge {
+      0%,100% { transform: translateY(0); opacity: 0.65; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicAlbum",
+  "name": "Graveyard Echoes",
+  "byArtist": { "@type": "MusicGroup", "name": "Auny", "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" },
+  "datePublished": "2026-04-20",
+  "genre": "Instrumental · Atmospheric · Underwater",
+  "url": "https://auny.media/albums/graveyard-echoes",
+  "sameAs": [
+    "https://open.spotify.com/album/0ucHKpYbov1yzO0PyWtyNf",
+    "https://distrokid.com/hyperfollow/auny1/graveyard-echoes"
+  ],
+  "image": "https://auny.media/album-art/graveyard-echoes.jpg",
+  "numTracks": 21
+}
+</script>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Links</a>
+  </div>
+  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+</nav>
+
+
+<div class="bg-art">
+  <div class="bg-blob" style="width:320px;height:320px;background:rgba(var(--accent-rgb),0.18);top:-80px;left:-100px;"></div>
+  <div class="bg-blob" style="width:260px;height:260px;background:rgba(var(--accent-rgb),0.12);top:30%;right:-100px;"></div>
+  <div class="bg-blob" style="width:240px;height:240px;background:rgba(var(--accent-rgb),0.1);bottom:10%;left:-80px;"></div>
+</div>
+
+<div class="page">
+  <div class="left-panel">
+    <div class="hero">
+      <p class="hero-label">✦ &nbsp; album</p>
+      <h1 class="hero-name">Graveyard<br>Echoes</h1>
+      <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
+
+      <p class="blurb">Pressure, depth, things that don't come back to the surface.</p>
+
+      <div class="meta-block">
+        <div class="meta-row"><span class="meta-key">Tracks</span><span class="meta-val">21 songs</span></div>
+        <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">April 20, 2026</span></div>
+        <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Instrumental · Atmospheric · Underwater</span></div>
+        <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
+      </div>
+
+      <a class="hero-accent" href="https://open.spotify.com/album/0ucHKpYbov1yzO0PyWtyNf" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
+    </div>
+    <p class="page-footer">Graveyard Echoes &nbsp;·&nbsp; AUNY &nbsp;·&nbsp; 2026</p>
+  </div>
+
+  <div class="right-panel">
+    <div class="orbit-system" id="orbit"></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var RINGS = [[{"num":1,"name":"Underwater","id":"5GJBeFVxymS9iDrhwLTuz6","dur":""},{"num":2,"name":"Pressure Point","id":"0BvDfqmUyxZXB9Lse84c3E","dur":""},{"num":3,"name":"Surface Tension","id":"2VfHFTFfcWaFTX2705voxx","dur":""},{"num":4,"name":"Graveyard Echoes","id":"7FwJ6kQ43jx2fTiZ72kUmX","dur":""},{"num":5,"name":"Still Remains","id":"3LZiUzYlNZvZGlfRdFxvb2","dur":""},{"num":6,"name":"Past Graves","id":"0JBQcu8HVPSaFjrDatmiGB","dur":""},{"num":7,"name":"Glass Ghost 2.0","id":"4wJ0xS3cnzEWRQSorDV7xM","dur":""}],[{"num":8,"name":"Nobody Knows","id":"01seIA0mZOTKuCqARIG84j","dur":""},{"num":9,"name":"Lullaby","id":"14MwNBUBWg2T5DIFquRWI6","dur":""},{"num":10,"name":"Digi Artifacts","id":"2vCre3hld7ZaOjnW56f1Bl","dur":""},{"num":11,"name":"Crystalline Mist","id":"46NTWtVTDJbQUSmPdeX6c0","dur":""},{"num":12,"name":"Corrupted","id":"0jwekCapdrPMkUXp9osJQi","dur":""},{"num":13,"name":"Raining Elsewhere","id":"6lioHqzPQLbhgvGPnhGE1S","dur":""},{"num":14,"name":"Dripping Memory","id":"5B2HxdWBrr8GLvBmEJtBGL","dur":""}],[{"num":15,"name":"Sand Houses","id":"25ZzzhmqQzSK0aEMjYlk8D","dur":""},{"num":16,"name":"Eroded","id":"0wqxNLK9PgWeHGXbIvVz2q","dur":""},{"num":17,"name":"Cemetary","id":"7hg86SGJJl8KLIPTm6JFaM","dur":""},{"num":18,"name":"Hollowed Grounds","id":"6CV2iw91cehjY7tge69evi","dur":""},{"num":19,"name":"Fragments","id":"5lhU4liwapAPFwHMorK3sf","dur":""},{"num":20,"name":"Unresolved","id":"5oAUnp4D8r7WDYpwqZhjmc","dur":""},{"num":21,"name":"Closure","id":"274sJJ03Jby3lH1DqQns99","dur":""}]];
+  var ALBUM_URL = 'https://open.spotify.com/album/0ucHKpYbov1yzO0PyWtyNf';
+  var ALBUM_ART = '/album-art/graveyard-echoes.jpg';
+  var ACCENTS = ["#4FA0B5","#3D7D8F","#0C2127"];
+
+  var isMobile = window.innerWidth < 760;
+  var vw = isMobile ? window.innerWidth : window.innerWidth * 0.68;
+  var vh = window.innerHeight - 64;
+  var S = Math.max(340, Math.min(820, vw - 24, vh - 40));
+  var ICON = Math.max(30, Math.round(S * 0.078));
+  var HALF = Math.round(ICON / 2);
+  var radii = RINGS.length === 2
+    ? [Math.round(S * 0.24), Math.round(S * 0.44)]
+    : [Math.round(S * 0.18), Math.round(S * 0.33), Math.round(S * 0.47)];
+  var W = (radii[radii.length - 1] + HALF) * 2 + 8;
+  var CX = W / 2, CY = W / 2;
+
+  var orbit = document.getElementById('orbit');
+  orbit.style.width = W + 'px';
+  orbit.style.height = W + 'px';
+  orbit.style.position = 'relative';
+
+  function makeRing(r, cls) {
+    var d = document.createElement('div');
+    d.className = 'ring-track ' + cls;
+    d.style.width = (r * 2) + 'px';
+    d.style.height = (r * 2) + 'px';
+    d.style.left = (CX - r) + 'px';
+    d.style.top = (CY - r) + 'px';
+    orbit.appendChild(d);
+  }
+  for (var k = 0; k < radii.length; k++) makeRing(radii[k], 'ring-' + (k + 1));
+
+  // Spinning vinyl
+  var vsz = Math.round(S * 0.16);
+  var vWrap = document.createElement('div');
+  vWrap.className = 'vinyl-wrap';
+  vWrap.style.cssText = 'width:' + vsz + 'px;height:' + vsz + 'px;margin-left:' + (-(vsz/2)) + 'px;margin-top:' + (-(vsz/2)) + 'px;top:50%;left:50%;';
+  vWrap.innerHTML = '<svg viewBox="0 0 110 110" width="' + vsz + '" height="' + vsz + '">'
+    + '<circle cx="55" cy="55" r="53" fill="#050510"/>'
+    + '<circle cx="55" cy="55" r="51" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="47" fill="none" stroke="#091020" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="43" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="39" fill="none" stroke="#091020" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="35" fill="none" stroke="#0d1428" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="30" fill="none" stroke="#4FA0B5" stroke-width="0.8" opacity="0.35"/>'
+    + '<circle cx="55" cy="55" r="24" fill="#050510"/>'
+    + '<circle cx="55" cy="55" r="22" fill="none" stroke="#4FA0B5" stroke-width="1.5" opacity="0.7"/>'
+    + '<circle cx="55" cy="55" r="3" fill="#4FA0B5" opacity="0.8"/>'
+    + '</svg>';
+  orbit.appendChild(vWrap);
+
+  // Non-spinning album cover at center
+  var lblSize = Math.round(vsz * 0.58);
+  var lblWrap = document.createElement('a');
+  lblWrap.href = ALBUM_URL;
+  lblWrap.target = '_blank';
+  lblWrap.rel = 'noopener';
+  lblWrap.setAttribute('aria-label', 'Graveyard Echoes — open full album on Spotify');
+  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(var(--accent-rgb),0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
+  lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="Graveyard Echoes album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
+  orbit.appendChild(lblWrap);
+
+  // Planet factory
+  function makePlanet(p, ringColor) {
+    var a = document.createElement('a');
+    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'planet';
+    a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    var numStr = (p.num < 10 ? '0' : '') + p.num;
+    var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
+      + '<text x="14" y="19" text-anchor="middle" font-family="Space Mono,monospace" font-size="11" font-weight="700" fill="' + ringColor + '" opacity="0.92">' + numStr + '</text>'
+      + '</svg>';
+    a.innerHTML =
+      '<div class="planet-icon" style="width:' + ICON + 'px;height:' + ICON + 'px;border:1.5px solid ' + ringColor + ';box-shadow:0 0 12px ' + ringColor + '55,inset 0 0 18px ' + ringColor + '28;">' + iconSvg + '</div>'
+      + '<span class="planet-name" style="color:' + ringColor + ';">' + p.name + '</span>';
+    orbit.appendChild(a);
+    return a;
+  }
+
+  var els = RINGS.map(function (ring, i) {
+    var color = ACCENTS[Math.min(i, ACCENTS.length - 1)];
+    return ring.map(function (p) { return makePlanet(p, color); });
+  });
+
+  // Animation
+  var phases = RINGS.map(function (_, i) { return (i * Math.PI) / 5; });
+  var dirs = [-1, 1, -1].slice(0, RINGS.length);
+  var periods = [40, 55, 48].slice(0, RINGS.length);
+  var last = null;
+
+  function tick(ts) {
+    if (!last) last = ts;
+    var dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+    for (var i = 0; i < RINGS.length; i++) {
+      phases[i] += dirs[i] * dt * (2 * Math.PI / periods[i]);
+      var R = radii[i];
+      var ring = RINGS[i];
+      for (var j = 0; j < ring.length; j++) {
+        var a = phases[i] + (j / ring.length) * 2 * Math.PI;
+        els[i][j].style.left = (CX + R * Math.cos(a) - HALF) + 'px';
+        els[i][j].style.top  = (CY + R * Math.sin(a) - HALF) + 'px';
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

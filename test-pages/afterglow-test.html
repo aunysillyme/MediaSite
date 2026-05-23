@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Afterglow — Auny</title>
+<meta name="description" content="Afterglow — a 20-track instrumental album by Auny. Drive music for nights that don't resolve.">
+
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="Afterglow — Auny">
+<meta property="og:description" content="20 tracks. 1 hr 5 min. Drive music for nights that don't resolve.">
+<meta property="og:image" content="https://auny.media/album-art/afterglow.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://auny.media/afterglow">
+<meta property="og:site_name" content="auny.media">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="Afterglow — Auny">
+<meta name="twitter:description" content="20 tracks. 1 hr 5 min. Drive music for nights that don't resolve.">
+<meta name="twitter:image" content="https://auny.media/album-art/afterglow.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +58,7 @@
       rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
     );
     pointer-events: none;
-    z-index: 9999;
+    z-index: 50;
     opacity: 0.22;
   }
 
@@ -322,7 +339,7 @@
     position: fixed;
     top: 1.25rem;
     right: 1.5rem;
-    z-index: 200;
+    z-index: 300;
     padding: 0.45rem 1rem;
     border-radius: 8px;
     background: rgba(14, 6, 0, 0.82);
@@ -341,6 +358,18 @@
   .back-btn:hover {
     border-color: #FF8C42;
     box-shadow: 0 0 14px rgba(255, 140, 66, 0.3);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orbit-arrow,
+    .vinyl-wrap,
+    .ring-1, .ring-2, .ring-3,
+    .hero-subtitle,
+    .left-panel,
+    .orbit-system {
+      animation: none !important;
+    }
+    .planet { transition: none !important; }
   }
 
   @media (max-width: 640px) {
@@ -399,23 +428,23 @@
   </svg>
 </div>
 
-<a class="back-btn" href="/links">&#8592; auny.media/links</a>
+<a class="back-btn" href="/links">← auny.media/links</a>
 
 <div class="page">
   <div class="left-panel">
     <div class="hero">
-      <p class="hero-label">&#10022; &nbsp; album</p>
+      <p class="hero-label">✦ &nbsp; album</p>
       <h1 class="hero-name">Afterglow</h1>
-      <p class="hero-subtitle">Auny &nbsp;&middot;&nbsp; 2025</p>
+      <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
 
       <div class="meta-block">
         <div class="meta-row">
           <span class="meta-key">Tracks</span>
-          <span class="meta-val">20 songs &nbsp;&middot;&nbsp; 1 hr 5 min</span>
+          <span class="meta-val">20 songs &nbsp;·&nbsp; 1 hr 5 min</span>
         </div>
         <div class="meta-row">
           <span class="meta-key">Released</span>
-          <span class="meta-val">2025</span>
+          <span class="meta-val">March 30, 2026</span>
         </div>
         <div class="meta-row">
           <span class="meta-key">Written &amp; Produced</span>
@@ -427,9 +456,9 @@
         </div>
       </div>
 
-      <div class="hero-accent">listen now <span class="orbit-arrow">&rarr;</span></div>
+      <div class="hero-accent">listen now <span class="orbit-arrow">→</span></div>
     </div>
-    <p class="page-footer">Afterglow &nbsp;&middot;&nbsp; Auny &nbsp;&middot;&nbsp; 2025</p>
+    <p class="page-footer">Afterglow &nbsp;·&nbsp; Auny &nbsp;·&nbsp; 2026</p>
   </div>
 
   <div class="right-panel">
@@ -458,39 +487,42 @@
   var CX   = W / 2;
   var CY   = W / 2;
 
+  var SP = 'https://open.spotify.com/track/';
+
   // ── RING 1 — tracks 1–7 (counter-clockwise, golden amber) ──
   var RING1 = [
-    { n: 'Ignition On',      dur: '3:03', num: 1,  c: '#FFB347' },
-    { n: '1:11AM',            dur: '3:12', num: 2,  c: '#FFB347' },
-    { n: 'Random Turn',       dur: '2:15', num: 3,  c: '#FFB347' },
-    { n: 'No Destination',    dur: '3:05', num: 4,  c: '#FFB347' },
-    { n: 'Streetlights',      dur: '4:01', num: 5,  c: '#FFB347' },
-    { n: 'Groovy',            dur: '3:12', num: 6,  c: '#FFB347' },
-    { n: 'Red Lights',        dur: '2:33', num: 7,  c: '#FFB347' },
+    { n: 'Ignition On',       dur: '3:03', num: 1,  c: '#FFB347', u: SP + '36PUw9lnw7BvBCnn3j6Ga4' },
+    { n: '1:11AM',             dur: '3:12', num: 2,  c: '#FFB347', u: SP + '6u65xSSVcWCURZgNQQZTj0' },
+    { n: 'Random Turn',        dur: '2:15', num: 3,  c: '#FFB347', u: SP + '77659trBJFSsR7mFIhn3UK' },
+    { n: 'No Destination',     dur: '3:05', num: 4,  c: '#FFB347', u: SP + '1zHwnagy0ahV8SlKKXVPhR' },
+    { n: 'Streetlights',       dur: '4:01', num: 5,  c: '#FFB347', u: SP + '7Ix3xPym0joomPSxP5bWqc' },
+    { n: 'Groovy',             dur: '3:12', num: 6,  c: '#FFB347', u: SP + '0YwzXjxn269jH2VQW1Oypt' },
+    { n: 'Red Lights',         dur: '2:33', num: 7,  c: '#FFB347', u: SP + '3lwRGqC15dOw6o4r1DIX2x' },
   ];
 
   // ── RING 2 — tracks 8–14 (clockwise, deep orange) ──
   var RING2 = [
-    { n: 'Rearview Mirror',   dur: '3:16', num: 8,  c: '#FF6B35' },
-    { n: 'Stop Sign',         dur: '3:26', num: 9,  c: '#FF6B35' },
-    { n: 'Flickering Lights', dur: '3:28', num: 10, c: '#FF6B35' },
-    { n: 'Intersection',      dur: '3:19', num: 11, c: '#FF6B35' },
-    { n: 'Reflections',       dur: '2:58', num: 12, c: '#FF6B35' },
-    { n: 'Late Nights',       dur: '3:34', num: 13, c: '#FF6B35' },
-    { n: 'Ocean Pkwy',        dur: '3:44', num: 14, c: '#FF6B35' },
+    { n: 'Rearview Mirror',    dur: '3:16', num: 8,  c: '#FF6B35', u: SP + '2JOHcvxuY7BcApNuLhdqZ5' },
+    { n: 'Stop Sign',          dur: '3:26', num: 9,  c: '#FF6B35', u: SP + '6dA8Xbkjoh3V8iSAtO9HlF' },
+    { n: 'Flickering Lights',  dur: '3:28', num: 10, c: '#FF6B35', u: SP + '2lI8SLRo22cNx6UGpIppyc' },
+    { n: 'Intersection',       dur: '3:19', num: 11, c: '#FF6B35', u: SP + '0RK9FLgl3Ldt6itHGHsM4O' },
+    { n: 'Reflections',        dur: '2:58', num: 12, c: '#FF6B35', u: SP + '3yW7CoOIBLttLYEMPwBP2L' },
+    { n: 'Late Nights',        dur: '3:34', num: 13, c: '#FF6B35', u: SP + '2MlwftbJttlt7bGVkFg3Nt' },
+    { n: 'Ocean Pkwy',         dur: '3:44', num: 14, c: '#FF6B35', u: SP + '7ka0hHys37fjKi7PLCz0jU' },
   ];
 
   // ── RING 3 — tracks 15–20 (counter-clockwise, warm rose) ──
   var RING3 = [
-    { n: 'Skipped Exit',      dur: '3:24', num: 15, c: '#E84855' },
-    { n: 'Still Driving',     dur: '3:59', num: 16, c: '#E84855' },
-    { n: 'Gas Station Coffee',dur: '3:03', num: 17, c: '#E84855' },
-    { n: 'Mileage',           dur: '3:33', num: 18, c: '#E84855' },
-    { n: 'Almost Morning',    dur: '2:33', num: 19, c: '#E84855' },
-    { n: 'Engine Off',        dur: '3:29', num: 20, c: '#FFB347' },
+    { n: 'Skipped Exit',       dur: '3:24', num: 15, c: '#E84855', u: SP + '0Mejm2NuXHrF9kJSxAZpFD' },
+    { n: 'Still Driving',      dur: '3:59', num: 16, c: '#E84855', u: SP + '63eU0coGgwFPZb7XwPprlK' },
+    { n: 'Gas Station Coffee', dur: '3:03', num: 17, c: '#E84855', u: SP + '1UsWrQ3R4WwBIk2ZrHRds7' },
+    { n: 'Mileage',            dur: '3:33', num: 18, c: '#E84855', u: SP + '6k7Nk6Gn1oDV8w15D0Km1l' },
+    { n: 'Almost Morning',     dur: '2:33', num: 19, c: '#E84855', u: SP + '2iZOcBh3mTECgNlg8MQRzg' },
+    { n: 'Engine Off',         dur: '3:29', num: 20, c: '#FFB347', u: SP + '69lBBhAVS3f9s9jdRqW7vq' },
   ];
 
   var ALBUM_URL = 'https://open.spotify.com/album/27HeS1tHoz3hNWdt6WIfy9';
+  var ALBUM_ART = '/album-art/afterglow.jpg';
 
   var orbit = document.getElementById('orbit');
   orbit.style.width    = W + 'px';
@@ -526,30 +558,29 @@
     + '<circle cx="55" cy="55" r="24" fill="#0a0604"/>'
     + '<circle cx="55" cy="55" r="22" fill="none" stroke="#FF8C42" stroke-width="1.5" opacity="0.7"/>'
     + '<circle cx="55" cy="55" r="18" fill="none" stroke="#FFB347" stroke-width="0.5" opacity="0.4"/>'
-    /* Sunset / glow icon in center */
-    + '<circle cx="55" cy="58" r="10" fill="#FF8C42" opacity="0.25"/>'
-    + '<path d="M42 58 Q48 44 55 42 Q62 44 68 58 Z" fill="#FF6B35" opacity="0.7"/>'
-    + '<line x1="42" y1="58" x2="68" y2="58" stroke="#FFB347" stroke-width="1" opacity="0.6"/>'
-    + '<line x1="44" y1="61" x2="66" y2="61" stroke="#FF8C42" stroke-width="0.5" opacity="0.3"/>'
-    + '<line x1="46" y1="64" x2="64" y2="64" stroke="#E84855" stroke-width="0.5" opacity="0.2"/>'
     + '<circle cx="55" cy="55" r="3" fill="#FF8C42" opacity="0.8"/>'
     + '</svg>';
   orbit.appendChild(vWrap);
 
-  // ── Album label (non-spinning, sits over vinyl center) ──
-  var lblSize = 36;
-  var lblWrap = document.createElement('div');
-  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#0a0604;z-index:8;display:flex;align-items:center;justify-content:center;';
+  // ── Album cover (non-spinning, clickable, sits over vinyl center) ──
+  var lblSize = 64;
+  var lblWrap = document.createElement('a');
+  lblWrap.href = ALBUM_URL;
+  lblWrap.target = '_blank';
+  lblWrap.rel = 'noopener';
+  lblWrap.setAttribute('aria-label', 'Afterglow — open full album on Spotify');
+  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#0a0604;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(255,140,66,0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
+  lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="Afterglow album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
   orbit.appendChild(lblWrap);
 
   // ── Planet factory ──
   function makePlanet(p) {
     var a = document.createElement('a');
-    a.href   = ALBUM_URL;
+    a.href   = p.u;
     a.target = '_blank';
-    a.rel    = 'noopener noreferrer';
+    a.rel    = 'noopener';
     a.className = 'planet';
-    a.setAttribute('aria-label', p.n);
+    a.setAttribute('aria-label', p.n + ' — open track on Spotify');
 
     var numStr = (p.num < 10 ? '0' : '') + p.num;
     var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
