@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:singles && vite build",
+    "build:singles": "node scripts/build-singles.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

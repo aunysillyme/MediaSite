@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singles — Auny</title>
+<meta name="description" content="Every single released by Auny — 23 tracks across the descent, the becoming, and the color series.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Singles — Auny">
+<meta property="og:description" content="Every single by Auny. 23 tracks. Color Series + standalone work.">
+<meta property="og:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+<meta property="og:url" content="https://auny.media/singles/">
+<meta property="og:site_name" content="auny.media">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:title" content="Singles — Auny">
+<meta name="twitter:description" content="23 tracks across the descent, the becoming, and the color series.">
+<meta name="twitter:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+
+<link rel="canonical" href="https://auny.media/singles/">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; }
+  html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.18; filter: hue-rotate(200deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(80px); }
+
+  .back-btn {
+    position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
+    padding: 0.45rem 1rem; border-radius: 8px;
+    background: rgba(3,3,8,0.82);
+    border: 1px solid rgba(var(--accent-rgb),0.33);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-decoration: none; text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 80px 32px 100px; position: relative; z-index: 4; }
+
+  .page-head { text-align: left; margin-bottom: 56px; max-width: 800px; }
+  .page-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+  }
+  .page-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(56px, 7vw, 112px); line-height: 0.92; letter-spacing: -2px;
+    margin-bottom: 18px;
+    text-shadow: 0 0 60px rgba(var(--accent-rgb),0.4);
+  }
+  .page-blurb {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 2.2vw, 30px); line-height: 1.35;
+    color: rgba(255,255,255,0.88); max-width: 680px;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.75;
+    margin-bottom: 6px;
+  }
+  .section-heading {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(24px, 2.4vw, 36px); line-height: 1.1; letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .section-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(15px, 1.4vw, 19px); color: rgba(255,255,255,0.65);
+    margin-bottom: 24px; max-width: 600px;
+  }
+
+  /* color series row */
+  .series-row {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  /* standard grid */
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    position: relative; display: block; text-decoration: none; color: inherit;
+    background: rgba(8,8,16,0.55); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px; overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform;
+  }
+  .card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.22); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  .card .cover { width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative; }
+  .card .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .card:hover .cover img { transform: scale(1.06); }
+  .card .body { padding: 14px 14px 16px; }
+  .card-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px;
+    line-height: 1.2; margin-bottom: 4px; color: #fff;
+  }
+  .card-meta {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.5);
+  }
+
+  .card.series .body { border-top: 1px solid var(--card-accent, var(--accent)); }
+  .card.series .card-title { color: var(--card-accent, #fff); }
+  .card.series .badge {
+    position: absolute; top: 10px; left: 10px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2);
+    padding: 3px 8px; border-radius: 999px; z-index: 2;
+  }
+
+  .footer-note {
+    margin-top: 80px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08);
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none !important; }
+    .card:hover { transform: none; }
+    .card .cover img { transition: none !important; }
+    .card:hover .cover img { transform: none; }
+  }
+
+  @media (max-width: 720px) {
+    .series-row { grid-template-columns: repeat(2, 1fr); }
+    .container { padding: 80px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<a class="back-btn" href="/links">← auny.media/links</a>
+
+<div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:20%;"></div>
+<div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
+
+<main class="container">
+  <header class="page-head">
+    <p class="page-label">✦ &nbsp; singles · 23 tracks</p>
+    <h1 class="page-title">Singles</h1>
+    <p class="page-blurb">The full vocal catalog. The Color Series at the top — a complete emotional atlas across five colors. Everything else, newest first.</p>
+  </header>
+
+  <section>
+    <p class="section-label">the color series · 5 of 5</p>
+    <h2 class="section-heading">A complete emotional atlas</h2>
+    <p class="section-sub">🖤 BLACK · 🩵 BLUE · 💛 YELLOW · ❤️ RED · 🧡 ORANGE — each color is a state. Together they map the descent and the return.</p>
+    <div class="series-row">
+{{SERIES_CARDS}}
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">all 23 singles · reverse-chronological</p>
+    <h2 class="section-heading">Everything</h2>
+    <p class="section-sub">PINK is set apart — not part of the series. Every other color was chosen or inhabited; pink was assigned and refused.</p>
+    <div class="grid">
+{{ALL_CARDS}}
+    </div>
+  </section>
+
+  <p class="footer-note">23 singles &nbsp;·&nbsp; auny &nbsp;·&nbsp; 11119560 Records DK</p>
+</main>
+
+</body>
+</html>

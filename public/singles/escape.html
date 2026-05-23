@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESCAPE — Auny</title>
+<meta name="description" content="ESCAPE by Auny — Choosing to move rather than run, driving as regulation ritual, carrying your own light. Released January 11, 2026.">
+
+<meta property="og:type" content="music.song">
+<meta property="og:title" content="ESCAPE — Auny">
+<meta property="og:description" content="Choosing to move rather than run, driving as regulation ritual, carrying your own light">
+<meta property="og:image" content="https://auny.media/album-art/singles/escape.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://auny.media/singles/escape">
+<meta property="og:site_name" content="auny.media">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="ESCAPE — Auny">
+<meta name="twitter:description" content="For the lighthouse I hold within">
+<meta name="twitter:image" content="https://auny.media/album-art/singles/escape.jpg">
+
+<link rel="canonical" href="https://auny.media/singles/escape">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #1E90FF;
+    --accent-rgb: 30,144,255;
+    --bg: #030308;
+    --text: #ffffff;
+    --text-soft: rgba(255,255,255,0.86);
+    --text-mute: rgba(255,255,255,0.55);
+  }
+  html, body { min-height: 100%; background: var(--bg); font-family: 'Space Mono', monospace; color: var(--text); }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.16; filter: hue-rotate(200deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(70px); }
+
+  .back-btn {
+    position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
+    padding: 0.45rem 1rem; border-radius: 8px;
+    background: rgba(3,3,8,0.82);
+    border: 1px solid rgba(var(--accent-rgb),0.33);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-decoration: none; text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
+
+  /* hero */
+  .hero {
+    width: 100%; min-height: 100vh; display: grid;
+    grid-template-columns: 1fr 1.1fr; align-items: center;
+    padding: 80px 64px 60px; position: relative; z-index: 4; gap: 40px;
+  }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; max-width: 540px; }
+  .hero-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+  }
+  .hero-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(56px, 7.5vw, 128px); line-height: 0.9;
+    letter-spacing: -2px; margin-bottom: 6px;
+    text-shadow: 0 0 60px rgba(var(--accent-rgb),0.5);
+  }
+  .hero-byline {
+    font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 36px;
+  }
+  .pull-quote {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(24px, 2.6vw, 38px); line-height: 1.2;
+    color: var(--text); margin-bottom: 40px; max-width: 520px;
+    text-shadow: 0 0 24px rgba(var(--accent-rgb),0.3);
+  }
+  .pull-quote::before { content: '\201C'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-right: 4px; }
+  .pull-quote::after  { content: '\201D'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-left: 4px; }
+
+  .meta-block {
+    display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.25); padding-left: 14px;
+  }
+  .meta-row { display: flex; flex-direction: column; gap: 1px; }
+  .meta-key {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.6;
+  }
+  .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
+
+  .listen-now {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(24px, 2.4vw, 34px); line-height: 1.2;
+    color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px;
+  }
+  .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
+
+  .series-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 16px; margin-bottom: 10px;
+  }
+  .series-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .chip:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .chip.this { border-color: var(--accent); color: var(--accent); }
+  .standalone-note {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.42); margin-top: 16px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.4); padding-left: 10px;
+  }
+
+  /* cover stage */
+  .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+  .cover-frame {
+    width: min(86%, 540px); aspect-ratio: 1/1; border-radius: 6px; overflow: hidden;
+    box-shadow: 0 0 80px rgba(var(--accent-rgb),0.45), 0 0 200px rgba(var(--accent-rgb),0.18), inset 0 0 0 1px rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vinyl-small {
+    position: absolute; right: -64px; bottom: -64px;
+    width: 180px; height: 180px;
+    animation: vspin 18s linear infinite;
+    z-index: 5;
+    filter: drop-shadow(0 0 24px rgba(var(--accent-rgb),0.5));
+  }
+  @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+  /* lyrics */
+  .lyrics-section { position: relative; z-index: 4; padding: 40px 24px 100px; display: flex; flex-direction: column; align-items: center; }
+  .lyrics-divider {
+    width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
+    color: rgba(var(--accent-rgb),0.6); text-transform: uppercase;
+  }
+  .lyrics-divider::before, .lyrics-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb),0.3), transparent);
+  }
+  .lyrics-body {
+    max-width: 640px; width: 100%;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 26px); line-height: 1.55;
+    color: var(--text-soft); text-align: center;
+    text-shadow: 0 0 18px rgba(var(--accent-rgb),0.18);
+    user-select: text;
+  }
+  .lyrics-body p { margin-bottom: 1.4em; }
+  .lyrics-body p:last-child { margin-bottom: 0; }
+  .lyrics-body .accent { color: var(--accent); }
+  .lyrics-footer {
+    margin-top: 64px;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.36);
+    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 720px;
+  }
+  .lyrics-footer span strong {
+    color: rgba(255,255,255,0.72); font-weight: 700; letter-spacing: 0;
+    text-transform: none; font-size: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl-small, .listen-now .arrow { animation: none !important; }
+  }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding: 80px 24px 40px; gap: 32px; }
+    .hero-left { order: 2; max-width: unset; }
+    .cover-stage { order: 1; }
+    .cover-frame { width: min(88%, 420px); }
+    .vinyl-small { width: 120px; height: 120px; right: -32px; bottom: -32px; }
+    .pull-quote { font-size: 22px; }
+    .lyrics-section { padding: 20px 20px 80px; }
+    .lyrics-body { font-size: 19px; line-height: 1.5; }
+    .lyrics-footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "ESCAPE",
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Auny",
+    "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI"
+  },
+  "datePublished": "2026-01-11",
+  "genre": "EDM · Lyrical · Dark",
+  "url": "https://auny.media/singles/escape",
+  "sameAs": [
+    "https://open.spotify.com/track/56BtuXtta9X8BYVBEH8UXm",
+    "https://distrokid.com/hyperfollow/auny1/escape"
+  ],
+  "image": "https://auny.media/album-art/singles/escape.jpg",
+  "recordingOf": {
+    "@type": "MusicComposition",
+    "name": "ESCAPE",
+    "lyrics": {
+      "@type": "CreativeWork",
+      "text": "I don't run.\nI escape.\nLeave the shadows behind\nThat don't deserve my grace.\n\nThe walls don't follow me\nonce the engine hums.\nIt's me and the road\n\nI'm Wandering\n\nIt's me and the road again\ndrive until the noise thins,\nuntil the shadows disappear\nfor the lighthouse I hold within\n\nI feel the fight.\nDarkness looses its grip.\nLaughter finds me\nit's quiet here.\n\ni find peace\n\nI know nothing's fixed\nBut the road reminds me..\nLight still exists\n\nI know now\nWhat I should've known then\n\nLight still exists\nAnd beyond the shadows\n\nI escape"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<a class="back-btn" href="/singles">← All Singles</a>
+
+<div class="bg-blob" style="width:380px;height:380px;background:rgba(var(--accent-rgb),0.16);top:-100px;left:30%;"></div>
+<div class="bg-blob" style="width:280px;height:280px;background:rgba(var(--accent-rgb),0.12);bottom:5%;right:5%;"></div>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-label">✦ &nbsp; single</p>
+    <h1 class="hero-title">ESCAPE</h1>
+    <p class="hero-byline">Auny &nbsp;·&nbsp; 2026</p>
+
+    <p class="pull-quote">For the lighthouse I hold within</p>
+
+    <div class="meta-block">
+      <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">January 11, 2026</span></div>
+      <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">EDM · Lyrical · Dark</span></div>
+      <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
+    </div>
+
+    <a class="listen-now" href="https://open.spotify.com/track/56BtuXtta9X8BYVBEH8UXm" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+
+    
+  </div>
+
+  <div class="cover-stage">
+    <div class="cover-frame">
+      <img src="/album-art/singles/escape.jpg" alt="ESCAPE cover art by Auny" width="640" height="640">
+    </div>
+    <div class="vinyl-small" aria-hidden="true">
+      <svg viewBox="0 0 180 180" width="180" height="180">
+        <circle cx="90" cy="90" r="88" fill="#050510"/>
+        <circle cx="90" cy="90" r="84" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="78" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="72" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="66" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="60" fill="none" stroke="#1E90FF" stroke-width="0.8" opacity="0.35"/>
+        <circle cx="90" cy="90" r="42" fill="#050510"/>
+        <circle cx="90" cy="90" r="40" fill="none" stroke="#1E90FF" stroke-width="1.5" opacity="0.7"/>
+        <circle cx="90" cy="90" r="4" fill="#1E90FF" opacity="0.8"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="lyrics-section" aria-label="Lyrics">
+  <div class="lyrics-divider">lyrics</div>
+  <article class="lyrics-body">
+    <p>I don't run.<br>I escape.<br>Leave the shadows behind<br>That don't deserve my grace.</p>
+    <p>The walls don't follow me<br>once the engine hums.<br>It's me and the road</p>
+    <p>I'm Wandering</p>
+    <p>It's me and the road again<br>drive until the noise thins,<br>until the shadows disappear<br><span class="accent">for the lighthouse I hold within</span></p>
+    <p>I feel the fight.<br>Darkness looses its grip.<br>Laughter finds me<br>it's quiet here.</p>
+    <p>i find peace</p>
+    <p>I know nothing's fixed<br>But the road reminds me..<br>Light still exists</p>
+    <p>I know now<br>What I should've known then</p>
+    <p>Light still exists<br>And beyond the shadows</p>
+    <p>I escape</p>
+  </article>
+  <div class="lyrics-footer">
+    <span><strong>Written &amp; Produced</strong> by Auny</span>
+    <span><strong>Released</strong> January 11, 2026</span>
+    <span><strong>©</strong> 11119560 Records DK</span>
+  </div>
+</section>
+
+</body>
+</html>
