@@ -534,6 +534,46 @@
   }
   requestAnimationFrame(loop);
 })();
+
+// ─── Slam-bubble hover: cards in horizontal rows push siblings outward ───
+(function () {
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (coarse || reduce) return;
+
+  function initRow(row) {
+    var cards = Array.prototype.slice.call(row.children).filter(function (el) {
+      return el.tagName === 'A' || el.tagName === 'DIV' || el.tagName === 'SPAN';
+    });
+    cards.forEach(function (card, i) {
+      card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      card.addEventListener('mouseenter', function () {
+        cards.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(1.18)';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, 28 - (dist - 1) * 8);
+            var shrink = Math.max(0.88, 1 - dist * 0.025);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      });
+    });
+  }
+
+  function init() {
+    document.querySelectorAll('.album-row, .series-row').forEach(initRow);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
 </script>
 
 
