@@ -43,6 +43,10 @@
   .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); }
 
 /* Global site nav — included on every static page. */
+#atmosphere-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+}
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
@@ -168,6 +172,7 @@
 </head>
 <body>
 
+<canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
 <nav class="site-nav" aria-label="Primary">
   <a class="brand" href="/" aria-label="Auny — home">
     <span class="brand-mark">A</span><span class="brand-word">UNY</span>
@@ -187,6 +192,105 @@
     <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
   </div>
 </nav>
+<script>
+(function () {
+  var canvas = document.getElementById('atmosphere-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var NOTES = ['♪','♫','♩','♬','♭','♮'];
+
+  function readAccent() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    return v || '#1E90FF';
+  }
+  var accent = readAccent();
+
+  var W = 0, H = 0;
+  function resize() {
+    W = canvas.width  = Math.floor(innerWidth  * dpr);
+    H = canvas.height = Math.floor(innerHeight * dpr);
+    canvas.style.width  = innerWidth  + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  resize();
+  addEventListener('resize', resize, { passive: true });
+
+  var COUNT = reduce ? 22 : 60;
+  var particles = [];
+  for (var i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (14 + Math.random() * 10) * dpr,
+      vx: (Math.random() - 0.5) * 0.4 * dpr,
+      vy: (Math.random() - 0.5) * 0.4 * dpr,
+      opacity: 0.22 + Math.random() * 0.28,
+      rotation: (Math.random() - 0.5) * 0.6,
+    });
+  }
+
+  var mouseX = -9999, mouseY = -9999;
+  if (!reduce && !coarse) {
+    addEventListener('mousemove', function (e) {
+      mouseX = e.clientX * dpr;
+      mouseY = e.clientY * dpr;
+    }, { passive: true });
+    addEventListener('mouseleave', function () { mouseX = mouseY = -9999; }, { passive: true });
+  }
+
+  var REPULSE_RADIUS = 170 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 1.4;
+
+  var running = true;
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(loop);
+  });
+
+  // Re-read accent when route/template changes; cheap to refresh occasionally
+  var accentTick = 0;
+
+  function loop() {
+    if (!running) return;
+    if ((accentTick++ & 31) === 0) accent = readAccent();
+    ctx.clearRect(0, 0, W, H);
+    for (var j = 0; j < particles.length; j++) {
+      var p = particles[j];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -24) p.x = W + 24;
+      if (p.x > W + 24) p.x = -24;
+      if (p.y < -24) p.y = H + 24;
+      if (p.y > H + 24) p.y = -24;
+      var dx = p.x - mouseX, dy = p.y - mouseY;
+      var dist2 = dx * dx + dy * dy;
+      var r2 = REPULSE_RADIUS * REPULSE_RADIUS;
+      if (dist2 < r2 && dist2 > 1) {
+        var dist = Math.sqrt(dist2);
+        var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
+        p.x += (dx / dist) * force * 6;
+        p.y += (dy / dist) * force * 6;
+      }
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = accent;
+      ctx.font = p.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.glyph, 0, 0);
+      ctx.restore();
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
 
 
 <div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:30%;"></div>
