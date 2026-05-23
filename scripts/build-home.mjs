@@ -59,6 +59,17 @@ function miniSeries(slug) {
     </a>`;
 }
 
+function miniPink() {
+  const p = SINGLES.find((x) => x.slug === 'pink');
+  return `    <a class="mini-card outlier" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
+      <div class="cover"><img src="/album-art/singles/${p.slug}.jpg" alt="${esc(p.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title" style="color:${p.accent.color}">${p.emoji} ${esc(p.title)}</div>
+        <div class="mini-card-meta">refused</div>
+      </div>
+    </a>`;
+}
+
 const html = render(HOME_TPL, {
   LATEST_URL: latestUrl,
   LATEST_COVER: latestCover,
@@ -72,7 +83,7 @@ const html = render(HOME_TPL, {
   MONTHLY_LISTENERS,
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
   SINGLE_TILES: SINGLES.slice(0, 5).map(miniSingle).join('\n'),
-  SERIES_TILES: COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug)).join('\n'),
+  SERIES_TILES: [...COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug)), miniPink()].join('\n'),
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });

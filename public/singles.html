@@ -164,8 +164,15 @@
 
   /* color series row */
   .series-row {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
     margin-bottom: 80px;
+  }
+  .card.outlier {
+    border: 1px dashed rgba(255,255,255,0.18);
+    background: rgba(8,8,16,0.4);
+  }
+  .card.outlier .card-meta {
+    font-style: italic; color: rgba(233,30,99,0.75);
   }
 
   /* standard grid */
@@ -471,6 +478,14 @@
         <div class="body">
           <div class="card-title">ORANGE</div>
           <div class="card-meta">January 15, 2026</div>
+        </div>
+      </a>
+      <a class="card series outlier" href="/singles/pink" style="--card-accent:#E91E63">
+        <span class="badge" style="color:#E91E63">🩷 refused</span>
+        <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">PINK</div>
+          <div class="card-meta">apart from the series</div>
         </div>
       </a>
     </div>

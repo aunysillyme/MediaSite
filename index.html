@@ -292,12 +292,20 @@
 
   /* Color Series row (smaller — tertiary section) */
   .series-row {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
     max-width: 920px; margin: 0 auto;
   }
   .series-row .mini-card .body { padding: 8px 10px 10px; }
   .series-row .mini-card-title { font-size: 12px; }
   .series-row .mini-card-meta { font-size: 8px; letter-spacing: 1.5px; }
+  .series-row .mini-card.outlier {
+    border: 1px dashed rgba(255,255,255,0.16);
+    background: rgba(8,8,16,0.4);
+  }
+  .series-row .mini-card.outlier .mini-card-meta {
+    font-style: italic; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(233,30,99,0.7);
+  }
 
   /* Platforms strip */
   .platforms {
@@ -343,11 +351,11 @@
     .hero { grid-template-columns: 1fr; gap: 28px; padding: 80px 24px 24px; }
     .hero-left { order: 2; }
     .featured { order: 1; padding: 0; }
-    .series-row { grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .series-row { grid-template-columns: repeat(6, 1fr); gap: 10px; }
     .section { padding: 60px 24px; }
   }
   @media (max-width: 540px) {
-    .series-row { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+    .series-row { grid-template-columns: repeat(6, 1fr); gap: 8px; }
     .mini-card-title { font-size: 13px; }
     .mini-card-meta { font-size: 8px; }
     .hero-stats { gap: 24px; }
@@ -576,6 +584,13 @@
       <div class="body">
         <div class="mini-card-title" style="color:#FF8C42">🧡 ORANGE</div>
         <div class="mini-card-meta">January 15, 2026</div>
+      </div>
+    </a>
+    <a class="mini-card outlier" href="/singles/pink" style="--card-accent:#E91E63">
+      <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title" style="color:#E91E63">🩷 PINK</div>
+        <div class="mini-card-meta">refused</div>
       </div>
     </a>
   </div>

@@ -131,9 +131,25 @@ ${badge}        <div class="cover"><img src="/album-art/singles/${single.slug}.j
       </a>`;
 }
 
+function pinkOutlierCard() {
+  const p = SINGLES.find((s) => s.slug === 'pink');
+  if (!p) return '';
+  return `      <a class="card series outlier" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
+        <span class="badge" style="color:${p.accent.color}">${p.emoji} refused</span>
+        <div class="cover"><img src="/album-art/singles/${p.slug}.jpg" alt="${escAttr(p.title)} cover" loading="lazy" width="640" height="640"></div>
+        <div class="body">
+          <div class="card-title">${escHtml(p.title)}</div>
+          <div class="card-meta">apart from the series</div>
+        </div>
+      </a>`;
+}
+
 function renderList() {
   const series = colorSeriesMembers();
-  const seriesCards = series.map((s, i) => cardHtml(s, { badgeText: `${s.emoji} ${i + 1}/5` })).join('\n');
+  const seriesCards = [
+    ...series.map((s, i) => cardHtml(s, { badgeText: `${s.emoji} ${i + 1}/5` })),
+    pinkOutlierCard(),
+  ].join('\n');
   const allCards = SINGLES.map((s) => cardHtml(s)).join('\n');
   return LIST_TPL
     .replaceAll('{{SERIES_CARDS}}', seriesCards)
