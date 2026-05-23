@@ -711,6 +711,61 @@
     });
   }
 
+  // Grid version: 2D radial push (handles wrap layouts correctly)
+  function initGrid(grid, opts) {
+    opts = opts || {};
+    var scale     = opts.scale     || 1.15;
+    var pushMax   = opts.pushMax   || 26;     // strongest push, px
+    var radius    = opts.radius    || 340;    // beyond this, no push
+    var skipDisabled = opts.skipDisabled || false;
+
+    var cards = Array.prototype.slice.call(grid.children).filter(function (el) {
+      if (el.tagName !== 'A' && el.tagName !== 'DIV' && el.tagName !== 'SPAN') return false;
+      if (skipDisabled && el.classList.contains('disabled')) return false;
+      return true;
+    });
+
+    function centers() {
+      cards.forEach(function (c) {
+        var r = c.getBoundingClientRect();
+        c._cx = r.left + r.width  / 2;
+        c._cy = r.top  + r.height / 2;
+      });
+    }
+    centers();
+    addEventListener('resize', centers, { passive: true });
+
+    cards.forEach(function (card) {
+      card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      card.addEventListener('mouseenter', function () {
+        centers();
+        var hx = card._cx, hy = card._cy;
+        cards.forEach(function (other) {
+          if (other === card) {
+            other.style.transform = 'scale(' + scale + ')';
+            other.style.zIndex = '10';
+          } else {
+            var dx = other._cx - hx, dy = other._cy - hy;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 1 || dist > radius) {
+              other.style.transform = '';
+              other.style.zIndex = '';
+              return;
+            }
+            var t = 1 - dist / radius;       // 0..1, 1 closest
+            var push = t * pushMax;
+            var shrink = Math.max(0.94, 1 - t * 0.04);
+            other.style.transform = 'translate(' + (dx / dist) * push + 'px,' + (dy / dist) * push + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      });
+    });
+  }
+
   function init() {
     document.querySelectorAll('.album-row, .series-row').forEach(function (r) { initRow(r); });
     document.querySelectorAll('.nav-links').forEach(function (r) {
@@ -719,6 +774,7 @@
     document.querySelectorAll('.nav-ctas').forEach(function (r) {
       initRow(r, { scale: 1.18, pushBase: 12, falloff: 4, shrinkPer: 0.02, minShrink: 0.92 });
     });
+    document.querySelectorAll('.grid').forEach(function (g) { initGrid(g); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
