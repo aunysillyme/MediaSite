@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albums — Auny</title>
+<meta name="description" content="Every instrumental album by Auny. 7 albums spanning drive music, focus, study, ambient and dark techno.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Albums — Auny">
+<meta property="og:description" content="Seven instrumental albums. Drive music. Focus. Atmospheric depth. Dark techno.">
+<meta property="og:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+<meta property="og:url" content="https://auny.media/albums">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:title" content="Albums — Auny">
+<meta name="twitter:description" content="Seven instrumental albums.">
+<meta name="twitter:image" content="https://auny.media/images/link-preview-thumbnail-1200x630.png">
+
+<link rel="canonical" href="https://auny.media/albums">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; --nav-accent: #1E90FF; }
+  html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.18; filter: hue-rotate(220deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); }
+
+/* Global site nav — included on every static page. */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-spotify {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s;
+}
+.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+
+@media (max-width: 720px) {
+  .site-nav { padding: 12px 18px; }
+  .site-nav .nav-links { gap: 16px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 100px 32px 100px; position: relative; z-index: 4; }
+  .page-head { margin-bottom: 56px; max-width: 760px; }
+  .page-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px; }
+  .page-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: clamp(56px, 7vw, 112px); line-height: 0.92; letter-spacing: -2px; margin-bottom: 18px; text-shadow: 0 0 60px rgba(var(--accent-rgb),0.4); }
+  .page-blurb { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.35; color: rgba(255,255,255,0.88); max-width: 680px; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .album-card {
+    position: relative; display: block; text-decoration: none; color: inherit;
+    background: rgba(8,8,16,0.55); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px; overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .album-card:hover { transform: translateY(-6px); border-color: var(--card-accent, rgba(255,255,255,0.22)); box-shadow: 0 16px 60px rgba(0,0,0,0.55), 0 0 60px rgba(var(--card-accent-rgb, 255,255,255), 0.15); }
+  .album-card .cover { width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative; }
+  .album-card .cover img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .album-card:hover .cover img { transform: scale(1.05); }
+  .album-card .badge {
+    position: absolute; top: 12px; left: 12px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 4px 10px; border-radius: 999px;
+    background: rgba(0,0,0,0.66); color: var(--card-accent, #fff);
+    border: 1px solid var(--card-accent, rgba(255,255,255,0.2));
+  }
+  .album-card .body { padding: 18px 18px 20px; border-top: 1px solid var(--card-accent, rgba(255,255,255,0.08)); }
+  .album-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; color: #fff; margin-bottom: 6px; }
+  .album-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+  .album-card-blurb { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: 15px; line-height: 1.35; color: rgba(255,255,255,0.72); }
+
+  .footer-note { margin-top: 80px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .album-card, .album-card .cover img { transition: none !important; }
+    .album-card:hover { transform: none; }
+    .album-card:hover .cover img { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Links</a>
+  </div>
+  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+</nav>
+
+
+<div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:30%;"></div>
+<div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
+
+<main class="container">
+  <header class="page-head">
+    <p class="page-label">✦ &nbsp; albums · 7 instrumental records</p>
+    <h1 class="page-title">Albums</h1>
+    <p class="page-blurb">Two parallel bodies of work — albums are instrumental, singles are vocal. Each one a complete world.</p>
+  </header>
+
+  <div class="grid">
+      <a class="album-card" href="/albums/midnight-glitch" style="--card-accent:#50FA7B;--card-accent-rgb:80,250,123">
+        <div class="cover"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" loading="lazy" width="640" height="640">
+          <span class="badge">23 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Midnight Glitch</div>
+          <div class="album-card-meta">May 6, 2026 · Hard Techno</div>
+          <div class="album-card-blurb">High-intensity. Built for coding, gaming, deep focus.</div>
+        </div>
+      </a>
+      <a class="album-card" href="/albums/graveyard-echoes" style="--card-accent:#4FA0B5;--card-accent-rgb:79,160,181">
+        <div class="cover"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" loading="lazy" width="640" height="640">
+          <span class="badge">21 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Graveyard Echoes</div>
+          <div class="album-card-meta">April 20, 2026 · Instrumental</div>
+          <div class="album-card-blurb">Pressure, depth, things that don't come back to the surface.</div>
+        </div>
+      </a>
+      <a class="album-card" href="/albums/afterglow" style="--card-accent:#FF8C42;--card-accent-rgb:255,140,66">
+        <div class="cover"><img src="/album-art/afterglow.jpg" alt="Afterglow cover" loading="lazy" width="640" height="640">
+          <span class="badge">20 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Afterglow</div>
+          <div class="album-card-meta">March 30, 2026 · Instrumental</div>
+          <div class="album-card-blurb">Drive music for nights that don't resolve. 20 tracks. 1 hr 5 min.</div>
+        </div>
+      </a>
+      <a class="album-card" href="/albums/blue-lightning" style="--card-accent:#1E90FF;--card-accent-rgb:30,144,255">
+        <div class="cover"><img src="/album-art/blue-lightning.jpg" alt="Blue Lightning cover" loading="lazy" width="640" height="640">
+          <span class="badge">26 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Blue Lightning</div>
+          <div class="album-card-meta">March 25, 2026 · Instrumental</div>
+          <div class="album-card-blurb">Electric atmospheric instrumental. 26 tracks. 1 hr 28 min.</div>
+        </div>
+      </a>
+      <a class="album-card" href="/albums/focus-with-me" style="--card-accent:#E8B86D;--card-accent-rgb:232,184,109">
+        <div class="cover"><img src="/album-art/focus-with-me.jpg" alt="Focus with Me cover" loading="lazy" width="640" height="640">
+          <span class="badge">24 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Focus with Me</div>
+          <div class="album-card-meta">March 14, 2026 · Instrumental</div>
+          <div class="album-card-blurb">A morning-to-night focus suite. 24 tracks across paired moods.</div>
+        </div>
+      </a>
+      <a class="album-card" href="/albums/1111" style="--card-accent:#9B7EDE;--card-accent-rgb:155,126,222">
+        <div class="cover"><img src="/album-art/1111.jpg" alt="11:11 cover" loading="lazy" width="640" height="640">
+          <span class="badge">12 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">11:11</div>
+          <div class="album-card-meta">March 9, 2026 · Instrumental</div>
+          <div class="album-card-blurb">For the hours that bookend a day — 11:11 AM to 11:11 PM and the stillness around both.</div>
+        </div>
+      </a>
+      <a class="album-card" href="/albums/work-with-me" style="--card-accent:#FF8FA3;--card-accent-rgb:255,143,163">
+        <div class="cover"><img src="/album-art/work-with-me.jpg" alt="Work with Me cover" loading="lazy" width="640" height="640">
+          <span class="badge">10 tracks</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Work with Me</div>
+          <div class="album-card-meta">February 24, 2026 · Instrumental</div>
+          <div class="album-card-blurb">Coworking energy. Coffee, sunrise, momentum, sunset.</div>
+        </div>
+      </a>
+  </div>
+
+  <p class="footer-note">7 albums &nbsp;·&nbsp; auny &nbsp;·&nbsp; 11119560 Records DK</p>
+</main>
+
+</body>
+</html>

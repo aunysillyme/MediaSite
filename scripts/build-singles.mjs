@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES_ORDER, colorSeriesMembers } from '../src/data/singles.js';
+import { navFor, NAV_CSS } from './_lib.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8');
@@ -105,6 +106,8 @@ function renderSingle(single) {
     SERIES_BLOCK: seriesBlockFor(single),
     LYRICS_HTML: lyricsToStanzas(single.lyrics, single.anchorLyric),
     LYRICS_JSON: lyricsToJsonText(single.lyrics),
+    NAV: navFor('singles'),
+    NAV_CSS: NAV_CSS,
   };
   return Object.entries(replacements).reduce(
     (html, [key, val]) => html.replaceAll(`{{${key}}}`, val),
@@ -134,7 +137,9 @@ function renderList() {
   const allCards = SINGLES.map((s) => cardHtml(s)).join('\n');
   return LIST_TPL
     .replaceAll('{{SERIES_CARDS}}', seriesCards)
-    .replaceAll('{{ALL_CARDS}}', allCards);
+    .replaceAll('{{ALL_CARDS}}', allCards)
+    .replaceAll('{{NAV}}', navFor('singles'))
+    .replaceAll('{{NAV_CSS}}', NAV_CSS);
 }
 
 // ─── Write files ─────────────────────────────────────────────────────────────

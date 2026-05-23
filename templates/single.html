@@ -38,11 +38,13 @@
   :root {
     --accent: {{ACCENT_COLOR}};
     --accent-rgb: {{ACCENT_RGB}};
+    --nav-accent: {{ACCENT_COLOR}};
     --bg: #030308;
     --text: #ffffff;
     --text-soft: rgba(255,255,255,0.86);
     --text-mute: rgba(255,255,255,0.55);
   }
+{{NAV_CSS}}
   html, body { min-height: 100%; background: var(--bg); font-family: 'Space Mono', monospace; color: var(--text); }
   body::before {
     content:''; position:fixed; inset:0;
@@ -73,7 +75,7 @@
   .hero {
     width: 100%; min-height: 100vh; display: grid;
     grid-template-columns: 1fr 1.1fr; align-items: center;
-    padding: 80px 64px 60px; position: relative; z-index: 4; gap: 40px;
+    padding: 110px 64px 60px; position: relative; z-index: 4; gap: 40px;
   }
   .hero-left { display: flex; flex-direction: column; justify-content: center; max-width: 540px; }
   .hero-label {
@@ -236,7 +238,7 @@
 </head>
 <body>
 
-<a class="back-btn" href="/singles">← All Singles</a>
+{{NAV}}
 
 <div class="bg-blob" style="width:380px;height:380px;background:rgba(var(--accent-rgb),0.16);top:-100px;left:30%;"></div>
 <div class="bg-blob" style="width:280px;height:280px;background:rgba(var(--accent-rgb),0.12);bottom:5%;right:5%;"></div>

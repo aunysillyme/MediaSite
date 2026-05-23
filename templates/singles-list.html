@@ -29,8 +29,9 @@
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; }
+  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; --nav-accent: #1E90FF; }
   html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; }
+{{NAV_CSS}}
   body::before {
     content:''; position:fixed; inset:0;
     background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
@@ -56,7 +57,7 @@
   }
   .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
 
-  .container { max-width: 1280px; margin: 0 auto; padding: 80px 32px 100px; position: relative; z-index: 4; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 110px 32px 100px; position: relative; z-index: 4; }
 
   .page-head { text-align: left; margin-bottom: 56px; max-width: 800px; }
   .page-label {
@@ -154,7 +155,7 @@
 </head>
 <body>
 
-<a class="back-btn" href="/links">← auny.media/links</a>
+{{NAV}}
 
 <div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:20%;"></div>
 <div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>

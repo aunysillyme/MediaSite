@@ -29,8 +29,60 @@
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; }
+  :root { --accent: #1E90FF; --accent-rgb: 30,144,255; --nav-accent: #1E90FF; }
   html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; }
+/* Global site nav — included on every static page. */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-spotify {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s;
+}
+.site-nav .nav-spotify:hover { color: #1DB954; border-color: #1DB954; }
+
+@media (max-width: 720px) {
+  .site-nav { padding: 12px 18px; }
+  .site-nav .nav-links { gap: 16px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-spotify { padding: 5px 10px; font-size: 9px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
   body::before {
     content:''; position:fixed; inset:0;
     background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
@@ -56,7 +108,7 @@
   }
   .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
 
-  .container { max-width: 1280px; margin: 0 auto; padding: 80px 32px 100px; position: relative; z-index: 4; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 110px 32px 100px; position: relative; z-index: 4; }
 
   .page-head { text-align: left; margin-bottom: 56px; max-width: 800px; }
   .page-label {
@@ -154,7 +206,18 @@
 </head>
 <body>
 
-<a class="back-btn" href="/links">← auny.media/links</a>
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Links</a>
+  </div>
+  <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+</nav>
+
 
 <div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:20%;"></div>
 <div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
