@@ -208,22 +208,32 @@
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (coarse || reduce) return;
 
-  function initRow(row) {
+  function initRow(row, opts) {
+    opts = opts || {};
+    var scale     = opts.scale     || 1.18;
+    var pushBase  = opts.pushBase  || 28;
+    var falloff   = opts.falloff   || 8;
+    var shrinkPer = opts.shrinkPer || 0.025;
+    var minShrink = opts.minShrink || 0.88;
+    var skipDisabled = opts.skipDisabled || false;
+
     var cards = Array.prototype.slice.call(row.children).filter(function (el) {
-      return el.tagName === 'A' || el.tagName === 'DIV' || el.tagName === 'SPAN';
+      if (el.tagName !== 'A' && el.tagName !== 'DIV' && el.tagName !== 'SPAN') return false;
+      if (skipDisabled && el.classList.contains('disabled')) return false;
+      return true;
     });
     cards.forEach(function (card, i) {
       card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
       card.addEventListener('mouseenter', function () {
         cards.forEach(function (other, j) {
           if (j === i) {
-            other.style.transform = 'scale(1.18)';
+            other.style.transform = 'scale(' + scale + ')';
             other.style.zIndex = '10';
           } else {
             var dir = j > i ? 1 : -1;
             var dist = Math.abs(j - i);
-            var pushPx = dir * Math.max(0, 28 - (dist - 1) * 8);
-            var shrink = Math.max(0.88, 1 - dist * 0.025);
+            var pushPx = dir * Math.max(0, pushBase - (dist - 1) * falloff);
+            var shrink = Math.max(minShrink, 1 - dist * shrinkPer);
             other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
             other.style.zIndex = '';
           }
@@ -236,7 +246,13 @@
   }
 
   function init() {
-    document.querySelectorAll('.album-row, .series-row').forEach(initRow);
+    document.querySelectorAll('.album-row, .series-row').forEach(function (r) { initRow(r); });
+    document.querySelectorAll('.nav-links').forEach(function (r) {
+      initRow(r, { scale: 1.28, pushBase: 18, falloff: 5, shrinkPer: 0.02, minShrink: 0.9, skipDisabled: true });
+    });
+    document.querySelectorAll('.nav-ctas').forEach(function (r) {
+      initRow(r, { scale: 1.18, pushBase: 12, falloff: 4, shrinkPer: 0.02, minShrink: 0.92 });
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
