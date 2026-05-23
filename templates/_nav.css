@@ -4,61 +4,26 @@
   pointer-events: none;
 }
 
-/* Custom cursor — opted in via <html class="custom-cursor-active"> from JS */
-.custom-cursor-active,
-.custom-cursor-active a,
-.custom-cursor-active button,
-.custom-cursor-active [role="button"],
-.custom-cursor-active .mini-card,
-.custom-cursor-active .card,
-.custom-cursor-active .platform {
-  cursor: none;
-}
-.custom-cursor-active input,
-.custom-cursor-active textarea,
-.custom-cursor-active [contenteditable="true"] {
-  cursor: text;
-}
-#custom-cursor {
-  position: fixed; top: 0; left: 0; z-index: 9999;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.2s ease;
-}
-#custom-cursor .cursor-core,
-#custom-cursor .cursor-halo {
-  position: fixed; top: 0; left: 0;
+/* Cursor spotlight — soft accent glow that follows the cursor */
+#cursor-spotlight {
+  position: fixed; top: 0; left: 0; z-index: 2;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
   border-radius: 50%;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle,
+    rgba(var(--accent-rgb, 30,144,255), 0.14) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.06) 28%,
+    transparent 65%);
   will-change: transform;
 }
-#custom-cursor .cursor-core {
-  width: 8px; height: 8px; margin: -4px 0 0 -4px;
-  background: var(--accent, #1E90FF);
-  box-shadow:
-    0 0 10px rgba(var(--accent-rgb, 30,144,255), 0.9),
-    0 0 26px rgba(var(--accent-rgb, 30,144,255), 0.5);
-  transition: width 0.2s ease, height 0.2s ease, margin 0.2s ease;
-}
-#custom-cursor .cursor-halo {
-  width: 30px; height: 30px; margin: -15px 0 0 -15px;
-  border: 1px solid rgba(var(--accent-rgb, 30,144,255), 0.45);
-  opacity: 0.7;
-  transition: width 0.25s ease, height 0.25s ease, margin 0.25s ease, opacity 0.2s, border-color 0.2s;
-}
-#custom-cursor.hover .cursor-core {
-  width: 12px; height: 12px; margin: -6px 0 0 -6px;
-}
-#custom-cursor.hover .cursor-halo {
-  width: 48px; height: 48px; margin: -24px 0 0 -24px;
-  opacity: 1; border-color: rgba(var(--accent-rgb, 30,144,255), 0.8);
-}
 @media (pointer: coarse) {
-  #custom-cursor { display: none; }
+  #cursor-spotlight { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #custom-cursor .cursor-core,
-  #custom-cursor .cursor-halo { transition: none; }
+  #cursor-spotlight { display: none; }
 }
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
