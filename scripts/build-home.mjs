@@ -25,6 +25,9 @@ const latest = latestIsAlbum ? latestAlbum : latestSingle;
 const latestUrl = latestIsAlbum ? `/albums/${latest.slug}` : `/singles/${latest.slug}`;
 const latestCover = latestIsAlbum ? `/album-art/${latest.slug}.jpg` : `/album-art/singles/${latest.slug}.jpg`;
 const latestType = latestIsAlbum ? 'Album' : 'Single';
+const latestSpotifyUrl = latestIsAlbum
+  ? `https://open.spotify.com/album/${latest.spotifyAlbumId}`
+  : `https://open.spotify.com/track/${latest.spotifyTrackId}`;
 const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
 
 function miniAlbum(a) {
@@ -74,6 +77,7 @@ const html = render(HOME_TPL, {
   LATEST_URL: latestUrl,
   LATEST_COVER: latestCover,
   LATEST_TYPE: latestType,
+  LATEST_SPOTIFY_URL: latestSpotifyUrl,
   LATEST_TITLE: esc(latest.title),
   LATEST_DATE: esc(latest.releaseDisplay),
   LATEST_BLURB: esc(latestBlurb),

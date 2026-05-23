@@ -117,7 +117,11 @@
   .hero-tagline {
     font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
     font-size: clamp(18px, 2vw, 28px); line-height: 1.25;
-    color: rgba(255,255,255,0.92); margin-bottom: 24px; max-width: 540px;
+    color: rgba(255,255,255,0.92); margin-bottom: 14px; max-width: 540px;
+  }
+  .hero-subline {
+    font-family: 'Space Mono', monospace; font-size: 13px; line-height: 1.5;
+    color: rgba(255,255,255,0.7); margin-bottom: 24px; max-width: 540px;
   }
   .hero-stats {
     display: flex; gap: 32px; margin-bottom: 26px; flex-wrap: wrap;
@@ -128,8 +132,8 @@
     color: var(--accent); line-height: 1;
   }
   .stat-label {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 4px;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.75); margin-top: 4px;
   }
   .hero-cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
   .cta {
@@ -154,10 +158,44 @@
   }
   .featured-card {
     display: block; text-decoration: none; color: inherit;
-    width: min(100%, 360px);
+    width: min(100%, 440px);
     transition: transform 0.3s ease;
+    position: relative;
   }
   .featured-card:hover { transform: translateY(-6px); }
+  .featured-play-overlay {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.25s ease; pointer-events: none; z-index: 6;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(3,3,8,0.45) 100%);
+  }
+  .featured-card:hover .featured-play-overlay { opacity: 1; }
+  .featured-play-overlay .play-circle {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: #1DB954; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(29,185,84,0.5);
+  }
+  .featured-play-overlay .play-circle svg { width: 28px; height: 28px; margin-left: 4px; }
+  .featured-cta-row {
+    display: flex; gap: 10px; margin-top: 14px; align-items: center; flex-wrap: wrap;
+  }
+  .featured-cta-spotify {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #1DB954; color: #030308;
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700;
+    letter-spacing: 2.5px; text-transform: uppercase;
+    padding: 11px 18px; border-radius: 999px; text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .featured-cta-spotify svg { width: 16px; height: 16px; }
+  .featured-cta-spotify:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(29,185,84,0.45); }
+  .featured-cta-details {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.65); text-decoration: none;
+    padding: 11px 4px; transition: color 0.2s;
+  }
+  .featured-cta-details:hover { color: #fff; }
   .featured-cover {
     position: relative;
     width: 100%; aspect-ratio: 1/1; border-radius: 10px; overflow: visible;
@@ -181,13 +219,13 @@
   .featured-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .featured-meta { margin-top: 18px; }
   .featured-tag {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 4px;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
   }
-  .featured-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.1; margin-bottom: 4px; }
+  .featured-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.1; margin-bottom: 4px; }
   .featured-sub {
     font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
-    font-size: 17px; color: rgba(255,255,255,0.75);
+    font-size: 18px; color: rgba(255,255,255,0.82);
   }
 
   /* Section heading */
@@ -199,6 +237,11 @@
   .section-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 30px; flex-wrap: wrap; gap: 16px; }
   .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: var(--accent); text-transform: uppercase; opacity: 0.75; margin-bottom: 8px; }
   .section-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: clamp(36px, 4.2vw, 56px); line-height: 1; letter-spacing: -1px; }
+  .section-sub {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(16px, 1.5vw, 20px); color: rgba(255,255,255,0.7);
+    margin-top: 10px; max-width: 600px;
+  }
   .section-link { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); text-decoration: none; }
   .section-link:hover { text-decoration: underline; }
 
@@ -218,7 +261,7 @@
   .mini-card:hover .cover img { transform: scale(1.05); }
   .mini-card .body { padding: 12px 14px 14px; }
   .mini-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; color: #fff; margin-bottom: 2px; }
-  .mini-card-meta { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.62); }
+  .mini-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 
   /* Color Series row (smaller — tertiary section) */
   .series-row {
@@ -227,7 +270,7 @@
   }
   .series-row .mini-card .body { padding: 8px 10px 10px; }
   .series-row .mini-card-title { font-size: 12px; }
-  .series-row .mini-card-meta { font-size: 8px; letter-spacing: 1.5px; }
+  .series-row .mini-card-meta { font-size: 9px; letter-spacing: 1.5px; }
 
   /* Platforms strip */
   .platforms {
@@ -256,11 +299,21 @@
     border-top: 1px solid rgba(255,255,255,0.08);
     padding: 36px 32px 60px; margin-top: 40px;
     text-align: center; position: relative; z-index: 4;
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.58);
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.65);
   }
-  .footer a { color: inherit; text-decoration: none; }
-  .footer a:hover { color: var(--accent); }
+  .footer-links {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+    margin-bottom: 18px;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-meta { color: rgba(255,255,255,0.5); font-size: 10px; }
+  .footer-meta a { color: rgba(255,255,255,0.65); text-decoration: none; }
+  .footer-meta a:hover { color: var(--accent); }
 
   @media (prefers-reduced-motion: reduce) {
     .cta, .featured-card, .mini-card, .mini-card .cover img,
@@ -298,6 +351,7 @@
     <p class="hero-label">✦ &nbsp; auny · music · lyrics · the lighthouse</p>
     <h1 class="hero-name">AUNY</h1>
     <p class="hero-tagline">Music for the in-between hours. Drive music. Focus. The void. The warm light that survives it.</p>
+    <p class="hero-subline">Dark EDM, lo-fi, ambient instrumentals and vocal singles. For late nights, long drives, focus, and feeling seen.</p>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">{{TOTAL_ALBUMS}}</span><span class="stat-label">Albums</span></div>
       <div class="stat"><span class="stat-num">{{TOTAL_SINGLES}}</span><span class="stat-label">Singles</span></div>
@@ -312,14 +366,28 @@
 
   <div class="featured">
     <span class="featured-label">latest release</span>
-    <a class="featured-card" href="{{LATEST_URL}}">
-      <div class="featured-cover"><img src="{{LATEST_COVER}}" alt="{{LATEST_TITLE}} cover" width="640" height="640"></div>
+    <div class="featured-card">
+      <a class="featured-cover-link" href="{{LATEST_URL}}" aria-label="View {{LATEST_TITLE}} details">
+        <div class="featured-cover">
+          <img src="{{LATEST_COVER}}" alt="{{LATEST_TITLE}} cover" width="640" height="640">
+          <div class="featured-play-overlay" aria-hidden="true">
+            <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+      </a>
       <div class="featured-meta">
         <p class="featured-tag">{{LATEST_TYPE}} · {{LATEST_DATE}}</p>
         <h2 class="featured-title">{{LATEST_TITLE}}</h2>
         <p class="featured-sub">{{LATEST_BLURB}}</p>
+        <div class="featured-cta-row">
+          <a class="featured-cta-spotify" href="{{LATEST_SPOTIFY_URL}}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.42c-.18.3-.57.4-.87.21-2.39-1.46-5.4-1.79-8.94-.98-.34.08-.69-.13-.77-.47-.08-.34.13-.69.47-.77 3.88-.89 7.21-.51 9.9 1.13.3.18.4.58.21.88zm1.23-2.72c-.23.38-.72.49-1.1.26-2.74-1.68-6.92-2.17-10.16-1.18-.42.12-.86-.11-.98-.53-.12-.42.11-.86.53-.98 3.71-1.13 8.32-.58 11.46 1.34.38.23.49.72.25 1.09zm.1-2.84C14.6 8.86 9.4 8.7 6.34 9.63c-.5.15-1.02-.13-1.17-.63-.15-.5.13-1.02.63-1.17 3.52-1.07 9.27-.86 12.99 1.34.45.27.6.85.33 1.3-.27.45-.85.6-1.3.33z"/></svg>
+            Play on Spotify
+          </a>
+          <a class="featured-cta-details" href="{{LATEST_URL}}">details →</a>
+        </div>
       </div>
-    </a>
+    </div>
   </div>
 </section>
 
@@ -386,6 +454,7 @@
     <div>
       <p class="section-label">✦ &nbsp; color series · 5 of 5</p>
       <h2 class="section-title">A complete emotional atlas</h2>
+      <p class="section-sub">A vocal-single series. One color per state. Together they map the descent and the way back.</p>
     </div>
     <a class="section-link" href="/singles">all {{TOTAL_SINGLES}} singles →</a>
   </div>
@@ -395,7 +464,16 @@
 </section>
 
 <footer class="footer">
-  © 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="/links">all links</a>
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/auny/1880511675" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://music.amazon.com/artists/B0GDL275G8/auny" target="_blank" rel="noopener">Amazon Music</a>
+    <a href="https://www.youtube.com/@aunysillyme" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno</a>
+    <a href="/links">all platforms</a>
+    <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">Contact</a>
+  </div>
+  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
 </footer>
 
 </body>
