@@ -4,7 +4,7 @@
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
 import { tpl, navFor, esc, writeOut, render, NAV_CSS } from './_lib.mjs';
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
@@ -12,9 +12,10 @@ import { dirname } from 'node:path';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const HOME_TPL = tpl('home.html');
 
-// Monthly Spotify listeners — manual until we wire up Spotify for Artists API.
-// Update this one number when the stat moves materially.
-const MONTHLY_LISTENERS = '2,249';
+// Monthly Spotify listeners — read from src/data/stats.json, which is auto-updated
+// weekly by .github/workflows/update-stats.yml (scrapes Spotify's Pathfinder API).
+const STATS = JSON.parse(readFileSync(join(root, 'src/data/stats.json'), 'utf8'));
+const MONTHLY_LISTENERS = STATS.spotify.monthlyListeners.toLocaleString('en-US');
 
 // Pick the most recent release across albums + singles
 const latestAlbum  = ALBUMS[0];

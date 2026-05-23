@@ -10,6 +10,7 @@
     "build:singles": "node scripts/build-singles.mjs",
     "build:albums": "node scripts/build-albums.mjs",
     "build:home": "node scripts/build-home.mjs",
+    "stats:fetch": "node scripts/update-stats.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
