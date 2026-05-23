@@ -28,6 +28,42 @@
 
   .left { display: flex; flex-direction: column; justify-content: center; height: 100%; max-width: 540px; }
 
+  /* lyrics section */
+  .lyrics-section { position: relative; z-index: 4; padding: 40px 64px 100px; display: flex; flex-direction: column; align-items: center; }
+  .lyrics-divider {
+    width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px; color: rgba(30,144,255,0.6); text-transform: uppercase;
+  }
+  .lyrics-divider::before, .lyrics-divider::after {
+    content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(30,144,255,0.3), transparent);
+  }
+  .lyrics-body {
+    max-width: 640px;
+    width: 100%;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 26px);
+    line-height: 1.55;
+    color: rgba(255,255,255,0.86);
+    text-align: center;
+    text-shadow: 0 0 18px rgba(0,191,255,0.18);
+    user-select: text;
+  }
+  .lyrics-body p { margin-bottom: 1.4em; }
+  .lyrics-body p:last-child { margin-bottom: 0; }
+  .lyrics-body .accent { color: #1E90FF; font-style: italic; }
+  .lyrics-footer {
+    margin-top: 64px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center;
+  }
+  .lyrics-footer span strong { color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 0; text-transform: none; font-size: 12px; }
+
   .hero-label  { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px; color: #00BFFF; text-transform: uppercase; opacity: 0.6; margin-bottom: 14px; }
   .hero-name   { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: clamp(56px, 7.5vw, 128px); color: #fff; line-height: 0.9; letter-spacing: -2px; margin-bottom: 6px; text-shadow: 0 0 60px rgba(30,144,255,0.5); }
   .hero-subtitle { font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px; color: #1E90FF; text-transform: uppercase; opacity: 0.6; margin-bottom: 36px; }
@@ -129,5 +165,64 @@
     </div>
   </div>
 </div>
+
+<section class="lyrics-section" aria-label="Lyrics">
+  <div class="lyrics-divider">lyrics</div>
+  <article class="lyrics-body" itemscope itemtype="https://schema.org/MusicRecording">
+    <meta itemprop="name" content="BLUE">
+    <meta itemprop="byArtist" content="Auny">
+    <p>
+      Blue is the color of ice<br>
+      It's the color of sky<br>
+      Blue is ocean waves<br>
+      The color of storms<br>
+      Blue is the light that glows<br>
+      When lightning strikes
+    </p>
+    <p>
+      Blue is calm<br>
+      Blue is cold<br>
+      <span class="accent">Blue is the color I walk into</span><br>
+      When I wanna…
+    </p>
+    <p>
+      Blue is the color of storms<br>
+      That pass without a sound<br>
+      Calm on the surface<br>
+      While the world breaks down
+    </p>
+    <p>
+      Blue is endless<br>
+      Blue is space<br>
+      Between the sun and the moon<br>
+      Blue is mine<br>
+      Blue is yours<br>
+      Blue is a bond
+    </p>
+    <p>
+      It's the sharpness<br>
+      That cuts through your storms
+    </p>
+    <p>
+      Blue…<br>
+      Is where I slow my breath<br>
+      Blue is the color<br>
+      I lose myself in<br>
+      Without fearing what's next
+    </p>
+    <p>
+      Blue is storms<br>
+      Blue is cold<br>
+      <span class="accent">Blue is the color I walk into</span><br>
+      When I wanna be frozen in time
+    </p>
+  </article>
+  <div class="lyrics-footer">
+    <span><strong>Written &amp; Produced</strong> by Auny</span>
+    <span><strong>Released</strong> Jan 24, 2026</span>
+    <span><strong>© 11119560 Records DK</strong></span>
+  </div>
+</section>
+
 </body>
 </html>
