@@ -118,9 +118,53 @@
     color: var(--accent); text-decoration: none;
     display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
   }
+  .embed-wrap {
+    position: relative; max-width: 540px; margin: 0 0 22px;
+    padding: 34px 14px 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+    border-radius: 14px;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.06),
+      0 12px 30px rgba(0,0,0,0.32),
+      inset 0 0 0 1px rgba(var(--accent-rgb), 0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+  }
+  .cassette-strip {
+    position: absolute; top: 0; left: 0; right: 0; height: 24px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px;
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
+  }
+  .cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
+  .cassette-strip .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #ff3535;
+    box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
+    animation: livepulse 1.6s ease-in-out infinite;
+  }
+  @keyframes livepulse {
+    0%,100% { opacity: 0.45; transform: scale(0.92); }
+    50%     { opacity: 1;    transform: scale(1.1); }
+  }
+  .cassette-strip .reels { display: flex; gap: 6px; }
+  .cassette-strip .reel {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
+    animation: spin 3.2s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .embed-note {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.42);
+    margin: 12px 4px 0; text-align: center;
+  }
   .spotify-embed {
-    border: 0; border-radius: 12px; display: block;
-    width: 100%; max-width: 540px; height: 80px; margin-bottom: 22px;
+    border: 0; border-radius: 10px; display: block;
+    width: 100%; height: 80px;
     background: rgba(0,0,0,0.4);
   }
   .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
@@ -268,7 +312,14 @@
 
     <a class="listen-now" href="https://open.spotify.com/track/{{SPOTIFY_TRACK_ID}}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
 
-    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/{{SPOTIFY_TRACK_ID}}?utm_source=auny_media&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Spotify preview player for {{TITLE}}"></iframe>
+    <div class="embed-wrap">
+      <div class="cassette-strip">
+        <span class="left"><span class="live-dot"></span>Now Playing</span>
+        <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+      </div>
+      <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/{{SPOTIFY_TRACK_ID}}?utm_source=auny_media&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Spotify preview player for {{TITLE}}"></iframe>
+      <p class="embed-note">hit play to preview · plays full on spotify</p>
+    </div>
 
     {{SERIES_BLOCK}}
   </div>

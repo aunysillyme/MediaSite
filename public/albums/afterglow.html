@@ -261,7 +261,8 @@
     margin: 0 0 16px;
   }
   .album-player-frame {
-    width: 100%; padding: 14px; border-radius: 16px;
+    position: relative;
+    width: 100%; padding: 34px 14px 14px; border-radius: 16px;
     background: rgba(8, 8, 16, 0.6);
     border: 1px solid rgba(var(--accent-rgb), 0.32);
     box-shadow:
@@ -270,12 +271,39 @@
       inset 0 0 0 1px rgba(255,255,255,0.04);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
   }
   .album-player-frame iframe {
     width: 100%; height: 380px;
     border: 0; border-radius: 10px; display: block;
     background: rgba(0,0,0,0.4);
   }
+  .cassette-strip {
+    position: absolute; top: 0; left: 0; right: 0; height: 24px;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px;
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
+  }
+  .cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
+  .cassette-strip .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #ff3535;
+    box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
+    animation: livepulse 1.6s ease-in-out infinite;
+  }
+  @keyframes livepulse {
+    0%,100% { opacity: 0.45; transform: scale(0.92); }
+    50%     { opacity: 1;    transform: scale(1.1); }
+  }
+  .cassette-strip .reels { display: flex; gap: 6px; }
+  .cassette-strip .reel {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
+    animation: spin 3.2s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
   .album-player-note {
     font-family: 'Space Mono', monospace;
     font-size: 10px; letter-spacing: 3px;
@@ -710,11 +738,15 @@
 <section class="album-player-section" aria-label="Album preview player">
   <p class="album-player-label">✦ &nbsp; preview the album</p>
   <div class="album-player-frame">
+    <div class="cassette-strip">
+      <span class="left"><span class="live-dot"></span>Now Playing</span>
+      <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+    </div>
     <iframe src="https://open.spotify.com/embed/album/27HeS1tHoz3hNWdt6WIfy9?utm_source=auny_media&theme=0"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             title="Spotify preview player for Afterglow" loading="lazy"></iframe>
   </div>
-  <p class="album-player-note">30-sec previews · click any track · plays full on spotify</p>
+  <p class="album-player-note">hit play to preview · plays full on spotify</p>
 </section>
 
 <script>
