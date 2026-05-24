@@ -147,7 +147,7 @@ function renderList() {
   const series = colorSeriesMembers();
   const seriesCards = [
     pinkCard(),
-    ...series.map((s) => cardHtml(s, { badgeText: s.emoji })),
+    ...series.filter((s) => s.slug !== 'pink').map((s) => cardHtml(s, { badgeText: s.emoji })),
   ].join('\n');
   const allCards = SINGLES.map((s) => cardHtml(s)).join('\n');
   const jsonLd = JSON.stringify({
