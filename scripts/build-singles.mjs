@@ -46,6 +46,7 @@ function bgHueFor(single) {
     return map[single.slug] ?? 200;
   }
   if (single.slug === 'pink') return 320;
+  if (single.slug === 'cyan') return 180;
   return 200;
 }
 
@@ -55,6 +56,7 @@ function heroLabelFor(single) {
     return `${single.emoji} &nbsp; single · color series · ${i + 1} of 5`;
   }
   if (single.slug === 'pink') return '🩷 &nbsp; single · standalone';
+  if (single.slug === 'cyan') return '🩵 &nbsp; single · color series · outlier';
   return '✦ &nbsp; single';
 }
 
@@ -68,6 +70,9 @@ function seriesBlockFor(single) {
   }
   if (single.slug === 'pink') {
     return `<p class="standalone-note">Standalone single — outside the color series. Every other color was chosen or inhabited; pink was assigned and refused.</p>`;
+  }
+  if (single.slug === 'cyan') {
+    return `<p class="standalone-note">Color series outlier — a color outside the traditional rainbow. The monster of memory, frozen and forgotten; the scar worn proud once the wound has closed.</p>`;
   }
   return '';
 }

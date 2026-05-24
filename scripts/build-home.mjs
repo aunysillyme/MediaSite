@@ -73,6 +73,18 @@ function miniPink() {
     </a>`;
 }
 
+function miniCyan() {
+  const c = SINGLES.find((x) => x.slug === 'cyan');
+  if (!c) return '';
+  return `    <a class="mini-card" href="/singles/${c.slug}" style="--card-accent:${c.accent.color}">
+      <div class="cover"><img src="/album-art/singles/${c.slug}.jpg" alt="${esc(c.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title" style="color:${c.accent.color}">${c.emoji} ${esc(c.title)}</div>
+        <div class="mini-card-meta">${esc(c.releaseDisplay)}</div>
+      </div>
+    </a>`;
+}
+
 const html = render(HOME_TPL, {
   LATEST_URL: latestUrl,
   LATEST_COVER: latestCover,
@@ -87,7 +99,7 @@ const html = render(HOME_TPL, {
   MONTHLY_LISTENERS,
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
   SINGLE_TILES: SINGLES.slice(0, 5).map(miniSingle).join('\n'),
-  SERIES_TILES: [miniPink(), ...COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug))].join('\n'),
+  SERIES_TILES: [miniPink(), miniCyan(), ...COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug))].join('\n'),
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });

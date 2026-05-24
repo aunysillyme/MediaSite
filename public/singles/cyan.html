@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CYAN — Auny</title>
+<meta name="description" content="CYAN by Auny — A monster made of memory, frozen and forgotten — the scar you wear proud once the wound has closed.. Released May 24, 2026.">
+
+<meta property="og:type" content="music.song">
+<meta property="og:title" content="CYAN — Auny">
+<meta property="og:description" content="A monster made of memory, frozen and forgotten — the scar you wear proud once the wound has closed.">
+<meta property="og:image" content="https://www.auny.media/album-art/singles/cyan.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://www.auny.media/singles/cyan">
+<meta property="og:site_name" content="auny.media">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="CYAN — Auny">
+<meta name="twitter:description" content="It's just a scar I wear all proud">
+<meta name="twitter:image" content="https://www.auny.media/album-art/singles/cyan.jpg">
+
+<link rel="canonical" href="https://www.auny.media/singles/cyan">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Cormorant+Garamond:ital,wght@1,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #22D3EE;
+    --accent-rgb: 34,211,238;
+    --nav-accent: #22D3EE;
+    --bg: #030308;
+    --text: #ffffff;
+    --text-soft: rgba(255,255,255,0.86);
+    --text-mute: rgba(255,255,255,0.55);
+  }
+/* Global site nav — included on every static page. */
+#atmosphere-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+
+/* Cursor spotlight — soft accent glow that follows the cursor */
+#cursor-spotlight {
+  position: fixed; top: 0; left: 0; z-index: 2;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle,
+    rgba(var(--accent-rgb, 30,144,255), 0.14) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.06) 28%,
+    transparent 65%);
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  #cursor-spotlight { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cursor-spotlight { display: none; }
+}
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.94);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s;
+}
+.site-nav .nav-link:hover { color: #fff; }
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-link-stack {
+  display: inline-flex; flex-direction: column; align-items: center;
+  gap: 2px; line-height: 1; padding: 4px 0;
+}
+.site-nav .nav-link-stack .nav-link-sub {
+  font-size: 7px; letter-spacing: 1.8px; opacity: 0.55;
+  text-transform: uppercase;
+}
+.site-nav .nav-link-stack .nav-link-main {
+  font-size: 11px; letter-spacing: 3px;
+}
+.site-nav .nav-link.disabled {
+  cursor: default; color: rgba(255,255,255,0.32);
+}
+.site-nav .nav-link.disabled:hover { color: rgba(255,255,255,0.32); }
+.site-nav .nav-link.disabled .nav-link-sub { color: rgba(255,255,255,0.45); }
+.site-nav .nav-ctas { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-spotify,
+.site-nav .nav-suno {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.site-nav .nav-spotify:hover {
+  color: #1DB954; border-color: #1DB954;
+  box-shadow: 0 0 14px rgba(29,185,84,0.35);
+}
+.site-nav .nav-suno:hover {
+  color: #FF7A29; border-color: #FF7A29;
+  box-shadow: 0 0 14px rgba(255,122,41,0.45);
+}
+
+@media (max-width: 720px) {
+  .site-nav { padding: 10px 14px; }
+  .site-nav .nav-links { gap: 12px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-link-stack .nav-link-sub { font-size: 6px; letter-spacing: 1.4px; }
+  .site-nav .nav-link-stack .nav-link-main { font-size: 9px; letter-spacing: 2px; }
+  .site-nav .nav-ctas { gap: 6px; }
+  .site-nav .nav-spotify,
+  .site-nav .nav-suno { padding: 5px 9px; font-size: 9px; letter-spacing: 2px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+  html, body { min-height: 100%; background: var(--bg); font-family: 'Space Mono', monospace; color: var(--text); }
+  body::before {
+    content:''; position:fixed; inset:0;
+    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    opacity: 0.16; filter: hue-rotate(180deg) saturate(1.3); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content:''; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.18;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(70px); }
+
+  .back-btn {
+    position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
+    padding: 0.45rem 1rem; border-radius: 8px;
+    background: rgba(3,3,8,0.82);
+    border: 1px solid rgba(var(--accent-rgb),0.33);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-decoration: none; text-transform: uppercase;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
+
+  /* hero */
+  .hero {
+    width: 100%; display: grid;
+    grid-template-columns: 1fr 1.1fr; align-items: center;
+    padding: 88px 64px 36px; position: relative; z-index: 4; gap: 36px;
+  }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; max-width: 540px; }
+  .hero-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(48px, 6vw, 96px); line-height: 0.92;
+    letter-spacing: -1.5px; margin-bottom: 6px;
+    text-shadow: 0 0 60px rgba(var(--accent-rgb),0.5);
+  }
+  .hero-byline {
+    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 24px;
+  }
+  .pull-quote {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 2vw, 30px); line-height: 1.22;
+    color: var(--text); margin-bottom: 24px; max-width: 520px;
+    text-shadow: 0 0 24px rgba(var(--accent-rgb),0.3);
+  }
+  .pull-quote::before { content: '\201C'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-right: 4px; }
+  .pull-quote::after  { content: '\201D'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-left: 4px; }
+
+  .meta-block {
+    display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.25); padding-left: 14px;
+  }
+  .meta-row { display: flex; flex-direction: column; gap: 1px; }
+  .meta-key {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.6;
+  }
+  .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
+
+  .listen-now {
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
+    color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .spotify-embed {
+    border: 0; border-radius: 12px; display: block;
+    width: 100%; max-width: 540px; height: 80px; margin-bottom: 22px;
+    background: rgba(0,0,0,0.4);
+  }
+  .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
+
+  .series-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.58); margin-top: 16px; margin-bottom: 10px;
+  }
+  .series-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .chip:hover { border-color: rgba(255,255,255,0.62); color: #fff; }
+  .chip.this { border-color: var(--accent); color: var(--accent); }
+  .standalone-note {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.58); margin-top: 16px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.4); padding-left: 10px;
+  }
+
+  /* cover stage */
+  .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
+  .cover-wrap {
+    position: relative;
+    width: min(80%, 460px); aspect-ratio: 1/1;
+  }
+  .cover-frame {
+    width: 100%; height: 100%; border-radius: 6px; overflow: hidden;
+    box-shadow: 0 0 80px rgba(var(--accent-rgb),0.45), 0 0 200px rgba(var(--accent-rgb),0.18), inset 0 0 0 1px rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vinyl-small {
+    position: absolute; left: -56px; bottom: -56px;
+    width: 170px; height: 170px;
+    animation: vspin 18s linear infinite;
+    z-index: 5;
+    filter: drop-shadow(0 0 24px rgba(var(--accent-rgb),0.5));
+  }
+  @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+  /* lyrics */
+  .lyrics-section { position: relative; z-index: 4; padding: 40px 24px 100px; display: flex; flex-direction: column; align-items: center; }
+  .lyrics-divider {
+    width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
+    color: rgba(var(--accent-rgb),0.6); text-transform: uppercase;
+  }
+  .lyrics-divider::before, .lyrics-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb),0.3), transparent);
+  }
+  .lyrics-body {
+    max-width: 640px; width: 100%;
+    font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700;
+    font-size: clamp(20px, 1.8vw, 26px); line-height: 1.55;
+    color: var(--text-soft); text-align: center;
+    text-shadow: 0 0 18px rgba(var(--accent-rgb),0.18);
+    user-select: text;
+  }
+  .lyrics-body p { margin-bottom: 1.4em; }
+  .lyrics-body p:last-child { margin-bottom: 0; }
+  .lyrics-body .accent { color: var(--accent); }
+  .lyrics-footer {
+    margin-top: 64px;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.36);
+    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 720px;
+  }
+  .lyrics-footer span strong {
+    color: rgba(255,255,255,0.72); font-weight: 700; letter-spacing: 0;
+    text-transform: none; font-size: 12px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl-small, .listen-now .arrow { animation: none !important; }
+  }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding: 80px 24px 40px; gap: 32px; }
+    .hero-left { order: 2; max-width: unset; }
+    .cover-stage { order: 1; }
+    .cover-wrap { width: min(88%, 420px); }
+    .vinyl-small { width: 120px; height: 120px; left: -38px; bottom: -38px; }
+    .pull-quote { font-size: 22px; }
+    .lyrics-section { padding: 20px 20px 80px; }
+    .lyrics-body { font-size: 19px; line-height: 1.5; }
+    .lyrics-footer { flex-direction: column; gap: 10px; }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicRecording",
+  "name": "CYAN",
+  "byArtist": {
+    "@type": "MusicGroup",
+    "name": "Auny",
+    "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI"
+  },
+  "datePublished": "2026-05-24",
+  "genre": "Dark Atmospheric EDM · Downtempo · Cinematic",
+  "url": "https://www.auny.media/singles/cyan",
+  "sameAs": [
+    "https://open.spotify.com/track/4gUImSpQJvH4C8g1Lr2Xvm",
+    "https://distrokid.com/hyperfollow/auny1/cyan"
+  ],
+  "image": "https://www.auny.media/album-art/singles/cyan.jpg",
+  "recordingOf": {
+    "@type": "MusicComposition",
+    "name": "CYAN",
+    "lyrics": {
+      "@type": "CreativeWork",
+      "text": "Cyan lives in the space\nwhere I stopped looking\nCold\nCalculated\n[whisper] Masquerading\n\nA monster made of ice\nAnd forgotten things\nOne that promised light\nBut was the devil in disguise\n\nCyan is darkness\nThat hides behind a veil\n\nCyan is a monster\nThat lives just in my memory\n\nCyan is the color\nI erased\n\nCyan is the color\nI use\n\n[whisper] As a reminder for the pain\n\nCyan is the darkness\nI will never have to see\n\nCyan is a heart that is cold\nCyan is a heart\nThat can't see gold\nCyan doesn't hurt me anymore\n\n[spoken whisper] cyan…\n[spoken/stripped] is no longer an open wound\n[spoken/stripped] It's just a scar I wear all proud"
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
+<div id="cursor-spotlight" aria-hidden="true"></div>
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="home" href="/">Home</a>
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Platforms</a>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Collabs — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">collabs</span>
+    </span>
+  </div>
+  <div class="nav-ctas">
+    <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+    <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
+  </div>
+</nav>
+<script>
+(function () {
+  var canvas = document.getElementById('atmosphere-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var NOTES = ['♪','♫','♩','♬','♭','♮'];
+
+  function readAccent() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    return v || '#1E90FF';
+  }
+  function readAccentRgb() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+    return v || '30,144,255';
+  }
+  var accent = readAccent();
+  var accentRgb = readAccentRgb();
+
+  var W = 0, H = 0;
+  function resize() {
+    W = canvas.width  = Math.floor(innerWidth  * dpr);
+    H = canvas.height = Math.floor(innerHeight * dpr);
+    canvas.style.width  = innerWidth  + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  resize();
+  addEventListener('resize', resize, { passive: true });
+
+  // ─── Ambient dust particles ──────────────────────────────────
+  var COUNT = reduce ? 22 : 60;
+  var particles = [];
+  for (var i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (12 + Math.random() * 8.5) * dpr,
+      vx: (Math.random() - 0.5) * 0.4 * dpr,
+      vy: (Math.random() - 0.5) * 0.4 * dpr,
+      opacity: 0.13 + Math.random() * 0.17,
+      rotation: (Math.random() - 0.5) * 0.6,
+    });
+  }
+
+  var mouseX = -9999, mouseY = -9999;
+  var lastSpawnX = 0, lastSpawnY = 0;
+  var spotlight = document.getElementById('cursor-spotlight');
+
+  // ─── Cursor trail (musical notes that fade behind cursor) ────
+  var trail = [];
+  function spawnTrail(x, y) {
+    if (reduce || coarse) return;
+    trail.push({
+      x: x, y: y,
+      vx: (Math.random() - 0.5) * 0.6 * dpr,
+      vy: 0.2 * dpr + Math.random() * 0.4 * dpr,
+      spawnedAt: performance.now(),
+      maxLife: 1300 + Math.random() * 600,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (10 + Math.random() * 4) * dpr,
+      rot: (Math.random() - 0.5) * 0.5,
+    });
+  }
+
+  if (!reduce && !coarse) {
+    addEventListener('mousemove', function (e) {
+      mouseX = e.clientX * dpr;
+      mouseY = e.clientY * dpr;
+      // Spotlight follows cursor (transform on the div)
+      if (spotlight) {
+        spotlight.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        spotlight.style.opacity = '1';
+      }
+      // Rate-limit trail spawns by distance moved (every ~70 css px)
+      var dxs = e.clientX - lastSpawnX, dys = e.clientY - lastSpawnY;
+      if (dxs * dxs + dys * dys > 70 * 70) {
+        spawnTrail(mouseX, mouseY);
+        lastSpawnX = e.clientX;
+        lastSpawnY = e.clientY;
+      }
+    }, { passive: true });
+    addEventListener('mouseleave', function () {
+      mouseX = mouseY = -9999;
+      if (spotlight) spotlight.style.opacity = '0';
+    }, { passive: true });
+  }
+
+  var REPULSE_RADIUS = 230 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 2.2;
+
+  var running = true;
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(loop);
+  });
+
+  var accentTick = 0;
+  function loop() {
+    if (!running) return;
+    if ((accentTick++ & 31) === 0) {
+      accent = readAccent();
+      accentRgb = readAccentRgb();
+      if (spotlight) {
+        spotlight.style.background =
+          'radial-gradient(circle, rgba(' + accentRgb + ',0.14) 0%, rgba(' + accentRgb + ',0.06) 28%, transparent 65%)';
+      }
+    }
+    ctx.clearRect(0, 0, W, H);
+
+    // ambient dust
+    for (var j = 0; j < particles.length; j++) {
+      var p = particles[j];
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -24) p.x = W + 24;
+      if (p.x > W + 24) p.x = -24;
+      if (p.y < -24) p.y = H + 24;
+      if (p.y > H + 24) p.y = -24;
+      var dx = p.x - mouseX, dy = p.y - mouseY;
+      var dist2 = dx * dx + dy * dy;
+      var r2 = REPULSE_RADIUS * REPULSE_RADIUS;
+      if (dist2 < r2 && dist2 > 1) {
+        var dist = Math.sqrt(dist2);
+        var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
+        p.x += (dx / dist) * force * 10;
+        p.y += (dy / dist) * force * 10;
+      }
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = accent;
+      ctx.font = p.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    // cursor trail — very low opacity, fades over lifetime
+    var now = performance.now();
+    for (var b = trail.length - 1; b >= 0; b--) {
+      var tp = trail[b];
+      var age = now - tp.spawnedAt;
+      if (age > tp.maxLife) { trail.splice(b, 1); continue; }
+      tp.x += tp.vx;
+      tp.y += tp.vy;
+      tp.vy += 0.005 * dpr;     // slight gravity drift
+      tp.rot += 0.012;
+      var t = age / tp.maxLife;
+      // Peak opacity capped at ~0.18, then fades out
+      var fadeIn  = Math.min(1, age / 220);
+      var fadeOut = 1 - t;
+      var alpha = 0.13 * fadeIn * fadeOut;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(tp.x, tp.y);
+      ctx.rotate(tp.rot);
+      ctx.fillStyle = accent;
+      ctx.font = tp.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(tp.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+
+
+<div class="bg-blob" style="width:380px;height:380px;background:rgba(var(--accent-rgb),0.16);top:-100px;left:30%;"></div>
+<div class="bg-blob" style="width:280px;height:280px;background:rgba(var(--accent-rgb),0.12);bottom:5%;right:5%;"></div>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-label">🩵 &nbsp; single · color series · outlier</p>
+    <h1 class="hero-title">CYAN</h1>
+    <p class="hero-byline">Auny &nbsp;·&nbsp; 2026</p>
+
+    <p class="pull-quote">It's just a scar I wear all proud</p>
+
+    <div class="meta-block">
+      <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">May 24, 2026</span></div>
+      <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Dark Atmospheric EDM · Downtempo · Cinematic</span></div>
+      <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
+    </div>
+
+    <a class="listen-now" href="https://open.spotify.com/track/4gUImSpQJvH4C8g1Lr2Xvm" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+
+    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/4gUImSpQJvH4C8g1Lr2Xvm?utm_source=auny_media&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Spotify preview player for CYAN"></iframe>
+
+    <p class="standalone-note">Color series outlier — a color outside the traditional rainbow. The monster of memory, frozen and forgotten; the scar worn proud once the wound has closed.</p>
+  </div>
+
+  <div class="cover-stage">
+   <div class="cover-wrap">
+    <div class="cover-frame">
+      <img src="/album-art/singles/cyan.jpg" alt="CYAN cover art by Auny" width="640" height="640">
+    </div>
+    <div class="vinyl-small" aria-hidden="true">
+      <svg viewBox="0 0 180 180" width="180" height="180">
+        <defs>
+          <clipPath id="vinyl-label-cyan">
+            <circle cx="90" cy="90" r="40"/>
+          </clipPath>
+        </defs>
+        <circle cx="90" cy="90" r="88" fill="#050510"/>
+        <circle cx="90" cy="90" r="84" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="78" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="72" fill="none" stroke="#0d1428" stroke-width="1.6"/>
+        <circle cx="90" cy="90" r="66" fill="none" stroke="#0a1224" stroke-width="1"/>
+        <circle cx="90" cy="90" r="60" fill="none" stroke="#22D3EE" stroke-width="0.8" opacity="0.35"/>
+        <image href="/album-art/singles/cyan.jpg" x="50" y="50" width="80" height="80" clip-path="url(#vinyl-label-cyan)"/>
+        <circle cx="90" cy="90" r="40" fill="none" stroke="#22D3EE" stroke-width="1.2" opacity="0.55"/>
+        <circle cx="90" cy="90" r="3.5" fill="#050510"/>
+        <circle cx="90" cy="90" r="1.6" fill="#22D3EE" opacity="0.9"/>
+      </svg>
+    </div>
+   </div>
+  </div>
+</section>
+
+<section class="lyrics-section" aria-label="Lyrics">
+  <div class="lyrics-divider">lyrics</div>
+  <article class="lyrics-body">
+    <p>Cyan lives in the space<br>where I stopped looking<br>Cold<br>Calculated<br>[whisper] Masquerading</p>
+    <p>A monster made of ice<br>And forgotten things<br>One that promised light<br>But was the devil in disguise</p>
+    <p>Cyan is darkness<br>That hides behind a veil</p>
+    <p>Cyan is a monster<br>That lives just in my memory</p>
+    <p>Cyan is the color<br>I erased</p>
+    <p>Cyan is the color<br>I use</p>
+    <p>[whisper] As a reminder for the pain</p>
+    <p>Cyan is the darkness<br>I will never have to see</p>
+    <p>Cyan is a heart that is cold<br>Cyan is a heart<br>That can't see gold<br>Cyan doesn't hurt me anymore</p>
+    <p>[spoken whisper] cyan…<br>[spoken/stripped] is no longer an open wound<br><span class="accent">[spoken/stripped] It's just a scar I wear all proud</span></p>
+  </article>
+  <div class="lyrics-footer">
+    <span><strong>Written &amp; Produced</strong> by Auny</span>
+    <span><strong>Released</strong> May 24, 2026</span>
+    <span><strong>©</strong> 11119560 Records DK</span>
+  </div>
+</section>
+
+</body>
+</html>

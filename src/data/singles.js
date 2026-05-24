@@ -1,4 +1,4 @@
-// Source of truth for the 23 singles. Reverse chronological.
+// Source of truth for the 25 singles. Reverse chronological.
 // Lyric text uses double newlines between stanzas. The build script renders <p> per stanza.
 // Cover JPGs live at /public/album-art/singles/<slug>.jpg
 
@@ -13,6 +13,58 @@ export const COLOR_SERIES_ORDER = [
 ];
 
 export const SINGLES = [
+  {
+    slug: 'cyan',
+    title: 'CYAN',
+    releaseDate: '2026-05-24',
+    releaseDisplay: 'May 24, 2026',
+    year: 2026,
+    spotifyTrackId: '4gUImSpQJvH4C8g1Lr2Xvm',
+    hyperfollowSlug: 'cyan',
+    genre: 'Dark Atmospheric EDM · Downtempo · Cinematic',
+    era: 3,
+    colorSeries: 'standalone',
+    emoji: '🩵',
+    accent: { color: '#22D3EE', rgb: '34,211,238' },
+    themes: 'A monster made of memory, frozen and forgotten — the scar you wear proud once the wound has closed.',
+    anchorLyric: "It's just a scar I wear all proud",
+    lyrics: `Cyan lives in the space
+where I stopped looking
+Cold
+Calculated
+[whisper] Masquerading
+
+A monster made of ice
+And forgotten things
+One that promised light
+But was the devil in disguise
+
+Cyan is darkness
+That hides behind a veil
+
+Cyan is a monster
+That lives just in my memory
+
+Cyan is the color
+I erased
+
+Cyan is the color
+I use
+
+[whisper] As a reminder for the pain
+
+Cyan is the darkness
+I will never have to see
+
+Cyan is a heart that is cold
+Cyan is a heart
+That can't see gold
+Cyan doesn't hurt me anymore
+
+[spoken whisper] cyan…
+[spoken/stripped] is no longer an open wound
+[spoken/stripped] It's just a scar I wear all proud`,
+  },
   {
     slug: 'let-go',
     title: 'Let Go',
