@@ -15,10 +15,7 @@ export const COLOR_SERIES = [
   { slug: 'red',    emoji: '❤️', label: 'RED',    type: 'rainbow', released: true,  accent: { color: '#E84855', rgb: '232,72,85'   } },
   { slug: 'pink',   emoji: '🩷', label: 'PINK',   type: 'outlier', released: true,  accent: { color: '#E91E63', rgb: '233,30,99'   } },
   { slug: 'orange', emoji: '🧡', label: 'ORANGE', type: 'rainbow', released: true,  accent: { color: '#FF8C42', rgb: '255,140,66'  } },
-
-  // ─── Coming next ──────────────────────────────────────────────────
-  { slug: 'cyan',   emoji: '🩵', label: 'CYAN',   type: 'outlier', released: false, releaseNote: 'tomorrow',
-    accent: { color: '#22D3EE', rgb: '34,211,238' } },
+  { slug: 'cyan',   emoji: '🩵', label: 'CYAN',   type: 'outlier', released: true,  accent: { color: '#22D3EE', rgb: '34,211,238'  } },
 
   // ─── Not yet written ──────────────────────────────────────────────
   { slug: 'violet', emoji: '💜', label: 'VIOLET', type: 'rainbow', released: false, accent: { color: '#A855F7', rgb: '168,85,247' } },
@@ -38,6 +35,58 @@ export const COLOR_TYPE_INFO = {
 };
 
 export const SINGLES = [
+  {
+    slug: 'cyan',
+    title: 'CYAN',
+    releaseDate: '2026-05-24',
+    releaseDisplay: 'May 24, 2026',
+    year: 2026,
+    spotifyTrackId: '4gUImSpQJvH4C8g1Lr2Xvm',
+    hyperfollowSlug: 'cyan',
+    genre: 'Dark Atmospheric EDM · Electronica · Singer/Songwriter',
+    era: 3,
+    colorSeries: 'member',
+    emoji: '🩵',
+    accent: { color: '#22D3EE', rgb: '34,211,238' },
+    themes: 'Cold/calculated pain held in memory — the heartbreak you erased, the scar worn proud as healing',
+    anchorLyric: "It's just a scar I wear all proud",
+    lyrics: `Cyan lives in the space
+where I stopped looking
+Cold
+Calculated
+Masquerading
+
+A monster made of ice
+And forgotten things
+One that promised light
+But was the devil in disguise
+
+Cyan is darkness
+That hides behind a veil
+
+Cyan is a monster
+That lives just in my memory
+
+Cyan is the color
+I erased
+
+Cyan is the color
+I use
+
+As a reminder for the pain
+
+Cyan is the darkness
+I will never have to see
+
+Cyan is a heart that is cold
+Cyan is a heart
+That can't see gold
+Cyan doesn't hurt me anymore
+
+cyan…
+is no longer an open wound
+It's just a scar I wear all proud`,
+  },
   {
     slug: 'let-go',
     title: 'Let Go',

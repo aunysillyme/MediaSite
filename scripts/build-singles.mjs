@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 // Generates static HTML for /singles/ and /singles/<slug>/ from src/data/singles.js + templates/
 
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo, singleCoverPath } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -44,7 +44,7 @@ function lyricsToJsonText(text) {
 // Per-single background hue rotation off the source PNG (which is already blue-violet)
 function bgHueFor(single) {
   if (single.colorSeries === 'member') {
-    const map = { black: 200, blue: 200, yellow: 30, red: 340, pink: 320, orange: 20 };
+    const map = { black: 200, blue: 200, yellow: 30, red: 340, pink: 320, orange: 20, cyan: 180 };
     return map[single.slug] ?? 200;
   }
   return 200;
@@ -89,6 +89,7 @@ function renderSingle(single) {
     TITLE_HTML: titleHtml(single),
     YEAR: String(single.year),
     SLUG: single.slug,
+    COVER_EXT: singleCoverPath(single.slug).endsWith('.jpg') ? 'jpg' : 'svg',
     RELEASE_DISPLAY: escHtml(single.releaseDisplay),
     RELEASE_ISO: single.releaseDate,
     GENRE: escHtml(single.genre),
@@ -126,7 +127,7 @@ function cardHtml(single, opts = {}) {
   const accentStyle = hasAccent ? ` style="--card-accent:${single.accent.color}"` : '';
   const badge = opts.badgeText ? `      <span class="badge" style="color:${single.accent.color}">${opts.badgeText}</span>\n` : '';
   return `      <a class="${cls}" href="/singles/${single.slug}"${accentStyle}>
-${badge}        <div class="cover"><img src="/album-art/singles/${single.slug}.jpg" alt="${escAttr(single.title)} cover" loading="lazy" width="640" height="640"></div>
+${badge}        <div class="cover"><img src="${singleCoverPath(single.slug)}" alt="${escAttr(single.title)} cover" loading="lazy" width="640" height="640"></div>
         <div class="body">
           <div class="card-title">${escHtml(single.title)}</div>
           <div class="card-meta">${escHtml(single.releaseDisplay)}</div>
@@ -139,7 +140,7 @@ function pinkCard() {
   if (!p) return '';
   return `      <a class="card series" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
         <span class="badge" style="color:${p.accent.color}">${p.emoji}</span>
-        <div class="cover"><img src="/album-art/singles/${p.slug}.jpg" alt="${escAttr(p.title)} cover" loading="lazy" width="640" height="640"></div>
+        <div class="cover"><img src="${singleCoverPath(p.slug)}" alt="${escAttr(p.title)} cover" loading="lazy" width="640" height="640"></div>
         <div class="body">
           <div class="card-title">${escHtml(p.title)}</div>
           <div class="card-meta">${escHtml(p.releaseDisplay)}</div>
@@ -171,7 +172,7 @@ function renderList() {
           '@type': 'MusicRecording',
           'name': s.title,
           'url': `https://www.auny.media/singles/${s.slug}`,
-          'image': `https://www.auny.media/album-art/singles/${s.slug}.jpg`,
+          'image': `https://www.auny.media${singleCoverPath(s.slug)}`,
           'datePublished': s.releaseDate,
           'genre': s.genre,
           'byArtist': { '@type': 'MusicGroup', '@id': 'https://www.auny.media/#artist' },

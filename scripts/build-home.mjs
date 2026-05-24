@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, singleCoverPath } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -23,7 +23,7 @@ const latestSingle = SINGLES[0];
 const latestIsAlbum = latestAlbum.releaseDate >= latestSingle.releaseDate;
 const latest = latestIsAlbum ? latestAlbum : latestSingle;
 const latestUrl = latestIsAlbum ? `/albums/${latest.slug}` : `/singles/${latest.slug}`;
-const latestCover = latestIsAlbum ? `/album-art/${latest.slug}.jpg` : `/album-art/singles/${latest.slug}.jpg`;
+const latestCover = latestIsAlbum ? `/album-art/${latest.slug}.jpg` : singleCoverPath(latest.slug);
 const latestType = latestIsAlbum ? 'Album' : 'Single';
 const latestSpotifyUrl = latestIsAlbum
   ? `https://open.spotify.com/album/${latest.spotifyAlbumId}`
@@ -42,7 +42,7 @@ function miniAlbum(a) {
 
 function miniSingle(s) {
   return `    <a class="mini-card" href="/singles/${s.slug}">
-      <div class="cover"><img src="/album-art/singles/${s.slug}.jpg" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
         <div class="mini-card-title">${esc(s.title)}</div>
         <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
@@ -54,7 +54,7 @@ function miniSeries(slug) {
   const s = SINGLES.find((x) => x.slug === slug);
   const order = COLOR_SERIES_ORDER.find((x) => x.slug === slug);
   return `    <a class="mini-card" href="/singles/${s.slug}" style="--card-accent:${order.accent.color}">
-      <div class="cover"><img src="/album-art/singles/${s.slug}.jpg" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
         <div class="mini-card-title" style="color:${order.accent.color}">${order.emoji} ${esc(s.title)}</div>
         <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
@@ -65,7 +65,7 @@ function miniSeries(slug) {
 function miniPink() {
   const p = SINGLES.find((x) => x.slug === 'pink');
   return `    <a class="mini-card" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
-      <div class="cover"><img src="/album-art/singles/${p.slug}.jpg" alt="${esc(p.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><img src="${singleCoverPath(p.slug)}" alt="${esc(p.title)} cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
         <div class="mini-card-title" style="color:${p.accent.color}">${p.emoji} ${esc(p.title)}</div>
         <div class="mini-card-meta">${esc(p.releaseDisplay)}</div>

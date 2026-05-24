@@ -1,5 +1,5 @@
 // Shared helpers for build scripts
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -70,6 +70,13 @@ export function navFor(section) {
 
 export function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Returns "/album-art/singles/<slug>.jpg" if it exists, else falls back
+// to ".svg" (for placeholder covers awaiting the real asset).
+export function singleCoverPath(slug) {
+  const ext = existsSync(join(root, 'public/album-art/singles', `${slug}.jpg`)) ? 'jpg' : 'svg';
+  return `/album-art/singles/${slug}.${ext}`;
 }
 
 export function writeOut(relPath, content) {
