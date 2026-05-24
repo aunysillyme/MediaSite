@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo, singleCoverPath } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo, singleCoverPath, seriesBadge } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -125,7 +125,7 @@ function cardHtml(single, opts = {}) {
   const hasAccent = single.colorSeries === 'member' || single.slug === 'pink';
   const cls = hasAccent ? 'card series' : 'card';
   const accentStyle = hasAccent ? ` style="--card-accent:${single.accent.color}"` : '';
-  const badge = opts.badgeText ? `      <span class="badge" style="color:${single.accent.color}">${opts.badgeText}</span>\n` : '';
+  const badge = opts.badgeText ? `      ${seriesBadge(opts.badgeText)}\n` : '';
   return `      <a class="${cls}" href="/singles/${single.slug}"${accentStyle}>
 ${badge}        <div class="cover"><img src="${singleCoverPath(single.slug)}" alt="${escAttr(single.title)} cover" loading="lazy" width="640" height="640"></div>
         <div class="body">
@@ -139,7 +139,7 @@ function pinkCard() {
   const p = SINGLES.find((s) => s.slug === 'pink');
   if (!p) return '';
   return `      <a class="card series" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
-        <span class="badge" style="color:${p.accent.color}">${p.emoji}</span>
+        ${seriesBadge(p.emoji)}
         <div class="cover"><img src="${singleCoverPath(p.slug)}" alt="${escAttr(p.title)} cover" loading="lazy" width="640" height="640"></div>
         <div class="body">
           <div class="card-title">${escHtml(p.title)}</div>
@@ -188,7 +188,8 @@ function renderList() {
     .replaceAll('{{TOTAL_SINGLES}}', String(SINGLES.length))
     .replaceAll('{{LIST_JSONLD}}', jsonLd)
     .replaceAll('{{NAV}}', navFor('singles'))
-    .replaceAll('{{NAV_CSS}}', NAV_CSS);
+    .replaceAll('{{NAV_CSS}}', NAV_CSS)
+    .replaceAll('{{SERIES_CARD_CSS}}', SERIES_CARD_CSS);
 }
 
 // ─── Write files ─────────────────────────────────────────────────────────────

@@ -1,0 +1,46 @@
+/* Series-card decoration — shared by /singles list cards (.card.series) and
+   homepage color-series tiles (.mini-card.series). Both render the same DOM:
+     <a class="… series" style="--card-accent: #hex">
+       <span class="badge">🩵</span>
+       <div class="cover">…</div>
+       <div class="body"><div class="…-title">CYAN</div>…</div>
+     </a>
+   Layout (sizing, padding) stays per-page; this file controls the accent
+   treatment so the two pages can't drift out of sync. */
+
+.card.series,
+.mini-card.series { position: relative; }
+
+.card.series::before,
+.mini-card.series::before {
+  content: ''; position: absolute; inset: -2px; border-radius: 12px;
+  background: radial-gradient(circle at 50% 0%, var(--card-accent, var(--accent)) 0%, transparent 65%);
+  opacity: 0.22; z-index: -1; pointer-events: none;
+  filter: blur(8px);
+}
+
+.card.series .cover {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06),
+              inset 0 -40px 60px -30px var(--card-accent, var(--accent));
+}
+.mini-card.series .cover {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06),
+              inset 0 -30px 50px -25px var(--card-accent, var(--accent));
+}
+
+.card.series .body,
+.mini-card.series .body { border-top: 1px solid var(--card-accent, var(--accent)); }
+
+.card.series .card-title,
+.mini-card.series .mini-card-title { color: var(--card-accent, #fff); }
+
+.card.series .badge,
+.mini-card.series .badge {
+  position: absolute; top: 10px; left: 10px;
+  font-size: 16px; line-height: 1;
+  background: rgba(0,0,0,0.65); border: 1px solid rgba(255,255,255,0.22);
+  padding: 5px 7px; border-radius: 999px; z-index: 2;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+}
+/* Smaller badge for the denser homepage row */
+.mini-card.series .badge { font-size: 13px; padding: 3px 6px; top: 8px; left: 8px; }

@@ -2,8 +2,8 @@
 // Generates the homepage at /index.html from src/data/albums.js + src/data/singles.js + templates/home.html
 
 import { ALBUMS } from '../src/data/albums.js';
-import { SINGLES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, singleCoverPath } from './_lib.mjs';
+import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, SERIES_CARD_CSS, singleCoverPath, seriesBadge } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -53,10 +53,11 @@ function miniSingle(s) {
 function miniSeries(slug) {
   const s = SINGLES.find((x) => x.slug === slug);
   const order = COLOR_SERIES_ORDER.find((x) => x.slug === slug);
-  return `    <a class="mini-card" href="/singles/${s.slug}" style="--card-accent:${order.accent.color}">
+  return `    <a class="mini-card series" href="/singles/${s.slug}" style="--card-accent:${order.accent.color}">
+      ${seriesBadge(order.emoji)}
       <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
-        <div class="mini-card-title" style="color:${order.accent.color}">${order.emoji} ${esc(s.title)}</div>
+        <div class="mini-card-title">${esc(s.title)}</div>
         <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
       </div>
     </a>`;
@@ -64,10 +65,11 @@ function miniSeries(slug) {
 
 function miniPink() {
   const p = SINGLES.find((x) => x.slug === 'pink');
-  return `    <a class="mini-card" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
+  return `    <a class="mini-card series" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
+      ${seriesBadge(p.emoji)}
       <div class="cover"><img src="${singleCoverPath(p.slug)}" alt="${esc(p.title)} cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
-        <div class="mini-card-title" style="color:${p.accent.color}">${p.emoji} ${esc(p.title)}</div>
+        <div class="mini-card-title">${esc(p.title)}</div>
         <div class="mini-card-meta">${esc(p.releaseDisplay)}</div>
       </div>
     </a>`;
@@ -89,6 +91,9 @@ const html = render(HOME_TPL, {
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
   SINGLE_TILES: SINGLES.slice(0, 5).map(miniSingle).join('\n'),
   SERIES_TILES: [miniPink(), ...COLOR_SERIES_ORDER.filter((c) => c.slug !== 'pink').map((c) => miniSeries(c.slug))].join('\n'),
+  SERIES_RELEASED: String(COLOR_SERIES.filter((c) => c.released).length),
+  SERIES_TOTAL: String(COLOR_SERIES.length),
+  SERIES_CARD_CSS,
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });

@@ -15,6 +15,13 @@ export const FOOTER_CSS = tpl('_footer.css');
 export const COLOR_CHIPS_HTML = tpl('_color-chips.html');
 export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
 export const LISTEN_CSS = tpl('_listen.css');
+export const SERIES_CARD_CSS = tpl('_series-card.css');
+
+// Single source of truth for the emoji-badge element used on color-series
+// cards across the homepage and /singles list. Renders <span class="badge">.
+export function seriesBadge(emoji) {
+  return `<span class="badge">${emoji}</span>`;
+}
 
 export function colorChipsFor({ colors, currentSlug, currentType }) {
   // Released chips link out; upcoming chips render as static "soon" pills
