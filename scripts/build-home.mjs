@@ -88,7 +88,7 @@ const html = render(HOME_TPL, {
   MONTHLY_LISTENERS,
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
   SINGLE_TILES: SINGLES.slice(0, 5).map(miniSingle).join('\n'),
-  SERIES_TILES: [miniPink(), ...COLOR_SERIES_ORDER.map((c) => miniSeries(c.slug))].join('\n'),
+  SERIES_TILES: [miniPink(), ...COLOR_SERIES_ORDER.filter((c) => c.slug !== 'pink').map((c) => miniSeries(c.slug))].join('\n'),
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });

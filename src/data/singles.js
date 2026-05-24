@@ -6,9 +6,10 @@ export const BRAND_ACCENT = { color: '#1E90FF', rgb: '30,144,255' };
 
 export const COLOR_SERIES_ORDER = [
   { slug: 'black',  emoji: '🖤', label: 'BLACK',  accent: { color: '#9EA0A6', rgb: '158,160,166' } },
-  { slug: 'blue',   emoji: '🩵', label: 'BLUE',   accent: { color: '#1E90FF', rgb: '30,144,255'  } },
+  { slug: 'blue',   emoji: '💙', label: 'BLUE',   accent: { color: '#1E90FF', rgb: '30,144,255'  } },
   { slug: 'yellow', emoji: '💛', label: 'YELLOW', accent: { color: '#F5C518', rgb: '245,197,24'  } },
   { slug: 'red',    emoji: '❤️', label: 'RED',    accent: { color: '#E84855', rgb: '232,72,85'   } },
+  { slug: 'pink',   emoji: '🩷', label: 'PINK',   accent: { color: '#E91E63', rgb: '233,30,99'   } },
   { slug: 'orange', emoji: '🧡', label: 'ORANGE', accent: { color: '#FF8C42', rgb: '255,140,66'  } },
 ];
 
@@ -606,7 +607,7 @@ Watch what I do next`,
     genre: 'EDM · Ambient · Dark Pop',
     era: 2,
     colorSeries: 'member',
-    emoji: '🩵',
+    emoji: '💙',
     accent: { color: '#1E90FF', rgb: '30,144,255' },
     themes: 'Chosen stillness, grief held in calm, the freeze response as shelter — standing still in the storm by choice',
     anchorLyric: "Calm on the surface — while the world breaks down",
