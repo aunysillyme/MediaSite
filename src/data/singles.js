@@ -24,8 +24,8 @@ export const COLOR_SERIES = [
   { slug: 'violet', emoji: '💜', label: 'VIOLET', type: 'rainbow', released: false, accent: { color: '#A855F7', rgb: '168,85,247' } },
   { slug: 'indigo', emoji: '🟣', label: 'INDIGO', type: 'rainbow', released: false, accent: { color: '#6366F1', rgb: '99,102,241' } },
   { slug: 'green',  emoji: '💚', label: 'GREEN',  type: 'rainbow', released: false, accent: { color: '#10B981', rgb: '16,185,129' } },
+  { slug: 'white',  emoji: '🤍', label: 'WHITE',  type: 'outlier', released: false, accent: { color: '#F5F5F5', rgb: '245,245,245' } },
   { slug: 'tbd-1',  emoji: '❓', label: '???',    type: 'outlier', released: false, accent: { color: '#9CA3AF', rgb: '156,163,175' } },
-  { slug: 'tbd-2',  emoji: '❓', label: '???',    type: 'outlier', released: false, accent: { color: '#9CA3AF', rgb: '156,163,175' } },
 ];
 
 // Released subset — used for chip-row members that have real pages
