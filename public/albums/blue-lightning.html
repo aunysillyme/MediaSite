@@ -340,9 +340,9 @@
   /* Orbit system */
   .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
   .planet {
-    position: absolute; display: flex; flex-direction: column; align-items: center;
+    position: absolute; display: block;
     cursor: pointer; text-decoration: none; z-index: 6;
-    transition: transform 0.22s ease; transform-origin: center top;
+    transition: transform 0.22s ease; transform-origin: center;
   }
   .planet:hover { transform: scale(1.25); }
   .planet-icon {
@@ -350,7 +350,8 @@
     transition: box-shadow 0.22s ease; flex-shrink: 0; background: rgba(3,3,8,0.85);
   }
   .planet-name {
-    font-family: 'Space Mono', monospace; font-size: 8px; margin-top: 4px;
+    position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%);
+    font-family: 'Space Mono', monospace; font-size: 8px;
     white-space: nowrap; opacity: 0; transition: opacity 0.18s ease;
     pointer-events: none; padding: 2px 5px; border-radius: 3px;
     color: #fff; letter-spacing: 0.3px; max-width: 120px;
