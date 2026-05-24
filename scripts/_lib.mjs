@@ -8,6 +8,24 @@ export const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8')
 
 export const NAV_HTML = tpl('_nav.html');
 export const NAV_CSS = tpl('_nav.css');
+export const PLAYER_HTML = tpl('_player.html');
+export const PLAYER_CSS = tpl('_player.css');
+export const FOOTER_HTML = tpl('_footer.html');
+export const FOOTER_CSS = tpl('_footer.css');
+
+export function playerFor({ kind, id, title }) {
+  const wrapClass = kind === 'album' ? 'embed-wrap album' : 'embed-wrap';
+  return render(PLAYER_HTML, {
+    EMBED_KIND: kind,
+    EMBED_ID: id,
+    EMBED_TITLE: esc(title),
+    WRAP_CLASS: wrapClass,
+  });
+}
+
+export function footerFor({ releaseDisplay }) {
+  return render(FOOTER_HTML, { RELEASE_DISPLAY: esc(releaseDisplay) });
+}
 
 export function navFor(section) {
   // Mark active section in the nav HTML

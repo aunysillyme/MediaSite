@@ -1,0 +1,18 @@
+<!-- Shared Spotify embed player. Variables:
+       {{EMBED_KIND}}   "track" | "album"
+       {{EMBED_ID}}     Spotify ID
+       {{EMBED_TITLE}}  Track/album title (for a11y)
+       {{WRAP_CLASS}}   "embed-wrap" for single, "embed-wrap album" for album
+-->
+<div class="{{WRAP_CLASS}}">
+  <div class="cassette-strip">
+    <span class="left"><span class="live-dot"></span>Now Playing</span>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+  </div>
+  <iframe class="spotify-embed"
+          src="https://open.spotify.com/embed/{{EMBED_KIND}}/{{EMBED_ID}}?utm_source=auny_media&theme=0"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify preview player for {{EMBED_TITLE}}"></iframe>
+  <p class="embed-note">hit play to preview · plays full on spotify</p>
+</div>

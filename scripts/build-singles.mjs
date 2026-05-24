@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES_ORDER, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, playerFor, footerFor } from './_lib.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8');
@@ -107,6 +107,10 @@ function renderSingle(single) {
     LYRICS_JSON: lyricsToJsonText(single.lyrics),
     NAV: navFor('singles'),
     NAV_CSS: NAV_CSS,
+    PLAYER_CSS: PLAYER_CSS,
+    PLAYER_HTML: playerFor({ kind: 'track', id: single.spotifyTrackId, title: single.title }),
+    FOOTER_CSS: FOOTER_CSS,
+    FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
   };
   return Object.entries(replacements).reduce(
     (html, [key, val]) => html.replaceAll(`{{${key}}}`, val),

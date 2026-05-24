@@ -233,55 +233,87 @@
     color: var(--accent); text-decoration: none;
     display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
   }
-  .embed-wrap {
-    position: relative; max-width: 540px; margin: 0 0 22px;
-    padding: 34px 14px 14px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
-    border-radius: 14px;
-    box-shadow:
-      inset 0 0 0 1px rgba(255,255,255,0.06),
-      0 12px 30px rgba(0,0,0,0.32),
-      inset 0 0 0 1px rgba(var(--accent-rgb), 0.10);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    overflow: hidden;
+  /* ─── Shared player container ──────────────────────────────────────────────
+   Used on single + album pages. Wraps a Spotify embed iframe with a
+   cassette-style accent strip + "now playing" indicator. Iframe height
+   varies (singles: 80px track player, albums: 380px album+tracklist).
+   Renders dark glass body with subtle accent border.
+*/
+.embed-wrap {
+  position: relative; max-width: 540px; margin: 0 0 22px;
+  padding: 34px 14px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 30px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(var(--accent-rgb), 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.embed-wrap.album { max-width: 920px; }
+.cassette-strip {
+  position: absolute; top: 0; left: 0; right: 0; height: 24px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px;
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
+}
+.cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
+.cassette-strip .live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ff3535;
+  box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
+  animation: livepulse 1.6s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { opacity: 0.45; transform: scale(0.92); }
+  50%     { opacity: 1;    transform: scale(1.1); }
+}
+.cassette-strip .reels { display: flex; gap: 6px; }
+.cassette-strip .reel {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
+  animation: spin 3.2s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.embed-wrap .spotify-embed {
+  border: 0; border-radius: 10px; display: block;
+  width: 100%; height: 80px;
+  background: rgba(0,0,0,0.4);
+  margin: 0;
+}
+.embed-wrap.album .spotify-embed { height: 380px; }
+.embed-note {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+  margin: 12px 4px 0; text-align: center;
+}
+
+  /* ─── Shared page footer ──────────────────────────────────────────────
+   Used at the actual bottom of single + album detail pages. Three
+   columns: credit · release date · copyright. Border-top adopts the
+   page accent color.
+*/
+.page-footer {
+  max-width: 920px; margin: 56px auto 40px; padding: 22px 24px 0;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+  display: flex; justify-content: space-between; gap: 18px;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.45); text-transform: uppercase;
+}
+.page-footer span strong {
+  color: rgba(255,255,255,0.78); font-weight: 600; margin-right: 6px;
+}
+@media (max-width: 720px) {
+  .page-footer {
+    flex-direction: column; gap: 10px;
+    text-align: center; padding: 22px 16px 0;
   }
-  .cassette-strip {
-    position: absolute; top: 0; left: 0; right: 0; height: 24px;
-    background: var(--accent);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 14px;
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
-  }
-  .cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
-  .cassette-strip .live-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #ff3535;
-    box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
-    animation: livepulse 1.6s ease-in-out infinite;
-  }
-  @keyframes livepulse {
-    0%,100% { opacity: 0.45; transform: scale(0.92); }
-    50%     { opacity: 1;    transform: scale(1.1); }
-  }
-  .cassette-strip .reels { display: flex; gap: 6px; }
-  .cassette-strip .reel {
-    width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
-    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
-    animation: spin 3.2s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .embed-note {
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.42);
-    margin: 12px 4px 0; text-align: center;
-  }
-  .spotify-embed {
-    border: 0; border-radius: 10px; display: block;
-    width: 100%; height: 80px;
-    background: rgba(0,0,0,0.4);
-  }
+}
+
   .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
   @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
 
@@ -347,17 +379,6 @@
   .lyrics-body p { margin-bottom: 1.4em; }
   .lyrics-body p:last-child { margin-bottom: 0; }
   .lyrics-body .accent { color: var(--accent); }
-  .lyrics-footer {
-    margin-top: 64px;
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.36);
-    display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; max-width: 720px;
-  }
-  .lyrics-footer span strong {
-    color: rgba(255,255,255,0.72); font-weight: 700; letter-spacing: 0;
-    text-transform: none; font-size: 12px;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .vinyl-small, .listen-now .arrow { animation: none !important; }
   }
@@ -371,7 +392,6 @@
     .pull-quote { font-size: 22px; }
     .lyrics-section { padding: 20px 20px 80px; }
     .lyrics-body { font-size: 19px; line-height: 1.5; }
-    .lyrics-footer { flex-direction: column; gap: 10px; }
   }
 </style>
 
@@ -740,14 +760,25 @@
 
     <a class="listen-now" href="https://open.spotify.com/track/3mJQtUFLrqZs1erDtF6oeP" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
 
-    <div class="embed-wrap">
-      <div class="cassette-strip">
-        <span class="left"><span class="live-dot"></span>Now Playing</span>
-        <div class="reels"><span class="reel"></span><span class="reel"></span></div>
-      </div>
-      <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/3mJQtUFLrqZs1erDtF6oeP?utm_source=auny_media&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" title="Spotify preview player for Heart Inside of Me, Pt. 2"></iframe>
-      <p class="embed-note">hit play to preview · plays full on spotify</p>
-    </div>
+    <!-- Shared Spotify embed player. Variables:
+       track   "track" | "album"
+       3mJQtUFLrqZs1erDtF6oeP     Spotify ID
+       Heart Inside of Me, Pt. 2  Track/album title (for a11y)
+       embed-wrap   "embed-wrap" for single, "embed-wrap album" for album
+-->
+<div class="embed-wrap">
+  <div class="cassette-strip">
+    <span class="left"><span class="live-dot"></span>Now Playing</span>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+  </div>
+  <iframe class="spotify-embed"
+          src="https://open.spotify.com/embed/track/3mJQtUFLrqZs1erDtF6oeP?utm_source=auny_media&theme=0"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify preview player for Heart Inside of Me, Pt. 2"></iframe>
+  <p class="embed-note">hit play to preview · plays full on spotify</p>
+</div>
+
 
     
   </div>
@@ -792,11 +823,16 @@
     <p>There's a heart inside of me<br>Still beating through the noise<br>It memorized pain<br>Long before it understood joy<br>There's a heart inside of me<br>Still standing in the mess<br>It keeps on showing up<br>Even when it doesn't feel safe</p>
     <p>Still here<br>Still breathing<br>Still mine</p>
   </article>
-  <div class="lyrics-footer">
-    <span><strong>Written &amp; Produced</strong> by Auny</span>
-    <span><strong>Released</strong> January 4, 2026</span>
-    <span><strong>©</strong> 11119560 Records DK</span>
-  </div>
+
+  <!-- Shared bottom-of-page footer. Variable:
+       January 4, 2026  e.g. "May 16, 2026"
+-->
+<footer class="page-footer">
+  <span><strong>Written &amp; Produced</strong> by Auny</span>
+  <span><strong>Released</strong> January 4, 2026</span>
+  <span><strong>©</strong> 11119560 Records DK</span>
+</footer>
+
 </section>
 
 </body>

@@ -237,28 +237,96 @@
     0%, 100% { transform: translateX(0); opacity: 0.65; }
     50% { transform: translateX(6px); opacity: 1; }
   }
+  /* ─── Shared player container ──────────────────────────────────────────────
+   Used on single + album pages. Wraps a Spotify embed iframe with a
+   cassette-style accent strip + "now playing" indicator. Iframe height
+   varies (singles: 80px track player, albums: 380px album+tracklist).
+   Renders dark glass body with subtle accent border.
+*/
+.embed-wrap {
+  position: relative; max-width: 540px; margin: 0 0 22px;
+  padding: 34px 14px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 30px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(var(--accent-rgb), 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.embed-wrap.album { max-width: 920px; }
+.cassette-strip {
+  position: absolute; top: 0; left: 0; right: 0; height: 24px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px;
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
+}
+.cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
+.cassette-strip .live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ff3535;
+  box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
+  animation: livepulse 1.6s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { opacity: 0.45; transform: scale(0.92); }
+  50%     { opacity: 1;    transform: scale(1.1); }
+}
+.cassette-strip .reels { display: flex; gap: 6px; }
+.cassette-strip .reel {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
+  animation: spin 3.2s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.embed-wrap .spotify-embed {
+  border: 0; border-radius: 10px; display: block;
+  width: 100%; height: 80px;
+  background: rgba(0,0,0,0.4);
+  margin: 0;
+}
+.embed-wrap.album .spotify-embed { height: 380px; }
+.embed-note {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+  margin: 12px 4px 0; text-align: center;
+}
+
+  /* ─── Shared page footer ──────────────────────────────────────────────
+   Used at the actual bottom of single + album detail pages. Three
+   columns: credit · release date · copyright. Border-top adopts the
+   page accent color.
+*/
+.page-footer {
+  max-width: 920px; margin: 56px auto 40px; padding: 22px 24px 0;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+  display: flex; justify-content: space-between; gap: 18px;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  color: rgba(255,255,255,0.45); text-transform: uppercase;
+}
+.page-footer span strong {
+  color: rgba(255,255,255,0.78); font-weight: 600; margin-right: 6px;
+}
+@media (max-width: 720px) {
   .page-footer {
-    max-width: 920px; margin: 56px auto 40px; padding: 22px 24px 0;
-    border-top: 1px solid rgba(var(--accent-rgb), 0.18);
-    display: flex; justify-content: space-between; gap: 18px;
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
-    color: rgba(255,255,255,0.45); text-transform: uppercase;
+    flex-direction: column; gap: 10px;
+    text-align: center; padding: 22px 16px 0;
   }
-  .page-footer span strong {
-    color: rgba(255,255,255,0.78); font-weight: 600; margin-right: 6px;
-  }
-  @media (max-width: 720px) {
-    .page-footer { flex-direction: column; gap: 10px; text-align: center; padding: 22px 16px 0; }
-  }
+}
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Spotify album preview — below the orbital hero */
+  /* Album preview section wrapper (centers the player partial below hero) */
   .album-player-section {
     position: relative; z-index: 4;
-    max-width: 760px; margin: 40px auto 60px; padding: 0 32px;
+    max-width: 960px; margin: 40px auto 60px; padding: 0 32px;
     display: flex; flex-direction: column; align-items: center;
     animation: fadeup 0.6s 0.3s ease-out both;
   }
@@ -267,56 +335,6 @@
     font-size: 11px; letter-spacing: 4px;
     color: var(--accent); text-transform: uppercase; opacity: 0.85;
     margin: 0 0 16px;
-  }
-  .album-player-frame {
-    position: relative;
-    width: 100%; padding: 34px 14px 14px; border-radius: 16px;
-    background: rgba(8, 8, 16, 0.6);
-    border: 1px solid rgba(var(--accent-rgb), 0.32);
-    box-shadow:
-      0 0 60px rgba(var(--accent-rgb), 0.18),
-      0 0 140px rgba(var(--accent-rgb), 0.08),
-      inset 0 0 0 1px rgba(255,255,255,0.04);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    overflow: hidden;
-  }
-  .album-player-frame iframe {
-    width: 100%; height: 380px;
-    border: 0; border-radius: 10px; display: block;
-    background: rgba(0,0,0,0.4);
-  }
-  .cassette-strip {
-    position: absolute; top: 0; left: 0; right: 0; height: 24px;
-    background: var(--accent);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 14px;
-    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
-  }
-  .cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
-  .cassette-strip .live-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #ff3535;
-    box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
-    animation: livepulse 1.6s ease-in-out infinite;
-  }
-  @keyframes livepulse {
-    0%,100% { opacity: 0.45; transform: scale(0.92); }
-    50%     { opacity: 1;    transform: scale(1.1); }
-  }
-  .cassette-strip .reels { display: flex; gap: 6px; }
-  .cassette-strip .reel {
-    width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
-    box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
-    animation: spin 3.2s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .album-player-note {
-    font-family: 'Space Mono', monospace;
-    font-size: 10px; letter-spacing: 3px;
-    color: rgba(255,255,255,0.5); text-transform: uppercase;
-    margin: 14px 0 0;
   }
 
   /* Orbit system */
@@ -367,7 +385,6 @@
     }
     .hero { flex: unset; align-items: center; }
     .meta-block { align-items: flex-start; width: 100%; max-width: 320px; }
-    .page-footer { padding-top: 16px; text-align: center; }
     .right-panel { width: 100%; padding: 0 0 28px; }
     @keyframes arrow-nudge {
       0%,100% { transform: translateY(0); opacity: 0.65; }
@@ -744,23 +761,36 @@
 
 <section class="album-player-section" aria-label="Album preview player">
   <p class="album-player-label">✦ &nbsp; preview the album</p>
-  <div class="album-player-frame">
-    <div class="cassette-strip">
-      <span class="left"><span class="live-dot"></span>Now Playing</span>
-      <div class="reels"><span class="reel"></span><span class="reel"></span></div>
-    </div>
-    <iframe src="https://open.spotify.com/embed/album/7CYsvVsXLjFCK9gmToB61t?utm_source=auny_media&theme=0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            title="Spotify preview player for Midnight Glitch" loading="lazy"></iframe>
+  <!-- Shared Spotify embed player. Variables:
+       album   "track" | "album"
+       7CYsvVsXLjFCK9gmToB61t     Spotify ID
+       Midnight Glitch  Track/album title (for a11y)
+       embed-wrap album   "embed-wrap" for single, "embed-wrap album" for album
+-->
+<div class="embed-wrap album">
+  <div class="cassette-strip">
+    <span class="left"><span class="live-dot"></span>Now Playing</span>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
   </div>
-  <p class="album-player-note">hit play to preview · plays full on spotify</p>
+  <iframe class="spotify-embed"
+          src="https://open.spotify.com/embed/album/7CYsvVsXLjFCK9gmToB61t?utm_source=auny_media&theme=0"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify preview player for Midnight Glitch"></iframe>
+  <p class="embed-note">hit play to preview · plays full on spotify</p>
+</div>
+
 </section>
 
+<!-- Shared bottom-of-page footer. Variable:
+       May 6, 2026  e.g. "May 16, 2026"
+-->
 <footer class="page-footer">
   <span><strong>Written &amp; Produced</strong> by Auny</span>
   <span><strong>Released</strong> May 6, 2026</span>
   <span><strong>©</strong> 11119560 Records DK</span>
 </footer>
+
 
 <script>
 (function () {
