@@ -117,9 +117,9 @@ function renderSingle(single) {
 // ─── List page render ───────────────────────────────────────────────────────
 
 function cardHtml(single, opts = {}) {
-  const isSeries = single.colorSeries === 'member';
-  const cls = isSeries ? 'card series' : 'card';
-  const accentStyle = isSeries ? ` style="--card-accent:${single.accent.color}"` : '';
+  const hasAccent = single.colorSeries === 'member' || single.slug === 'pink';
+  const cls = hasAccent ? 'card series' : 'card';
+  const accentStyle = hasAccent ? ` style="--card-accent:${single.accent.color}"` : '';
   const badge = opts.badgeText ? `      <span class="badge" style="color:${single.accent.color}">${opts.badgeText}</span>\n` : '';
   return `      <a class="${cls}" href="/singles/${single.slug}"${accentStyle}>
 ${badge}        <div class="cover"><img src="/album-art/singles/${single.slug}.jpg" alt="${escAttr(single.title)} cover" loading="lazy" width="640" height="640"></div>
