@@ -124,6 +124,7 @@
   }
   {{PLAYER_CSS}}
   {{FOOTER_CSS}}
+  {{LISTEN_CSS}}
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -244,7 +245,10 @@
         <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
       </div>
 
-      <a class="hero-accent" href="https://open.spotify.com/album/{{SPOTIFY_ALBUM_ID}}" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
+      <div class="hero-listen">
+        <a class="hero-accent" href="https://open.spotify.com/album/{{SPOTIFY_ALBUM_ID}}" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
+        <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/{{HYPERFOLLOW_SLUG}}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+      </div>
     </div>
   </div>
 

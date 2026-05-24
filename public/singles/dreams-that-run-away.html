@@ -367,6 +367,44 @@
   color: var(--accent); font-weight: 700;
 }
 
+  /* ─── Shared "stream on all platforms" CTA ─────────────────────────────
+   The pill links out to the DistroKid hyperfollow page. The pill's
+   accent border + glow adopts the page's --accent.
+
+   On singles: pill sits inline next to "listen on spotify" with a dot.
+   On albums: pill sits below the large "listen on spotify" hero link.
+*/
+.listen-row {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.listen-row .listen-now { margin-bottom: 0 !important; }
+.listen-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+}
+.all-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.18);
+  transition: box-shadow 0.25s, background 0.25s, transform 0.2s;
+}
+.all-pill:hover {
+  background: rgba(var(--accent-rgb), 0.18);
+  box-shadow: 0 0 26px rgba(var(--accent-rgb), 0.45);
+  transform: translateY(-1px);
+}
+.all-pill .ext { font-size: 0.85em; opacity: 0.85; }
+
+/* Album hero variant — stacked layout */
+.hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+.hero-listen .hero-accent { margin: 0; }
+
 
   /* cover stage */
   .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
@@ -790,7 +828,11 @@
       <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">11119560 Records DK</span></div>
     </div>
 
-    <a class="listen-now" href="https://open.spotify.com/track/20G7s9waUjuUvQ9eQjIIYy" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+    <div class="listen-row">
+      <a class="listen-now" href="https://open.spotify.com/track/20G7s9waUjuUvQ9eQjIIYy" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+      <span class="listen-dot"></span>
+      <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/dreams-that-run-away" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+    </div>
 
     <!-- Shared Spotify embed player. Variables:
        track   "track" | "album"

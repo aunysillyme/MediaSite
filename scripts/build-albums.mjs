@@ -2,7 +2,7 @@
 // Generates /albums + /albums/<slug> pages from src/data/albums.js + templates/
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, playerFor, footerFor } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, playerFor, footerFor } from './_lib.mjs';
 import { join } from 'node:path';
 
 const ALBUM_TPL = tpl('album.html');
@@ -44,6 +44,8 @@ function renderAlbum(album) {
     PLAYER_HTML: playerFor({ kind: 'album', id: album.spotifyAlbumId, title: album.title }),
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: album.releaseDisplay }),
+    LISTEN_CSS: LISTEN_CSS,
+    HYPERFOLLOW_SLUG: album.hyperfollowSlug,
   });
 }
 

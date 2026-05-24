@@ -14,6 +14,7 @@ export const FOOTER_HTML = tpl('_footer.html');
 export const FOOTER_CSS = tpl('_footer.css');
 export const COLOR_CHIPS_HTML = tpl('_color-chips.html');
 export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
+export const LISTEN_CSS = tpl('_listen.css');
 
 export function colorChipsFor({ colors, currentSlug, currentType }) {
   // Released chips link out; upcoming chips render as static "soon" pills

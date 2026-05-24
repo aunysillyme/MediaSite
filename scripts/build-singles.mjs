@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -110,6 +110,7 @@ function renderSingle(single) {
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
     COLOR_CHIPS_CSS: COLOR_CHIPS_CSS,
+    LISTEN_CSS: LISTEN_CSS,
   };
   return Object.entries(replacements).reduce(
     (html, [key, val]) => html.replaceAll(`{{${key}}}`, val),
