@@ -608,7 +608,7 @@ Watch what I do next`,
     era: 2,
     colorSeries: 'member',
     emoji: '💙',
-    accent: { color: '#D63CC5', rgb: '214,60,197' },
+    accent: { color: '#1E90FF', rgb: '30,144,255' },
     themes: 'Chosen stillness, grief held in calm, the freeze response as shelter — standing still in the storm by choice',
     anchorLyric: "Calm on the surface — while the world breaks down",
     lyrics: `Blue is the color of ice
