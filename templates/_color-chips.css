@@ -1,0 +1,49 @@
+/* ─── Color series chip row ────────────────────────────────────────────────
+   Used on every color series single page (BLACK, BLUE, YELLOW, RED, PINK,
+   ORANGE, CYAN, …). Released chips link to the song. Upcoming chips show
+   a dashed border + "SOON" tag and aren't clickable.
+*/
+.color-series-block { margin-top: 16px; }
+.series-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.58);
+  margin: 0 0 12px;
+}
+.series-chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chip {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.chip:hover { border-color: rgba(255,255,255,0.62); color: #fff; }
+.chip.this { border-color: var(--accent); color: var(--accent); }
+.chip.soon {
+  border-style: dashed; border-color: rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.36); cursor: default;
+}
+.chip.soon:hover { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.36); }
+.chip .soon-tag {
+  font-size: 8px; letter-spacing: 2px;
+  padding: 2px 6px; border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.4);
+}
+.chip.soon.tomorrow .soon-tag {
+  background: rgba(var(--chip-accent-rgb, 255,255,255), 0.15);
+  color: rgb(var(--chip-accent-rgb, 255,255,255));
+  animation: tomorrow-pulse 1.8s ease-in-out infinite;
+}
+@keyframes tomorrow-pulse {
+  0%,100% { opacity: 0.75; }
+  50%     { opacity: 1; }
+}
+.series-note {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.46);
+  margin: 14px 0 0;
+}
+.series-note .type-tag {
+  color: var(--accent); font-weight: 700;
+}

@@ -4,14 +4,38 @@
 
 export const BRAND_ACCENT = { color: '#1E90FF', rgb: '30,144,255' };
 
-export const COLOR_SERIES_ORDER = [
-  { slug: 'black',  emoji: '🖤', label: 'BLACK',  accent: { color: '#9EA0A6', rgb: '158,160,166' } },
-  { slug: 'blue',   emoji: '💙', label: 'BLUE',   accent: { color: '#1E90FF', rgb: '30,144,255'  } },
-  { slug: 'yellow', emoji: '💛', label: 'YELLOW', accent: { color: '#F5C518', rgb: '245,197,24'  } },
-  { slug: 'red',    emoji: '❤️', label: 'RED',    accent: { color: '#E84855', rgb: '232,72,85'   } },
-  { slug: 'pink',   emoji: '🩷', label: 'PINK',   accent: { color: '#E91E63', rgb: '233,30,99'   } },
-  { slug: 'orange', emoji: '🧡', label: 'ORANGE', accent: { color: '#FF8C42', rgb: '255,140,66'  } },
+// The 12-color series: 7 rainbow (ROYGBIV) + 5 outliers (non-spectral).
+// `released: false` entries render as "soon" chips and tease upcoming colors.
+// See vault: 🎵 Music/color_series_concept.md for the conceptual frame.
+export const COLOR_SERIES = [
+  // ─── Released so far (7) ──────────────────────────────────────────
+  { slug: 'black',  emoji: '🖤', label: 'BLACK',  type: 'outlier', released: true,  accent: { color: '#9EA0A6', rgb: '158,160,166' } },
+  { slug: 'blue',   emoji: '💙', label: 'BLUE',   type: 'rainbow', released: true,  accent: { color: '#1E90FF', rgb: '30,144,255'  } },
+  { slug: 'yellow', emoji: '💛', label: 'YELLOW', type: 'rainbow', released: true,  accent: { color: '#F5C518', rgb: '245,197,24'  } },
+  { slug: 'red',    emoji: '❤️', label: 'RED',    type: 'rainbow', released: true,  accent: { color: '#E84855', rgb: '232,72,85'   } },
+  { slug: 'pink',   emoji: '🩷', label: 'PINK',   type: 'outlier', released: true,  accent: { color: '#E91E63', rgb: '233,30,99'   } },
+  { slug: 'orange', emoji: '🧡', label: 'ORANGE', type: 'rainbow', released: true,  accent: { color: '#FF8C42', rgb: '255,140,66'  } },
+
+  // ─── Coming next ──────────────────────────────────────────────────
+  { slug: 'cyan',   emoji: '🩵', label: 'CYAN',   type: 'outlier', released: false, releaseNote: 'tomorrow',
+    accent: { color: '#22D3EE', rgb: '34,211,238' } },
+
+  // ─── Not yet written ──────────────────────────────────────────────
+  { slug: 'violet', emoji: '💜', label: 'VIOLET', type: 'rainbow', released: false, accent: { color: '#A855F7', rgb: '168,85,247' } },
+  { slug: 'indigo', emoji: '🟣', label: 'INDIGO', type: 'rainbow', released: false, accent: { color: '#6366F1', rgb: '99,102,241' } },
+  { slug: 'green',  emoji: '💚', label: 'GREEN',  type: 'rainbow', released: false, accent: { color: '#10B981', rgb: '16,185,129' } },
+  { slug: 'tbd-1',  emoji: '❓', label: '???',    type: 'outlier', released: false, accent: { color: '#9CA3AF', rgb: '156,163,175' } },
+  { slug: 'tbd-2',  emoji: '❓', label: '???',    type: 'outlier', released: false, accent: { color: '#9CA3AF', rgb: '156,163,175' } },
 ];
+
+// Released subset — used for chip-row members that have real pages
+export const COLOR_SERIES_ORDER = COLOR_SERIES.filter((c) => c.released);
+
+// Type meaning blurbs (shown under chip row on each color page)
+export const COLOR_TYPE_INFO = {
+  rainbow: { label: 'rainbow color', blurb: "one of the seven in the visible spectrum — chosen, inhabited, or survived" },
+  outlier: { label: 'outlier color', blurb: "outside the traditional rainbow — imposed, constructed, absent, or in-between" },
+};
 
 export const SINGLES = [
   {
@@ -76,7 +100,7 @@ Once I let go`,
     hyperfollowSlug: 'pink',
     genre: 'Dark EDM · Rave · Lo-Fi Mashup',
     era: 2,
-    colorSeries: 'standalone',
+    colorSeries: 'member',
     emoji: '🩷',
     accent: { color: '#E91E63', rgb: '233,30,99' },
     themes: 'Imposed identity, refusal, the cage that looks soft, being seen wrong, the color that doesn’t exist',

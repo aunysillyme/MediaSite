@@ -4,8 +4,10 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
-import { SINGLES, COLOR_SERIES_ORDER, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, playerFor, footerFor } from './_lib.mjs';
+import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo } from './_lib.mjs';
+
+registerColorTypeInfo(COLOR_TYPE_INFO);
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8');
@@ -42,33 +44,29 @@ function lyricsToJsonText(text) {
 // Per-single background hue rotation off the source PNG (which is already blue-violet)
 function bgHueFor(single) {
   if (single.colorSeries === 'member') {
-    const map = { black: 200, blue: 200, yellow: 30, red: 340, orange: 20 };
+    const map = { black: 200, blue: 200, yellow: 30, red: 340, pink: 320, orange: 20 };
     return map[single.slug] ?? 200;
   }
-  if (single.slug === 'pink') return 320;
   return 200;
 }
 
 function heroLabelFor(single) {
   if (single.colorSeries === 'member') {
-    return `${single.emoji} &nbsp; single · color series`;
+    const meta = COLOR_SERIES.find((c) => c.slug === single.slug);
+    const tag = meta?.type === 'outlier' ? 'outlier' : 'rainbow';
+    return `${single.emoji} &nbsp; single · color series · ${tag}`;
   }
-  if (single.slug === 'pink') return '🩷 &nbsp; single · standalone';
   return '✦ &nbsp; single';
 }
 
 function seriesBlockFor(single) {
-  if (single.colorSeries === 'member') {
-    const chips = COLOR_SERIES_ORDER.map(({ slug, emoji, label }) => {
-      const cls = slug === single.slug ? 'chip this' : 'chip';
-      return `      <a class="${cls}" href="/singles/${slug}">${emoji} ${label}</a>`;
-    }).join('\n');
-    return `<p class="series-label">part of the color series →</p>\n    <div class="series-chips">\n${chips}\n    </div>`;
-  }
-  if (single.slug === 'pink') {
-    return `<p class="standalone-note">Standalone single — outside the color series. Every other color was chosen or inhabited; pink was assigned and refused.</p>`;
-  }
-  return '';
+  if (single.colorSeries !== 'member') return '';
+  const meta = COLOR_SERIES.find((c) => c.slug === single.slug);
+  return colorChipsFor({
+    colors: COLOR_SERIES,
+    currentSlug: single.slug,
+    currentType: meta?.type,
+  });
 }
 
 function titleHtml(single) {
@@ -111,6 +109,7 @@ function renderSingle(single) {
     PLAYER_HTML: playerFor({ kind: 'track', id: single.spotifyTrackId, title: single.title }),
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
+    COLOR_CHIPS_CSS: COLOR_CHIPS_CSS,
   };
   return Object.entries(replacements).reduce(
     (html, [key, val]) => html.replaceAll(`{{${key}}}`, val),

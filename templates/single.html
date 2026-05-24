@@ -123,24 +123,7 @@
   .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
   @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
 
-  .series-label {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.58); margin-top: 16px; margin-bottom: 10px;
-  }
-  .series-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
-    text-decoration: none; transition: border-color 0.2s, color 0.2s;
-  }
-  .chip:hover { border-color: rgba(255,255,255,0.62); color: #fff; }
-  .chip.this { border-color: var(--accent); color: var(--accent); }
-  .standalone-note {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.58); margin-top: 16px;
-    border-left: 2px solid rgba(var(--accent-rgb),0.4); padding-left: 10px;
-  }
+  {{COLOR_CHIPS_CSS}}
 
   /* cover stage */
   .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }

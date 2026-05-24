@@ -1,0 +1,12 @@
+<!-- Color series chip row. Variables:
+       {{CHIPS}}           Rendered chip markup (released anchors + soon spans)
+       {{TYPE_LABEL}}      "rainbow color" or "outlier color"
+       {{TYPE_BLURB}}      One-line meaning for this type
+-->
+<div class="color-series-block">
+  <p class="series-label">part of the color series →</p>
+  <div class="series-chips">
+{{CHIPS}}
+  </div>
+  <p class="series-note"><span class="type-tag">{{TYPE_LABEL}}</span> — {{TYPE_BLURB}}</p>
+</div>

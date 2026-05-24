@@ -317,24 +317,56 @@
   .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
   @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
 
-  .series-label {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.58); margin-top: 16px; margin-bottom: 10px;
-  }
-  .series-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
-    text-decoration: none; transition: border-color 0.2s, color 0.2s;
-  }
-  .chip:hover { border-color: rgba(255,255,255,0.62); color: #fff; }
-  .chip.this { border-color: var(--accent); color: var(--accent); }
-  .standalone-note {
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-    text-transform: uppercase; color: rgba(255,255,255,0.58); margin-top: 16px;
-    border-left: 2px solid rgba(var(--accent-rgb),0.4); padding-left: 10px;
-  }
+  /* ─── Color series chip row ────────────────────────────────────────────────
+   Used on every color series single page (BLACK, BLUE, YELLOW, RED, PINK,
+   ORANGE, CYAN, …). Released chips link to the song. Upcoming chips show
+   a dashed border + "SOON" tag and aren't clickable.
+*/
+.color-series-block { margin-top: 16px; }
+.series-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.58);
+  margin: 0 0 12px;
+}
+.series-chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chip {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
+  text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.chip:hover { border-color: rgba(255,255,255,0.62); color: #fff; }
+.chip.this { border-color: var(--accent); color: var(--accent); }
+.chip.soon {
+  border-style: dashed; border-color: rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.36); cursor: default;
+}
+.chip.soon:hover { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.36); }
+.chip .soon-tag {
+  font-size: 8px; letter-spacing: 2px;
+  padding: 2px 6px; border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.4);
+}
+.chip.soon.tomorrow .soon-tag {
+  background: rgba(var(--chip-accent-rgb, 255,255,255), 0.15);
+  color: rgb(var(--chip-accent-rgb, 255,255,255));
+  animation: tomorrow-pulse 1.8s ease-in-out infinite;
+}
+@keyframes tomorrow-pulse {
+  0%,100% { opacity: 0.75; }
+  50%     { opacity: 1; }
+}
+.series-note {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.46);
+  margin: 14px 0 0;
+}
+.series-note .type-tag {
+  color: var(--accent); font-weight: 700;
+}
+
 
   /* cover stage */
   .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
@@ -746,7 +778,7 @@
 
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-label">💙 &nbsp; single · color series</p>
+    <p class="hero-label">💙 &nbsp; single · color series · rainbow</p>
     <h1 class="hero-title">BLUE</h1>
     <p class="hero-byline">Auny &nbsp;·&nbsp; 2026</p>
 
@@ -780,15 +812,41 @@
 </div>
 
 
-    <p class="series-label">part of the color series →</p>
-    <div class="series-chips">
-      <a class="chip" href="/singles/black">🖤 BLACK</a>
-      <a class="chip this" href="/singles/blue">💙 BLUE</a>
-      <a class="chip" href="/singles/yellow">💛 YELLOW</a>
-      <a class="chip" href="/singles/red">❤️ RED</a>
-      <a class="chip" href="/singles/pink">🩷 PINK</a>
-      <a class="chip" href="/singles/orange">🧡 ORANGE</a>
-    </div>
+    <!-- Color series chip row. Variables:
+           <a class="chip" href="/singles/black">🖤 BLACK</a>
+    <a class="chip this" href="/singles/blue">💙 BLUE</a>
+    <a class="chip" href="/singles/yellow">💛 YELLOW</a>
+    <a class="chip" href="/singles/red">❤️ RED</a>
+    <a class="chip" href="/singles/pink">🩷 PINK</a>
+    <a class="chip" href="/singles/orange">🧡 ORANGE</a>
+    <span class="chip soon tomorrow" style="--chip-accent-rgb:34,211,238">🩵 CYAN <span class="soon-tag">TOMORROW</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:168,85,247">💜 VIOLET <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:99,102,241">🟣 INDIGO <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:16,185,129">💚 GREEN <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:156,163,175">❓ ??? <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:156,163,175">❓ ??? <span class="soon-tag">SOON</span></span>           Rendered chip markup (released anchors + soon spans)
+       rainbow color      "rainbow color" or "outlier color"
+       one of the seven in the visible spectrum — chosen, inhabited, or survived      One-line meaning for this type
+-->
+<div class="color-series-block">
+  <p class="series-label">part of the color series →</p>
+  <div class="series-chips">
+    <a class="chip" href="/singles/black">🖤 BLACK</a>
+    <a class="chip this" href="/singles/blue">💙 BLUE</a>
+    <a class="chip" href="/singles/yellow">💛 YELLOW</a>
+    <a class="chip" href="/singles/red">❤️ RED</a>
+    <a class="chip" href="/singles/pink">🩷 PINK</a>
+    <a class="chip" href="/singles/orange">🧡 ORANGE</a>
+    <span class="chip soon tomorrow" style="--chip-accent-rgb:34,211,238">🩵 CYAN <span class="soon-tag">TOMORROW</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:168,85,247">💜 VIOLET <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:99,102,241">🟣 INDIGO <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:16,185,129">💚 GREEN <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:156,163,175">❓ ??? <span class="soon-tag">SOON</span></span>
+    <span class="chip soon" style="--chip-accent-rgb:156,163,175">❓ ??? <span class="soon-tag">SOON</span></span>
+  </div>
+  <p class="series-note"><span class="type-tag">rainbow color</span> — one of the seven in the visible spectrum — chosen, inhabited, or survived</p>
+</div>
+
   </div>
 
   <div class="cover-stage">

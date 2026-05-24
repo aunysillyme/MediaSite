@@ -12,6 +12,37 @@ export const PLAYER_HTML = tpl('_player.html');
 export const PLAYER_CSS = tpl('_player.css');
 export const FOOTER_HTML = tpl('_footer.html');
 export const FOOTER_CSS = tpl('_footer.css');
+export const COLOR_CHIPS_HTML = tpl('_color-chips.html');
+export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
+
+export function colorChipsFor({ colors, currentSlug, currentType }) {
+  // Released chips link out; upcoming chips render as static "soon" pills
+  // that adopt the upcoming color's accent for the SOON tag.
+  const chips = colors.map((c) => {
+    if (c.released) {
+      const cls = c.slug === currentSlug ? 'chip this' : 'chip';
+      return `    <a class="${cls}" href="/singles/${c.slug}">${c.emoji} ${c.label}</a>`;
+    }
+    const tomorrow = c.releaseNote === 'tomorrow' ? ' tomorrow' : '';
+    const accentVar = `--chip-accent-rgb:${c.accent.rgb}`;
+    const tag = c.releaseNote === 'tomorrow' ? 'TOMORROW' : 'SOON';
+    return `    <span class="chip soon${tomorrow}" style="${accentVar}">${c.emoji} ${c.label} <span class="soon-tag">${tag}</span></span>`;
+  }).join('\n');
+
+  const info = (currentType && currentType in COLOR_TYPE_INFO_MAP)
+    ? COLOR_TYPE_INFO_MAP[currentType]
+    : { label: 'color series', blurb: '12 colors total — 7 rainbow, 5 outliers' };
+
+  return render(COLOR_CHIPS_HTML, {
+    CHIPS: chips,
+    TYPE_LABEL: info.label,
+    TYPE_BLURB: info.blurb,
+  });
+}
+
+// Populated by build scripts that import COLOR_TYPE_INFO from singles.js
+let COLOR_TYPE_INFO_MAP = {};
+export function registerColorTypeInfo(info) { COLOR_TYPE_INFO_MAP = info; }
 
 export function playerFor({ kind, id, title }) {
   const wrapClass = kind === 'album' ? 'embed-wrap album' : 'embed-wrap';
