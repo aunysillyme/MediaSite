@@ -297,34 +297,43 @@
 .signup-label {
   font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
   text-transform: uppercase; color: var(--accent);
+  text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.55);
   white-space: nowrap;
 }
 .signup-label-sr { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; }
 .signup input[type="email"] {
   width: 260px; min-width: 0;
-  background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(8,8,16,0.7); border: 1px solid rgba(var(--accent-rgb), 0.4);
   border-radius: 6px; padding: 9px 12px;
   color: #fff; font-family: 'Space Mono', monospace; font-size: 12px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.55);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.12), inset 0 0 14px rgba(var(--accent-rgb), 0.08);
+  transition: border-color 0.2s, box-shadow 0.2s, text-shadow 0.2s;
 }
-.signup input[type="email"]::placeholder { color: rgba(255,255,255,0.32); letter-spacing: 0; text-transform: none; }
+.signup input[type="email"]::placeholder {
+  color: rgba(var(--accent-rgb), 0.45);
+  letter-spacing: 0; text-transform: none;
+  text-shadow: 0 0 6px rgba(var(--accent-rgb), 0.35);
+}
 .signup input[type="email"]:focus {
   outline: none; border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.16);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.25), 0 0 22px rgba(var(--accent-rgb), 0.25);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.75);
 }
 .signup button {
-  background: transparent; color: var(--accent);
-  border: 1px solid rgba(var(--accent-rgb), 0.55);
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2.5px;
-  text-transform: uppercase; padding: 9px 16px; border-radius: 6px;
+  background: var(--accent); color: #030308;
+  border: 1px solid var(--accent);
+  font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; padding: 9px 18px; border-radius: 6px;
   cursor: pointer; white-space: nowrap;
-  transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.35);
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
 }
 .signup button:hover {
-  background: rgba(var(--accent-rgb), 0.12);
-  box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.25);
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.55);
 }
-.signup button:disabled { opacity: 0.5; cursor: wait; background: transparent; box-shadow: none; }
+.signup button:disabled { opacity: 0.55; cursor: wait; transform: none; box-shadow: none; }
 .signup-hp { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
 .signup-status {
   font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;

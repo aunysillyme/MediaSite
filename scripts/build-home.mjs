@@ -116,6 +116,7 @@ const LINKS_TPL = tpl('links.html');
 const linksHtml = render(LINKS_TPL, {
   NAV: navFor('links'),
   NAV_CSS: NAV_CSS,
+  SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
 });
 writeOut('links.html', linksHtml);
 console.log('✓ generated /links → public/links.html');
