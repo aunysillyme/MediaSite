@@ -158,10 +158,21 @@
   }
   .featured-card {
     display: block; text-decoration: none; color: inherit;
-    width: min(100%, 380px);
+    width: min(100%, 620px);
     transition: transform 0.3s ease;
     position: relative;
   }
+  /* Featured card 2-column layout: cover+title on left, listen+player on right */
+  .featured-card-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  .featured-card-left .featured-meta { margin-top: 14px; }
+  .featured-card-right { display: flex; flex-direction: column; gap: 10px; }
+  .featured-card-right .listen-row { margin-bottom: 0; }
+  .featured-card-right .embed-wrap { margin-top: 4px; }
   .featured-cover-link { display: block; transition: transform 0.3s ease; }
   .featured-cover-link:hover { transform: translateY(-6px); }
   .featured-play-overlay {
@@ -370,18 +381,23 @@
   <div class="featured">
     <span class="featured-label">latest release</span>
     <div class="featured-card">
-      <a class="featured-cover-link" href="{{LATEST_URL}}" aria-label="View {{LATEST_TITLE}} details">
-        <div class="featured-cover">
-          <img src="{{LATEST_COVER}}" alt="{{LATEST_TITLE}} cover" width="640" height="640" fetchpriority="high" decoding="async">
-          <div class="featured-play-overlay" aria-hidden="true">
-            <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+     <div class="featured-card-grid">
+      <div class="featured-card-left">
+        <a class="featured-cover-link" href="{{LATEST_URL}}" aria-label="View {{LATEST_TITLE}} details">
+          <div class="featured-cover">
+            <img src="{{LATEST_COVER}}" alt="{{LATEST_TITLE}} cover" width="640" height="640" fetchpriority="high" decoding="async">
+            <div class="featured-play-overlay" aria-hidden="true">
+              <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+            </div>
           </div>
+        </a>
+        <div class="featured-meta">
+          <p class="featured-tag">{{LATEST_TYPE}} · {{LATEST_DATE}}</p>
+          <h2 class="featured-title">{{LATEST_TITLE}}</h2>
+          <p class="featured-sub">{{LATEST_BLURB}}</p>
         </div>
-      </a>
-      <div class="featured-meta">
-        <p class="featured-tag">{{LATEST_TYPE}} · {{LATEST_DATE}}</p>
-        <h2 class="featured-title">{{LATEST_TITLE}}</h2>
-        <p class="featured-sub">{{LATEST_BLURB}}</p>
+      </div>
+      <div class="featured-card-right">
         <div class="listen-row">
           <a class="listen-now" href="{{LATEST_SPOTIFY_URL}}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
           <span class="listen-dot"></span>
@@ -389,6 +405,7 @@
         </div>
         {{LATEST_PLAYER_HTML}}
       </div>
+     </div>
     </div>
   </div>
 </section>
