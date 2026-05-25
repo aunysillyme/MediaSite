@@ -55,8 +55,8 @@
 .signup-status.ok    { color: var(--accent); }
 .signup-status.err   { color: #ff8585; }
 
-/* Tighten gap to the per-page footer that follows the signup. */
-.signup + .page-footer { margin-top: 18px; }
+/* When signup precedes the global footer, the footer's own top margin
+   handles the gap (24px). No extra rule needed — kept consistent everywhere. */
 
 @media (max-width: 640px) {
   .signup { flex-wrap: wrap; margin: 24px 16px 0; gap: 10px; }

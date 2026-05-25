@@ -287,6 +287,39 @@
 /* Smaller badge for the denser homepage row */
 .mini-card.series .badge { font-size: 13px; padding: 3px 6px; top: 8px; left: 8px; }
 
+  /* ─── Global site footer ──────────────────────────────────────────────
+   Single footer used on every page. Platform links row + copyright.
+   Top border adopts the page accent so it tunes to whatever color the
+   page is wearing today. */
+.site-footer {
+  max-width: 1240px; margin: 24px auto 0; padding: 22px 32px 40px;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+  text-align: center; position: relative; z-index: 4;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+}
+.site-footer .footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+  margin-bottom: 16px;
+}
+.site-footer .footer-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer .footer-links a:hover { color: var(--accent); }
+.site-footer .footer-meta {
+  color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px;
+}
+.site-footer .footer-meta a {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+}
+.site-footer .footer-meta a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .site-footer { padding: 22px 16px 32px; }
+  .site-footer .footer-links { gap: 14px; font-size: 10px; }
+}
+
   /* Newsletter signup — minimal inline form. No card, no glow, no background.
    Reads as a single mono label + input + button line. Picks up page accent. */
 .signup {
@@ -344,8 +377,8 @@
 .signup-status.ok    { color: var(--accent); }
 .signup-status.err   { color: #ff8585; }
 
-/* Tighten gap to the per-page footer that follows the signup. */
-.signup + .page-footer { margin-top: 18px; }
+/* When signup precedes the global footer, the footer's own top margin
+   handles the gap (24px). No extra rule needed — kept consistent everywhere. */
 
 @media (max-width: 640px) {
   .signup { flex-wrap: wrap; margin: 24px 16px 0; gap: 10px; }
@@ -355,12 +388,6 @@
 }
 
 
-
-  .footer-note {
-    margin-top: 80px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08);
-    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
-    text-transform: uppercase; color: rgba(255,255,255,0.52); text-align: center;
-  }
 
   @media (prefers-reduced-motion: reduce) {
     .card { transition: none !important; }
@@ -1402,9 +1429,23 @@
   <span class="signup-status" id="signup-status" role="status" aria-live="polite"></span>
 </form>
 
-
-  <p class="footer-note">25 singles &nbsp;·&nbsp; auny &nbsp;·&nbsp; 11119560 Records DK</p>
 </main>
+<!-- Global site footer. Identical on every page (home, singles, albums,
+     list pages, links). Per-release info is not in the footer — release
+     date is rendered in the meta block on individual pages. -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/auny/1880511675" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://music.amazon.com/artists/B0GDL275G8/auny" target="_blank" rel="noopener">Amazon Music</a>
+    <a href="https://www.youtube.com/@aunysillyme" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno</a>
+    <a href="/links">all platforms</a>
+    <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">Contact</a>
+  </div>
+  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
+</footer>
+
 
 <script>
 (function () {

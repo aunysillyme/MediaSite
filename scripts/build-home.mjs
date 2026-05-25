@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, singleCoverPath, seriesBadge } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -103,6 +103,7 @@ const html = render(HOME_TPL, {
   SERIES_CARD_CSS,
   LISTEN_CSS,
   SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
+  FOOTER_HTML, FOOTER_CSS,
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });
@@ -113,10 +114,12 @@ console.log('✓ generated homepage → index.html');
 
 // Process /links page (templates/links.html → public/links.html)
 const LINKS_TPL = tpl('links.html');
+// /links is intentionally self-contained — its orbital surface already
+// shows every platform, and adding signup/global-footer breaks the
+// centered flex layout. Keep nav only.
 const linksHtml = render(LINKS_TPL, {
   NAV: navFor('links'),
   NAV_CSS: NAV_CSS,
-  SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
 });
 writeOut('links.html', linksHtml);
 console.log('✓ generated /links → public/links.html');

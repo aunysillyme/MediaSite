@@ -99,6 +99,7 @@ function renderList() {
     NAV: navFor('albums'),
     NAV_CSS: NAV_CSS,
     SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
+    FOOTER_HTML: footerFor(), FOOTER_CSS,
   });
 }
 

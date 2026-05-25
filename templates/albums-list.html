@@ -76,13 +76,12 @@
   .album-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.62); margin-bottom: 10px; }
  .album-card-blurb { font-family: 'Patrick Hand', cursive; font-size: 15px; line-height: 1.35; color: rgba(255,255,255,0.72); }
 
-  .footer-note { margin-top: 80px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.52); text-align: center; }
-
   @media (prefers-reduced-motion: reduce) {
     .album-card, .album-card .cover img { transition: none !important; }
     .album-card:hover { transform: none; }
     .album-card:hover .cover img { transform: none; }
   }
+  {{FOOTER_CSS}}
   {{SIGNUP_CSS}}
 </style>
 <script type="application/ld+json">
@@ -108,9 +107,8 @@
   </div>
 
   {{SIGNUP_HTML}}
-
-  <p class="footer-note">7 albums &nbsp;·&nbsp; auny &nbsp;·&nbsp; 11119560 Records DK</p>
 </main>
+{{FOOTER_HTML}}
 
 {{SIGNUP_JS}}
 

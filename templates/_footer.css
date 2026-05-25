@@ -1,21 +1,32 @@
-/* ─── Shared page footer ──────────────────────────────────────────────
-   Used at the actual bottom of single + album detail pages. Three
-   columns: credit · release date · copyright. Border-top adopts the
-   page accent color.
-*/
-.page-footer {
-  max-width: 920px; margin: 56px auto 40px; padding: 22px 24px 0;
+/* ─── Global site footer ──────────────────────────────────────────────
+   Single footer used on every page. Platform links row + copyright.
+   Top border adopts the page accent so it tunes to whatever color the
+   page is wearing today. */
+.site-footer {
+  max-width: 1240px; margin: 24px auto 0; padding: 22px 32px 40px;
   border-top: 1px solid rgba(var(--accent-rgb), 0.18);
-  display: flex; justify-content: space-between; gap: 18px;
-  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
-  color: rgba(255,255,255,0.45); text-transform: uppercase;
+  text-align: center; position: relative; z-index: 4;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
 }
-.page-footer span strong {
-  color: rgba(255,255,255,0.78); font-weight: 600; margin-right: 6px;
+.site-footer .footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+  margin-bottom: 16px;
 }
-@media (max-width: 720px) {
-  .page-footer {
-    flex-direction: column; gap: 10px;
-    text-align: center; padding: 22px 16px 0;
-  }
+.site-footer .footer-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer .footer-links a:hover { color: var(--accent); }
+.site-footer .footer-meta {
+  color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px;
+}
+.site-footer .footer-meta a {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+}
+.site-footer .footer-meta a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .site-footer { padding: 22px 16px 32px; }
+  .site-footer .footer-links { gap: 14px; font-size: 10px; }
 }

@@ -65,8 +65,8 @@ export function playerFor({ kind, id, title }) {
   });
 }
 
-export function footerFor({ releaseDisplay }) {
-  return render(FOOTER_HTML, { RELEASE_DISPLAY: esc(releaseDisplay) });
+export function footerFor() {
+  return FOOTER_HTML;
 }
 
 export function navFor(section) {
