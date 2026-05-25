@@ -1,0 +1,15 @@
+<!-- Newsletter signup — POSTs to /api/subscribe → beehiiv (Mind n Machine).
+     Universal: rendered above the per-page footer on every page that wants it. -->
+<form class="signup" id="signup-form" novalidate>
+  <div class="signup-copy">
+    <span class="signup-eyebrow">✦ &nbsp; mind n machine</span>
+    <span class="signup-tagline">the dispatch behind the music — dark surreal storytelling &amp; creativity unleashed with AI</span>
+  </div>
+  <div class="signup-row">
+    <label class="signup-label-sr" for="signup-email">Your email</label>
+    <input type="email" id="signup-email" name="email" required autocomplete="email" placeholder="you@somewhere.net">
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="signup-hp">
+    <button type="submit" id="signup-submit">subscribe →</button>
+  </div>
+  <p class="signup-status" id="signup-status" role="status" aria-live="polite"></p>
+</form>

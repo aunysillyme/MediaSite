@@ -2,7 +2,7 @@
 // Generates /albums + /albums/<slug> pages from src/data/albums.js + templates/
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, playerFor, footerFor } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor } from './_lib.mjs';
 import { join } from 'node:path';
 
 const ALBUM_TPL = tpl('album.html');
@@ -46,6 +46,7 @@ function renderAlbum(album) {
     FOOTER_HTML: footerFor({ releaseDisplay: album.releaseDisplay }),
     LISTEN_CSS: LISTEN_CSS,
     HYPERFOLLOW_SLUG: album.hyperfollowSlug,
+    SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
   });
 }
 
@@ -97,6 +98,7 @@ function renderList() {
     LIST_JSONLD: listJsonLd(),
     NAV: navFor('albums'),
     NAV_CSS: NAV_CSS,
+    SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
   });
 }
 

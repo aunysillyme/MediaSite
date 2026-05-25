@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo, singleCoverPath, seriesBadge } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, colorChipsFor, registerColorTypeInfo, singleCoverPath, seriesBadge } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -112,6 +112,7 @@ function renderSingle(single) {
     FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
     COLOR_CHIPS_CSS: COLOR_CHIPS_CSS,
     LISTEN_CSS: LISTEN_CSS,
+    SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
   };
   return Object.entries(replacements).reduce(
     (html, [key, val]) => html.replaceAll(`{{${key}}}`, val),
@@ -189,7 +190,10 @@ function renderList() {
     .replaceAll('{{LIST_JSONLD}}', jsonLd)
     .replaceAll('{{NAV}}', navFor('singles'))
     .replaceAll('{{NAV_CSS}}', NAV_CSS)
-    .replaceAll('{{SERIES_CARD_CSS}}', SERIES_CARD_CSS);
+    .replaceAll('{{SERIES_CARD_CSS}}', SERIES_CARD_CSS)
+    .replaceAll('{{SIGNUP_HTML}}', SIGNUP_HTML)
+    .replaceAll('{{SIGNUP_CSS}}', SIGNUP_CSS)
+    .replaceAll('{{SIGNUP_JS}}', SIGNUP_JS);
 }
 
 // ─── Write files ─────────────────────────────────────────────────────────────

@@ -16,6 +16,9 @@ export const COLOR_CHIPS_HTML = tpl('_color-chips.html');
 export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
 export const LISTEN_CSS = tpl('_listen.css');
 export const SERIES_CARD_CSS = tpl('_series-card.css');
+export const SIGNUP_HTML = tpl('_signup.html');
+export const SIGNUP_CSS = tpl('_signup.css');
+export const SIGNUP_JS = tpl('_signup.js');
 
 // Single source of truth for the emoji-badge element used on color-series
 // cards across the homepage and /singles list. Renders <span class="badge">.

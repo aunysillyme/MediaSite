@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, singleCoverPath, seriesBadge } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, singleCoverPath, seriesBadge } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -102,6 +102,7 @@ const html = render(HOME_TPL, {
   SERIES_TOTAL: String(COLOR_SERIES.length),
   SERIES_CARD_CSS,
   LISTEN_CSS,
+  SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });
