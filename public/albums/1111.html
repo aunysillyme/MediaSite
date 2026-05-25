@@ -321,8 +321,9 @@
   /* Newsletter signup — minimal inline form. No card, no glow, no background.
    Reads as a single mono label + input + button line. Picks up page accent. */
 .signup {
-  max-width: 720px; margin: 36px auto 18px;
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  max-width: 720px; margin: 28px auto 0;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: nowrap;
 }
 .signup-label {
   font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
@@ -331,7 +332,7 @@
 }
 .signup-label-sr { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; }
 .signup input[type="email"] {
-  flex: 1 1 220px; min-width: 0;
+  width: 260px; min-width: 0;
   background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.12);
   border-radius: 6px; padding: 9px 12px;
   color: #fff; font-family: 'Space Mono', monospace; font-size: 12px;
@@ -359,16 +360,22 @@
 .signup-status {
   font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
   text-transform: uppercase; color: rgba(255,255,255,0.55);
+  flex: 1 1 100%; text-align: center; margin-top: 8px;
 }
+.signup-status:empty { display: none; }
 .signup-status.ok    { color: var(--accent); }
 .signup-status.err   { color: #ff8585; }
 
-@media (max-width: 600px) {
-  .signup { margin: 28px 16px 16px; }
-  .signup-label { width: 100%; text-align: center; }
-  .signup input[type="email"] { flex: 1 1 100%; }
+/* Tighten gap to the per-page footer that follows the signup. */
+.signup + .page-footer { margin-top: 18px; }
+
+@media (max-width: 640px) {
+  .signup { flex-wrap: wrap; margin: 24px 16px 0; gap: 10px; }
+  .signup-label { flex: 1 1 100%; text-align: center; }
+  .signup input[type="email"] { width: 100%; flex: 1 1 100%; }
   .signup button { width: 100%; padding: 11px 16px; }
 }
+
 
   /* ─── Shared "stream on all platforms" CTA ─────────────────────────────
    The pill links out to the DistroKid hyperfollow page. The pill's
