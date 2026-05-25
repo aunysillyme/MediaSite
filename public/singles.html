@@ -172,7 +172,7 @@
   }
   .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
 
-  .container { max-width: 1280px; margin: 0 auto; padding: 110px 32px 100px; position: relative; z-index: 4; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 110px 32px 80px; position: relative; z-index: 4; }
 
   .page-head { text-align: left; margin-bottom: 56px; max-width: 800px; }
   .page-label {
@@ -398,7 +398,7 @@
 
   @media (max-width: 720px) {
     .series-row { grid-template-columns: repeat(2, 1fr); }
-    .container { padding: 80px 20px 80px; }
+    .container { padding: 80px 20px 60px; }
   }
 </style>
 <script type="application/ld+json">
@@ -1418,8 +1418,8 @@
       </a>
     </div>
   </section>
-
-  <!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
+</main>
+<!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
 <form class="signup" id="signup-form" novalidate>
   <span class="signup-label">✦ &nbsp; sign up for updates</span>
   <label class="signup-label-sr" for="signup-email">Your email</label>
@@ -1429,7 +1429,6 @@
   <span class="signup-status" id="signup-status" role="status" aria-live="polite"></span>
 </form>
 
-</main>
 <!-- Global site footer. Identical on every page (home, singles, albums,
      list pages, links). Per-release info is not in the footer — release
      date is rendered in the meta block on individual pages. -->

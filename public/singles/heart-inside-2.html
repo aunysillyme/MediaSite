@@ -507,7 +507,7 @@
   @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
   /* lyrics */
-  .lyrics-section { position: relative; z-index: 4; padding: 40px 24px 100px; display: flex; flex-direction: column; align-items: center; }
+  .lyrics-section { position: relative; z-index: 4; padding: 40px 24px 80px; display: flex; flex-direction: column; align-items: center; }
   .lyrics-divider {
     width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
     font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
@@ -539,7 +539,7 @@
     .cover-wrap { width: min(88%, 420px); }
     .vinyl-small { width: 120px; height: 120px; left: -38px; bottom: -38px; }
     .pull-quote { font-size: 22px; }
-    .lyrics-section { padding: 20px 20px 80px; }
+    .lyrics-section { padding: 20px 20px 60px; }
     .lyrics-body { font-size: 19px; line-height: 1.5; }
   }
 </style>
@@ -976,8 +976,9 @@
     <p>There's a heart inside of me<br>Still beating through the noise<br>It memorized pain<br>Long before it understood joy<br>There's a heart inside of me<br>Still standing in the mess<br>It keeps on showing up<br>Even when it doesn't feel safe</p>
     <p>Still here<br>Still breathing<br>Still mine</p>
   </article>
+</section>
 
-  <!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
+<!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
 <form class="signup" id="signup-form" novalidate>
   <span class="signup-label">✦ &nbsp; sign up for updates</span>
   <label class="signup-label-sr" for="signup-email">Your email</label>
@@ -987,7 +988,7 @@
   <span class="signup-status" id="signup-status" role="status" aria-live="polite"></span>
 </form>
 
-  <!-- Global site footer. Identical on every page (home, singles, albums,
+<!-- Global site footer. Identical on every page (home, singles, albums,
      list pages, links). Per-release info is not in the footer — release
      date is rendered in the meta block on individual pages. -->
 <footer class="site-footer">
@@ -1003,7 +1004,6 @@
   <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
 </footer>
 
-</section>
 
 <script>
 (function () {
