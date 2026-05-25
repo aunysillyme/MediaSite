@@ -57,13 +57,13 @@
 {{NAV_CSS}}
 
   .page {
-    width: 100%; min-height: 100vh; display: flex; flex-direction: row;
+    width: 100%; display: flex; flex-direction: row;
     align-items: stretch; position: relative; padding-top: 64px;
   }
   .left-panel {
-    width: 32%; min-width: 260px;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 40px 36px 40px 56px;
+    width: 42%; min-width: 360px; max-width: 560px;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    padding: 40px 36px 40px 56px; gap: 32px;
     position: relative; z-index: 4;
     animation: fadeup 0.6s ease-out both;
   }
@@ -71,6 +71,7 @@
     flex: 1; display: flex; align-items: center; justify-content: center;
     position: relative; z-index: 4; overflow: visible;
     padding-right: 24px;
+    min-height: calc(100vh - 64px);
   }
   .bg-art { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
   .bg-blob { position: absolute; border-radius: 50%; filter: blur(60px); }
@@ -131,13 +132,15 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Album preview section wrapper (centers the player partial below hero) */
+  /* Album preview lives inside .left-panel, stacked under the info block. */
   .album-player-section {
     position: relative; z-index: 4;
-    max-width: 960px; margin: 40px auto 80px; padding: 0 32px;
-    display: flex; flex-direction: column; align-items: center;
+    width: 100%;
+    display: flex; flex-direction: column; align-items: stretch;
     animation: fadeup 0.6s 0.3s ease-out both;
   }
+  .album-player-section .embed-wrap { width: 100%; }
+  .album-player-section .spotify-embed { width: 100%; }
   .album-player-label {
     font-family: 'Space Mono', monospace;
     font-size: 11px; letter-spacing: 4px;
@@ -189,9 +192,10 @@
   @media (max-width: 760px) {
     .page { flex-direction: column; align-items: center; padding-top: 70px; }
     .left-panel {
-      width: 100%; min-width: unset; padding: 32px 24px 16px;
+      width: 100%; min-width: unset; max-width: unset; padding: 32px 24px 16px;
       align-items: center; text-align: center; flex: unset;
     }
+    .album-player-section { max-width: 480px; align-self: center; }
     .hero { flex: unset; align-items: center; }
     .meta-block { align-items: flex-start; width: 100%; max-width: 320px; }
     .right-panel { width: 100%; padding: 0 0 28px; }
@@ -251,17 +255,17 @@
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/{{HYPERFOLLOW_SLUG}}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
       </div>
     </div>
+
+    <section class="album-player-section" aria-label="Album preview player">
+      <p class="album-player-label">✦ &nbsp; preview the album</p>
+      {{PLAYER_HTML}}
+    </section>
   </div>
 
   <div class="right-panel">
     <div class="orbit-system" id="orbit"></div>
   </div>
 </div>
-
-<section class="album-player-section" aria-label="Album preview player">
-  <p class="album-player-label">✦ &nbsp; preview the album</p>
-  {{PLAYER_HTML}}
-</section>
 
 {{SIGNUP_HTML}}
 {{FOOTER_HTML}}
