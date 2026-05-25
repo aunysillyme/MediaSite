@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, SERIES_CARD_CSS, singleCoverPath, seriesBadge } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, LISTEN_CSS, SERIES_CARD_CSS, playerFor, singleCoverPath, seriesBadge } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +29,11 @@ const latestSpotifyUrl = latestIsAlbum
   ? `https://open.spotify.com/album/${latest.spotifyAlbumId}`
   : `https://open.spotify.com/track/${latest.spotifyTrackId}`;
 const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
+const latestPlayerHtml = playerFor({
+  kind: latestIsAlbum ? 'album' : 'track',
+  id: latestIsAlbum ? latest.spotifyAlbumId : latest.spotifyTrackId,
+  title: latest.title,
+});
 
 function miniAlbum(a) {
   return `    <a class="mini-card" href="/albums/${a.slug}">
@@ -80,6 +85,8 @@ const html = render(HOME_TPL, {
   LATEST_COVER: latestCover,
   LATEST_TYPE: latestType,
   LATEST_SPOTIFY_URL: latestSpotifyUrl,
+  LATEST_HYPERFOLLOW_SLUG: latest.hyperfollowSlug,
+  LATEST_PLAYER_HTML: latestPlayerHtml,
   LATEST_TITLE: esc(latest.title),
   LATEST_DATE: esc(latest.releaseDisplay),
   LATEST_BLURB: esc(latestBlurb),
@@ -94,6 +101,8 @@ const html = render(HOME_TPL, {
   SERIES_RELEASED: String(COLOR_SERIES.filter((c) => c.released).length),
   SERIES_TOTAL: String(COLOR_SERIES.length),
   SERIES_CARD_CSS,
+  PLAYER_CSS,
+  LISTEN_CSS,
   NAV: navFor(),
   NAV_CSS: NAV_CSS,
 });

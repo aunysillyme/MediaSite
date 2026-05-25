@@ -273,18 +273,19 @@
   }
   .featured-card {
     display: block; text-decoration: none; color: inherit;
-    width: min(100%, 440px);
+    width: min(100%, 380px);
     transition: transform 0.3s ease;
     position: relative;
   }
-  .featured-card:hover { transform: translateY(-6px); }
+  .featured-cover-link { display: block; transition: transform 0.3s ease; }
+  .featured-cover-link:hover { transform: translateY(-6px); }
   .featured-play-overlay {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     opacity: 0; transition: opacity 0.25s ease; pointer-events: none; z-index: 6;
     border-radius: 10px;
     background: linear-gradient(to bottom, rgba(0,0,0,0) 40%, rgba(3,3,8,0.45) 100%);
   }
-  .featured-card:hover .featured-play-overlay { opacity: 1; }
+  .featured-cover-link:hover .featured-play-overlay { opacity: 1; }
   .featured-play-overlay .play-circle {
     width: 72px; height: 72px; border-radius: 50%;
     background: #1DB954; color: #fff;
@@ -292,16 +293,15 @@
     box-shadow: 0 8px 30px rgba(29,185,84,0.5);
   }
   .featured-play-overlay .play-circle svg { width: 28px; height: 28px; margin-left: 4px; }
-  .featured-listen {
-    display: inline-flex; align-items: center; gap: 10px;
-    margin-top: 14px;
- font-family: 'Patrick Hand', cursive; 
+  .listen-now {
+    font-family: 'Patrick Hand', cursive;
     font-size: 22px; line-height: 1.2;
-    color: #1DB954; text-decoration: none;
-    transition: color 0.2s;
+    color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: filter 0.2s;
   }
-  .featured-listen:hover { color: #1ED760; }
-  .featured-listen .arrow {
+  .listen-now:hover { filter: brightness(1.15); }
+  .listen-now .arrow {
     display: inline-block; font-style: normal; font-family: 'Space Mono', monospace;
     font-size: 0.72em; animation: featured-nudge 1.6s ease-in-out infinite;
   }
@@ -309,6 +309,105 @@
     0%,100% { transform: translateX(0); opacity: 0.7; }
     50%     { transform: translateX(6px); opacity: 1; }
   }
+  /* ─── Shared "stream on all platforms" CTA ─────────────────────────────
+   The pill links out to the DistroKid hyperfollow page. The pill's
+   accent border + glow adopts the page's --accent.
+
+   On singles: pill sits inline next to "listen on spotify" with a dot.
+   On albums: pill sits below the large "listen on spotify" hero link.
+*/
+.listen-row {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.listen-row .listen-now { margin-bottom: 0 !important; }
+.listen-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+}
+.all-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.18);
+  transition: box-shadow 0.25s, background 0.25s, transform 0.2s;
+}
+.all-pill:hover {
+  background: rgba(var(--accent-rgb), 0.18);
+  box-shadow: 0 0 26px rgba(var(--accent-rgb), 0.45);
+  transform: translateY(-1px);
+}
+.all-pill .ext { font-size: 0.85em; opacity: 0.85; }
+
+/* Album hero variant — stacked layout */
+.hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+.hero-listen .hero-accent { margin: 0; }
+
+  /* ─── Shared player container ──────────────────────────────────────────────
+   Used on single + album pages. Wraps a Spotify embed iframe with a
+   cassette-style accent strip + "now playing" indicator. Iframe height
+   varies (singles: 80px track player, albums: 380px album+tracklist).
+   Renders dark glass body with subtle accent border.
+*/
+.embed-wrap {
+  position: relative; max-width: 540px; margin: 0 0 22px;
+  padding: 34px 14px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 30px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(var(--accent-rgb), 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.embed-wrap.album { max-width: 920px; }
+.cassette-strip {
+  position: absolute; top: 0; left: 0; right: 0; height: 24px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px;
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
+}
+.cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
+.cassette-strip .live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ff3535;
+  box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
+  animation: livepulse 1.6s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { opacity: 0.45; transform: scale(0.92); }
+  50%     { opacity: 1;    transform: scale(1.1); }
+}
+.cassette-strip .reels { display: flex; gap: 6px; }
+.cassette-strip .reel {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
+  animation: spin 3.2s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.embed-wrap .spotify-embed {
+  border: 0; border-radius: 10px; display: block;
+  width: 100%; height: 80px;
+  background: rgba(0,0,0,0.4);
+  margin: 0;
+}
+.embed-wrap.album .spotify-embed { height: 380px; }
+.embed-note {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+  margin: 12px 4px 0; text-align: center;
+}
+
+  /* Featured card embed: a touch tighter than single-page default */
+  .featured-card .embed-wrap { margin-top: 12px; }
   .featured-cover {
     position: relative;
     width: 100%; aspect-ratio: 1/1; border-radius: 10px; overflow: visible;
@@ -479,7 +578,7 @@
     .cta, .featured-card, .mini-card, .mini-card .cover img,
     .platform, .platform svg { transition: none !important; }
     .bg-blob, .bg-blob.b1, .bg-blob.b2, .bg-blob.b3,
-    .featured-cover::before, .featured-listen .arrow { animation: none !important; }
+    .featured-cover::before, .listen-now .arrow { animation: none !important; }
   }
 
   @media (max-width: 900px) {
@@ -852,7 +951,30 @@
         <p class="featured-tag">Single · May 24, 2026</p>
         <h2 class="featured-title">CYAN</h2>
         <p class="featured-sub">Cold/calculated pain held in memory — the heartbreak you erased, the scar worn proud as healing</p>
-        <a class="featured-listen" href="https://open.spotify.com/track/4gUImSpQJvH4C8g1Lr2Xvm" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+        <div class="listen-row">
+          <a class="listen-now" href="https://open.spotify.com/track/4gUImSpQJvH4C8g1Lr2Xvm" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+          <span class="listen-dot"></span>
+          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/cyan" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+        </div>
+        <!-- Shared Spotify embed player. Variables:
+       track   "track" | "album"
+       4gUImSpQJvH4C8g1Lr2Xvm     Spotify ID
+       CYAN  Track/album title (for a11y)
+       embed-wrap   "embed-wrap" for single, "embed-wrap album" for album
+-->
+<div class="embed-wrap">
+  <div class="cassette-strip">
+    <span class="left"><span class="live-dot"></span>Now Playing</span>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+  </div>
+  <iframe class="spotify-embed"
+          src="https://open.spotify.com/embed/track/4gUImSpQJvH4C8g1Lr2Xvm?utm_source=auny_media&theme=0"
+          loading="lazy"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Spotify preview player for CYAN"></iframe>
+  <p class="embed-note">hit play to preview · plays full on spotify</p>
+</div>
+
       </div>
     </div>
   </div>
