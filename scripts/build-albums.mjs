@@ -20,6 +20,19 @@ function titleHtml(title) {
 function renderAlbum(album) {
   const rings = ringsFor(album.tracks);
   const palette = album.palette || [album.accent.color, album.accent.color, album.accent.color];
+  const tracksJsonLd = JSON.stringify({
+    '@type': 'ItemList',
+    numberOfItems: album.tracks.length,
+    itemListElement: album.tracks.map((t, i) => {
+      const item = {
+        '@type': 'MusicRecording',
+        name: typeof t === 'string' ? t : t.name,
+        byArtist: { '@type': 'MusicGroup', name: 'Auny' },
+      };
+      if (t && t.id) item.sameAs = `https://open.spotify.com/track/${t.id}`;
+      return { '@type': 'ListItem', position: i + 1, item };
+    }),
+  });
   return render(ALBUM_TPL, {
     TITLE: esc(album.title),
     TITLE_HTML: titleHtml(album.title),
@@ -32,6 +45,7 @@ function renderAlbum(album) {
     SPOTIFY_ALBUM_ID: album.spotifyAlbumId,
     HYPERFOLLOW_SLUG: album.hyperfollowSlug,
     NUM_TRACKS: String(album.tracks.length),
+    TRACKS_JSONLD: tracksJsonLd,
     ACCENT_COLOR: album.accent.color,
     ACCENT_RGB: album.accent.rgb,
     BG_HUE: String(album.bgHue ?? 200),
