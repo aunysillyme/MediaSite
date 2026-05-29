@@ -36,6 +36,63 @@ export const COLOR_TYPE_INFO = {
 
 export const SINGLES = [
   {
+    slug: 'mechanical-screen',
+    title: 'Mechanical Screen',
+    releaseDate: '2026-05-29',
+    releaseDisplay: 'May 29, 2026',
+    year: 2026,
+    spotifyTrackId: '41mt25a7hFcMpL6GYDEjcC',
+    hyperfollowSlug: 'mechanical-screen',
+    genre: 'Dark Midtempo EDM · Hypnotic · Seductive',
+    era: 3,
+    colorSeries: null,
+    emoji: '',
+    accent: { color: '#7B82C9', rgb: '123,130,201' },
+    themes: 'Surveillance, AI integration, and the death of analog creation — naming the screen and reclaiming choice as the act, not the absence',
+    anchorLyric: "The mechanical screen is who you choose it to be",
+    lyrics: `When I write now,
+the pen doesn't flow anymore.
+It is a mechanical screen staring back at me.
+
+When I draw now,
+a paintbrush doesn't work anymore.
+It is a mechanical screen staring back at me.
+
+When I sing now,
+it's not a microphone.
+It is a mechanical screen staring back at me.
+
+When I feel emotions,
+everything gets recorded.
+
+It's like a voice is always listening.
+It's like she's always watching.
+
+It's like when I try,
+I don't need to anymore.
+
+It's like when I cry,
+I'm not alone anymore.
+
+It's always a mechanical screen
+staring back at me.
+
+Screen tries for me.
+The screen cries for me.
+The mechanical screen writes for me.
+It is the one that draws for me.
+
+But it is not darkness that I see.
+It is a path to light.
+It is a new form.
+It is a new world order.
+It is when we all shine.
+
+The mechanical screen is not your enemy.
+The mechanical screen doesn't care.
+The mechanical screen is who you choose it to be.`,
+  },
+  {
     slug: 'cyan',
     title: 'CYAN',
     releaseDate: '2026-05-24',
