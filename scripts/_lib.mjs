@@ -15,6 +15,28 @@ export const FOOTER_CSS = tpl('_footer.css');
 export const COLOR_CHIPS_HTML = tpl('_color-chips.html');
 export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
 export const LISTEN_CSS = tpl('_listen.css');
+export const RECENT_STRIP_HTML = tpl('_recent-strip.html');
+export const RECENT_STRIP_CSS = tpl('_recent-strip.css');
+
+// Renders the "more recent releases →" strip for single pages.
+// Picks the N newest singles (by releaseDate desc) excluding currentSlug.
+// `all` is the SINGLES array; caller passes it to avoid a circular import.
+export function recentStripFor({ all, currentSlug, limit = 4, heading = 'more recent releases →' }) {
+  const ordered = [...all]
+    .filter((s) => s.slug !== currentSlug)
+    .sort((a, b) => (a.releaseDate < b.releaseDate ? 1 : -1))
+    .slice(0, limit);
+  const cards = ordered.map((s) => {
+    return `    <a class="mini-card" href="/singles/${s.slug}">
+      <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title">${esc(s.title)}</div>
+        <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
+      </div>
+    </a>`;
+  }).join('\n');
+  return render(RECENT_STRIP_HTML, { HEADING: heading, CARDS: cards });
+}
 export const SERIES_CARD_CSS = tpl('_series-card.css');
 export const SIGNUP_HTML = tpl('_signup.html');
 export const SIGNUP_CSS = tpl('_signup.css');
