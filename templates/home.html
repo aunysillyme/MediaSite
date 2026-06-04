@@ -217,6 +217,20 @@
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .featured-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .featured-meta { margin-top: 18px; }
+  .featured-tag.upcoming {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
+  }
+  .featured-tag.upcoming .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: hero-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes hero-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
   .featured-tag {
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
     text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
@@ -359,14 +373,10 @@
         </div>
       </a>
       <div class="featured-meta">
-        <p class="featured-tag">{{LATEST_TYPE}} · {{LATEST_DATE}}</p>
+        {{LATEST_TAG_BLOCK}}
         <h2 class="featured-title">{{LATEST_TITLE}}</h2>
         <p class="featured-sub">{{LATEST_BLURB}}</p>
-        <div class="listen-row">
-          <a class="listen-now" href="{{LATEST_SPOTIFY_URL}}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-          <span class="listen-dot"></span>
-          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/{{LATEST_HYPERFOLLOW_SLUG}}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
-        </div>
+        {{LATEST_LISTEN_ROW}}
       </div>
     </div>
   </div>

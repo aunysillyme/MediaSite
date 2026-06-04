@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Auny — Music · Lyrics · The Lighthouse You Build For Yourself</title>
-<meta name="description" content="Auny — instrumental albums, vocal singles, and the Color Series. 33 releases · 162 tracks. Stream everywhere.">
+<meta name="description" content="Auny — instrumental albums, vocal singles, and the Color Series. 33 releases · 180 tracks. Stream everywhere.">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Auny — Music · Lyrics · The Lighthouse You Build For Yourself">
-<meta property="og:description" content="33 releases · 7 albums · 26 singles · 162 tracks. Stream on every platform.">
+<meta property="og:description" content="33 releases · 8 albums · 25 singles · 180 tracks. Stream on every platform.">
 <meta property="og:image" content="https://www.auny.media/images/link-preview-thumbnail-1200x630.png">
 <meta property="og:url" content="https://www.auny.media/">
 <meta property="og:site_name" content="auny.media">
@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AunySillyMe">
 <meta name="twitter:title" content="Auny — Music · Lyrics · The Lighthouse You Build For Yourself">
-<meta name="twitter:description" content="33 releases · 7 albums · 26 singles. Stream everywhere.">
+<meta name="twitter:description" content="33 releases · 8 albums · 25 singles. Stream everywhere.">
 <meta name="twitter:image" content="https://www.auny.media/images/link-preview-thumbnail-1200x630.png">
 
 <link rel="canonical" href="https://www.auny.media/">
@@ -62,7 +62,7 @@
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --accent: #7B82C9; --accent-rgb: 123,130,201; --nav-accent: #7B82C9; }
+  :root { --accent: #A02C2C; --accent-rgb: 160,44,44; --nav-accent: #A02C2C; }
   html, body { min-height: 100%; background: #030308; color: #fff; font-family: 'Space Mono', monospace; overflow-x: hidden; }
   body::before {
     content: ''; position: fixed; inset: 0;
@@ -369,6 +369,20 @@
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .featured-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .featured-meta { margin-top: 18px; }
+  .featured-tag.upcoming {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
+  }
+  .featured-tag.upcoming .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: hero-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes hero-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
   .featured-tag {
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
     text-transform: uppercase; color: var(--accent); margin-bottom: 6px;
@@ -634,10 +648,6 @@
     <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Collabs — coming soon">
       <span class="nav-link-sub">coming soon</span>
       <span class="nav-link-main">collabs</span>
-    </span>
-    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Poetry — coming soon">
-      <span class="nav-link-sub">coming soon</span>
-      <span class="nav-link-main">poetry</span>
     </span>
   </div>
   <div class="nav-ctas">
@@ -950,9 +960,9 @@
     <p class="hero-tagline">Music for the in-between hours. Drive music. Focus. The void. The warm light that survives it.</p>
     <p class="hero-subline">Dark EDM, lo-fi, ambient instrumentals and vocal singles. For late nights, long drives, focus, and feeling seen.</p>
     <div class="hero-stats">
-      <div class="stat"><span class="stat-num">7</span><span class="stat-label">Albums</span></div>
-      <div class="stat"><span class="stat-num">26</span><span class="stat-label">Singles</span></div>
-      <div class="stat"><span class="stat-num">162</span><span class="stat-label">Tracks</span></div>
+      <div class="stat"><span class="stat-num">8</span><span class="stat-label">Albums</span></div>
+      <div class="stat"><span class="stat-num">25</span><span class="stat-label">Singles</span></div>
+      <div class="stat"><span class="stat-num">180</span><span class="stat-label">Tracks</span></div>
       <div class="stat"><span class="stat-num">2,249</span><span class="stat-label">Monthly listeners</span></div>
     </div>
     <div class="hero-cta-row">
@@ -964,22 +974,20 @@
   <div class="featured">
     <span class="featured-label">latest release</span>
     <div class="featured-card">
-      <a class="featured-cover-link" href="/singles/mechanical-screen" aria-label="View Mechanical Screen details">
+      <a class="featured-cover-link" href="/albums/flatline" aria-label="View Flatline details">
         <div class="featured-cover">
-          <img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" width="640" height="640" fetchpriority="high" decoding="async">
+          <img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" fetchpriority="high" decoding="async">
           <div class="featured-play-overlay" aria-hidden="true">
             <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
         </div>
       </a>
       <div class="featured-meta">
-        <p class="featured-tag">Single · May 29, 2026</p>
-        <h2 class="featured-title">Mechanical Screen</h2>
-        <p class="featured-sub">Surveillance, AI integration, and the death of analog creation — naming the screen and reclaiming choice as the act, not the absence</p>
+        <p class="featured-tag upcoming"><span class="dot"></span>Coming June 5, 2026</p>
+        <h2 class="featured-title">Flatline</h2>
+        <p class="featured-sub">A masterwork of suspended clinical tension and delicate organic realism.</p>
         <div class="listen-row">
-          <a class="listen-now" href="https://open.spotify.com/track/41mt25a7hFcMpL6GYDEjcC" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-          <span class="listen-dot"></span>
-          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/mechanical-screen" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/flatline" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
         </div>
       </div>
     </div>
@@ -992,9 +1000,16 @@
       <p class="section-label">✦ &nbsp; instrumental body of work</p>
       <h2 class="section-title">Albums</h2>
     </div>
-    <a class="section-link" href="/albums">view all 7 →</a>
+    <a class="section-link" href="/albums">view all 8 →</a>
   </div>
   <div class="album-row">
+    <a class="mini-card" href="/albums/flatline">
+      <div class="cover"><img src="/album-art/flatline.jpg" alt="Flatline cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title">Flatline</div>
+        <div class="mini-card-meta">June 5, 2026</div>
+      </div>
+    </a>
     <a class="mini-card" href="/albums/midnight-glitch">
       <div class="cover"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
@@ -1023,13 +1038,6 @@
         <div class="mini-card-meta">March 25, 2026</div>
       </div>
     </a>
-    <a class="mini-card" href="/albums/focus-with-me">
-      <div class="cover"><img src="/album-art/focus-with-me.jpg" alt="Focus with Me cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Focus with Me</div>
-        <div class="mini-card-meta">March 14, 2026</div>
-      </div>
-    </a>
   </div>
 </section>
 
@@ -1039,16 +1047,9 @@
       <p class="section-label">✦ &nbsp; vocal work · newest first</p>
       <h2 class="section-title">Singles</h2>
     </div>
-    <a class="section-link" href="/singles">view all 26 →</a>
+    <a class="section-link" href="/singles">view all 25 →</a>
   </div>
   <div class="album-row">
-    <a class="mini-card" href="/singles/mechanical-screen">
-      <div class="cover"><img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Mechanical Screen</div>
-        <div class="mini-card-meta">May 29, 2026</div>
-      </div>
-    </a>
     <a class="mini-card" href="/singles/cyan">
       <div class="cover"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" loading="lazy" width="640" height="640"></div>
       <div class="body">
@@ -1075,6 +1076,13 @@
       <div class="body">
         <div class="mini-card-title">YELLOW</div>
         <div class="mini-card-meta">April 29, 2026</div>
+      </div>
+    </a>
+    <a class="mini-card" href="/singles/run-away">
+      <div class="cover"><img src="/album-art/singles/run-away.jpg" alt="Run Away cover" loading="lazy" width="640" height="640"></div>
+      <div class="body">
+        <div class="mini-card-title">Run Away</div>
+        <div class="mini-card-meta">March 13, 2026</div>
       </div>
     </a>
   </div>

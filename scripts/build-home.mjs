@@ -33,6 +33,22 @@ const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
 // Falls back to the artist's default brand accent if the release lacks one.
 const BRAND_ACCENT = { color: '#1E90FF', rgb: '30,144,255' };
 const latestAccent = latest.accent || BRAND_ACCENT;
+// Upcoming-release treatment: pulsing "Coming [date]" tag + single pre-save CTA.
+const today = new Date().toISOString().slice(0, 10);
+const latestUpcoming = !!latest.upcoming || latest.releaseDate > today
+  || (latestIsAlbum ? !latest.spotifyAlbumId : !latest.spotifyTrackId);
+const latestTagBlock = latestUpcoming
+  ? `<p class="featured-tag upcoming"><span class="dot"></span>Coming ${esc(latest.releaseDisplay)}</p>`
+  : `<p class="featured-tag">${esc(latestType)} · ${esc(latest.releaseDisplay)}</p>`;
+const latestListenRow = latestUpcoming
+  ? `<div class="listen-row">
+          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
+        </div>`
+  : `<div class="listen-row">
+          <a class="listen-now" href="${latestSpotifyUrl}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+          <span class="listen-dot"></span>
+          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+        </div>`;
 
 function miniAlbum(a) {
   return `    <a class="mini-card" href="/albums/${a.slug}">
@@ -90,6 +106,8 @@ const html = render(HOME_TPL, {
   LATEST_TITLE: esc(latest.title),
   LATEST_DATE: esc(latest.releaseDisplay),
   LATEST_BLURB: esc(latestBlurb),
+  LATEST_TAG_BLOCK: latestTagBlock,
+  LATEST_LISTEN_ROW: latestListenRow,
   TOTAL_SINGLES: String(SINGLES.length),
   TOTAL_ALBUMS: String(ALBUMS.length),
   TOTAL_RELEASES: String(SINGLES.length + ALBUMS.length),

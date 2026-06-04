@@ -186,6 +186,19 @@
     background: rgba(0,0,0,0.66); color: var(--card-accent, #fff);
     border: 1px solid var(--card-accent, rgba(255,255,255,0.2));
   }
+  .album-card .badge.upcoming {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(var(--card-accent-rgb,255,255,255), 0.18);
+    text-shadow: 0 0 8px rgba(var(--card-accent-rgb,255,255,255), 0.6);
+    box-shadow: 0 0 14px rgba(var(--card-accent-rgb,255,255,255), 0.18);
+  }
+  .album-card .badge.upcoming .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--card-accent, #fff);
+    box-shadow: 0 0 6px var(--card-accent, #fff);
+    animation: list-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes list-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .album-card.is-upcoming { box-shadow: 0 0 28px rgba(var(--card-accent-rgb,255,255,255), 0.12); }
   .album-card .body { padding: 18px 18px 20px; border-top: 1px solid var(--card-accent, rgba(255,255,255,0.08)); }
   .album-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; color: #fff; margin-bottom: 6px; }
   .album-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.62); margin-bottom: 10px; }
@@ -304,17 +317,33 @@
   "@type": "CollectionPage",
   "name": "Albums — Auny",
   "url": "https://www.auny.media/albums",
-  "description": "All 7 albums by Auny — instrumental atmospheric music.",
+  "description": "All 8 albums by Auny — instrumental atmospheric music.",
   "isPartOf": {
     "@id": "https://www.auny.media/#website"
   },
   "mainEntity": {
     "@type": "ItemList",
-    "numberOfItems": 7,
+    "numberOfItems": 8,
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
+        "item": {
+          "@type": "MusicAlbum",
+          "name": "Flatline",
+          "url": "https://www.auny.media/albums/flatline",
+          "image": "https://www.auny.media/album-art/flatline.jpg",
+          "datePublished": "2026-06-05",
+          "numTracks": 19,
+          "byArtist": {
+            "@type": "MusicGroup",
+            "@id": "https://www.auny.media/#artist"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
         "item": {
           "@type": "MusicAlbum",
           "name": "Midnight Glitch",
@@ -331,7 +360,7 @@
       },
       {
         "@type": "ListItem",
-        "position": 2,
+        "position": 3,
         "item": {
           "@type": "MusicAlbum",
           "name": "Graveyard Echoes",
@@ -348,7 +377,7 @@
       },
       {
         "@type": "ListItem",
-        "position": 3,
+        "position": 4,
         "item": {
           "@type": "MusicAlbum",
           "name": "Afterglow",
@@ -365,7 +394,7 @@
       },
       {
         "@type": "ListItem",
-        "position": 4,
+        "position": 5,
         "item": {
           "@type": "MusicAlbum",
           "name": "Blue Lightning",
@@ -382,7 +411,7 @@
       },
       {
         "@type": "ListItem",
-        "position": 5,
+        "position": 6,
         "item": {
           "@type": "MusicAlbum",
           "name": "Focus with Me",
@@ -399,7 +428,7 @@
       },
       {
         "@type": "ListItem",
-        "position": 6,
+        "position": 7,
         "item": {
           "@type": "MusicAlbum",
           "name": "11:11",
@@ -416,7 +445,7 @@
       },
       {
         "@type": "ListItem",
-        "position": 7,
+        "position": 8,
         "item": {
           "@type": "MusicAlbum",
           "name": "Work with Me",
@@ -768,6 +797,16 @@
   </header>
 
   <div class="grid">
+      <a class="album-card is-upcoming" href="/albums/flatline" style="--card-accent:#A02C2C;--card-accent-rgb:160,44,44">
+        <div class="cover"><img src="/album-art/flatline.jpg" alt="Flatline cover" loading="lazy" width="640" height="640">
+          <span class="badge upcoming"><span class="dot"></span>Coming June 5, 2026</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">Flatline</div>
+          <div class="album-card-meta">Releases June 5, 2026 · Electronic</div>
+          <div class="album-card-blurb">A masterwork of suspended clinical tension and delicate organic realism.</div>
+        </div>
+      </a>
       <a class="album-card" href="/albums/midnight-glitch" style="--card-accent:#50FA7B;--card-accent-rgb:80,250,123">
         <div class="cover"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" loading="lazy" width="640" height="640">
           <span class="badge">23 tracks</span>

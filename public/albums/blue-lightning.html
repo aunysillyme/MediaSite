@@ -457,6 +457,53 @@
     margin: 0 0 16px;
   }
 
+  /* Upcoming-album treatment (pre-release) */
+  .upcoming-banner {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; margin: 0 0 18px;
+    border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
+  }
+  .upcoming-banner .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .preview-soon {
+    width: 100%;
+    background: rgba(8,8,16,0.55);
+    border: 1px solid rgba(var(--accent-rgb), 0.32);
+    border-radius: 12px; padding: 22px 24px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
+  }
+  .preview-soon .ps-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .preview-soon .ps-headline {
+    font-family: 'Patrick Hand', cursive; font-size: 22px; line-height: 1.25;
+    color: rgba(255,255,255,0.92); margin: 0 0 14px;
+  }
+  .preview-soon .ps-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px;
+    background: var(--accent); color: #030308; font-weight: 700;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; text-decoration: none;
+    box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .preview-soon .ps-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.55); }
+
   /* Orbit system */
   .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
   .planet {
@@ -524,10 +571,7 @@
   "datePublished": "2026-03-25",
   "genre": "Instrumental · Electric · Atmospheric",
   "url": "https://www.auny.media/albums/blue-lightning",
-  "sameAs": [
-    "https://open.spotify.com/album/01ILnU5CjbBSU1YFMg7k6V",
-    "https://distrokid.com/hyperfollow/auny1/blue-lightning"
-  ],
+  "sameAs": ["https://open.spotify.com/album/01ILnU5CjbBSU1YFMg7k6V","https://distrokid.com/hyperfollow/auny1/blue-lightning"],
   "image": "https://www.auny.media/album-art/blue-lightning.jpg",
   "numTracks": 26,
   "track": {"@type":"ItemList","numberOfItems":26,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Blue Lightning","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5ybHXchRl5ELb7RdRnK7Cm"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Night Lanes","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0UAE8oCJXvrGMk3O0OlROI"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Night Lanes 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4OltGR2hKvEmgOamgYtpNP"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"Static Hearts","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2yVMph9wxKOxVVOHLqayRB"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Static Hearts 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0k4kGg7pzrKqGrQK4kURfy"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Made of Glass","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4uyLNFxXAKMIxOjMNRccLe"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Fried Circuits","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2FdAS3rcWWIyoudTTD8IDQ"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"Fried Circuits 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4y6lj6U4rGxdzDWH9yseRF"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Electric Bloom","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5Gglg5NQ3BPyKAIxjkXcdX"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Pre Glow-up","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1HkrPMfFZ9iKkIUbX86ljY"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Post Glow-up","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5gQeKBVPxImff4F0mD26pG"}},{"@type":"ListItem","position":12,"item":{"@type":"MusicRecording","name":"Slow Orbit","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5iFZlFORcjr8dyKohdiOuO"}},{"@type":"ListItem","position":13,"item":{"@type":"MusicRecording","name":"Pulsing Star","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7KOdCz1YhLVgdt89D0kraE"}},{"@type":"ListItem","position":14,"item":{"@type":"MusicRecording","name":"Shooting Star","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1R4nXauTPLeCAsHUNvMQ9Y"}},{"@type":"ListItem","position":15,"item":{"@type":"MusicRecording","name":"Ride at Dawn","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0r6EvPtxZRNmTN4JOvSFlf"}},{"@type":"ListItem","position":16,"item":{"@type":"MusicRecording","name":"Ride at Dusk","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6plgrLPZl1gcZJEbrWdh6x"}},{"@type":"ListItem","position":17,"item":{"@type":"MusicRecording","name":"Hold the Light","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6F9NlaNJfwqGDQizacZMvK"}},{"@type":"ListItem","position":18,"item":{"@type":"MusicRecording","name":"Hold the Light 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2Oa2tglXdFc6ZcPS4veG04"}},{"@type":"ListItem","position":19,"item":{"@type":"MusicRecording","name":"Past Echoes","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/53Ivbq4kXJVddISlyOiPnD"}},{"@type":"ListItem","position":20,"item":{"@type":"MusicRecording","name":"Future Echoes","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3a6RT0i3SdY7en9uQPE0mC"}},{"@type":"ListItem","position":21,"item":{"@type":"MusicRecording","name":"Open Seas","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/11JG2yvqdywbS8Zt2uUUm5"}},{"@type":"ListItem","position":22,"item":{"@type":"MusicRecording","name":"Open Skies","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0rig3SkeFNAiV5RgrIej7h"}},{"@type":"ListItem","position":23,"item":{"@type":"MusicRecording","name":"Neonify Cyan","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2YC3bqzDjKodCQ6sk1vKx9"}},{"@type":"ListItem","position":24,"item":{"@type":"MusicRecording","name":"Neonify Orange","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0GyXNoy8BhA8kWr80gq3nv"}},{"@type":"ListItem","position":25,"item":{"@type":"MusicRecording","name":"Purple Thunder","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/52E7TzC9UQhEW6xHAK11Aq"}},{"@type":"ListItem","position":26,"item":{"@type":"MusicRecording","name":"Blue Thunder","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2lvtKDnC5tVIHlAXhG3iQA"}}]}
@@ -876,6 +920,7 @@
   <div class="left-panel">
     <div class="hero">
       <p class="hero-label">✦ &nbsp; album</p>
+      
       <h1 class="hero-name">Blue Lightning</h1>
       <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
 

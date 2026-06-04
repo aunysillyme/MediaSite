@@ -457,6 +457,53 @@
     margin: 0 0 16px;
   }
 
+  /* Upcoming-album treatment (pre-release) */
+  .upcoming-banner {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; margin: 0 0 18px;
+    border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
+  }
+  .upcoming-banner .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .preview-soon {
+    width: 100%;
+    background: rgba(8,8,16,0.55);
+    border: 1px solid rgba(var(--accent-rgb), 0.32);
+    border-radius: 12px; padding: 22px 24px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
+  }
+  .preview-soon .ps-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .preview-soon .ps-headline {
+    font-family: 'Patrick Hand', cursive; font-size: 22px; line-height: 1.25;
+    color: rgba(255,255,255,0.92); margin: 0 0 14px;
+  }
+  .preview-soon .ps-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px;
+    background: var(--accent); color: #030308; font-weight: 700;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; text-decoration: none;
+    box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .preview-soon .ps-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.55); }
+
   /* Orbit system */
   .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
   .planet {
@@ -524,10 +571,7 @@
   "datePublished": "2026-03-14",
   "genre": "Instrumental · Lo-Fi · Study",
   "url": "https://www.auny.media/albums/focus-with-me",
-  "sameAs": [
-    "https://open.spotify.com/album/5AtAMHjAcihsSbY90kP0Kj",
-    "https://distrokid.com/hyperfollow/auny1/focus-with-me-study-edition"
-  ],
+  "sameAs": ["https://open.spotify.com/album/5AtAMHjAcihsSbY90kP0Kj","https://distrokid.com/hyperfollow/auny1/focus-with-me-study-edition"],
   "image": "https://www.auny.media/album-art/focus-with-me.jpg",
   "numTracks": 24,
   "track": {"@type":"ItemList","numberOfItems":24,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Morning Buffer","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0jEEzg7qQUoARCM3rv8z0W"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Latte Art","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2QGvt1yUXxS2g2V2Y4vD9D"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Page Turner","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3jTUTfjSQYzECSIB2k6eLM"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"Light","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1hz2cfeOPtcLt05PMtfNgQ"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Commute","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0kYvwkFYLnjgoZSmMRIqSP"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Focus Mode","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4fR4yky4DOuKZvNvq0g4Bb"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Softie","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2J701V2GB8dgRlRUBvYW0r"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"You're Late","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6LDpnqcYTN5bTFQz9qUrXG"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Bright AF","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4iR6yCqprMUvuzKXWrrxwL"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Silence","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/465O3kHGZuUDVyx3AY1rJ5"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Lo Finance","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4yj0A3njKD4SyKamxecVmR"}},{"@type":"ListItem","position":12,"item":{"@type":"MusicRecording","name":"Water Bodies","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7wWsQnaei6kg82b27q1JTA"}},{"@type":"ListItem","position":13,"item":{"@type":"MusicRecording","name":"Morning Buffer 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/69sQKtkD9VEI93pSCfuQzP"}},{"@type":"ListItem","position":14,"item":{"@type":"MusicRecording","name":"Latte Art 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2joWOAL3nAAWLFbVVpnruS"}},{"@type":"ListItem","position":15,"item":{"@type":"MusicRecording","name":"Page Turner 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3GWZNMRssexbnHxLhWnITy"}},{"@type":"ListItem","position":16,"item":{"@type":"MusicRecording","name":"Light 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6oCDTZoqxxs4IJQ1ELTsrO"}},{"@type":"ListItem","position":17,"item":{"@type":"MusicRecording","name":"Commute 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/28QwvEB8fUa6HMLdZVf0rA"}},{"@type":"ListItem","position":18,"item":{"@type":"MusicRecording","name":"Focus Mode 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/67OY46JSFSXPPpkhzIZRAI"}},{"@type":"ListItem","position":19,"item":{"@type":"MusicRecording","name":"Softie 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5lZL9m2JZvU6Ba6A6YHxVX"}},{"@type":"ListItem","position":20,"item":{"@type":"MusicRecording","name":"You're Late 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4KtcDqUhcE5d6jQSsmhqjO"}},{"@type":"ListItem","position":21,"item":{"@type":"MusicRecording","name":"Bright AF 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1nJuvBMsmfIszxHzBmPAx4"}},{"@type":"ListItem","position":22,"item":{"@type":"MusicRecording","name":"Lo Finance 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5VauZ3dDBJQ7YL5AFrcSIz"}},{"@type":"ListItem","position":23,"item":{"@type":"MusicRecording","name":"Silence 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0sPnrBBBONDnKfRCr0HDLI"}},{"@type":"ListItem","position":24,"item":{"@type":"MusicRecording","name":"Water Bodies 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1jSzLBtanQp1Jg6utnRkTT"}}]}
@@ -876,6 +920,7 @@
   <div class="left-panel">
     <div class="hero">
       <p class="hero-label">✦ &nbsp; album</p>
+      
       <h1 class="hero-name">Focus with Me</h1>
       <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
 

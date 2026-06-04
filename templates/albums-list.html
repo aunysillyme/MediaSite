@@ -71,6 +71,19 @@
     background: rgba(0,0,0,0.66); color: var(--card-accent, #fff);
     border: 1px solid var(--card-accent, rgba(255,255,255,0.2));
   }
+  .album-card .badge.upcoming {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(var(--card-accent-rgb,255,255,255), 0.18);
+    text-shadow: 0 0 8px rgba(var(--card-accent-rgb,255,255,255), 0.6);
+    box-shadow: 0 0 14px rgba(var(--card-accent-rgb,255,255,255), 0.18);
+  }
+  .album-card .badge.upcoming .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--card-accent, #fff);
+    box-shadow: 0 0 6px var(--card-accent, #fff);
+    animation: list-pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes list-pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .album-card.is-upcoming { box-shadow: 0 0 28px rgba(var(--card-accent-rgb,255,255,255), 0.12); }
   .album-card .body { padding: 18px 18px 20px; border-top: 1px solid var(--card-accent, rgba(255,255,255,0.08)); }
   .album-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 22px; line-height: 1.1; color: #fff; margin-bottom: 6px; }
   .album-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.62); margin-bottom: 10px; }

@@ -457,6 +457,53 @@
     margin: 0 0 16px;
   }
 
+  /* Upcoming-album treatment (pre-release) */
+  .upcoming-banner {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; margin: 0 0 18px;
+    border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
+  }
+  .upcoming-banner .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .preview-soon {
+    width: 100%;
+    background: rgba(8,8,16,0.55);
+    border: 1px solid rgba(var(--accent-rgb), 0.32);
+    border-radius: 12px; padding: 22px 24px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
+  }
+  .preview-soon .ps-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .preview-soon .ps-headline {
+    font-family: 'Patrick Hand', cursive; font-size: 22px; line-height: 1.25;
+    color: rgba(255,255,255,0.92); margin: 0 0 14px;
+  }
+  .preview-soon .ps-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px;
+    background: var(--accent); color: #030308; font-weight: 700;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; text-decoration: none;
+    box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .preview-soon .ps-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.55); }
+
   /* Orbit system */
   .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
   .planet {
@@ -524,10 +571,7 @@
   "datePublished": "2026-03-09",
   "genre": "Instrumental · Quiet · Night",
   "url": "https://www.auny.media/albums/1111",
-  "sameAs": [
-    "https://open.spotify.com/album/6c4X31NVvYkIhp4REBkgdh",
-    "https://distrokid.com/hyperfollow/auny1/1111"
-  ],
+  "sameAs": ["https://open.spotify.com/album/6c4X31NVvYkIhp4REBkgdh","https://distrokid.com/hyperfollow/auny1/1111"],
   "image": "https://www.auny.media/album-art/1111.jpg",
   "numTracks": 12,
   "track": {"@type":"ItemList","numberOfItems":12,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"11:11AM","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1ahWj0EV1rdHgPynmLb3RO"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Cafe Latte","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0US59Gbp5U3U76APajBj6u"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Page 227","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2bOlXkggw9gtNZsexU3wGI"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"By the Window","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7c0jihTb0nL2KPZEprbTNr"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Bus Stop","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2rfA4DwQr2fLAl4sAvDnhC"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Stillness","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/24rsdfnXeOjrlVVGWGfnSK"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Raindrops","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1xZhUjRVuhfvHexaS8NcKR"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"11:11PM","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2qFyMBI9nsHHRL8BEDnKdy"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Desk Lamp","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7wWUMmiWgXkexHq6VX5yZW"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Dim the Lights","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5R0kyyj1mMdPFCyZBiD5H4"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Unsent Messages","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2VxLDqCmCUYVFIanmCkjNz"}},{"@type":"ListItem","position":12,"item":{"@type":"MusicRecording","name":"Lights Out","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7sI0BbUiznlGP9yNj54BoO"}}]}
@@ -876,6 +920,7 @@
   <div class="left-panel">
     <div class="hero">
       <p class="hero-label">✦ &nbsp; album</p>
+      
       <h1 class="hero-name">11:11</h1>
       <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
 
