@@ -17,6 +17,13 @@ const HOME_TPL = tpl('home.html');
 const STATS = JSON.parse(readFileSync(join(root, 'src/data/stats.json'), 'utf8'));
 const MONTHLY_LISTENERS = STATS.spotify.monthlyListeners.toLocaleString('en-US');
 
+// Released-only counters: exclude upcoming albums/singles from portfolio stats
+// (pre-release tracks shouldn't inflate the "Tracks" count on the homepage).
+const TODAY_ISO = new Date().toISOString().slice(0, 10);
+const isUpcoming = (item) => !!item.upcoming || item.releaseDate > TODAY_ISO;
+const RELEASED_ALBUMS  = ALBUMS.filter((a) => !isUpcoming(a));
+const RELEASED_SINGLES = SINGLES.filter((s) => !isUpcoming(s));
+
 // Pick the most recent release across albums + singles
 const latestAlbum  = ALBUMS[0];
 const latestSingle = SINGLES[0];
@@ -108,10 +115,10 @@ const html = render(HOME_TPL, {
   LATEST_BLURB: esc(latestBlurb),
   LATEST_TAG_BLOCK: latestTagBlock,
   LATEST_LISTEN_ROW: latestListenRow,
-  TOTAL_SINGLES: String(SINGLES.length),
-  TOTAL_ALBUMS: String(ALBUMS.length),
-  TOTAL_RELEASES: String(SINGLES.length + ALBUMS.length),
-  TOTAL_TRACKS: String(SINGLES.length + ALBUMS.reduce((n, a) => n + a.tracks.length, 0)),
+  TOTAL_SINGLES: String(RELEASED_SINGLES.length),
+  TOTAL_ALBUMS: String(RELEASED_ALBUMS.length),
+  TOTAL_RELEASES: String(RELEASED_SINGLES.length + RELEASED_ALBUMS.length),
+  TOTAL_TRACKS: String(RELEASED_SINGLES.length + RELEASED_ALBUMS.reduce((n, a) => n + a.tracks.length, 0)),
   MONTHLY_LISTENERS,
   ALBUM_TILES: ALBUMS.slice(0, 5).map(miniAlbum).join('\n'),
   SINGLE_TILES: SINGLES.slice(0, 5).map(miniSingle).join('\n'),

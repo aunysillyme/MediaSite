@@ -33,9 +33,9 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --accent: #A02C2C;
-    --accent-rgb: 160,44,44;
-    --nav-accent: #A02C2C;
+    --accent: #06D6F0;
+    --accent-rgb: 6,214,240;
+    --nav-accent: #06D6F0;
   }
   html, body {
     min-height: 100%;
@@ -46,7 +46,7 @@
   body::before {
     content: ''; position: fixed; inset: 0;
     background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
-    opacity: 0.22; filter: hue-rotate(0deg) saturate(1.5); z-index: 0; pointer-events: none;
+    opacity: 0.22; filter: hue-rotate(180deg) saturate(1.5); z-index: 0; pointer-events: none;
   }
   body::after {
     content: ''; position: fixed; inset: 0;
@@ -1031,7 +1031,7 @@
   var RINGS = [[{"num":1,"name":"Bluebell","id":"","dur":""},{"num":2,"name":"Quill on Beat","id":"","dur":""},{"num":3,"name":"Basement","id":"","dur":""},{"num":4,"name":"Hum","id":"","dur":""},{"num":5,"name":"Jellyfish","id":"","dur":""},{"num":6,"name":"Hearts Collide","id":"","dur":""},{"num":7,"name":"Salty Heartbeat","id":"","dur":""}],[{"num":8,"name":"Clinks","id":"","dur":""},{"num":9,"name":"Vinyl","id":"","dur":""},{"num":10,"name":"Glass X","id":"","dur":""},{"num":11,"name":"Moonlit","id":"","dur":""},{"num":12,"name":"Under the Stars","id":"","dur":""},{"num":13,"name":"Sandglass","id":"","dur":""}],[{"num":14,"name":"Echo Cardio","id":"","dur":""},{"num":15,"name":"Flatline","id":"","dur":""},{"num":16,"name":"Glass Clinking","id":"","dur":""},{"num":17,"name":"Metronome","id":"","dur":""},{"num":18,"name":"Melancholy","id":"","dur":""},{"num":19,"name":"Cogwheel","id":"","dur":""}]];
   var ALBUM_URL = 'https://open.spotify.com/album/';
   var ALBUM_ART = '/album-art/flatline.jpg';
-  var ACCENTS = ["#A02C2C","#D4A24C","#22D3EE"];
+  var ACCENTS = ["#06D6F0","#D4A24C","#1E90FF"];
 
   var isMobile = window.innerWidth < 760;
   var vw = isMobile ? window.innerWidth : window.innerWidth * 0.68;
@@ -1073,10 +1073,10 @@
     + '<circle cx="55" cy="55" r="43" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
     + '<circle cx="55" cy="55" r="39" fill="none" stroke="#091020" stroke-width="1"/>'
     + '<circle cx="55" cy="55" r="35" fill="none" stroke="#0d1428" stroke-width="1"/>'
-    + '<circle cx="55" cy="55" r="30" fill="none" stroke="#A02C2C" stroke-width="0.8" opacity="0.35"/>'
+    + '<circle cx="55" cy="55" r="30" fill="none" stroke="#06D6F0" stroke-width="0.8" opacity="0.35"/>'
     + '<circle cx="55" cy="55" r="24" fill="#050510"/>'
-    + '<circle cx="55" cy="55" r="22" fill="none" stroke="#A02C2C" stroke-width="1.5" opacity="0.7"/>'
-    + '<circle cx="55" cy="55" r="3" fill="#A02C2C" opacity="0.8"/>'
+    + '<circle cx="55" cy="55" r="22" fill="none" stroke="#06D6F0" stroke-width="1.5" opacity="0.7"/>'
+    + '<circle cx="55" cy="55" r="3" fill="#06D6F0" opacity="0.8"/>'
     + '</svg>';
   orbit.appendChild(vWrap);
 

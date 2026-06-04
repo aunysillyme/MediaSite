@@ -13,9 +13,9 @@ export const ALBUMS = [
     genre: 'Electronic · Downtempo · Ambient · Lo-Fi',
     blurb: 'A masterwork of suspended clinical tension and delicate organic realism.',
     upcoming: true,
-    accent: { color: '#A02C2C', rgb: '160,44,44' },
-    bgHue: 0,
-    palette: ['#A02C2C', '#D4A24C', '#22D3EE'],
+    accent: { color: '#06D6F0', rgb: '6,214,240' },
+    bgHue: 180,
+    palette: ['#06D6F0', '#D4A24C', '#1E90FF'],
     centerIcon: 'flatline',
     tracks: [
       { num: 1,  name: 'Bluebell',          id: '', dur: '' },
