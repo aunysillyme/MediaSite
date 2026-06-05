@@ -8,11 +8,10 @@ export const ALBUMS = [
     releaseDate: '2026-06-05',
     releaseDisplay: 'June 5, 2026',
     year: 2026,
-    spotifyAlbumId: '', // populates after release
+    spotifyAlbumId: '3Ad55mTtVIdtlmLehTjOnP',
     hyperfollowSlug: 'flatline',
     genre: 'Electronic · Downtempo · Ambient · Lo-Fi',
     blurb: 'A masterwork of suspended clinical tension and delicate organic realism.',
-    upcoming: true,
     accent: { color: '#06D6F0', rgb: '6,214,240' },
     bgHue: 180,
     palette: ['#06D6F0', '#D4A24C', '#1E90FF'],
