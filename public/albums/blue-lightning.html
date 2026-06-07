@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"Blue Lightning","id":"5ybHXchRl5ELb7RdRnK7Cm","dur":"2:59"},{"num":2,"name":"Night Lanes","id":"0UAE8oCJXvrGMk3O0OlROI","dur":"3:53"},{"num":3,"name":"Night Lanes 2","id":"4OltGR2hKvEmgOamgYtpNP","dur":"3:09"},{"num":4,"name":"Static Hearts","id":"2yVMph9wxKOxVVOHLqayRB","dur":"3:22"},{"num":5,"name":"Static Hearts 2","id":"0k4kGg7pzrKqGrQK4kURfy","dur":"3:54"},{"num":6,"name":"Made of Glass","id":"4uyLNFxXAKMIxOjMNRccLe","dur":"2:54"},{"num":7,"name":"Fried Circuits","id":"2FdAS3rcWWIyoudTTD8IDQ","dur":"3:07"},{"num":8,"name":"Fried Circuits 2","id":"4y6lj6U4rGxdzDWH9yseRF","dur":"1:58"},{"num":9,"name":"Electric Bloom","id":"5Gglg5NQ3BPyKAIxjkXcdX","dur":"3:39"}],[{"num":10,"name":"Pre Glow-up","id":"1HkrPMfFZ9iKkIUbX86ljY","dur":"1:56"},{"num":11,"name":"Post Glow-up","id":"5gQeKBVPxImff4F0mD26pG","dur":"3:03"},{"num":12,"name":"Slow Orbit","id":"5iFZlFORcjr8dyKohdiOuO","dur":"3:39"},{"num":13,"name":"Pulsing Star","id":"7KOdCz1YhLVgdt89D0kraE","dur":"4:38"},{"num":14,"name":"Shooting Star","id":"1R4nXauTPLeCAsHUNvMQ9Y","dur":"5:38"},{"num":15,"name":"Ride at Dawn","id":"0r6EvPtxZRNmTN4JOvSFlf","dur":"2:55"},{"num":16,"name":"Ride at Dusk","id":"6plgrLPZl1gcZJEbrWdh6x","dur":"2:57"},{"num":17,"name":"Hold the Light","id":"6F9NlaNJfwqGDQizacZMvK","dur":"3:37"},{"num":18,"name":"Hold the Light 2","id":"2Oa2tglXdFc6ZcPS4veG04","dur":"3:07"}],[{"num":19,"name":"Past Echoes","id":"53Ivbq4kXJVddISlyOiPnD","dur":"3:20"},{"num":20,"name":"Future Echoes","id":"3a6RT0i3SdY7en9uQPE0mC","dur":"3:50"},{"num":21,"name":"Open Seas","id":"11JG2yvqdywbS8Zt2uUUm5","dur":"2:28"},{"num":22,"name":"Open Skies","id":"0rig3SkeFNAiV5RgrIej7h","dur":"4:38"},{"num":23,"name":"Neonify Cyan","id":"2YC3bqzDjKodCQ6sk1vKx9","dur":"2:42"},{"num":24,"name":"Neonify Orange","id":"0GyXNoy8BhA8kWr80gq3nv","dur":"4:50"},{"num":25,"name":"Purple Thunder","id":"52E7TzC9UQhEW6xHAK11Aq","dur":"2:43"},{"num":26,"name":"Blue Thunder","id":"2lvtKDnC5tVIHlAXhG3iQA","dur":"2:59"}]];
+  var ALBUM_ID = '01ILnU5CjbBSU1YFMg7k6V';
   var ALBUM_URL = 'https://open.spotify.com/album/01ILnU5CjbBSU1YFMg7k6V';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/blue-lightning';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/blue-lightning.jpg';
   var ACCENTS = ["#00BFFF","#1E90FF","#8B5CF6"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

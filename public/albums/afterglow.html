@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"Ignition On","id":"36PUw9lnw7BvBCnn3j6Ga4","dur":"3:03"},{"num":2,"name":"1:11AM","id":"6u65xSSVcWCURZgNQQZTj0","dur":"3:12"},{"num":3,"name":"Random Turn","id":"77659trBJFSsR7mFIhn3UK","dur":"2:15"},{"num":4,"name":"No Destination","id":"1zHwnagy0ahV8SlKKXVPhR","dur":"3:05"},{"num":5,"name":"Streetlights","id":"7Ix3xPym0joomPSxP5bWqc","dur":"4:01"},{"num":6,"name":"Groovy","id":"0YwzXjxn269jH2VQW1Oypt","dur":"3:12"},{"num":7,"name":"Red Lights","id":"3lwRGqC15dOw6o4r1DIX2x","dur":"2:33"}],[{"num":8,"name":"Rearview Mirror","id":"2JOHcvxuY7BcApNuLhdqZ5","dur":"3:16"},{"num":9,"name":"Stop Sign","id":"6dA8Xbkjoh3V8iSAtO9HlF","dur":"3:26"},{"num":10,"name":"Flickering Lights","id":"2lI8SLRo22cNx6UGpIppyc","dur":"3:28"},{"num":11,"name":"Intersection","id":"0RK9FLgl3Ldt6itHGHsM4O","dur":"3:19"},{"num":12,"name":"Reflections","id":"3yW7CoOIBLttLYEMPwBP2L","dur":"2:58"},{"num":13,"name":"Late Nights","id":"2MlwftbJttlt7bGVkFg3Nt","dur":"3:34"},{"num":14,"name":"Ocean Pkwy","id":"7ka0hHys37fjKi7PLCz0jU","dur":"3:44"}],[{"num":15,"name":"Skipped Exit","id":"0Mejm2NuXHrF9kJSxAZpFD","dur":"3:24"},{"num":16,"name":"Still Driving","id":"63eU0coGgwFPZb7XwPprlK","dur":"3:59"},{"num":17,"name":"Gas Station Coffee","id":"1UsWrQ3R4WwBIk2ZrHRds7","dur":"3:03"},{"num":18,"name":"Mileage","id":"6k7Nk6Gn1oDV8w15D0Km1l","dur":"3:33"},{"num":19,"name":"Almost Morning","id":"2iZOcBh3mTECgNlg8MQRzg","dur":"2:33"},{"num":20,"name":"Engine Off","id":"69lBBhAVS3f9s9jdRqW7vq","dur":"3:29"}]];
+  var ALBUM_ID = '27HeS1tHoz3hNWdt6WIfy9';
   var ALBUM_URL = 'https://open.spotify.com/album/27HeS1tHoz3hNWdt6WIfy9';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/afterglow';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/afterglow.jpg';
   var ACCENTS = ["#FFB347","#FF6B35","#E84855"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

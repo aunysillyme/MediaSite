@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"Coffee","id":"305tehnaFXlRWMwWX6Odvs","dur":""},{"num":2,"name":"Sunrise","id":"1CjjNSqenHlPuLnkmtUJAE","dur":""},{"num":3,"name":"Night","id":"1TuEhWsxrublbsxEt158Aq","dur":""},{"num":4,"name":"Me Without You","id":"49IsgGwpfCbboQx5ZiapuX","dur":""},{"num":5,"name":"Coworking","id":"5flhYSEQHuiMd4T181tX8d","dur":""}],[{"num":6,"name":"It's Been a While","id":"7Iw8VdfYvaHg0RJqlDSD0a","dur":""},{"num":7,"name":"Mornings","id":"3NcUS0gUO9JSuPdl8SQmri","dur":""},{"num":8,"name":"Dance","id":"4bdQS3VZek2wXAEBgdZk8M","dur":""},{"num":9,"name":"Wheels are Turning","id":"3d3vs6naosxLQGyJZPU71T","dur":""},{"num":10,"name":"Sunset","id":"3tHO9y68crVYabKuBDhyJ0","dur":""}]];
+  var ALBUM_ID = '3Y57JfSKcnYTAd6W6dlYvN';
   var ALBUM_URL = 'https://open.spotify.com/album/3Y57JfSKcnYTAd6W6dlYvN';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/work-with-me';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/work-with-me.jpg';
   var ACCENTS = ["#FF8FA3","#E0697D","#2E1518"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

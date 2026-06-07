@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"Morning Buffer","id":"0jEEzg7qQUoARCM3rv8z0W","dur":""},{"num":2,"name":"Latte Art","id":"2QGvt1yUXxS2g2V2Y4vD9D","dur":""},{"num":3,"name":"Page Turner","id":"3jTUTfjSQYzECSIB2k6eLM","dur":""},{"num":4,"name":"Light","id":"1hz2cfeOPtcLt05PMtfNgQ","dur":""},{"num":5,"name":"Commute","id":"0kYvwkFYLnjgoZSmMRIqSP","dur":""},{"num":6,"name":"Focus Mode","id":"4fR4yky4DOuKZvNvq0g4Bb","dur":""},{"num":7,"name":"Softie","id":"2J701V2GB8dgRlRUBvYW0r","dur":""},{"num":8,"name":"You're Late","id":"6LDpnqcYTN5bTFQz9qUrXG","dur":""}],[{"num":9,"name":"Bright AF","id":"4iR6yCqprMUvuzKXWrrxwL","dur":""},{"num":10,"name":"Silence","id":"465O3kHGZuUDVyx3AY1rJ5","dur":""},{"num":11,"name":"Lo Finance","id":"4yj0A3njKD4SyKamxecVmR","dur":""},{"num":12,"name":"Water Bodies","id":"7wWsQnaei6kg82b27q1JTA","dur":""},{"num":13,"name":"Morning Buffer 2","id":"69sQKtkD9VEI93pSCfuQzP","dur":""},{"num":14,"name":"Latte Art 2","id":"2joWOAL3nAAWLFbVVpnruS","dur":""},{"num":15,"name":"Page Turner 2","id":"3GWZNMRssexbnHxLhWnITy","dur":""},{"num":16,"name":"Light 2","id":"6oCDTZoqxxs4IJQ1ELTsrO","dur":""}],[{"num":17,"name":"Commute 2","id":"28QwvEB8fUa6HMLdZVf0rA","dur":""},{"num":18,"name":"Focus Mode 2","id":"67OY46JSFSXPPpkhzIZRAI","dur":""},{"num":19,"name":"Softie 2","id":"5lZL9m2JZvU6Ba6A6YHxVX","dur":""},{"num":20,"name":"You're Late 2","id":"4KtcDqUhcE5d6jQSsmhqjO","dur":""},{"num":21,"name":"Bright AF 2","id":"1nJuvBMsmfIszxHzBmPAx4","dur":""},{"num":22,"name":"Lo Finance 2","id":"5VauZ3dDBJQ7YL5AFrcSIz","dur":""},{"num":23,"name":"Silence 2","id":"0sPnrBBBONDnKfRCr0HDLI","dur":""},{"num":24,"name":"Water Bodies 2","id":"1jSzLBtanQp1Jg6utnRkTT","dur":""}]];
+  var ALBUM_ID = '5AtAMHjAcihsSbY90kP0Kj';
   var ALBUM_URL = 'https://open.spotify.com/album/5AtAMHjAcihsSbY90kP0Kj';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/focus-with-me-study-edition';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/focus-with-me.jpg';
   var ACCENTS = ["#E8B86D","#C99C5A","#3E2A18"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

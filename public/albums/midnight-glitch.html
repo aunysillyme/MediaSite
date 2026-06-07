@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"Glitch City","id":"3JBOCD2WpML55xRGPaGGRs","dur":""},{"num":2,"name":"Midnight Glitch","id":"73XH2onzHDdIUod0f5bWjH","dur":""},{"num":3,"name":"Digital Dusk","id":"7H6er0hOc7jq5SuwStWWK8","dur":""},{"num":4,"name":"Phantom Signal","id":"3BzhNOae9zzd9NAL6Mi1F6","dur":""},{"num":5,"name":"Going Spectral","id":"68N8nd7zTVyBuptK1I75OA","dur":""},{"num":6,"name":"Hard Reset","id":"0D55cI39ZW1PKxkmBjq48r","dur":""},{"num":7,"name":"Override","id":"5rUSeKnb8qdjuu2Mrzv4Vy","dur":""},{"num":8,"name":"Flow State","id":"17M2UBNdSjKCTHmvsRuGbq","dur":""}],[{"num":9,"name":"Binary","id":"070sjaYPaGjbxo6ERsplN5","dur":""},{"num":10,"name":"Dead Channel","id":"1truYX9aOf13Kd1YJy0ee2","dur":""},{"num":11,"name":"Null n Void","id":"1OvkYjqDh0syVJ4ZufpVQZ","dur":""},{"num":12,"name":"System To Blame","id":"3BtvdJlQEuADRhvO6npaTf","dur":""},{"num":13,"name":"It's Your Fault","id":"1159Kn0VrcAKsK7NRHZsMt","dur":""},{"num":14,"name":"Dark Matter","id":"630hpEVwss9PkOi6OAzdXE","dur":""},{"num":15,"name":"Fractured Core","id":"4pqh0HtoeNTR6vmNCdrE5H","dur":""},{"num":16,"name":"Corrupted Personality","id":"5Nux8450MxLnikV155NooQ","dur":""}],[{"num":17,"name":"Spectral Drift","id":"3aug41D5FoI8BwfyqFNF7H","dur":""},{"num":18,"name":"Chromatic Aberration","id":"4EivfsEhYdj7BN2Esf5IGo","dur":""},{"num":19,"name":"Ghost Frequency","id":"4ek0U9QhBDRrlWONkkzLmD","dur":""},{"num":20,"name":"Signal","id":"2cKxStq4geLX94Ad0yQB5O","dur":""},{"num":21,"name":"Neon Collapse","id":"6u4hCQNCFlZXWHrzYtm17S","dur":""},{"num":22,"name":"Neon Arsenal","id":"5pM4v6HxZFHt7XjFewY6eq","dur":""},{"num":23,"name":"Transit","id":"2qba5U7QQgtBNDZoMshBTY","dur":""}]];
+  var ALBUM_ID = '7CYsvVsXLjFCK9gmToB61t';
   var ALBUM_URL = 'https://open.spotify.com/album/7CYsvVsXLjFCK9gmToB61t';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/midnight-glitch';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/midnight-glitch.jpg';
   var ACCENTS = ["#50FA7B","#36C75A","#0F2A18"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

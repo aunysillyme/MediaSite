@@ -326,7 +326,12 @@
 <script>
 (function () {
   var RINGS = {{RINGS_JSON}};
+  var ALBUM_ID = '{{SPOTIFY_ALBUM_ID}}';
   var ALBUM_URL = 'https://open.spotify.com/album/{{SPOTIFY_ALBUM_ID}}';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/{{HYPERFOLLOW_SLUG}}';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/{{SLUG}}.jpg';
   var ACCENTS = {{PALETTE_JSON}};
 
@@ -391,7 +396,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"11:11AM","id":"1ahWj0EV1rdHgPynmLb3RO","dur":""},{"num":2,"name":"Cafe Latte","id":"0US59Gbp5U3U76APajBj6u","dur":""},{"num":3,"name":"Page 227","id":"2bOlXkggw9gtNZsexU3wGI","dur":""},{"num":4,"name":"By the Window","id":"7c0jihTb0nL2KPZEprbTNr","dur":""}],[{"num":5,"name":"Bus Stop","id":"2rfA4DwQr2fLAl4sAvDnhC","dur":""},{"num":6,"name":"Stillness","id":"24rsdfnXeOjrlVVGWGfnSK","dur":""},{"num":7,"name":"Raindrops","id":"1xZhUjRVuhfvHexaS8NcKR","dur":""},{"num":8,"name":"11:11PM","id":"2qFyMBI9nsHHRL8BEDnKdy","dur":""}],[{"num":9,"name":"Desk Lamp","id":"7wWUMmiWgXkexHq6VX5yZW","dur":""},{"num":10,"name":"Dim the Lights","id":"5R0kyyj1mMdPFCyZBiD5H4","dur":""},{"num":11,"name":"Unsent Messages","id":"2VxLDqCmCUYVFIanmCkjNz","dur":""},{"num":12,"name":"Lights Out","id":"7sI0BbUiznlGP9yNj54BoO","dur":""}]];
+  var ALBUM_ID = '6c4X31NVvYkIhp4REBkgdh';
   var ALBUM_URL = 'https://open.spotify.com/album/6c4X31NVvYkIhp4REBkgdh';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/1111';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/1111.jpg';
   var ACCENTS = ["#9B7EDE","#6F5BB0","#1E1734"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';

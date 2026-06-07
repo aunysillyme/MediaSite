@@ -1044,7 +1044,12 @@
 <script>
 (function () {
   var RINGS = [[{"num":1,"name":"Underwater","id":"5GJBeFVxymS9iDrhwLTuz6","dur":""},{"num":2,"name":"Pressure Point","id":"0BvDfqmUyxZXB9Lse84c3E","dur":""},{"num":3,"name":"Surface Tension","id":"2VfHFTFfcWaFTX2705voxx","dur":""},{"num":4,"name":"Graveyard Echoes","id":"7FwJ6kQ43jx2fTiZ72kUmX","dur":""},{"num":5,"name":"Still Remains","id":"3LZiUzYlNZvZGlfRdFxvb2","dur":""},{"num":6,"name":"Past Graves","id":"0JBQcu8HVPSaFjrDatmiGB","dur":""},{"num":7,"name":"Glass Ghost 2.0","id":"4wJ0xS3cnzEWRQSorDV7xM","dur":""}],[{"num":8,"name":"Nobody Knows","id":"01seIA0mZOTKuCqARIG84j","dur":""},{"num":9,"name":"Lullaby","id":"14MwNBUBWg2T5DIFquRWI6","dur":""},{"num":10,"name":"Digi Artifacts","id":"2vCre3hld7ZaOjnW56f1Bl","dur":""},{"num":11,"name":"Crystalline Mist","id":"46NTWtVTDJbQUSmPdeX6c0","dur":""},{"num":12,"name":"Corrupted","id":"0jwekCapdrPMkUXp9osJQi","dur":""},{"num":13,"name":"Raining Elsewhere","id":"6lioHqzPQLbhgvGPnhGE1S","dur":""},{"num":14,"name":"Dripping Memory","id":"5B2HxdWBrr8GLvBmEJtBGL","dur":""}],[{"num":15,"name":"Sand Houses","id":"25ZzzhmqQzSK0aEMjYlk8D","dur":""},{"num":16,"name":"Eroded","id":"0wqxNLK9PgWeHGXbIvVz2q","dur":""},{"num":17,"name":"Cemetary","id":"7hg86SGJJl8KLIPTm6JFaM","dur":""},{"num":18,"name":"Hollowed Grounds","id":"6CV2iw91cehjY7tge69evi","dur":""},{"num":19,"name":"Fragments","id":"5lhU4liwapAPFwHMorK3sf","dur":""},{"num":20,"name":"Unresolved","id":"5oAUnp4D8r7WDYpwqZhjmc","dur":""},{"num":21,"name":"Closure","id":"274sJJ03Jby3lH1DqQns99","dur":""}]];
+  var ALBUM_ID = '0ucHKpYbov1yzO0PyWtyNf';
   var ALBUM_URL = 'https://open.spotify.com/album/0ucHKpYbov1yzO0PyWtyNf';
+  var HYPERFOLLOW_URL = 'https://distrokid.com/hyperfollow/auny1/graveyard-echoes';
+  // Fallback for a track with no Spotify id yet: the album on Spotify if it's
+  // released, otherwise the pre-save link — never a dead /track/ URL.
+  var TRACK_FALLBACK = ALBUM_ID ? ALBUM_URL : HYPERFOLLOW_URL;
   var ALBUM_ART = '/album-art/graveyard-echoes.jpg';
   var ACCENTS = ["#4FA0B5","#3D7D8F","#0C2127"];
 
@@ -1109,7 +1114,7 @@
   // Planet factory
   function makePlanet(p, ringColor) {
     var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.href = p.id ? ('https://open.spotify.com/track/' + p.id) : TRACK_FALLBACK;
     a.target = '_blank';
     a.rel = 'noopener';
     a.className = 'planet';
