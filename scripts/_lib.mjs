@@ -46,7 +46,11 @@ export function singleGenreHead(genre) {
   if (parts[0] === 'Lyrical' && parts.length > 1) return `Lyrical ${parts[1]}`;
   return parts[0];
 }
-export function albumGenreHead(genre) {
+// Accepts either a genre string OR the full album object (to honor an
+// optional `genreHead` override field for SEO-weak auto-extractions).
+export function albumGenreHead(genreOrAlbum) {
+  if (typeof genreOrAlbum === 'object' && genreOrAlbum?.genreHead) return genreOrAlbum.genreHead;
+  const genre = typeof genreOrAlbum === 'string' ? genreOrAlbum : genreOrAlbum.genre;
   const parts = genre.split('·').map((p) => p.trim());
   if (parts[0] === 'Instrumental' && parts.length > 1) return parts[1];
   return parts[0];

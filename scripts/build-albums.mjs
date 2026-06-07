@@ -69,7 +69,7 @@ function renderAlbum(album) {
     YEAR: String(album.year),
     BLURB: esc(album.blurb),
     GENRE: esc(album.genre),
-    GENRE_HEAD: esc(albumGenreHead(album.genre)),
+    GENRE_HEAD: esc(albumGenreHead(album)),
     RELEASE_DISPLAY: esc(album.releaseDisplay),
     RELEASE_ISO: album.releaseDate,
     SPOTIFY_ALBUM_ID: album.spotifyAlbumId,

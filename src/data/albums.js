@@ -162,6 +162,7 @@ export const ALBUMS = [
     spotifyAlbumId: '01ILnU5CjbBSU1YFMg7k6V',
     hyperfollowSlug: 'blue-lightning',
     genre: 'Instrumental · Electric · Atmospheric',
+    genreHead: 'Electronic',  // override: auto would say "Electric" (not a search term)
     blurb: 'Electric atmospheric instrumental. 26 tracks. 1 hr 28 min.',
     accent: { color: '#1E90FF', rgb: '30,144,255' },
     bgHue: 200,
@@ -247,6 +248,7 @@ export const ALBUMS = [
     spotifyAlbumId: '6c4X31NVvYkIhp4REBkgdh',
     hyperfollowSlug: '1111',
     genre: 'Instrumental · Quiet · Night',
+    genreHead: 'Ambient',  // override: auto would say "Quiet" (not a search term)
     blurb: 'For the hours that bookend a day — 11:11 AM to 11:11 PM and the stillness around both.',
     accent: { color: '#9B7EDE', rgb: '155,126,222' },
     bgHue: 260,
@@ -276,6 +278,7 @@ export const ALBUMS = [
     spotifyAlbumId: '3Y57JfSKcnYTAd6W6dlYvN',
     hyperfollowSlug: 'work-with-me',
     genre: 'Instrumental · Morning · Coworking',
+    genreHead: 'Lo-Fi',  // override: auto would say "Morning" (matches cover's Lo-Fi Chill Out branding)
     blurb: 'Coworking energy. Coffee, sunrise, momentum, sunset.',
     accent: { color: '#FF8FA3', rgb: '255,143,163' },
     bgHue: 10,
