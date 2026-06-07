@@ -2,7 +2,7 @@
 // Generates /albums + /albums/<slug> pages from src/data/albums.js + templates/
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead } from './_lib.mjs';
 import { join } from 'node:path';
 
 const ALBUM_TPL = tpl('album.html');
@@ -69,6 +69,7 @@ function renderAlbum(album) {
     YEAR: String(album.year),
     BLURB: esc(album.blurb),
     GENRE: esc(album.genre),
+    GENRE_HEAD: esc(albumGenreHead(album.genre)),
     RELEASE_DISPLAY: esc(album.releaseDisplay),
     RELEASE_ISO: album.releaseDate,
     SPOTIFY_ALBUM_ID: album.spotifyAlbumId,

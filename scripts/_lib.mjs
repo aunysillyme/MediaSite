@@ -37,6 +37,21 @@ export function recentStripFor({ all, currentSlug, limit = 4, heading = 'more re
   }).join('\n');
   return render(RECENT_STRIP_HTML, { HEADING: heading, CARDS: cards });
 }
+// Pull a SEO-meaningful primary genre out of a "·"-separated genre string.
+// Singles: first segment is often "Lyrical" (not a search keyword on its own),
+//          so combine with the next segment for specificity.
+// Albums:  first segment is often "Instrumental" (generic), so skip past it.
+export function singleGenreHead(genre) {
+  const parts = genre.split('·').map((p) => p.trim());
+  if (parts[0] === 'Lyrical' && parts.length > 1) return `Lyrical ${parts[1]}`;
+  return parts[0];
+}
+export function albumGenreHead(genre) {
+  const parts = genre.split('·').map((p) => p.trim());
+  if (parts[0] === 'Instrumental' && parts.length > 1) return parts[1];
+  return parts[0];
+}
+
 export const SERIES_CARD_CSS = tpl('_series-card.css');
 export const SIGNUP_HTML = tpl('_signup.html');
 export const SIGNUP_CSS = tpl('_signup.css');

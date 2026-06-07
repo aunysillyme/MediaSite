@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -93,6 +93,7 @@ function renderSingle(single) {
     RELEASE_DISPLAY: escHtml(single.releaseDisplay),
     RELEASE_ISO: single.releaseDate,
     GENRE: escHtml(single.genre),
+    GENRE_HEAD: escHtml(singleGenreHead(single.genre)),
     SPOTIFY_TRACK_ID: single.spotifyTrackId,
     HYPERFOLLOW_SLUG: single.hyperfollowSlug,
     THEMES: escHtml(single.themes),
