@@ -436,6 +436,39 @@
 .hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
 .hero-listen .hero-accent { margin: 0; }
 
+/* ─── "Also on" per-platform direct links ──────────────────────────────
+   Secondary row under the main CTAs. Quieter than .all-pill (neutral
+   border, no glow) so Spotify + hyperfollow stay the primary actions;
+   pills adopt the page accent on hover. Renders only platforms that
+   have a URL in the album's `platforms` map.
+*/
+.platform-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 2px;
+}
+.platform-row .pr-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.38);
+  margin-right: 2px;
+}
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.platform-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  transform: translateY(-1px);
+}
+.platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -571,7 +604,7 @@
   "datePublished": "2026-03-09",
   "genre": "Instrumental · Quiet · Night",
   "url": "https://www.auny.media/albums/1111",
-  "sameAs": ["https://open.spotify.com/album/6c4X31NVvYkIhp4REBkgdh","https://distrokid.com/hyperfollow/auny1/1111"],
+  "sameAs": ["https://open.spotify.com/album/6c4X31NVvYkIhp4REBkgdh","https://music.apple.com/us/album/11-11/1883600139","https://tidal.com/album/505452901","https://www.pandora.com/AL:62830541","https://distrokid.com/hyperfollow/auny1/1111"],
   "image": "https://www.auny.media/album-art/1111.jpg",
   "numTracks": 12,
   "track": {"@type":"ItemList","numberOfItems":12,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"11:11AM","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1ahWj0EV1rdHgPynmLb3RO"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Cafe Latte","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0US59Gbp5U3U76APajBj6u"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Page 227","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2bOlXkggw9gtNZsexU3wGI"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"By the Window","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7c0jihTb0nL2KPZEprbTNr"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Bus Stop","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2rfA4DwQr2fLAl4sAvDnhC"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Stillness","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/24rsdfnXeOjrlVVGWGfnSK"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Raindrops","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1xZhUjRVuhfvHexaS8NcKR"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"11:11PM","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2qFyMBI9nsHHRL8BEDnKdy"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Desk Lamp","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7wWUMmiWgXkexHq6VX5yZW"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Dim the Lights","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5R0kyyj1mMdPFCyZBiD5H4"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Unsent Messages","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2VxLDqCmCUYVFIanmCkjNz"}},{"@type":"ListItem","position":12,"item":{"@type":"MusicRecording","name":"Lights Out","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7sI0BbUiznlGP9yNj54BoO"}}]}
@@ -936,6 +969,11 @@
       <div class="hero-listen">
         <a class="hero-accent" href="https://open.spotify.com/album/6c4X31NVvYkIhp4REBkgdh" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/1111" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+        <div class="platform-row"><span class="pr-label">also on</span>
+          <a class="platform-pill" href="https://music.apple.com/us/album/11-11/1883600139" target="_blank" rel="noopener">Apple Music <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://tidal.com/album/505452901" target="_blank" rel="noopener">Tidal <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://www.pandora.com/AL:62830541" target="_blank" rel="noopener">Pandora <span class="ext">↗</span></a>
+        </div>
       </div>
     </div>
 

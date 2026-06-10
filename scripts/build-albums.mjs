@@ -17,6 +17,30 @@ function titleHtml(title) {
   return esc(title);
 }
 
+// Canonical display order + labels for the "also on" direct-link pills.
+const PLATFORM_LABELS = [
+  ['appleMusic',   'Apple Music'],
+  ['youtubeMusic', 'YouTube Music'],
+  ['amazonMusic',  'Amazon Music'],
+  ['tidal',        'Tidal'],
+  ['deezer',       'Deezer'],
+  ['pandora',      'Pandora'],
+];
+
+function platformRowFor(album) {
+  const p = album.platforms || {};
+  const pills = PLATFORM_LABELS
+    .filter(([key]) => p[key])
+    .map(([key, label]) => `<a class="platform-pill" href="${p[key]}" target="_blank" rel="noopener">${label} <span class="ext">↗</span></a>`);
+  if (!pills.length) return '';
+  return `<div class="platform-row"><span class="pr-label">also on</span>\n          ${pills.join('\n          ')}\n        </div>`;
+}
+
+function platformUrls(album) {
+  const p = album.platforms || {};
+  return PLATFORM_LABELS.map(([key]) => p[key]).filter(Boolean);
+}
+
 function renderAlbum(album) {
   const rings = ringsFor(album.tracks);
   const palette = album.palette || [album.accent.color, album.accent.color, album.accent.color];
@@ -31,6 +55,7 @@ function renderAlbum(album) {
     : `<div class="hero-listen">
         <a class="hero-accent" href="https://open.spotify.com/album/${album.spotifyAlbumId}" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+        ${platformRowFor(album)}
       </div>`;
   const previewSection = upcoming
     ? `<section class="album-player-section" aria-label="Album coming soon">
@@ -78,6 +103,7 @@ function renderAlbum(album) {
     TRACKS_JSONLD: tracksJsonLd,
     SAMEAS_JSONLD: JSON.stringify([
       album.spotifyAlbumId ? `https://open.spotify.com/album/${album.spotifyAlbumId}` : null,
+      ...platformUrls(album),
       `https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}`,
     ].filter(Boolean)),
     ACCENT_COLOR: album.accent.color,

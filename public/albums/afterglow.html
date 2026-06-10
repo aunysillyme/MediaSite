@@ -436,6 +436,39 @@
 .hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
 .hero-listen .hero-accent { margin: 0; }
 
+/* ─── "Also on" per-platform direct links ──────────────────────────────
+   Secondary row under the main CTAs. Quieter than .all-pill (neutral
+   border, no glow) so Spotify + hyperfollow stay the primary actions;
+   pills adopt the page accent on hover. Renders only platforms that
+   have a URL in the album's `platforms` map.
+*/
+.platform-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 2px;
+}
+.platform-row .pr-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.38);
+  margin-right: 2px;
+}
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.platform-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  transform: translateY(-1px);
+}
+.platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -571,7 +604,7 @@
   "datePublished": "2026-03-30",
   "genre": "Instrumental · Drive Music · Sunset",
   "url": "https://www.auny.media/albums/afterglow",
-  "sameAs": ["https://open.spotify.com/album/27HeS1tHoz3hNWdt6WIfy9","https://distrokid.com/hyperfollow/auny1/afterglow"],
+  "sameAs": ["https://open.spotify.com/album/27HeS1tHoz3hNWdt6WIfy9","https://music.apple.com/us/album/afterglow/1889922242","https://tidal.com/album/511594665","https://www.pandora.com/AL:64185834","https://distrokid.com/hyperfollow/auny1/afterglow"],
   "image": "https://www.auny.media/album-art/afterglow.jpg",
   "numTracks": 20,
   "track": {"@type":"ItemList","numberOfItems":20,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Ignition On","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/36PUw9lnw7BvBCnn3j6Ga4"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"1:11AM","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6u65xSSVcWCURZgNQQZTj0"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Random Turn","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/77659trBJFSsR7mFIhn3UK"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"No Destination","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1zHwnagy0ahV8SlKKXVPhR"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Streetlights","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7Ix3xPym0joomPSxP5bWqc"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Groovy","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0YwzXjxn269jH2VQW1Oypt"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Red Lights","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3lwRGqC15dOw6o4r1DIX2x"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"Rearview Mirror","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2JOHcvxuY7BcApNuLhdqZ5"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Stop Sign","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6dA8Xbkjoh3V8iSAtO9HlF"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Flickering Lights","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2lI8SLRo22cNx6UGpIppyc"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Intersection","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0RK9FLgl3Ldt6itHGHsM4O"}},{"@type":"ListItem","position":12,"item":{"@type":"MusicRecording","name":"Reflections","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3yW7CoOIBLttLYEMPwBP2L"}},{"@type":"ListItem","position":13,"item":{"@type":"MusicRecording","name":"Late Nights","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2MlwftbJttlt7bGVkFg3Nt"}},{"@type":"ListItem","position":14,"item":{"@type":"MusicRecording","name":"Ocean Pkwy","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7ka0hHys37fjKi7PLCz0jU"}},{"@type":"ListItem","position":15,"item":{"@type":"MusicRecording","name":"Skipped Exit","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0Mejm2NuXHrF9kJSxAZpFD"}},{"@type":"ListItem","position":16,"item":{"@type":"MusicRecording","name":"Still Driving","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/63eU0coGgwFPZb7XwPprlK"}},{"@type":"ListItem","position":17,"item":{"@type":"MusicRecording","name":"Gas Station Coffee","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1UsWrQ3R4WwBIk2ZrHRds7"}},{"@type":"ListItem","position":18,"item":{"@type":"MusicRecording","name":"Mileage","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6k7Nk6Gn1oDV8w15D0Km1l"}},{"@type":"ListItem","position":19,"item":{"@type":"MusicRecording","name":"Almost Morning","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2iZOcBh3mTECgNlg8MQRzg"}},{"@type":"ListItem","position":20,"item":{"@type":"MusicRecording","name":"Engine Off","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/69lBBhAVS3f9s9jdRqW7vq"}}]}
@@ -936,6 +969,11 @@
       <div class="hero-listen">
         <a class="hero-accent" href="https://open.spotify.com/album/27HeS1tHoz3hNWdt6WIfy9" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/afterglow" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+        <div class="platform-row"><span class="pr-label">also on</span>
+          <a class="platform-pill" href="https://music.apple.com/us/album/afterglow/1889922242" target="_blank" rel="noopener">Apple Music <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://tidal.com/album/511594665" target="_blank" rel="noopener">Tidal <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://www.pandora.com/AL:64185834" target="_blank" rel="noopener">Pandora <span class="ext">↗</span></a>
+        </div>
       </div>
     </div>
 

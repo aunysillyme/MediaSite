@@ -484,6 +484,39 @@
 .hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
 .hero-listen .hero-accent { margin: 0; }
 
+/* ─── "Also on" per-platform direct links ──────────────────────────────
+   Secondary row under the main CTAs. Quieter than .all-pill (neutral
+   border, no glow) so Spotify + hyperfollow stay the primary actions;
+   pills adopt the page accent on hover. Renders only platforms that
+   have a URL in the album's `platforms` map.
+*/
+.platform-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 2px;
+}
+.platform-row .pr-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.38);
+  margin-right: 2px;
+}
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.platform-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  transform: translateY(-1px);
+}
+.platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
+
   /* ─── Recent releases strip ──────────────────────────────────────────
    Bottom-of-page exit-ramp: 4 mini-cards of the most recent singles,
    excluding the current one. Lifts internal-link equity across the

@@ -436,6 +436,39 @@
 .hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
 .hero-listen .hero-accent { margin: 0; }
 
+/* ─── "Also on" per-platform direct links ──────────────────────────────
+   Secondary row under the main CTAs. Quieter than .all-pill (neutral
+   border, no glow) so Spotify + hyperfollow stay the primary actions;
+   pills adopt the page accent on hover. Renders only platforms that
+   have a URL in the album's `platforms` map.
+*/
+.platform-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 2px;
+}
+.platform-row .pr-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.38);
+  margin-right: 2px;
+}
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.platform-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  transform: translateY(-1px);
+}
+.platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -571,7 +604,7 @@
   "datePublished": "2026-03-14",
   "genre": "Instrumental · Lo-Fi · Study",
   "url": "https://www.auny.media/albums/focus-with-me",
-  "sameAs": ["https://open.spotify.com/album/5AtAMHjAcihsSbY90kP0Kj","https://distrokid.com/hyperfollow/auny1/focus-with-me-study-edition"],
+  "sameAs": ["https://open.spotify.com/album/5AtAMHjAcihsSbY90kP0Kj","https://music.apple.com/us/album/focus-with-me-study-edition/1885247607","https://music.amazon.com/albums/B0GSL986Q6","https://tidal.com/album/507198998","https://www.pandora.com/AL:63220321","https://distrokid.com/hyperfollow/auny1/focus-with-me-study-edition"],
   "image": "https://www.auny.media/album-art/focus-with-me.jpg",
   "numTracks": 24,
   "track": {"@type":"ItemList","numberOfItems":24,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Morning Buffer","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0jEEzg7qQUoARCM3rv8z0W"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Latte Art","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2QGvt1yUXxS2g2V2Y4vD9D"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Page Turner","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3jTUTfjSQYzECSIB2k6eLM"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"Light","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1hz2cfeOPtcLt05PMtfNgQ"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Commute","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0kYvwkFYLnjgoZSmMRIqSP"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Focus Mode","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4fR4yky4DOuKZvNvq0g4Bb"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Softie","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2J701V2GB8dgRlRUBvYW0r"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"You're Late","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6LDpnqcYTN5bTFQz9qUrXG"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Bright AF","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4iR6yCqprMUvuzKXWrrxwL"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Silence","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/465O3kHGZuUDVyx3AY1rJ5"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Lo Finance","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4yj0A3njKD4SyKamxecVmR"}},{"@type":"ListItem","position":12,"item":{"@type":"MusicRecording","name":"Water Bodies","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/7wWsQnaei6kg82b27q1JTA"}},{"@type":"ListItem","position":13,"item":{"@type":"MusicRecording","name":"Morning Buffer 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/69sQKtkD9VEI93pSCfuQzP"}},{"@type":"ListItem","position":14,"item":{"@type":"MusicRecording","name":"Latte Art 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/2joWOAL3nAAWLFbVVpnruS"}},{"@type":"ListItem","position":15,"item":{"@type":"MusicRecording","name":"Page Turner 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/3GWZNMRssexbnHxLhWnITy"}},{"@type":"ListItem","position":16,"item":{"@type":"MusicRecording","name":"Light 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/6oCDTZoqxxs4IJQ1ELTsrO"}},{"@type":"ListItem","position":17,"item":{"@type":"MusicRecording","name":"Commute 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/28QwvEB8fUa6HMLdZVf0rA"}},{"@type":"ListItem","position":18,"item":{"@type":"MusicRecording","name":"Focus Mode 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/67OY46JSFSXPPpkhzIZRAI"}},{"@type":"ListItem","position":19,"item":{"@type":"MusicRecording","name":"Softie 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5lZL9m2JZvU6Ba6A6YHxVX"}},{"@type":"ListItem","position":20,"item":{"@type":"MusicRecording","name":"You're Late 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/4KtcDqUhcE5d6jQSsmhqjO"}},{"@type":"ListItem","position":21,"item":{"@type":"MusicRecording","name":"Bright AF 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1nJuvBMsmfIszxHzBmPAx4"}},{"@type":"ListItem","position":22,"item":{"@type":"MusicRecording","name":"Lo Finance 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/5VauZ3dDBJQ7YL5AFrcSIz"}},{"@type":"ListItem","position":23,"item":{"@type":"MusicRecording","name":"Silence 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/0sPnrBBBONDnKfRCr0HDLI"}},{"@type":"ListItem","position":24,"item":{"@type":"MusicRecording","name":"Water Bodies 2","byArtist":{"@type":"MusicGroup","name":"Auny"},"sameAs":"https://open.spotify.com/track/1jSzLBtanQp1Jg6utnRkTT"}}]}
@@ -936,6 +969,12 @@
       <div class="hero-listen">
         <a class="hero-accent" href="https://open.spotify.com/album/5AtAMHjAcihsSbY90kP0Kj" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/focus-with-me-study-edition" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+        <div class="platform-row"><span class="pr-label">also on</span>
+          <a class="platform-pill" href="https://music.apple.com/us/album/focus-with-me-study-edition/1885247607" target="_blank" rel="noopener">Apple Music <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://music.amazon.com/albums/B0GSL986Q6" target="_blank" rel="noopener">Amazon Music <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://tidal.com/album/507198998" target="_blank" rel="noopener">Tidal <span class="ext">↗</span></a>
+          <a class="platform-pill" href="https://www.pandora.com/AL:63220321" target="_blank" rel="noopener">Pandora <span class="ext">↗</span></a>
+        </div>
       </div>
     </div>
 

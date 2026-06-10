@@ -10,6 +10,14 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '3Ad55mTtVIdtlmLehTjOnP',
     hyperfollowSlug: 'flatline',
+    // Direct per-platform album links (rendered as "also on" pills + schema sameAs).
+    // Only set platforms with confirmed-live URLs; missing keys simply don't render.
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/flatline/6774093365',
+      youtubeMusic: 'https://music.youtube.com/playlist?list=OLAK5uy_m6rtbXbnHf6boZwiFNvcqxCPW12qf7Z2M',
+      amazonMusic: 'https://music.amazon.com/albums/B0H35B2ZXK',
+      tidal: 'https://tidal.com/album/528580178',
+    },
     genre: 'Electronic · Downtempo · Ambient · Lo-Fi',
     blurb: 'A masterwork of suspended clinical tension and delicate organic realism.',
     accent: { color: '#06D6F0', rgb: '6,214,240' },
@@ -46,6 +54,10 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '7CYsvVsXLjFCK9gmToB61t',
     hyperfollowSlug: 'midnight-glitch',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/midnight-glitch/6767560584',
+      tidal: 'https://tidal.com/album/522538611',
+    },
     genre: 'Hard Techno · Atmospheric Drift Phonk · Industrial',
     blurb: 'High-intensity. Built for coding, gaming, deep focus.',
     accent: { color: '#50FA7B', rgb: '80,250,123' },
@@ -86,6 +98,11 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '0ucHKpYbov1yzO0PyWtyNf',
     hyperfollowSlug: 'graveyard-echoes',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/graveyard-echoes/1895226000',
+      tidal: 'https://tidal.com/album/517468035',
+      pandora: 'https://www.pandora.com/AL:65424857',
+    },
     genre: 'Instrumental · Atmospheric · Underwater',
     blurb: 'Pressure, depth, things that don\'t come back to the surface.',
     accent: { color: '#4FA0B5', rgb: '79,160,181' },
@@ -124,6 +141,11 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '27HeS1tHoz3hNWdt6WIfy9',
     hyperfollowSlug: 'afterglow',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/afterglow/1889922242',
+      tidal: 'https://tidal.com/album/511594665',
+      pandora: 'https://www.pandora.com/AL:64185834',
+    },
     genre: 'Instrumental · Drive Music · Sunset',
     blurb: 'Drive music for nights that don\'t resolve. 20 tracks. 1 hr 5 min.',
     accent: { color: '#FF8C42', rgb: '255,140,66' },
@@ -161,6 +183,11 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '01ILnU5CjbBSU1YFMg7k6V',
     hyperfollowSlug: 'blue-lightning',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/blue-lightning/1888215683',
+      tidal: 'https://tidal.com/album/510052201',
+      pandora: 'https://www.pandora.com/AL:63852795',
+    },
     genre: 'Instrumental · Electric · Atmospheric',
     genreHead: 'Electronic',  // override: auto would say "Electric" (not a search term)
     blurb: 'Electric atmospheric instrumental. 26 tracks. 1 hr 28 min.',
@@ -206,6 +233,12 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '5AtAMHjAcihsSbY90kP0Kj',
     hyperfollowSlug: 'focus-with-me-study-edition',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/focus-with-me-study-edition/1885247607',
+      amazonMusic: 'https://music.amazon.com/albums/B0GSL986Q6',
+      tidal: 'https://tidal.com/album/507198998',
+      pandora: 'https://www.pandora.com/AL:63220321',
+    },
     genre: 'Instrumental · Lo-Fi · Study',
     blurb: 'A morning-to-night focus suite. 24 tracks across paired moods.',
     accent: { color: '#E8B86D', rgb: '232,184,109' },
@@ -247,6 +280,11 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '6c4X31NVvYkIhp4REBkgdh',
     hyperfollowSlug: '1111',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/11-11/1883600139',
+      tidal: 'https://tidal.com/album/505452901',
+      pandora: 'https://www.pandora.com/AL:62830541',
+    },
     genre: 'Instrumental · Quiet · Night',
     genreHead: 'Ambient',  // override: auto would say "Quiet" (not a search term)
     blurb: 'For the hours that bookend a day — 11:11 AM to 11:11 PM and the stillness around both.',
@@ -277,6 +315,10 @@ export const ALBUMS = [
     year: 2026,
     spotifyAlbumId: '3Y57JfSKcnYTAd6W6dlYvN',
     hyperfollowSlug: 'work-with-me',
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/work-with-me/1880511708',
+      pandora: 'https://www.pandora.com/AL:62060825',
+    },
     genre: 'Instrumental · Morning · Coworking',
     genreHead: 'Lo-Fi',  // override: auto would say "Morning" (matches cover's Lo-Fi Chill Out branding)
     blurb: 'Coworking energy. Coffee, sunrise, momentum, sunset.',
