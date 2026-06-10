@@ -40,9 +40,12 @@
     background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
     pointer-events: none; z-index: 50; opacity: 0.18;
   }
-  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; }
 
 /* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
 #atmosphere-canvas {
   position: fixed; inset: 0; z-index: 1;
   pointer-events: none;
@@ -787,8 +790,8 @@
 </script>
 
 
-<div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:30%;"></div>
-<div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
+<div class="bg-blob" style="width:420px;height:420px;background:radial-gradient(closest-side, rgba(30,144,255,0.18), transparent);top:-120px;left:30%;"></div>
+<div class="bg-blob" style="width:320px;height:320px;background:radial-gradient(closest-side, rgba(80,0,200,0.14), transparent);bottom:5%;right:5%;"></div>
 
 <main class="container">
   <header class="page-head">
@@ -799,7 +802,7 @@
 
   <div class="grid">
       <a class="album-card" href="/albums/flatline" style="--card-accent:#06D6F0;--card-accent-rgb:6,214,240">
-        <div class="cover"><img src="/album-art/flatline.jpg" alt="Flatline cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/flatline-320.avif 320w, /album-art/flatline-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/flatline-320.webp 320w, /album-art/flatline-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">19 tracks</span>
         </div>
         <div class="body">
@@ -809,7 +812,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/midnight-glitch" style="--card-accent:#50FA7B;--card-accent-rgb:80,250,123">
-        <div class="cover"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/midnight-glitch-320.avif 320w, /album-art/midnight-glitch-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/midnight-glitch-320.webp 320w, /album-art/midnight-glitch-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">23 tracks</span>
         </div>
         <div class="body">
@@ -819,7 +822,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/graveyard-echoes" style="--card-accent:#4FA0B5;--card-accent-rgb:79,160,181">
-        <div class="cover"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/graveyard-echoes-320.avif 320w, /album-art/graveyard-echoes-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/graveyard-echoes-320.webp 320w, /album-art/graveyard-echoes-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">21 tracks</span>
         </div>
         <div class="body">
@@ -829,7 +832,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/afterglow" style="--card-accent:#FF8C42;--card-accent-rgb:255,140,66">
-        <div class="cover"><img src="/album-art/afterglow.jpg" alt="Afterglow cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/afterglow-320.avif 320w, /album-art/afterglow-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/afterglow-320.webp 320w, /album-art/afterglow-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/afterglow.jpg" alt="Afterglow cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">20 tracks</span>
         </div>
         <div class="body">
@@ -839,7 +842,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/blue-lightning" style="--card-accent:#1E90FF;--card-accent-rgb:30,144,255">
-        <div class="cover"><img src="/album-art/blue-lightning.jpg" alt="Blue Lightning cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/blue-lightning-320.avif 320w, /album-art/blue-lightning-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/blue-lightning-320.webp 320w, /album-art/blue-lightning-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/blue-lightning.jpg" alt="Blue Lightning cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">26 tracks</span>
         </div>
         <div class="body">
@@ -849,7 +852,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/focus-with-me" style="--card-accent:#E8B86D;--card-accent-rgb:232,184,109">
-        <div class="cover"><img src="/album-art/focus-with-me.jpg" alt="Focus with Me cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/focus-with-me-320.avif 320w, /album-art/focus-with-me-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/focus-with-me-320.webp 320w, /album-art/focus-with-me-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/focus-with-me.jpg" alt="Focus with Me cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">24 tracks</span>
         </div>
         <div class="body">
@@ -859,7 +862,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/1111" style="--card-accent:#9B7EDE;--card-accent-rgb:155,126,222">
-        <div class="cover"><img src="/album-art/1111.jpg" alt="11:11 cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/1111-320.avif 320w, /album-art/1111-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/1111-320.webp 320w, /album-art/1111-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/1111.jpg" alt="11:11 cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">12 tracks</span>
         </div>
         <div class="body">
@@ -869,7 +872,7 @@
         </div>
       </a>
       <a class="album-card" href="/albums/work-with-me" style="--card-accent:#FF8FA3;--card-accent-rgb:255,143,163">
-        <div class="cover"><img src="/album-art/work-with-me.jpg" alt="Work with Me cover" loading="lazy" width="640" height="640">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/work-with-me-320.avif 320w, /album-art/work-with-me-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/work-with-me-320.webp 320w, /album-art/work-with-me-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/work-with-me.jpg" alt="Work with Me cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">10 tracks</span>
         </div>
         <div class="body">

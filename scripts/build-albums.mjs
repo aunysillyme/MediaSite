@@ -2,7 +2,7 @@
 // Generates /albums + /albums/<slug> pages from src/data/albums.js + templates/
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
 import { join } from 'node:path';
 
 const ALBUM_TPL = tpl('album.html');
@@ -113,7 +113,7 @@ function cardHtml(album) {
     ? `Releases ${esc(album.releaseDisplay)} · ${esc(album.genre.split('·')[0].trim())}`
     : `${esc(album.releaseDisplay)} · ${esc(album.genre.split('·')[0].trim())}`;
   return `      <a class="album-card${isUpcoming ? ' is-upcoming' : ''}" href="/albums/${album.slug}" style="--card-accent:${album.accent.color};--card-accent-rgb:${album.accent.rgb}">
-        <div class="cover"><img src="/album-art/${album.slug}.jpg" alt="${esc(album.title)} cover" loading="lazy" width="640" height="640">
+        <div class="cover">${coverPicture({ base: `/album-art/${album.slug}`, alt: `${esc(album.title)} cover`, sizes: '(max-width:720px) 45vw, 300px' })}
           ${badge}
         </div>
         <div class="body">

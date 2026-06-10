@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "npm run build:site && vite",
     "build": "npm run build:site && vite build",
-    "build:site": "npm run build:singles && npm run build:albums && npm run build:home && npm run build:sitemap",
+    "build:site": "npm run build:images && npm run build:singles && npm run build:albums && npm run build:home && npm run build:sitemap",
     "build:singles": "node scripts/build-singles.mjs",
     "build:albums": "node scripts/build-albums.mjs",
     "build:home": "node scripts/build-home.mjs",
     "build:sitemap": "node scripts/build-sitemap.mjs",
     "stats:fetch": "node scripts/update-stats.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^9.117.3",
@@ -31,6 +32,7 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "playwright": "^1.59.1",
+    "sharp": "^0.35.0",
     "vite": "^6.0.7"
   }
 }

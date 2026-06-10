@@ -56,7 +56,7 @@
     background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
     pointer-events: none; z-index: 50; opacity: 0.18;
   }
-  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(70px); }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; }
 
   .back-btn {
     position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
@@ -228,8 +228,8 @@
 
 {{NAV}}
 
-<div class="bg-blob" style="width:380px;height:380px;background:rgba(var(--accent-rgb),0.16);top:-100px;left:30%;"></div>
-<div class="bg-blob" style="width:280px;height:280px;background:rgba(var(--accent-rgb),0.12);bottom:5%;right:5%;"></div>
+<div class="bg-blob" style="width:380px;height:380px;background:radial-gradient(closest-side, rgba(var(--accent-rgb), transparent),0.16);top:-100px;left:30%;"></div>
+<div class="bg-blob" style="width:280px;height:280px;background:radial-gradient(closest-side, rgba(var(--accent-rgb), transparent),0.12);bottom:5%;right:5%;"></div>
 
 <section class="hero">
   <div class="hero-left">
@@ -260,7 +260,7 @@
   <div class="cover-stage">
    <div class="cover-wrap">
     <div class="cover-frame">
-      <img src="/album-art/singles/{{SLUG}}.{{COVER_EXT}}" alt="{{TITLE}} cover art by Auny" width="640" height="640">
+      {{HERO_PICTURE}}
     </div>
     <div class="vinyl-small" aria-hidden="true">
       <svg viewBox="0 0 180 180" width="180" height="180">

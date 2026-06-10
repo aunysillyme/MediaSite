@@ -40,7 +40,7 @@
     background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
     pointer-events: none; z-index: 50; opacity: 0.18;
   }
-  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; }
 
 {{NAV_CSS}}
 
@@ -105,8 +105,8 @@
 
 {{NAV}}
 
-<div class="bg-blob" style="width:420px;height:420px;background:rgba(30,144,255,0.18);top:-120px;left:30%;"></div>
-<div class="bg-blob" style="width:320px;height:320px;background:rgba(80,0,200,0.14);bottom:5%;right:5%;"></div>
+<div class="bg-blob" style="width:420px;height:420px;background:radial-gradient(closest-side, rgba(30,144,255,0.18), transparent);top:-120px;left:30%;"></div>
+<div class="bg-blob" style="width:320px;height:320px;background:radial-gradient(closest-side, rgba(80,0,200,0.14), transparent);bottom:5%;right:5%;"></div>
 
 <main class="container">
   <header class="page-head">

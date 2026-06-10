@@ -74,27 +74,12 @@
     background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
     pointer-events: none; z-index: 50; opacity: 0.18;
   }
-  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; filter: blur(90px); will-change: transform; }
-  .bg-blob.b1 { animation: drift1 26s ease-in-out infinite; }
-  .bg-blob.b2 { animation: drift2 32s ease-in-out infinite; }
-  .bg-blob.b3 { animation: drift3 38s ease-in-out infinite; }
-  @keyframes drift1 {
-    0%   { transform: translate(0,0) scale(1); }
-    50%  { transform: translate(70px,50px) scale(1.08); }
-    100% { transform: translate(0,0) scale(1); }
-  }
-  @keyframes drift2 {
-    0%   { transform: translate(0,0) scale(1); }
-    50%  { transform: translate(-50px,40px) scale(1.12); }
-    100% { transform: translate(0,0) scale(1); }
-  }
-  @keyframes drift3 {
-    0%   { transform: translate(0,0) scale(1); }
-    50%  { transform: translate(40px,-60px) scale(0.94); }
-    100% { transform: translate(0,0) scale(1); }
-  }
+  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; }
 
 /* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
 #atmosphere-canvas {
   position: fixed; inset: 0; z-index: 1;
   pointer-events: none;
@@ -396,7 +381,6 @@
       rgba(var(--accent-rgb),0.55) 100%);
     border-radius: 50%;
     filter: blur(32px);
-    animation: spin 22s linear infinite;
     pointer-events: none;
   }
   @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -987,9 +971,9 @@
 </script>
 
 
-<div class="bg-blob b1" style="width:520px;height:520px;background:rgba(30,144,255,0.22);top:-160px;left:30%;"></div>
-<div class="bg-blob b2" style="width:380px;height:380px;background:rgba(120,0,200,0.16);bottom:-100px;right:-80px;"></div>
-<div class="bg-blob b3" style="width:300px;height:300px;background:rgba(255,140,66,0.12);top:50%;left:-100px;"></div>
+<div class="bg-blob b1" style="width:520px;height:520px;background:radial-gradient(closest-side, rgba(30,144,255,0.22), transparent);top:-160px;left:30%;"></div>
+<div class="bg-blob b2" style="width:380px;height:380px;background:radial-gradient(closest-side, rgba(120,0,200,0.16), transparent);bottom:-100px;right:-80px;"></div>
+<div class="bg-blob b3" style="width:300px;height:300px;background:radial-gradient(closest-side, rgba(255,140,66,0.12), transparent);top:50%;left:-100px;"></div>
 
 <section class="hero">
   <div class="hero-left">
@@ -1014,7 +998,7 @@
     <div class="featured-card">
       <a class="featured-cover-link" href="/albums/flatline" aria-label="View Flatline details">
         <div class="featured-cover">
-          <img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" fetchpriority="high" decoding="async">
+          <picture><source type="image/avif" srcset="/album-art/flatline-320.avif 320w, /album-art/flatline-640.avif 640w" sizes="(max-width:860px) 90vw, 460px"><source type="image/webp" srcset="/album-art/flatline-320.webp 320w, /album-art/flatline-640.webp 640w" sizes="(max-width:860px) 90vw, 460px"><img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" fetchpriority="high" decoding="async"></picture>
           <div class="featured-play-overlay" aria-hidden="true">
             <div class="play-circle"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
@@ -1044,35 +1028,35 @@
   </div>
   <div class="album-row">
     <a class="mini-card" href="/albums/flatline">
-      <div class="cover"><img src="/album-art/flatline.jpg" alt="Flatline cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/flatline-320.avif 320w, /album-art/flatline-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/flatline-320.webp 320w, /album-art/flatline-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Flatline</div>
         <div class="mini-card-meta">June 5, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/albums/midnight-glitch">
-      <div class="cover"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/midnight-glitch-320.avif 320w, /album-art/midnight-glitch-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/midnight-glitch-320.webp 320w, /album-art/midnight-glitch-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Midnight Glitch</div>
         <div class="mini-card-meta">May 6, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/albums/graveyard-echoes">
-      <div class="cover"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/graveyard-echoes-320.avif 320w, /album-art/graveyard-echoes-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/graveyard-echoes-320.webp 320w, /album-art/graveyard-echoes-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Graveyard Echoes</div>
         <div class="mini-card-meta">April 20, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/albums/afterglow">
-      <div class="cover"><img src="/album-art/afterglow.jpg" alt="Afterglow cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/afterglow-320.avif 320w, /album-art/afterglow-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/afterglow-320.webp 320w, /album-art/afterglow-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/afterglow.jpg" alt="Afterglow cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Afterglow</div>
         <div class="mini-card-meta">March 30, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/albums/blue-lightning">
-      <div class="cover"><img src="/album-art/blue-lightning.jpg" alt="Blue Lightning cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/blue-lightning-320.avif 320w, /album-art/blue-lightning-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/blue-lightning-320.webp 320w, /album-art/blue-lightning-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/blue-lightning.jpg" alt="Blue Lightning cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Blue Lightning</div>
         <div class="mini-card-meta">March 25, 2026</div>
@@ -1091,35 +1075,35 @@
   </div>
   <div class="album-row">
     <a class="mini-card" href="/singles/mechanical-screen">
-      <div class="cover"><img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/mechanical-screen-320.avif 320w, /album-art/singles/mechanical-screen-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/mechanical-screen-320.webp 320w, /album-art/singles/mechanical-screen-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Mechanical Screen</div>
         <div class="mini-card-meta">May 29, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/singles/cyan">
-      <div class="cover"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/cyan-320.avif 320w, /album-art/singles/cyan-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/cyan-320.webp 320w, /album-art/singles/cyan-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">CYAN</div>
         <div class="mini-card-meta">May 24, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/singles/let-go">
-      <div class="cover"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/let-go-320.avif 320w, /album-art/singles/let-go-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/let-go-320.webp 320w, /album-art/singles/let-go-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">Let Go</div>
         <div class="mini-card-meta">May 16, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/singles/pink">
-      <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/pink-320.avif 320w, /album-art/singles/pink-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/pink-320.webp 320w, /album-art/singles/pink-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/pink.jpg" alt="PINK cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">PINK</div>
         <div class="mini-card-meta">May 4, 2026</div>
       </div>
     </a>
     <a class="mini-card" href="/singles/yellow">
-      <div class="cover"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/yellow-320.avif 320w, /album-art/singles/yellow-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/yellow-320.webp 320w, /album-art/singles/yellow-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">YELLOW</div>
         <div class="mini-card-meta">April 29, 2026</div>
@@ -1172,7 +1156,7 @@
   <div class="series-row">
     <a class="mini-card series" href="/singles/pink" style="--card-accent:#E91E63">
       <span class="badge">🩷</span>
-      <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/pink-320.avif 320w, /album-art/singles/pink-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/pink-320.webp 320w, /album-art/singles/pink-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/pink.jpg" alt="PINK cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">PINK</div>
         <div class="mini-card-meta">May 4, 2026</div>
@@ -1180,7 +1164,7 @@
     </a>
     <a class="mini-card series" href="/singles/black" style="--card-accent:#9EA0A6">
       <span class="badge">🖤</span>
-      <div class="cover"><img src="/album-art/singles/black.jpg" alt="BLACK cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/black-320.avif 320w, /album-art/singles/black-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/black-320.webp 320w, /album-art/singles/black-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/black.jpg" alt="BLACK cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">BLACK</div>
         <div class="mini-card-meta">January 8, 2026</div>
@@ -1188,7 +1172,7 @@
     </a>
     <a class="mini-card series" href="/singles/blue" style="--card-accent:#1E90FF">
       <span class="badge">💙</span>
-      <div class="cover"><img src="/album-art/singles/blue.jpg" alt="BLUE cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/blue-320.avif 320w, /album-art/singles/blue-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/blue-320.webp 320w, /album-art/singles/blue-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/blue.jpg" alt="BLUE cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">BLUE</div>
         <div class="mini-card-meta">January 24, 2026</div>
@@ -1196,7 +1180,7 @@
     </a>
     <a class="mini-card series" href="/singles/yellow" style="--card-accent:#F5C518">
       <span class="badge">💛</span>
-      <div class="cover"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/yellow-320.avif 320w, /album-art/singles/yellow-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/yellow-320.webp 320w, /album-art/singles/yellow-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/yellow.jpg" alt="YELLOW cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">YELLOW</div>
         <div class="mini-card-meta">April 29, 2026</div>
@@ -1204,7 +1188,7 @@
     </a>
     <a class="mini-card series" href="/singles/red" style="--card-accent:#E84855">
       <span class="badge">❤️</span>
-      <div class="cover"><img src="/album-art/singles/red.jpg" alt="RED cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/red-320.avif 320w, /album-art/singles/red-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/red-320.webp 320w, /album-art/singles/red-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/red.jpg" alt="RED cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">RED</div>
         <div class="mini-card-meta">January 12, 2026</div>
@@ -1212,7 +1196,7 @@
     </a>
     <a class="mini-card series" href="/singles/orange" style="--card-accent:#FF8C42">
       <span class="badge">🧡</span>
-      <div class="cover"><img src="/album-art/singles/orange.jpg" alt="ORANGE cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/orange-320.avif 320w, /album-art/singles/orange-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/orange-320.webp 320w, /album-art/singles/orange-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/orange.jpg" alt="ORANGE cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">ORANGE</div>
         <div class="mini-card-meta">January 15, 2026</div>
@@ -1220,7 +1204,7 @@
     </a>
     <a class="mini-card series" href="/singles/cyan" style="--card-accent:#22D3EE">
       <span class="badge">🩵</span>
-      <div class="cover"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/singles/cyan-320.avif 320w, /album-art/singles/cyan-640.avif 640w" sizes="(max-width:720px) 45vw, 220px"><source type="image/webp" srcset="/album-art/singles/cyan-320.webp 320w, /album-art/singles/cyan-640.webp 640w" sizes="(max-width:720px) 45vw, 220px"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
       <div class="body">
         <div class="mini-card-title">CYAN</div>
         <div class="mini-card-meta">May 24, 2026</div>

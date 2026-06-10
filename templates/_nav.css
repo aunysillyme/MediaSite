@@ -1,4 +1,7 @@
 /* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
 #atmosphere-canvas {
   position: fixed; inset: 0; z-index: 1;
   pointer-events: none;

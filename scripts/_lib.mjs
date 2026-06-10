@@ -82,6 +82,22 @@ export function platformUrls(release) {
   return PLATFORM_LABELS.map(([key]) => p[key]).filter(Boolean);
 }
 
+// ─── Responsive cover <picture> ───────────────────────────────────────
+// Emits AVIF + WebP sources (320w/640w) with the master JPEG as fallback.
+// `base` is the cover path without extension (e.g. "/album-art/singles/cyan").
+// `sizes` tells the browser the rendered width so it picks the right variant.
+// Grids pass a small fixed size; detail heroes pass eager:true for the LCP.
+export function coverPicture({ base, alt, sizes = '240px', eager = false, imgClass = '' }) {
+  const cls = imgClass ? ` class="${imgClass}"` : '';
+  const loading = eager
+    ? ' fetchpriority="high" decoding="async"'
+    : ' loading="lazy" decoding="async"';
+  return `<picture>` +
+    `<source type="image/avif" srcset="${base}-320.avif 320w, ${base}-640.avif 640w" sizes="${sizes}">` +
+    `<source type="image/webp" srcset="${base}-320.webp 320w, ${base}-640.webp 640w" sizes="${sizes}">` +
+    `<img${cls} src="${base}.jpg" alt="${alt}" width="640" height="640"${loading}></picture>`;
+}
+
 export const SERIES_CARD_CSS = tpl('_series-card.css');
 export const SIGNUP_HTML = tpl('_signup.html');
 export const SIGNUP_CSS = tpl('_signup.css');

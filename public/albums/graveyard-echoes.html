@@ -55,6 +55,9 @@
   }
 
 /* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
 #atmosphere-canvas {
   position: fixed; inset: 0; z-index: 1;
   pointer-events: none;
@@ -189,7 +192,7 @@
     min-height: calc(100vh - 64px);
   }
   .bg-art { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-  .bg-blob { position: absolute; border-radius: 50%; filter: blur(60px); }
+  .bg-blob { position: absolute; border-radius: 50%; }
 
   .hero { position: relative; z-index: 4; flex: 1; display: flex; flex-direction: column; justify-content: center; }
   .hero-label {
@@ -944,9 +947,9 @@
 
 
 <div class="bg-art">
-  <div class="bg-blob" style="width:320px;height:320px;background:rgba(var(--accent-rgb),0.18);top:-80px;left:-100px;"></div>
-  <div class="bg-blob" style="width:260px;height:260px;background:rgba(var(--accent-rgb),0.12);top:30%;right:-100px;"></div>
-  <div class="bg-blob" style="width:240px;height:240px;background:rgba(var(--accent-rgb),0.1);bottom:10%;left:-80px;"></div>
+  <div class="bg-blob" style="width:320px;height:320px;background:radial-gradient(closest-side, rgba(var(--accent-rgb), transparent),0.18);top:-80px;left:-100px;"></div>
+  <div class="bg-blob" style="width:260px;height:260px;background:radial-gradient(closest-side, rgba(var(--accent-rgb), transparent),0.12);top:30%;right:-100px;"></div>
+  <div class="bg-blob" style="width:240px;height:240px;background:radial-gradient(closest-side, rgba(var(--accent-rgb), transparent),0.1);bottom:10%;left:-80px;"></div>
 </div>
 
 <div class="page">
@@ -1174,6 +1177,9 @@
   var periods = [40, 55, 48].slice(0, RINGS.length);
   var last = null;
 
+  // Only animate while the orbital is on-screen and the tab is visible —
+  // a 60fps DOM-positioning loop is the page's biggest idle CPU cost.
+  var running = false, onScreen = true, rafId = 0;
   function tick(ts) {
     if (!last) last = ts;
     var dt = Math.min((ts - last) / 1000, 0.05);
@@ -1188,9 +1194,18 @@
         els[i][j].style.top  = (CY + R * Math.sin(a) - HALF) + 'px';
       }
     }
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  function start() { if (!running && onScreen && !document.hidden) { running = true; last = null; rafId = requestAnimationFrame(tick); } }
+  function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onScreen = es[0].isIntersecting;
+      onScreen ? start() : stop();
+    }, { rootMargin: '120px' }).observe(orbit);
+  }
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  start();
 })();
 </script>
 </body>

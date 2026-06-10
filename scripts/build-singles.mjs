@@ -5,7 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls } from './_lib.mjs';
+import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -94,6 +94,7 @@ function renderSingle(single) {
     RELEASE_ISO: single.releaseDate,
     GENRE: escHtml(single.genre),
     GENRE_HEAD: escHtml(singleGenreHead(single.genre)),
+    HERO_PICTURE: coverPicture({ base: singleCoverPath(single.slug).replace(/\.jpg$/, ''), alt: `${escAttr(single.title)} cover art by Auny`, sizes: '(max-width:760px) 80vw, 420px', eager: true }),
     SPOTIFY_TRACK_ID: single.spotifyTrackId,
     HYPERFOLLOW_SLUG: single.hyperfollowSlug,
     PLATFORM_ROW: platformRowFor(single),
@@ -137,7 +138,7 @@ function cardHtml(single, opts = {}) {
   const accentStyle = hasAccent ? ` style="--card-accent:${single.accent.color}"` : '';
   const badge = opts.badgeText ? `      ${seriesBadge(opts.badgeText)}\n` : '';
   return `      <a class="${cls}" href="/singles/${single.slug}"${accentStyle}>
-${badge}        <div class="cover"><img src="${singleCoverPath(single.slug)}" alt="${escAttr(single.title)} cover" loading="lazy" width="640" height="640"></div>
+${badge}        <div class="cover">${coverPicture({ base: singleCoverPath(single.slug).replace(/\.jpg$/, ''), alt: `${escAttr(single.title)} cover`, sizes: '(max-width:720px) 45vw, 240px' })}</div>
         <div class="body">
           <div class="card-title">${escHtml(single.title)}</div>
           <div class="card-meta">${escHtml(single.releaseDisplay)}</div>
@@ -150,7 +151,7 @@ function pinkCard() {
   if (!p) return '';
   return `      <a class="card series" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
         ${seriesBadge(p.emoji)}
-        <div class="cover"><img src="${singleCoverPath(p.slug)}" alt="${escAttr(p.title)} cover" loading="lazy" width="640" height="640"></div>
+        <div class="cover">${coverPicture({ base: singleCoverPath(p.slug).replace(/\.jpg$/, ''), alt: `${escAttr(p.title)} cover`, sizes: '(max-width:720px) 45vw, 240px' })}</div>
         <div class="body">
           <div class="card-title">${escHtml(p.title)}</div>
           <div class="card-meta">${escHtml(p.releaseDisplay)}</div>

@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -59,7 +59,7 @@ const latestListenRow = latestUpcoming
 
 function miniAlbum(a) {
   return `    <a class="mini-card" href="/albums/${a.slug}">
-      <div class="cover"><img src="/album-art/${a.slug}.jpg" alt="${esc(a.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover">${coverPicture({ base: `/album-art/${a.slug}`, alt: `${esc(a.title)} cover`, sizes: '(max-width:720px) 45vw, 220px' })}</div>
       <div class="body">
         <div class="mini-card-title">${esc(a.title)}</div>
         <div class="mini-card-meta">${esc(a.releaseDisplay)}</div>
@@ -69,7 +69,7 @@ function miniAlbum(a) {
 
 function miniSingle(s) {
   return `    <a class="mini-card" href="/singles/${s.slug}">
-      <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover">${coverPicture({ base: singleCoverPath(s.slug).replace(/\.jpg$/, ''), alt: `${esc(s.title)} cover`, sizes: '(max-width:720px) 45vw, 220px' })}</div>
       <div class="body">
         <div class="mini-card-title">${esc(s.title)}</div>
         <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
@@ -82,7 +82,7 @@ function miniSeries(slug) {
   const order = COLOR_SERIES_ORDER.find((x) => x.slug === slug);
   return `    <a class="mini-card series" href="/singles/${s.slug}" style="--card-accent:${order.accent.color}">
       ${seriesBadge(order.emoji)}
-      <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover">${coverPicture({ base: singleCoverPath(s.slug).replace(/\.jpg$/, ''), alt: `${esc(s.title)} cover`, sizes: '(max-width:720px) 45vw, 220px' })}</div>
       <div class="body">
         <div class="mini-card-title">${esc(s.title)}</div>
         <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
@@ -94,7 +94,7 @@ function miniPink() {
   const p = SINGLES.find((x) => x.slug === 'pink');
   return `    <a class="mini-card series" href="/singles/${p.slug}" style="--card-accent:${p.accent.color}">
       ${seriesBadge(p.emoji)}
-      <div class="cover"><img src="${singleCoverPath(p.slug)}" alt="${esc(p.title)} cover" loading="lazy" width="640" height="640"></div>
+      <div class="cover">${coverPicture({ base: singleCoverPath(p.slug).replace(/\.jpg$/, ''), alt: `${esc(p.title)} cover`, sizes: '(max-width:720px) 45vw, 220px' })}</div>
       <div class="body">
         <div class="mini-card-title">${esc(p.title)}</div>
         <div class="mini-card-meta">${esc(p.releaseDisplay)}</div>
@@ -105,6 +105,7 @@ function miniPink() {
 const html = render(HOME_TPL, {
   LATEST_URL: latestUrl,
   LATEST_COVER: latestCover,
+  LATEST_PICTURE: coverPicture({ base: latestCover.replace(/\.jpg$/, ''), alt: `${esc(latest.title)} cover`, sizes: '(max-width:860px) 90vw, 460px', eager: true }),
   LATEST_TYPE: latestType,
   LATEST_SPOTIFY_URL: latestSpotifyUrl,
   LATEST_HYPERFOLLOW_SLUG: latest.hyperfollowSlug,
