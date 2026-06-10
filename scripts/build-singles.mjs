@@ -115,7 +115,7 @@ function renderSingle(single) {
     NAV: navFor('singles'),
     NAV_CSS: NAV_CSS,
     PLAYER_CSS: PLAYER_CSS,
-    PLAYER_HTML: playerFor({ kind: 'track', id: single.spotifyTrackId, title: single.title }),
+    PLAYER_HTML: playerFor({ kind: 'track', id: single.spotifyTrackId, title: single.title, cover: singleCoverPath(single.slug).replace(/\.jpg$/, '-640.webp') }),
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
     COLOR_CHIPS_CSS: COLOR_CHIPS_CSS,

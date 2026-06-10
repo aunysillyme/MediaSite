@@ -138,12 +138,13 @@ export function colorChipsFor({ colors, currentSlug, currentType }) {
 let COLOR_TYPE_INFO_MAP = {};
 export function registerColorTypeInfo(info) { COLOR_TYPE_INFO_MAP = info; }
 
-export function playerFor({ kind, id, title }) {
+export function playerFor({ kind, id, title, cover = '' }) {
   const wrapClass = kind === 'album' ? 'embed-wrap album' : 'embed-wrap';
   return render(PLAYER_HTML, {
     EMBED_KIND: kind,
     EMBED_ID: id,
     EMBED_TITLE: esc(title),
+    EMBED_COVER: cover,
     WRAP_CLASS: wrapClass,
   });
 }

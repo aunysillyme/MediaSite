@@ -1,7 +1,10 @@
-<!-- Shared Spotify embed player. Variables:
+<!-- Shared Spotify player. Renders a lightweight click-to-play facade (cover +
+     play button) instead of the ~2MB Spotify iframe; the iframe is injected
+     only when the visitor clicks. Variables:
        {{EMBED_KIND}}   "track" | "album"
        {{EMBED_ID}}     Spotify ID
        {{EMBED_TITLE}}  Track/album title (for a11y)
+       {{EMBED_COVER}}  cover image URL (facade background)
        {{WRAP_CLASS}}   "embed-wrap" for single, "embed-wrap album" for album
 -->
 <div class="{{WRAP_CLASS}}">
@@ -9,10 +12,27 @@
     <span class="left"><span class="live-dot"></span>Now Playing</span>
     <div class="reels"><span class="reel"></span><span class="reel"></span></div>
   </div>
-  <iframe class="spotify-embed"
-          src="https://open.spotify.com/embed/{{EMBED_KIND}}/{{EMBED_ID}}?utm_source=auny_media&theme=0"
-          loading="lazy"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          title="Spotify preview player for {{EMBED_TITLE}}"></iframe>
+  <button type="button" class="spotify-facade {{EMBED_KIND}}"
+          data-embed="https://open.spotify.com/embed/{{EMBED_KIND}}/{{EMBED_ID}}?utm_source=auny_media&theme=0"
+          data-title="{{EMBED_TITLE}}"
+          style="background-image:url('{{EMBED_COVER}}')"
+          aria-label="Preview {{EMBED_TITLE}} on Spotify">
+    <span class="facade-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="facade-label">Preview on Spotify</span>
+  </button>
   <p class="embed-note">hit play to preview · plays full on spotify</p>
 </div>
+<script>
+(function(){
+  if (window.__spotifyFacade) return; window.__spotifyFacade = true;
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('.spotify-facade'); if (!btn) return;
+    var f = document.createElement('iframe');
+    f.className = 'spotify-embed';
+    f.src = btn.getAttribute('data-embed');
+    f.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+    f.setAttribute('title', 'Spotify player for ' + (btn.getAttribute('data-title') || ''));
+    btn.replaceWith(f);
+  });
+})();
+</script>

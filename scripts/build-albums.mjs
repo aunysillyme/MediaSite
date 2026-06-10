@@ -44,7 +44,7 @@ function renderAlbum(album) {
     </section>`
     : `<section class="album-player-section" aria-label="Album preview player">
       <p class="album-player-label">✦ &nbsp; preview the album</p>
-      ${playerFor({ kind: 'album', id: album.spotifyAlbumId, title: album.title })}
+      ${playerFor({ kind: 'album', id: album.spotifyAlbumId, title: album.title, cover: `/album-art/${album.slug}-640.webp` })}
     </section>`;
   const upcomingBanner = upcoming
     ? `<p class="upcoming-banner"><span class="dot"></span> Coming ${esc(album.releaseDisplay)}</p>`
