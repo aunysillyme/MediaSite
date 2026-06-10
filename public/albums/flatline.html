@@ -25,10 +25,9 @@
 <link rel="canonical" href="https://www.auny.media/albums/flatline">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Patrick+Hand&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/outfit-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
 
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +44,7 @@
   }
   body::before {
     content: ''; position: fixed; inset: 0;
-    background: url('/images/background-site-1920x1080.png') center/cover no-repeat;
+    background: url('/images/background-site-1920x1080.webp') center/cover no-repeat;
     opacity: 0.22; filter: hue-rotate(180deg) saturate(1.5); z-index: 0; pointer-events: none;
   }
   body::after {
