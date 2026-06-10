@@ -56,6 +56,32 @@ export function albumGenreHead(genreOrAlbum) {
   return parts[0];
 }
 
+// ─── "Also on" per-platform direct links (albums + singles) ────────────
+// Canonical display order + labels for the platform pills. A release's
+// `platforms` map holds confirmed-live URLs; missing keys don't render.
+export const PLATFORM_LABELS = [
+  ['appleMusic',   'Apple Music'],
+  ['youtubeMusic', 'YouTube Music'],
+  ['amazonMusic',  'Amazon Music'],
+  ['tidal',        'Tidal'],
+  ['deezer',       'Deezer'],
+  ['pandora',      'Pandora'],
+];
+
+export function platformRowFor(release) {
+  const p = release.platforms || {};
+  const pills = PLATFORM_LABELS
+    .filter(([key]) => p[key])
+    .map(([key, label]) => `<a class="platform-pill" href="${p[key]}" target="_blank" rel="noopener">${label} <span class="ext">↗</span></a>`);
+  if (!pills.length) return '';
+  return `<div class="platform-row"><span class="pr-label">also on</span>\n          ${pills.join('\n          ')}\n        </div>`;
+}
+
+export function platformUrls(release) {
+  const p = release.platforms || {};
+  return PLATFORM_LABELS.map(([key]) => p[key]).filter(Boolean);
+}
+
 export const SERIES_CARD_CSS = tpl('_series-card.css');
 export const SIGNUP_HTML = tpl('_signup.html');
 export const SIGNUP_CSS = tpl('_signup.css');

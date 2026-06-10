@@ -2,7 +2,7 @@
 // Generates /albums + /albums/<slug> pages from src/data/albums.js + templates/
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls } from './_lib.mjs';
 import { join } from 'node:path';
 
 const ALBUM_TPL = tpl('album.html');
@@ -15,30 +15,6 @@ function titleHtml(title) {
     return esc(words.slice(0, mid).join(' ')) + '<br>' + esc(words.slice(mid).join(' '));
   }
   return esc(title);
-}
-
-// Canonical display order + labels for the "also on" direct-link pills.
-const PLATFORM_LABELS = [
-  ['appleMusic',   'Apple Music'],
-  ['youtubeMusic', 'YouTube Music'],
-  ['amazonMusic',  'Amazon Music'],
-  ['tidal',        'Tidal'],
-  ['deezer',       'Deezer'],
-  ['pandora',      'Pandora'],
-];
-
-function platformRowFor(album) {
-  const p = album.platforms || {};
-  const pills = PLATFORM_LABELS
-    .filter(([key]) => p[key])
-    .map(([key, label]) => `<a class="platform-pill" href="${p[key]}" target="_blank" rel="noopener">${label} <span class="ext">↗</span></a>`);
-  if (!pills.length) return '';
-  return `<div class="platform-row"><span class="pr-label">also on</span>\n          ${pills.join('\n          ')}\n        </div>`;
-}
-
-function platformUrls(album) {
-  const p = album.platforms || {};
-  return PLATFORM_LABELS.map(([key]) => p[key]).filter(Boolean);
 }
 
 function renderAlbum(album) {

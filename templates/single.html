@@ -200,10 +200,7 @@
   "datePublished": "{{RELEASE_ISO}}",
   "genre": "{{GENRE}}",
   "url": "https://www.auny.media/singles/{{SLUG}}",
-  "sameAs": [
-    "https://open.spotify.com/track/{{SPOTIFY_TRACK_ID}}",
-    "https://distrokid.com/hyperfollow/auny1/{{HYPERFOLLOW_SLUG}}"
-  ],
+  "sameAs": {{SAMEAS_JSONLD}},
   "image": "https://www.auny.media/album-art/singles/{{SLUG}}.{{COVER_EXT}}",
   "recordingOf": {
     "@type": "MusicComposition",
@@ -253,6 +250,7 @@
       <span class="listen-dot"></span>
       <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/{{HYPERFOLLOW_SLUG}}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
     </div>
+    {{PLATFORM_ROW}}
 
     {{PLAYER_HTML}}
 
