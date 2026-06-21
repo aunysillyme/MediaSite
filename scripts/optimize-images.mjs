@@ -25,7 +25,10 @@ let made = 0, skipped = 0;
 for (const dir of DIRS) {
   const abs = join(root, dir);
   if (!existsSync(abs)) continue;
-  const masters = readdirSync(abs).filter((f) => f.endsWith('.jpg') && !/-\d+\.jpg$/.test(f));
+  // Optimizer only writes .avif / .webp — no extra exclusion needed. The earlier
+  // `!/-\d+\.jpg$/` filter (intended to skip generated variants) also excluded
+  // legitimate masters whose slug ends in `-<digit>` like feel-again-pt-2.jpg.
+  const masters = readdirSync(abs).filter((f) => f.endsWith('.jpg'));
   for (const file of masters) {
     const src = join(abs, file);
     const base = file.replace(/\.jpg$/, '');
