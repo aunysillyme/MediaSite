@@ -1,7 +1,40 @@
-// Source of truth for all 7 instrumental albums. Reverse-chronological.
+// Source of truth for the album catalog. Reverse-chronological.
 // Track IDs verified directly against Spotify pages on 2026-05-23.
 
 export const ALBUMS = [
+  {
+    slug: 'dreams',
+    title: 'dreaMs',
+    // Pre-distribution teaser: not on DistroKid yet, so no date, no Spotify ID,
+    // no hyperfollow. `teaser: true` ⇒ "Coming Soon" with no pre-save CTA.
+    // When it goes live: set releaseDate/Display + spotifyAlbumId + hyperfollowSlug
+    // + per-track ids, drop `teaser`/`upcoming`, and it auto-flips to released.
+    releaseDate: '',
+    releaseDisplay: 'Coming Soon',
+    year: 2026,
+    spotifyAlbumId: '',
+    hyperfollowSlug: '',
+    upcoming: true,
+    teaser: true,
+    genre: 'Electronic · Melodic Bass · EDM',
+    blurb: 'A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.',
+    accent: { color: '#E3B23C', rgb: '227,178,60' },
+    bgHue: 35,
+    palette: ['#E3B23C', '#E8743B', '#5B8AA6'],
+    tracks: [
+      { num: 1,  name: 'Map',        id: '', dur: '' },
+      { num: 2,  name: "Don't Stop", id: '', dur: '' },
+      { num: 3,  name: 'Reason',     id: '', dur: '' },
+      { num: 4,  name: 'More',       id: '', dur: '' },
+      { num: 5,  name: 'Buried',     id: '', dur: '' },
+      { num: 6,  name: 'Flinch',     id: '', dur: '' },
+      { num: 7,  name: 'Weight',     id: '', dur: '' },
+      { num: 8,  name: 'Before',     id: '', dur: '' },
+      { num: 9,  name: 'Evolve',     id: '', dur: '' },
+      { num: 10, name: 'Watch',      id: '', dur: '' },
+      { num: 11, name: 'Believe',    id: '', dur: '' },
+    ],
+  },
   {
     slug: 'flatline',
     title: 'Flatline',

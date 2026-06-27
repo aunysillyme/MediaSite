@@ -24,9 +24,10 @@ const isUpcoming = (item) => !!item.upcoming || item.releaseDate > TODAY_ISO;
 const RELEASED_ALBUMS  = ALBUMS.filter((a) => !isUpcoming(a));
 const RELEASED_SINGLES = SINGLES.filter((s) => !isUpcoming(s));
 
-// Pick the most recent release across albums + singles
-const latestAlbum  = ALBUMS[0];
-const latestSingle = SINGLES[0];
+// Pick the most recent RELEASED item for the hero — a pre-release teaser at the
+// top of the array (e.g. an unannounced album with no date) must not hijack it.
+const latestAlbum  = RELEASED_ALBUMS[0];
+const latestSingle = RELEASED_SINGLES[0];
 const latestIsAlbum = latestAlbum.releaseDate >= latestSingle.releaseDate;
 const latest = latestIsAlbum ? latestAlbum : latestSingle;
 const latestUrl = latestIsAlbum ? `/albums/${latest.slug}` : `/singles/${latest.slug}`;

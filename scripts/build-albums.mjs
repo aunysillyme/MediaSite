@@ -24,7 +24,12 @@ function renderAlbum(album) {
   // so a build after midnight on release day swaps the page treatment.
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = !!album.upcoming || album.releaseDate > today || !album.spotifyAlbumId;
-  const heroListenBlock = upcoming
+  // Teaser = pre-distribution (no DistroKid yet): "Coming Soon", no pre-save CTA.
+  const teaser = !!album.teaser;
+  const comingLabel = teaser ? esc(album.releaseDisplay) : `Coming ${esc(album.releaseDisplay)}`;
+  const heroListenBlock = teaser
+    ? ''
+    : upcoming
     ? `<div class="hero-listen">
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
       </div>`
@@ -33,7 +38,15 @@ function renderAlbum(album) {
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
         ${platformRowFor(album)}
       </div>`;
-  const previewSection = upcoming
+  const previewSection = teaser
+    ? `<section class="album-player-section" aria-label="Album coming soon">
+      <p class="album-player-label">✦ &nbsp; coming soon</p>
+      <div class="preview-soon">
+        <p class="ps-label">${album.tracks.length} tracks · ${esc(album.genre)}</p>
+        <p class="ps-headline">Mastered and ready. Release date to be announced — stay tuned.</p>
+      </div>
+    </section>`
+    : upcoming
     ? `<section class="album-player-section" aria-label="Album coming soon">
       <p class="album-player-label">✦ &nbsp; coming soon</p>
       <div class="preview-soon">
@@ -47,7 +60,7 @@ function renderAlbum(album) {
       ${playerFor({ kind: 'album', id: album.spotifyAlbumId, title: album.title, cover: `/album-art/${album.slug}-640.webp` })}
     </section>`;
   const upcomingBanner = upcoming
-    ? `<p class="upcoming-banner"><span class="dot"></span> Coming ${esc(album.releaseDisplay)}</p>`
+    ? `<p class="upcoming-banner"><span class="dot"></span> ${comingLabel}</p>`
     : '';
   const heroLabelSuffix = upcoming ? ' · upcoming' : '';
   const tracksJsonLd = JSON.stringify({
@@ -73,6 +86,8 @@ function renderAlbum(album) {
     GENRE_HEAD: esc(albumGenreHead(album)),
     RELEASE_DISPLAY: esc(album.releaseDisplay),
     RELEASE_ISO: album.releaseDate,
+    // Omit datePublished entirely for unreleased albums (no valid date yet).
+    DATE_PUBLISHED_PROP: album.releaseDate ? `\n  "datePublished": "${album.releaseDate}",` : '',
     SPOTIFY_ALBUM_ID: album.spotifyAlbumId,
     HYPERFOLLOW_SLUG: album.hyperfollowSlug,
     NUM_TRACKS: String(album.tracks.length),
@@ -80,7 +95,7 @@ function renderAlbum(album) {
     SAMEAS_JSONLD: JSON.stringify([
       album.spotifyAlbumId ? `https://open.spotify.com/album/${album.spotifyAlbumId}` : null,
       ...platformUrls(album),
-      `https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}`,
+      album.hyperfollowSlug ? `https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}` : null,
     ].filter(Boolean)),
     ACCENT_COLOR: album.accent.color,
     ACCENT_RGB: album.accent.rgb,
@@ -106,10 +121,15 @@ function renderAlbum(album) {
 function cardHtml(album) {
   const today = new Date().toISOString().slice(0, 10);
   const isUpcoming = !!album.upcoming || album.releaseDate > today;
-  const badge = isUpcoming
+  const isTeaser = !!album.teaser;
+  const badge = isTeaser
+    ? `<span class="badge upcoming"><span class="dot"></span>${esc(album.releaseDisplay)}</span>`
+    : isUpcoming
     ? `<span class="badge upcoming"><span class="dot"></span>Coming ${esc(album.releaseDisplay)}</span>`
     : `<span class="badge">${album.tracks.length} tracks</span>`;
-  const meta = isUpcoming
+  const meta = isTeaser
+    ? `${esc(album.genre.split('·')[0].trim())} · ${album.tracks.length} tracks`
+    : isUpcoming
     ? `Releases ${esc(album.releaseDisplay)} · ${esc(album.genre.split('·')[0].trim())}`
     : `${esc(album.releaseDisplay)} · ${esc(album.genre.split('·')[0].trim())}`;
   return `      <a class="album-card${isUpcoming ? ' is-upcoming' : ''}" href="/albums/${album.slug}" style="--card-accent:${album.accent.color};--card-accent-rgb:${album.accent.rgb}">
@@ -143,7 +163,7 @@ function listJsonLd() {
           'name': a.title,
           'url': `https://www.auny.media/albums/${a.slug}`,
           'image': `https://www.auny.media/album-art/${a.slug}.jpg`,
-          'datePublished': a.releaseDate,
+          'datePublished': a.releaseDate || undefined,
           'numTracks': a.tracks.length,
           'byArtist': { '@type': 'MusicGroup', '@id': 'https://www.auny.media/#artist' },
           'sameAs': a.spotifyAlbumId ? `https://open.spotify.com/album/${a.spotifyAlbumId}` : undefined,

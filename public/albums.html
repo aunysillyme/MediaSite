@@ -319,17 +319,32 @@ picture { display: contents; }
   "@type": "CollectionPage",
   "name": "Albums — Auny",
   "url": "https://www.auny.media/albums",
-  "description": "All 8 albums by Auny — instrumental atmospheric music.",
+  "description": "All 9 albums by Auny — instrumental atmospheric music.",
   "isPartOf": {
     "@id": "https://www.auny.media/#website"
   },
   "mainEntity": {
     "@type": "ItemList",
-    "numberOfItems": 8,
+    "numberOfItems": 9,
     "itemListElement": [
       {
         "@type": "ListItem",
         "position": 1,
+        "item": {
+          "@type": "MusicAlbum",
+          "name": "dreaMs",
+          "url": "https://www.auny.media/albums/dreams",
+          "image": "https://www.auny.media/album-art/dreams.jpg",
+          "numTracks": 11,
+          "byArtist": {
+            "@type": "MusicGroup",
+            "@id": "https://www.auny.media/#artist"
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
         "item": {
           "@type": "MusicAlbum",
           "name": "Flatline",
@@ -346,7 +361,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 2,
+        "position": 3,
         "item": {
           "@type": "MusicAlbum",
           "name": "Midnight Glitch",
@@ -363,7 +378,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 3,
+        "position": 4,
         "item": {
           "@type": "MusicAlbum",
           "name": "Graveyard Echoes",
@@ -380,7 +395,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 4,
+        "position": 5,
         "item": {
           "@type": "MusicAlbum",
           "name": "Afterglow",
@@ -397,7 +412,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 5,
+        "position": 6,
         "item": {
           "@type": "MusicAlbum",
           "name": "Blue Lightning",
@@ -414,7 +429,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 6,
+        "position": 7,
         "item": {
           "@type": "MusicAlbum",
           "name": "Focus with Me",
@@ -431,7 +446,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 7,
+        "position": 8,
         "item": {
           "@type": "MusicAlbum",
           "name": "11:11",
@@ -448,7 +463,7 @@ picture { display: contents; }
       },
       {
         "@type": "ListItem",
-        "position": 8,
+        "position": 9,
         "item": {
           "@type": "MusicAlbum",
           "name": "Work with Me",
@@ -800,6 +815,16 @@ picture { display: contents; }
   </header>
 
   <div class="grid">
+      <a class="album-card is-upcoming" href="/albums/dreams" style="--card-accent:#E3B23C;--card-accent-rgb:227,178,60">
+        <div class="cover"><picture><source type="image/avif" srcset="/album-art/dreams-320.avif 320w, /album-art/dreams-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/dreams-320.webp 320w, /album-art/dreams-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/dreams.jpg" alt="dreaMs cover" width="640" height="640" loading="lazy" decoding="async"></picture>
+          <span class="badge upcoming"><span class="dot"></span>Coming Soon</span>
+        </div>
+        <div class="body">
+          <div class="album-card-title">dreaMs</div>
+          <div class="album-card-meta">Electronic · 11 tracks</div>
+          <div class="album-card-blurb">A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.</div>
+        </div>
+      </a>
       <a class="album-card" href="/albums/flatline" style="--card-accent:#06D6F0;--card-accent-rgb:6,214,240">
         <div class="cover"><picture><source type="image/avif" srcset="/album-art/flatline-320.avif 320w, /album-art/flatline-640.avif 640w" sizes="(max-width:720px) 45vw, 300px"><source type="image/webp" srcset="/album-art/flatline-320.webp 320w, /album-art/flatline-640.webp 640w" sizes="(max-width:720px) 45vw, 300px"><img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" loading="lazy" decoding="async"></picture>
           <span class="badge">19 tracks</span>

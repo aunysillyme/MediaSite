@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dreaMs by Auny — Electronic Album</title>
+<meta name="description" content="dreaMs by Auny — a 11-track Electronic instrumental album. A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered. Stream on Spotify, Apple Music, YouTube.">
+
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="dreaMs by Auny">
+<meta property="og:description" content="A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.">
+<meta property="og:image" content="https://www.auny.media/album-art/dreams.jpg">
+<meta property="og:image:width" content="640">
+<meta property="og:image:height" content="640">
+<meta property="og:url" content="https://www.auny.media/albums/dreams">
+<meta property="og:site_name" content="auny.media">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="dreaMs by Auny">
+<meta name="twitter:description" content="A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.">
+<meta name="twitter:image" content="https://www.auny.media/album-art/dreams.jpg">
+
+<link rel="canonical" href="https://www.auny.media/albums/dreams">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preload" href="/fonts/outfit-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #E3B23C;
+    --accent-rgb: 227,178,60;
+    --nav-accent: #E3B23C;
+  }
+  html, body {
+    min-height: 100%;
+    background: #030308;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url('/images/background-site-1920x1080.webp') center/cover no-repeat;
+    opacity: 0.22; filter: hue-rotate(35deg) saturate(1.5); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.2;
+  }
+
+/* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
+#atmosphere-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+
+/* Cursor spotlight — soft accent glow that follows the cursor */
+#cursor-spotlight {
+  position: fixed; top: 0; left: 0; z-index: 2;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle,
+    rgba(var(--accent-rgb, 30,144,255), 0.10) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.04) 28%,
+    transparent 65%);
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  #cursor-spotlight { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cursor-spotlight { display: none; }
+}
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.94);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.72);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.site-nav .nav-link:hover {
+  color: #fff;
+  text-shadow:
+    0 0 8px rgba(var(--accent-rgb, 30,144,255), 0.85),
+    0 0 18px rgba(var(--accent-rgb, 30,144,255), 0.4);
+}
+.site-nav .nav-link.disabled:hover {
+  color: rgba(255,255,255,0.32); text-shadow: none;
+}
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-link-stack {
+  display: inline-flex; flex-direction: column; align-items: center;
+  gap: 2px; line-height: 1; padding: 4px 0;
+}
+.site-nav .nav-link-stack .nav-link-sub {
+  font-size: 7px; letter-spacing: 1.8px; opacity: 0.55;
+  text-transform: uppercase;
+}
+.site-nav .nav-link-stack .nav-link-main {
+  font-size: 11px; letter-spacing: 3px;
+}
+.site-nav .nav-link.disabled {
+  cursor: default; color: rgba(255,255,255,0.32);
+}
+.site-nav .nav-link.disabled:hover { color: rgba(255,255,255,0.32); }
+.site-nav .nav-link.disabled .nav-link-sub { color: rgba(255,255,255,0.45); }
+.site-nav .nav-ctas { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-spotify,
+.site-nav .nav-suno {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.site-nav .nav-spotify:hover {
+  color: #1DB954; border-color: #1DB954;
+  box-shadow: 0 0 14px rgba(29,185,84,0.35);
+}
+.site-nav .nav-suno:hover {
+  color: #FF7A29; border-color: #FF7A29;
+  box-shadow: 0 0 14px rgba(255,122,41,0.45);
+}
+
+@media (max-width: 720px) {
+  .site-nav { padding: 10px 14px; }
+  .site-nav .nav-links { gap: 12px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-link-stack .nav-link-sub { font-size: 6px; letter-spacing: 1.4px; }
+  .site-nav .nav-link-stack .nav-link-main { font-size: 9px; letter-spacing: 2px; }
+  .site-nav .nav-ctas { gap: 6px; }
+  .site-nav .nav-spotify,
+  .site-nav .nav-suno { padding: 5px 9px; font-size: 9px; letter-spacing: 2px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+
+  .page {
+    width: 100%; display: flex; flex-direction: row;
+    align-items: stretch; position: relative; padding-top: 64px;
+  }
+  .left-panel {
+    width: 42%; min-width: 360px; max-width: 560px;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    padding: 40px 36px 40px 56px; gap: 32px;
+    position: relative; z-index: 4;
+    animation: fadeup 0.6s ease-out both;
+  }
+  .right-panel {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 4; overflow: visible;
+    padding-right: 24px;
+    min-height: calc(100vh - 64px);
+  }
+  .bg-art { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .bg-blob { position: absolute; border-radius: 50%; }
+
+  .hero { position: relative; z-index: 4; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .hero-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
+  }
+  .hero-name {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(36px, 4.2vw, 64px); line-height: 0.95; letter-spacing: -0.5px;
+    margin-bottom: 6px; text-shadow: 0 0 40px rgba(var(--accent-rgb),0.4);
+  }
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 24px;
+  }
+  .meta-block {
+    display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.28); padding-left: 14px;
+  }
+  .meta-row { display: flex; flex-direction: column; gap: 1px; }
+  .meta-key {
+    font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.6;
+  }
+  .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
+  .blurb {
+ font-family: 'Patrick Hand', cursive; 
+    font-size: clamp(18px, 1.6vw, 22px); line-height: 1.35;
+    color: rgba(255,255,255,0.82); margin-bottom: 24px;
+  }
+  .hero-accent {
+ font-family: 'Patrick Hand', cursive; 
+    font-size: clamp(22px, 2.8vw, 34px); line-height: 1.2;
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .orbit-arrow {
+    display: inline-block; font-style: normal; font-family: 'Space Mono', monospace;
+    font-size: 0.72em; color: var(--accent);
+    animation: arrow-nudge 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb),0.7);
+    line-height: 1;
+  }
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(0); opacity: 0.65; }
+    50% { transform: translateX(6px); opacity: 1; }
+  }
+  /* ─── Shared player container ──────────────────────────────────────────────
+   Used on single + album pages. Wraps a Spotify embed iframe with a
+   cassette-style accent strip + "now playing" indicator. Iframe height
+   varies (singles: 80px track player, albums: 380px album+tracklist).
+   Renders dark glass body with subtle accent border.
+*/
+.embed-wrap {
+  position: relative; max-width: 540px; margin: 0 0 22px;
+  padding: 34px 14px 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 12px 30px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(var(--accent-rgb), 0.10);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+.embed-wrap.album { max-width: 920px; }
+.cassette-strip {
+  position: absolute; top: 0; left: 0; right: 0; height: 24px;
+  background: var(--accent);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 14px;
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(0,0,0,0.82); font-weight: 600;
+}
+.cassette-strip .left { display: inline-flex; align-items: center; gap: 8px; }
+.cassette-strip .live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ff3535;
+  box-shadow: 0 0 6px #ff3535, 0 0 1px rgba(0,0,0,0.5);
+  animation: livepulse 1.6s ease-in-out infinite;
+}
+@keyframes livepulse {
+  0%,100% { opacity: 0.45; transform: scale(0.92); }
+  50%     { opacity: 1;    transform: scale(1.1); }
+}
+.cassette-strip .reels { display: flex; gap: 6px; }
+.cassette-strip .reel {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.28);
+  animation: spin 3.2s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.embed-wrap .spotify-embed {
+  border: 0; border-radius: 10px; display: block;
+  width: 100%; height: 80px;
+  background: rgba(0,0,0,0.4);
+  margin: 0;
+}
+.embed-wrap.album .spotify-embed { height: 380px; }
+
+/* Click-to-play facade — same footprint as the iframe it replaces, so the
+   swap on click causes no layout shift. */
+.spotify-facade {
+  position: relative; display: flex; align-items: center; gap: 14px;
+  width: 100%; height: 80px; margin: 0; padding: 0;
+  border: 0; border-radius: 10px; cursor: pointer; overflow: hidden;
+  background-size: cover; background-position: center;
+  text-align: left;
+}
+.spotify-facade::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(3,3,8,0.58); backdrop-filter: saturate(1.1);
+}
+.spotify-facade.album { height: 380px; flex-direction: column; justify-content: center; gap: 14px; }
+.facade-play {
+  position: relative; z-index: 1; flex: 0 0 auto; margin-left: 16px;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: #1DB954; color: #fff; display: grid; place-items: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.45);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.spotify-facade.album .facade-play { margin: 0; width: 62px; height: 62px; }
+.spotify-facade:hover .facade-play { transform: scale(1.08); box-shadow: 0 6px 22px rgba(29,185,84,0.5); }
+.facade-play svg { width: 22px; height: 22px; margin-left: 2px; }
+.spotify-facade.album .facade-play svg { width: 28px; height: 28px; }
+.facade-label {
+  position: relative; z-index: 1;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: #fff; text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+}
+@media (prefers-reduced-motion: reduce) {
+  .spotify-facade:hover .facade-play { transform: none; }
+}
+.embed-note {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.42);
+  margin: 12px 4px 0; text-align: center;
+}
+
+  /* ─── Global site footer ──────────────────────────────────────────────
+   Single footer used on every page. Platform links row + copyright.
+   Top border adopts the page accent so it tunes to whatever color the
+   page is wearing today. */
+.site-footer {
+  max-width: 1240px; margin: 24px auto 0; padding: 22px 32px 40px;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+  text-align: center; position: relative; z-index: 4;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+}
+.site-footer .footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+  margin-bottom: 16px;
+}
+.site-footer .footer-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer .footer-links a:hover { color: var(--accent); }
+.site-footer .footer-meta {
+  color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px;
+}
+.site-footer .footer-meta a {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+}
+.site-footer .footer-meta a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .site-footer { padding: 22px 16px 32px; }
+  .site-footer .footer-links { gap: 14px; font-size: 10px; }
+}
+
+  /* Newsletter signup — minimal inline form. No card, no glow, no background.
+   Reads as a single mono label + input + button line. Picks up page accent. */
+.signup {
+  max-width: 720px; margin: 28px auto 0;
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  flex-wrap: nowrap;
+}
+.signup-label {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent);
+  text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.55);
+  white-space: nowrap;
+}
+.signup-label-sr { position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important; clip: rect(0 0 0 0) !important; white-space: nowrap !important; }
+.signup input[type="email"] {
+  width: 260px; min-width: 0;
+  background: rgba(8,8,16,0.7); border: 1px solid rgba(var(--accent-rgb), 0.4);
+  border-radius: 6px; padding: 9px 12px;
+  color: #fff; font-family: 'Space Mono', monospace; font-size: 12px;
+  text-shadow: 0 0 8px rgba(var(--accent-rgb), 0.55);
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.12), inset 0 0 14px rgba(var(--accent-rgb), 0.08);
+  transition: border-color 0.2s, box-shadow 0.2s, text-shadow 0.2s;
+}
+.signup input[type="email"]::placeholder {
+  color: rgba(var(--accent-rgb), 0.45);
+  letter-spacing: 0; text-transform: none;
+  text-shadow: 0 0 6px rgba(var(--accent-rgb), 0.35);
+}
+.signup input[type="email"]:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.25), 0 0 22px rgba(var(--accent-rgb), 0.25);
+  text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.75);
+}
+.signup button {
+  background: var(--accent); color: #030308;
+  border: 1px solid var(--accent);
+  font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; padding: 9px 18px; border-radius: 6px;
+  cursor: pointer; white-space: nowrap;
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.35);
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+}
+.signup button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(var(--accent-rgb), 0.55);
+}
+.signup button:disabled { opacity: 0.55; cursor: wait; transform: none; box-shadow: none; }
+.signup-hp { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
+.signup-status {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  flex: 1 1 100%; text-align: center; margin-top: 8px;
+}
+.signup-status:empty { display: none; }
+.signup-status.ok    { color: var(--accent); }
+.signup-status.err   { color: #ff8585; }
+
+/* When signup precedes the global footer, the footer's own top margin
+   handles the gap (24px). No extra rule needed — kept consistent everywhere. */
+
+@media (max-width: 640px) {
+  .signup { flex-wrap: wrap; margin: 24px 16px 0; gap: 10px; }
+  .signup-label { flex: 1 1 100%; text-align: center; }
+  .signup input[type="email"] { width: 100%; flex: 1 1 100%; }
+  .signup button { width: 100%; padding: 11px 16px; }
+}
+
+
+  /* ─── Shared "stream on all platforms" CTA ─────────────────────────────
+   The pill links out to the DistroKid hyperfollow page. The pill's
+   accent border + glow adopts the page's --accent.
+
+   On singles: pill sits inline next to "listen on spotify" with a dot.
+   On albums: pill sits below the large "listen on spotify" hero link.
+*/
+.listen-row {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.listen-row .listen-now { margin-bottom: 0 !important; }
+.listen-dot {
+  width: 4px; height: 4px; border-radius: 50%;
+  background: rgba(255,255,255,0.28);
+}
+.all-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 999px;
+  background: rgba(var(--accent-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-rgb), 0.45);
+  color: var(--accent);
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; text-decoration: none;
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.18);
+  transition: box-shadow 0.25s, background 0.25s, transform 0.2s;
+}
+.all-pill:hover {
+  background: rgba(var(--accent-rgb), 0.18);
+  box-shadow: 0 0 26px rgba(var(--accent-rgb), 0.45);
+  transform: translateY(-1px);
+}
+.all-pill .ext { font-size: 0.85em; opacity: 0.85; }
+
+/* Album hero variant — stacked layout */
+.hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
+.hero-listen .hero-accent { margin: 0; }
+
+/* ─── "Also on" per-platform direct links ──────────────────────────────
+   Secondary row under the main CTAs. Quieter than .all-pill (neutral
+   border, no glow) so Spotify + hyperfollow stay the primary actions;
+   pills adopt the page accent on hover. Renders only platforms that
+   have a URL in the album's `platforms` map.
+*/
+.platform-row {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 2px;
+}
+.platform-row .pr-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.38);
+  margin-right: 2px;
+}
+.platform-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.72);
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
+}
+.platform-pill:hover {
+  border-color: rgba(var(--accent-rgb), 0.6);
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), 0.08);
+  transform: translateY(-1px);
+}
+.platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Album preview lives inside .left-panel, stacked under the info block. */
+  .album-player-section {
+    position: relative; z-index: 4;
+    width: 100%;
+    display: flex; flex-direction: column; align-items: stretch;
+    animation: fadeup 0.6s 0.3s ease-out both;
+  }
+  .album-player-section .embed-wrap { width: 100%; }
+  .album-player-section .spotify-embed { width: 100%; }
+  .album-player-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.85;
+    margin: 0 0 16px;
+  }
+
+  /* Upcoming-album treatment (pre-release) */
+  .upcoming-banner {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; margin: 0 0 18px;
+    border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
+  }
+  .upcoming-banner .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse-dot 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse-dot { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .preview-soon {
+    width: 100%;
+    background: rgba(8,8,16,0.55);
+    border: 1px solid rgba(var(--accent-rgb), 0.32);
+    border-radius: 12px; padding: 22px 24px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
+  }
+  .preview-soon .ps-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .preview-soon .ps-headline {
+    font-family: 'Patrick Hand', cursive; font-size: 22px; line-height: 1.25;
+    color: rgba(255,255,255,0.92); margin: 0 0 14px;
+  }
+  .preview-soon .ps-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px;
+    background: var(--accent); color: #030308; font-weight: 700;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; text-decoration: none;
+    box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .preview-soon .ps-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.55); }
+
+  /* Orbit system */
+  .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
+  .planet {
+    position: absolute; display: block;
+    cursor: pointer; text-decoration: none; z-index: 6;
+    transition: transform 0.22s ease; transform-origin: center;
+  }
+  .planet:hover { transform: scale(1.25); }
+  .planet-icon {
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: box-shadow 0.22s ease; flex-shrink: 0; background: rgba(3,3,8,0.85);
+  }
+  .planet-name {
+    position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%);
+    font-family: 'Space Mono', monospace; font-size: 8px;
+    white-space: nowrap; opacity: 0; transition: opacity 0.18s ease;
+    pointer-events: none; padding: 2px 5px; border-radius: 3px;
+    color: #fff; letter-spacing: 0.3px; max-width: 120px;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .planet:hover .planet-name { opacity: 1; }
+
+  .ring-track {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid transparent; pointer-events: none;
+  }
+  .ring-1 { animation: ring-1a 4s ease-in-out infinite; }
+  .ring-2 { animation: ring-2a 4s ease-in-out 1s infinite; }
+  .ring-3 { animation: ring-3a 4s ease-in-out 2s infinite; }
+  @keyframes ring-1a { 0%,100% { border-color: rgba(var(--accent-rgb),0.16); } 50% { border-color: rgba(var(--accent-rgb),0.4); } }
+  @keyframes ring-2a { 0%,100% { border-color: rgba(var(--accent-rgb),0.12); } 50% { border-color: rgba(var(--accent-rgb),0.34); } }
+  @keyframes ring-3a { 0%,100% { border-color: rgba(var(--accent-rgb),0.1); }  50% { border-color: rgba(var(--accent-rgb),0.3); } }
+
+  .vinyl-wrap { position: absolute; z-index: 4; animation: vspin 18s linear infinite; }
+  @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vinyl-wrap, .ring-1, .ring-2, .ring-3, .orbit-arrow, .left-panel, .orbit-system { animation: none !important; }
+    .planet { transition: none !important; }
+  }
+
+  @media (max-width: 760px) {
+    .page { flex-direction: column; align-items: center; padding-top: 70px; }
+    .left-panel {
+      width: 100%; min-width: unset; max-width: unset; padding: 32px 24px 16px;
+      align-items: center; text-align: center; flex: unset;
+    }
+    .album-player-section { max-width: 480px; align-self: center; }
+    .hero { flex: unset; align-items: center; }
+    .meta-block { align-items: flex-start; width: 100%; max-width: 320px; }
+    .right-panel { width: 100%; padding: 0 0 28px; }
+    @keyframes arrow-nudge {
+      0%,100% { transform: translateY(0); opacity: 0.65; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
+  }
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicAlbum",
+  "name": "dreaMs",
+  "byArtist": { "@type": "MusicGroup", "name": "Auny", "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" },
+  "genre": "Electronic · Melodic Bass · EDM",
+  "url": "https://www.auny.media/albums/dreams",
+  "sameAs": [],
+  "image": "https://www.auny.media/album-art/dreams.jpg",
+  "numTracks": 11,
+  "track": {"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Map","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Don't Stop","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Reason","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"More","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Buried","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Flinch","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Weight","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"Before","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Evolve","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Watch","byArtist":{"@type":"MusicGroup","name":"Auny"}}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Believe","byArtist":{"@type":"MusicGroup","name":"Auny"}}}]}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.auny.media/" },
+    { "@type": "ListItem", "position": 2, "name": "Albums", "item": "https://www.auny.media/albums" },
+    { "@type": "ListItem", "position": 3, "name": "dreaMs", "item": "https://www.auny.media/albums/dreams" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
+<div id="cursor-spotlight" aria-hidden="true"></div>
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="home" href="/">Home</a>
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Platforms</a>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Collabs — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">collabs</span>
+    </span>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Poetry — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">poetry</span>
+    </span>
+  </div>
+  <div class="nav-ctas">
+    <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+    <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
+  </div>
+</nav>
+<script>
+(function () {
+  var canvas = document.getElementById('atmosphere-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var NOTES = ['♪','♫','♩','♬','♭','♮'];
+
+  function readAccent() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    return v || '#1E90FF';
+  }
+  function readAccentRgb() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+    return v || '30,144,255';
+  }
+  var accent = readAccent();
+  var accentRgb = readAccentRgb();
+
+  var W = 0, H = 0;
+  function resize() {
+    W = canvas.width  = Math.floor(innerWidth  * dpr);
+    H = canvas.height = Math.floor(innerHeight * dpr);
+    canvas.style.width  = innerWidth  + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  resize();
+  addEventListener('resize', resize, { passive: true });
+
+  // ─── Ambient dust particles ──────────────────────────────────
+  var COUNT = reduce ? 22 : (coarse ? 30 : 60);
+  var particles = [];
+  for (var i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (12 + Math.random() * 8.5) * dpr,
+      vx: (Math.random() - 0.5) * 0.4 * dpr,
+      vy: (Math.random() - 0.5) * 0.4 * dpr,
+      opacity: 0.13 + Math.random() * 0.17,
+      rotation: (Math.random() - 0.5) * 0.6,
+      // displacement offset from natural drift — decays back to 0 (spring-back)
+      ox: 0, oy: 0,
+    });
+  }
+
+  var mouseX = -9999, mouseY = -9999;
+  var lastSpawnX = 0, lastSpawnY = 0;
+  var spotlight = document.getElementById('cursor-spotlight');
+
+  // ─── Cursor trail (musical notes that fade behind cursor) ────
+  var trail = [];
+  function spawnTrail(x, y) {
+    if (reduce || coarse) return;
+    trail.push({
+      x: x, y: y,
+      vx: (Math.random() - 0.5) * 0.6 * dpr,
+      vy: 0.2 * dpr + Math.random() * 0.4 * dpr,
+      spawnedAt: performance.now(),
+      maxLife: 1300 + Math.random() * 600,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (10 + Math.random() * 4) * dpr,
+      rot: (Math.random() - 0.5) * 0.5,
+    });
+  }
+
+  if (!reduce && !coarse) {
+    addEventListener('mousemove', function (e) {
+      mouseX = e.clientX * dpr;
+      mouseY = e.clientY * dpr;
+      // Spotlight follows cursor (transform on the div)
+      if (spotlight) {
+        spotlight.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        spotlight.style.opacity = '1';
+      }
+      // Rate-limit trail spawns by distance moved (every ~70 css px)
+      var dxs = e.clientX - lastSpawnX, dys = e.clientY - lastSpawnY;
+      if (dxs * dxs + dys * dys > 70 * 70) {
+        spawnTrail(mouseX, mouseY);
+        lastSpawnX = e.clientX;
+        lastSpawnY = e.clientY;
+      }
+    }, { passive: true });
+    addEventListener('mouseleave', function () {
+      mouseX = mouseY = -9999;
+      if (spotlight) spotlight.style.opacity = '0';
+    }, { passive: true });
+  }
+
+  var REPULSE_RADIUS = 300 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 3.2;
+
+  var running = true;
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(loop);
+  });
+
+  var accentTick = 0;
+  function loop() {
+    if (!running) return;
+    if ((accentTick++ & 31) === 0) {
+      accent = readAccent();
+      accentRgb = readAccentRgb();
+      if (spotlight) {
+        spotlight.style.background =
+          'radial-gradient(circle, rgba(' + accentRgb + ',0.10) 0%, rgba(' + accentRgb + ',0.04) 28%, transparent 65%)';
+      }
+    }
+    ctx.clearRect(0, 0, W, H);
+
+    // ambient dust
+    for (var j = 0; j < particles.length; j++) {
+      var p = particles[j];
+      // Natural drift along the home path
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -24) p.x = W + 24;
+      if (p.x > W + 24) p.x = -24;
+      if (p.y < -24) p.y = H + 24;
+      if (p.y > H + 24) p.y = -24;
+      // Composite position = home path + cursor displacement
+      var fx = p.x + p.ox, fy = p.y + p.oy;
+      // Cursor repulse — accumulates into displacement offset, not position
+      var dx = fx - mouseX, dy = fy - mouseY;
+      var dist2 = dx * dx + dy * dy;
+      var r2 = REPULSE_RADIUS * REPULSE_RADIUS;
+      if (dist2 < r2 && dist2 > 1) {
+        var dist = Math.sqrt(dist2);
+        var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
+        p.ox += (dx / dist) * force * 15;
+        p.oy += (dy / dist) * force * 15;
+      }
+      // Spring back: damp the displacement toward 0 every frame
+      p.ox *= 0.93;
+      p.oy *= 0.93;
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.translate(p.x + p.ox, p.y + p.oy);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = accent;
+      ctx.font = p.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    // cursor trail — very low opacity, fades over lifetime
+    var now = performance.now();
+    for (var b = trail.length - 1; b >= 0; b--) {
+      var tp = trail[b];
+      var age = now - tp.spawnedAt;
+      if (age > tp.maxLife) { trail.splice(b, 1); continue; }
+      tp.x += tp.vx;
+      tp.y += tp.vy;
+      tp.vy += 0.005 * dpr;     // slight gravity drift
+      tp.rot += 0.012;
+      var t = age / tp.maxLife;
+      // Peak opacity capped at ~0.18, then fades out
+      var fadeIn  = Math.min(1, age / 220);
+      var fadeOut = 1 - t;
+      var alpha = 0.13 * fadeIn * fadeOut;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(tp.x, tp.y);
+      ctx.rotate(tp.rot);
+      ctx.fillStyle = accent;
+      ctx.font = tp.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(tp.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+// ─── Slam-bubble hover: cards in horizontal rows push siblings outward ───
+(function () {
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (coarse || reduce) return;
+
+  function initRow(row, opts) {
+    opts = opts || {};
+    var scale     = opts.scale     || 1.18;
+    var pushBase  = opts.pushBase  || 28;
+    var falloff   = opts.falloff   || 8;
+    var shrinkPer = opts.shrinkPer || 0.025;
+    var minShrink = opts.minShrink || 0.88;
+    var skipDisabled = opts.skipDisabled || false;
+
+    var cards = Array.prototype.slice.call(row.children).filter(function (el) {
+      if (el.tagName !== 'A' && el.tagName !== 'DIV' && el.tagName !== 'SPAN') return false;
+      if (skipDisabled && el.classList.contains('disabled')) return false;
+      return true;
+    });
+    cards.forEach(function (card, i) {
+      card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      card.addEventListener('mouseenter', function () {
+        cards.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(' + scale + ')';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, pushBase - (dist - 1) * falloff);
+            var shrink = Math.max(minShrink, 1 - dist * shrinkPer);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      });
+    });
+  }
+
+  // Grid: group cards into visual rows (by Y-center), then apply
+  // the same horizontal-domino push as homepage rows within each row.
+  function initGrid(grid) {
+    var cards = Array.prototype.slice.call(grid.children).filter(function (el) {
+      return el.tagName === 'A' || el.tagName === 'DIV' || el.tagName === 'SPAN';
+    });
+    function refreshRows() {
+      var rows = [];
+      cards.forEach(function (c) {
+        var r = c.getBoundingClientRect();
+        var cy = r.top + r.height / 2;
+        var bucket = rows.find(function (row) { return Math.abs(row.y - cy) < r.height / 2; });
+        if (bucket) bucket.items.push(c);
+        else rows.push({ y: cy, items: [c] });
+      });
+      cards.forEach(function (c) { c._slamRow = null; });
+      rows.forEach(function (r) {
+        var sorted = r.items.sort(function (a, b) {
+          return a.getBoundingClientRect().left - b.getBoundingClientRect().left;
+        });
+        sorted.forEach(function (c) { c._slamRow = sorted; });
+      });
+    }
+    cards.forEach(function (c) {
+      c.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      c.addEventListener('mouseenter', function () {
+        var row = c._slamRow;
+        if (!row) return;
+        var i = row.indexOf(c);
+        row.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(1.18)';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, 28 - (dist - 1) * 8);
+            var shrink = Math.max(0.88, 1 - dist * 0.025);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      c.addEventListener('mouseleave', function () {
+        var row = c._slamRow;
+        if (row) row.forEach(function (o) { o.style.transform = ''; o.style.zIndex = ''; });
+      });
+    });
+    refreshRows();
+    addEventListener('resize', refreshRows, { passive: true });
+  }
+
+  function init() {
+    document.querySelectorAll('.album-row, .series-row').forEach(function (r) { initRow(r); });
+    document.querySelectorAll('.nav-links').forEach(function (r) {
+      initRow(r, { scale: 1.28, pushBase: 18, falloff: 5, shrinkPer: 0.02, minShrink: 0.9, skipDisabled: true });
+    });
+    document.querySelectorAll('.nav-ctas').forEach(function (r) {
+      initRow(r, { scale: 1.18, pushBase: 12, falloff: 4, shrinkPer: 0.02, minShrink: 0.92 });
+    });
+    document.querySelectorAll('.grid').forEach(function (g) { initGrid(g); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+
+<div class="bg-art">
+  <div class="bg-blob" style="width:320px;height:320px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.18), transparent);top:-80px;left:-100px;"></div>
+  <div class="bg-blob" style="width:260px;height:260px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.12), transparent);top:30%;right:-100px;"></div>
+  <div class="bg-blob" style="width:240px;height:240px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.1), transparent);bottom:10%;left:-80px;"></div>
+</div>
+
+<div class="page">
+  <div class="left-panel">
+    <div class="hero">
+      <p class="hero-label">✦ &nbsp; album · upcoming</p>
+      <p class="upcoming-banner"><span class="dot"></span> Coming Soon</p>
+      <h1 class="hero-name">dreaMs</h1>
+      <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
+
+      <p class="blurb">A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.</p>
+
+      <div class="meta-block">
+        <div class="meta-row"><span class="meta-key">Tracks</span><span class="meta-val">11 songs</span></div>
+        <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">Coming Soon</span></div>
+        <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Electronic · Melodic Bass · EDM</span></div>
+        <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
+      </div>
+
+      
+    </div>
+
+    <section class="album-player-section" aria-label="Album coming soon">
+      <p class="album-player-label">✦ &nbsp; coming soon</p>
+      <div class="preview-soon">
+        <p class="ps-label">11 tracks · Electronic · Melodic Bass · EDM</p>
+        <p class="ps-headline">Mastered and ready. Release date to be announced — stay tuned.</p>
+      </div>
+    </section>
+  </div>
+
+  <div class="right-panel">
+    <div class="orbit-system" id="orbit"></div>
+  </div>
+</div>
+
+<!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
+<form class="signup" id="signup-form" novalidate>
+  <span class="signup-label">✦ &nbsp; sign up for updates</span>
+  <label class="signup-label-sr" for="signup-email">Your email</label>
+  <input type="email" id="signup-email" name="email" required autocomplete="email" placeholder="you@somewhere.net">
+  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="signup-hp">
+  <button type="submit" id="signup-submit">subscribe →</button>
+  <span class="signup-status" id="signup-status" role="status" aria-live="polite"></span>
+</form>
+
+<!-- Global site footer. Identical on every page (home, singles, albums,
+     list pages, links). Per-release info is not in the footer — release
+     date is rendered in the meta block on individual pages. -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/auny/1880511675" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://music.amazon.com/artists/B0GDL275G8/auny" target="_blank" rel="noopener">Amazon Music</a>
+    <a href="https://www.youtube.com/@aunysillyme" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno</a>
+    <a href="/links">all platforms</a>
+    <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">Contact</a>
+  </div>
+  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
+</footer>
+
+
+<script>
+(function () {
+  var form = document.getElementById('signup-form');
+  if (!form) return;
+  var emailInput = document.getElementById('signup-email');
+  var btn = document.getElementById('signup-submit');
+  var status = document.getElementById('signup-status');
+
+  function setStatus(msg, cls) {
+    status.textContent = msg || '';
+    status.className = 'signup-status' + (cls ? ' ' + cls : '');
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var email = (emailInput.value || '').trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setStatus('please enter a valid email', 'err');
+      emailInput.focus();
+      return;
+    }
+    btn.disabled = true;
+    setStatus('subscribing…', '');
+    try {
+      var res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, website: form.website.value }),
+      });
+      if (res.ok) {
+        setStatus('subscribed · check your inbox for the welcome', 'ok');
+        form.reset();
+      } else {
+        var data = await res.json().catch(function () { return {}; });
+        setStatus(data.error === 'invalid_email' ? 'that email looks off — try again' : 'something broke on our end — try again later', 'err');
+      }
+    } catch (err) {
+      setStatus('network hiccup — try again', 'err');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
+
+<script>
+(function () {
+  var RINGS = [[{"num":1,"name":"Map","id":"","dur":""},{"num":2,"name":"Don't Stop","id":"","dur":""},{"num":3,"name":"Reason","id":"","dur":""},{"num":4,"name":"More","id":"","dur":""}],[{"num":5,"name":"Buried","id":"","dur":""},{"num":6,"name":"Flinch","id":"","dur":""},{"num":7,"name":"Weight","id":"","dur":""},{"num":8,"name":"Before","id":"","dur":""}],[{"num":9,"name":"Evolve","id":"","dur":""},{"num":10,"name":"Watch","id":"","dur":""},{"num":11,"name":"Believe","id":"","dur":""}]];
+  var ALBUM_URL = 'https://open.spotify.com/album/';
+  var ALBUM_ART = '/album-art/dreams.jpg';
+  var ACCENTS = ["#E3B23C","#E8743B","#5B8AA6"];
+
+  var isMobile = window.innerWidth < 760;
+  var vw = isMobile ? window.innerWidth : window.innerWidth * 0.68;
+  var vh = window.innerHeight - 64;
+  var S = Math.max(340, Math.min(820, vw - 24, vh - 40));
+  var ICON = Math.max(30, Math.round(S * 0.078));
+  var HALF = Math.round(ICON / 2);
+  var radii = RINGS.length === 2
+    ? [Math.round(S * 0.24), Math.round(S * 0.44)]
+    : [Math.round(S * 0.18), Math.round(S * 0.33), Math.round(S * 0.47)];
+  var W = (radii[radii.length - 1] + HALF) * 2 + 8;
+  var CX = W / 2, CY = W / 2;
+
+  var orbit = document.getElementById('orbit');
+  orbit.style.width = W + 'px';
+  orbit.style.height = W + 'px';
+  orbit.style.position = 'relative';
+
+  function makeRing(r, cls) {
+    var d = document.createElement('div');
+    d.className = 'ring-track ' + cls;
+    d.style.width = (r * 2) + 'px';
+    d.style.height = (r * 2) + 'px';
+    d.style.left = (CX - r) + 'px';
+    d.style.top = (CY - r) + 'px';
+    orbit.appendChild(d);
+  }
+  for (var k = 0; k < radii.length; k++) makeRing(radii[k], 'ring-' + (k + 1));
+
+  // Spinning vinyl
+  var vsz = Math.round(S * 0.16);
+  var vWrap = document.createElement('div');
+  vWrap.className = 'vinyl-wrap';
+  vWrap.style.cssText = 'width:' + vsz + 'px;height:' + vsz + 'px;margin-left:' + (-(vsz/2)) + 'px;margin-top:' + (-(vsz/2)) + 'px;top:50%;left:50%;';
+  vWrap.innerHTML = '<svg viewBox="0 0 110 110" width="' + vsz + '" height="' + vsz + '">'
+    + '<circle cx="55" cy="55" r="53" fill="#050510"/>'
+    + '<circle cx="55" cy="55" r="51" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="47" fill="none" stroke="#091020" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="43" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="39" fill="none" stroke="#091020" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="35" fill="none" stroke="#0d1428" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="30" fill="none" stroke="#E3B23C" stroke-width="0.8" opacity="0.35"/>'
+    + '<circle cx="55" cy="55" r="24" fill="#050510"/>'
+    + '<circle cx="55" cy="55" r="22" fill="none" stroke="#E3B23C" stroke-width="1.5" opacity="0.7"/>'
+    + '<circle cx="55" cy="55" r="3" fill="#E3B23C" opacity="0.8"/>'
+    + '</svg>';
+  orbit.appendChild(vWrap);
+
+  // Non-spinning album cover at center
+  var lblSize = Math.round(vsz * 0.58);
+  var lblWrap = document.createElement('a');
+  lblWrap.href = ALBUM_URL;
+  lblWrap.target = '_blank';
+  lblWrap.rel = 'noopener';
+  lblWrap.setAttribute('aria-label', 'dreaMs — open full album on Spotify');
+  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(var(--accent-rgb),0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
+  lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="dreaMs album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
+  orbit.appendChild(lblWrap);
+
+  // Planet factory
+  function makePlanet(p, ringColor) {
+    var a = document.createElement('a');
+    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'planet';
+    a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    var numStr = (p.num < 10 ? '0' : '') + p.num;
+    var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
+      + '<text x="14" y="19" text-anchor="middle" font-family="Space Mono,monospace" font-size="11" font-weight="700" fill="' + ringColor + '" opacity="0.92">' + numStr + '</text>'
+      + '</svg>';
+    a.innerHTML =
+      '<div class="planet-icon" style="width:' + ICON + 'px;height:' + ICON + 'px;border:1.5px solid ' + ringColor + ';box-shadow:0 0 12px ' + ringColor + '55,inset 0 0 18px ' + ringColor + '28;">' + iconSvg + '</div>'
+      + '<span class="planet-name" style="color:' + ringColor + ';">' + p.name + '</span>';
+    orbit.appendChild(a);
+    return a;
+  }
+
+  var els = RINGS.map(function (ring, i) {
+    var color = ACCENTS[Math.min(i, ACCENTS.length - 1)];
+    return ring.map(function (p) { return makePlanet(p, color); });
+  });
+
+  // Animation
+  var phases = RINGS.map(function (_, i) { return (i * Math.PI) / 5; });
+  var dirs = [-1, 1, -1].slice(0, RINGS.length);
+  var periods = [40, 55, 48].slice(0, RINGS.length);
+  var last = null;
+
+  // Only animate while the orbital is on-screen and the tab is visible —
+  // a 60fps DOM-positioning loop is the page's biggest idle CPU cost.
+  var running = false, onScreen = true, rafId = 0;
+  function tick(ts) {
+    if (!last) last = ts;
+    var dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+    for (var i = 0; i < RINGS.length; i++) {
+      phases[i] += dirs[i] * dt * (2 * Math.PI / periods[i]);
+      var R = radii[i];
+      var ring = RINGS[i];
+      for (var j = 0; j < ring.length; j++) {
+        var a = phases[i] + (j / ring.length) * 2 * Math.PI;
+        els[i][j].style.left = (CX + R * Math.cos(a) - HALF) + 'px';
+        els[i][j].style.top  = (CY + R * Math.sin(a) - HALF) + 'px';
+      }
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+  function start() { if (!running && onScreen && !document.hidden) { running = true; last = null; rafId = requestAnimationFrame(tick); } }
+  function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onScreen = es[0].isIntersecting;
+      onScreen ? start() : stop();
+    }, { rootMargin: '120px' }).observe(orbit);
+  }
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  start();
+})();
+</script>
+</body>
+</html>
