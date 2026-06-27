@@ -26,7 +26,7 @@
 (function(){
   if (window.__spotifyFacade) return; window.__spotifyFacade = true;
   document.addEventListener('click', function(e){
-    var btn = e.target.closest('.spotify-facade'); if (!btn) return;
+    var btn = e.target.closest('.spotify-facade'); if (!btn || btn.classList.contains('disabled')) return;
     var f = document.createElement('iframe');
     f.className = 'spotify-embed';
     f.src = btn.getAttribute('data-embed');

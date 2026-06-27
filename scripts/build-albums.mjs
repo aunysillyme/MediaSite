@@ -17,6 +17,38 @@ function titleHtml(title) {
   return esc(title);
 }
 
+// Concept-album poem: each track's vocal `line` read in order forms one poem,
+// grouped into consecutive `movement` blocks. Renders nothing if no track has a line.
+function poemSectionFor(album) {
+  const lined = album.tracks.filter((t) => t.line);
+  if (!lined.length) return '';
+  const groups = [];
+  for (const t of lined) {
+    const prev = groups[groups.length - 1];
+    if (prev && prev.movement === (t.movement || '')) prev.tracks.push(t);
+    else groups.push({ movement: t.movement || '', tracks: [t] });
+  }
+  const body = groups.map((g) => {
+    const label = g.movement ? `<p class="movement-label">${esc(g.movement)}</p>\n        ` : '';
+    const lines = g.tracks.map((t) =>
+      `<div class="poem-line-block">
+          <span class="poem-track">${String(t.num).padStart(2, '0')} · ${esc(t.name)}</span>
+          <p class="poem-line">${esc(t.line)}</p>
+        </div>`).join('\n        ');
+    return `<div class="poem-movement">\n        ${label}${lines}\n      </div>`;
+  }).join('\n      ');
+  return `<section class="poem-section" aria-label="The poem">
+      <div class="poem-head">
+        <p class="poem-label">✦ &nbsp; the poem</p>
+        <h2 class="poem-title">${lined.length} lines, one poem</h2>
+        <p class="poem-sub">Every track carries one line. Read top to bottom, they tell one continuous story.</p>
+      </div>
+      <div class="poem-body">
+      ${body}
+      </div>
+    </section>`;
+}
+
 function renderAlbum(album) {
   const rings = ringsFor(album.tracks);
   const palette = album.palette || [album.accent.color, album.accent.color, album.accent.color];
@@ -41,10 +73,7 @@ function renderAlbum(album) {
   const previewSection = teaser
     ? `<section class="album-player-section" aria-label="Album coming soon">
       <p class="album-player-label">✦ &nbsp; coming soon</p>
-      <div class="preview-soon">
-        <p class="ps-label">${album.tracks.length} tracks · ${esc(album.genre)}</p>
-        <p class="ps-headline">Mastered and ready. Release date to be announced — stay tuned.</p>
-      </div>
+      ${playerFor({ kind: 'album', id: '', title: album.title, cover: `/album-art/${album.slug}-640.webp`, disabled: true })}
     </section>`
     : upcoming
     ? `<section class="album-player-section" aria-label="Album coming soon">
@@ -109,6 +138,7 @@ function renderAlbum(album) {
     PLAYER_CSS: PLAYER_CSS,
     HERO_LISTEN_BLOCK: heroListenBlock,
     PREVIEW_SECTION: previewSection,
+    POEM_SECTION: poemSectionFor(album),
     UPCOMING_BANNER: upcomingBanner,
     HERO_LABEL_SUFFIX: heroLabelSuffix,
     FOOTER_CSS: FOOTER_CSS,

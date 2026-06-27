@@ -138,8 +138,22 @@ export function colorChipsFor({ colors, currentSlug, currentType }) {
 let COLOR_TYPE_INFO_MAP = {};
 export function registerColorTypeInfo(info) { COLOR_TYPE_INFO_MAP = info; }
 
-export function playerFor({ kind, id, title, cover = '' }) {
+export function playerFor({ kind, id, title, cover = '', disabled = false }) {
   const wrapClass = kind === 'album' ? 'embed-wrap album' : 'embed-wrap';
+  // Pre-release: same cover + player chrome, but inert — no embed, no click.
+  if (disabled) {
+    return `<div class="${wrapClass}">
+  <div class="cassette-strip disabled">
+    <span class="left">Coming Soon</span>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+  </div>
+  <div class="spotify-facade ${kind} disabled" style="background-image:url('${cover}')" aria-disabled="true" role="img" aria-label="${esc(title)} — coming soon">
+    <span class="facade-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="facade-label">Player unlocks on release day</span>
+  </div>
+  <p class="embed-note">coming soon · preview disabled</p>
+</div>`;
+  }
   return render(PLAYER_HTML, {
     EMBED_KIND: kind,
     EMBED_ID: id,

@@ -85,6 +85,17 @@
 @media (prefers-reduced-motion: reduce) {
   .spotify-facade:hover .facade-play { transform: none; }
 }
+
+/* Disabled (pre-release) player — cover + chrome shown, but inert. */
+.cassette-strip.disabled { background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.62); }
+.cassette-strip.disabled .reel { animation: none; }
+.spotify-facade.disabled { cursor: default; }
+.spotify-facade.disabled::before { background: rgba(3,3,8,0.66); }
+.spotify-facade.disabled .facade-play {
+  background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.7);
+  box-shadow: none;
+}
+.spotify-facade.disabled:hover .facade-play { transform: none; box-shadow: none; }
 .embed-note {
   font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
   text-transform: uppercase; color: rgba(255,255,255,0.42);

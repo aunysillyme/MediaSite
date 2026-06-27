@@ -327,6 +327,17 @@ picture { display: contents; }
 @media (prefers-reduced-motion: reduce) {
   .spotify-facade:hover .facade-play { transform: none; }
 }
+
+/* Disabled (pre-release) player — cover + chrome shown, but inert. */
+.cassette-strip.disabled { background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.62); }
+.cassette-strip.disabled .reel { animation: none; }
+.spotify-facade.disabled { cursor: default; }
+.spotify-facade.disabled::before { background: rgba(3,3,8,0.66); }
+.spotify-facade.disabled .facade-play {
+  background: rgba(255,255,255,0.16); color: rgba(255,255,255,0.7);
+  box-shadow: none;
+}
+.spotify-facade.disabled:hover .facade-play { transform: none; box-shadow: none; }
 .embed-note {
   font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
   text-transform: uppercase; color: rgba(255,255,255,0.42);
@@ -572,6 +583,45 @@ picture { display: contents; }
     transition: transform 0.15s, box-shadow 0.2s;
   }
   .preview-soon .ps-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.55); }
+
+  /* The Poem — full-width section under the page (concept albums only).
+     Each track's vocal line read in order forms one continuous poem,
+     grouped into the album's movements. */
+  .poem-section { position: relative; z-index: 4; padding: 56px 24px 90px; display: flex; flex-direction: column; align-items: center; }
+  .poem-head { max-width: 680px; text-align: center; margin-bottom: 44px; }
+  .poem-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent); opacity: 0.85; margin-bottom: 12px;
+  }
+  .poem-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(28px, 3.2vw, 44px); line-height: 1.05; letter-spacing: -0.5px;
+    margin-bottom: 14px; text-shadow: 0 0 40px rgba(var(--accent-rgb), 0.35);
+  }
+  .poem-sub { font-family: 'Patrick Hand', cursive; font-size: clamp(16px, 1.6vw, 20px); line-height: 1.4; color: rgba(255,255,255,0.7); }
+  .poem-body { width: 100%; max-width: 640px; }
+  .poem-movement { margin-bottom: 40px; }
+  .poem-movement:last-child { margin-bottom: 0; }
+  .movement-label {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: rgba(var(--accent-rgb), 0.85);
+  }
+  .movement-label::before, .movement-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.35), transparent);
+  }
+  .poem-line-block { margin-bottom: 22px; }
+  .poem-line-block:last-child { margin-bottom: 0; }
+  .poem-track {
+    display: block; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent); opacity: 0.55; margin-bottom: 4px;
+  }
+  .poem-line {
+    font-family: 'Patrick Hand', cursive; font-size: clamp(21px, 2.1vw, 30px); line-height: 1.3;
+    color: var(--text, #fff); text-shadow: 0 0 26px rgba(var(--accent-rgb), 0.18);
+  }
+  @media (max-width: 720px) { .poem-section { padding: 40px 20px 70px; } }
 
   /* Orbit system */
   .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
@@ -1006,10 +1056,17 @@ picture { display: contents; }
 
     <section class="album-player-section" aria-label="Album coming soon">
       <p class="album-player-label">✦ &nbsp; coming soon</p>
-      <div class="preview-soon">
-        <p class="ps-label">11 tracks · Electronic · Melodic Bass · EDM</p>
-        <p class="ps-headline">Mastered and ready. Release date to be announced — stay tuned.</p>
-      </div>
+      <div class="embed-wrap album">
+  <div class="cassette-strip disabled">
+    <span class="left">Coming Soon</span>
+    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
+  </div>
+  <div class="spotify-facade album disabled" style="background-image:url('/album-art/dreams-640.webp')" aria-disabled="true" role="img" aria-label="dreaMs — coming soon">
+    <span class="facade-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+    <span class="facade-label">Player unlocks on release day</span>
+  </div>
+  <p class="embed-note">coming soon · preview disabled</p>
+</div>
     </section>
   </div>
 
@@ -1017,6 +1074,69 @@ picture { display: contents; }
     <div class="orbit-system" id="orbit"></div>
   </div>
 </div>
+
+<section class="poem-section" aria-label="The poem">
+      <div class="poem-head">
+        <p class="poem-label">✦ &nbsp; the poem</p>
+        <h2 class="poem-title">11 lines, one poem</h2>
+        <p class="poem-sub">Every track carries one line. Read top to bottom, they tell one continuous story.</p>
+      </div>
+      <div class="poem-body">
+      <div class="poem-movement">
+        <p class="movement-label">Lost</p>
+        <div class="poem-line-block">
+          <span class="poem-track">01 · Map</span>
+          <p class="poem-line">I lost the map a long time ago.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">02 · Don't Stop</span>
+          <p class="poem-line">Just kept moving so I wouldn't have to stop.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">03 · Reason</span>
+          <p class="poem-line">Looking for one reason to keep going.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">04 · More</span>
+          <p class="poem-line">I always wanted to be more than this.</p>
+        </div>
+      </div>
+      <div class="poem-movement">
+        <p class="movement-label">Anchor</p>
+        <div class="poem-line-block">
+          <span class="poem-track">05 · Buried</span>
+          <p class="poem-line">You saw the parts I kept buried.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">06 · Flinch</span>
+          <p class="poem-line">You didn't flinch. You didn't hide. You saw me.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">07 · Weight</span>
+          <p class="poem-line">First time the ground held my weight.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">08 · Before</span>
+          <p class="poem-line">You believed it before I could.</p>
+        </div>
+      </div>
+      <div class="poem-movement">
+        <p class="movement-label">Empowered</p>
+        <div class="poem-line-block">
+          <span class="poem-track">09 · Evolve</span>
+          <p class="poem-line">Push me. I don't break. I evolve.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">10 · Watch</span>
+          <p class="poem-line">Watch what I do with this.</p>
+        </div>
+        <div class="poem-line-block">
+          <span class="poem-track">11 · Believe</span>
+          <p class="poem-line">Turns out all I needed was someone who believes.</p>
+        </div>
+      </div>
+      </div>
+    </section>
 
 <!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
 <form class="signup" id="signup-form" novalidate>
@@ -1093,7 +1213,7 @@ picture { display: contents; }
 
 <script>
 (function () {
-  var RINGS = [[{"num":1,"name":"Map","id":"","dur":""},{"num":2,"name":"Don't Stop","id":"","dur":""},{"num":3,"name":"Reason","id":"","dur":""},{"num":4,"name":"More","id":"","dur":""}],[{"num":5,"name":"Buried","id":"","dur":""},{"num":6,"name":"Flinch","id":"","dur":""},{"num":7,"name":"Weight","id":"","dur":""},{"num":8,"name":"Before","id":"","dur":""}],[{"num":9,"name":"Evolve","id":"","dur":""},{"num":10,"name":"Watch","id":"","dur":""},{"num":11,"name":"Believe","id":"","dur":""}]];
+  var RINGS = [[{"num":1,"name":"Map","id":"","dur":"","movement":"Lost","line":"I lost the map a long time ago."},{"num":2,"name":"Don't Stop","id":"","dur":"","movement":"Lost","line":"Just kept moving so I wouldn't have to stop."},{"num":3,"name":"Reason","id":"","dur":"","movement":"Lost","line":"Looking for one reason to keep going."},{"num":4,"name":"More","id":"","dur":"","movement":"Lost","line":"I always wanted to be more than this."}],[{"num":5,"name":"Buried","id":"","dur":"","movement":"Anchor","line":"You saw the parts I kept buried."},{"num":6,"name":"Flinch","id":"","dur":"","movement":"Anchor","line":"You didn't flinch. You didn't hide. You saw me."},{"num":7,"name":"Weight","id":"","dur":"","movement":"Anchor","line":"First time the ground held my weight."},{"num":8,"name":"Before","id":"","dur":"","movement":"Anchor","line":"You believed it before I could."}],[{"num":9,"name":"Evolve","id":"","dur":"","movement":"Empowered","line":"Push me. I don't break. I evolve."},{"num":10,"name":"Watch","id":"","dur":"","movement":"Empowered","line":"Watch what I do with this."},{"num":11,"name":"Believe","id":"","dur":"","movement":"Empowered","line":"Turns out all I needed was someone who believes."}]];
   var ALBUM_URL = 'https://open.spotify.com/album/';
   var ALBUM_ART = '/album-art/dreams.jpg';
   var ACCENTS = ["#E3B23C","#E8743B","#5B8AA6"];
