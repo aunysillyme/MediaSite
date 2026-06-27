@@ -91,6 +91,7 @@ function renderAlbum(album) {
     SPOTIFY_ALBUM_ID: album.spotifyAlbumId,
     HYPERFOLLOW_SLUG: album.hyperfollowSlug,
     NUM_TRACKS: String(album.tracks.length),
+    ALBUM_KIND: album.vocal ? 'vocal' : 'instrumental',
     TRACKS_JSONLD: tracksJsonLd,
     SAMEAS_JSONLD: JSON.stringify([
       album.spotifyAlbumId ? `https://open.spotify.com/album/${album.spotifyAlbumId}` : null,
@@ -150,7 +151,7 @@ function listJsonLd() {
     '@type': 'CollectionPage',
     'name': 'Albums — Auny',
     'url': 'https://www.auny.media/albums',
-    'description': `All ${ALBUMS.length} albums by Auny — instrumental atmospheric music.`,
+    'description': `All ${ALBUMS.length} albums by Auny — instrumental and vocal.`,
     'isPartOf': { '@id': 'https://www.auny.media/#website' },
     'mainEntity': {
       '@type': 'ItemList',
@@ -176,6 +177,7 @@ function listJsonLd() {
 function renderList() {
   return render(LIST_TPL, {
     ALBUM_CARDS: ALBUMS.map(cardHtml).join('\n'),
+    ALBUM_COUNT: String(ALBUMS.length),
     LIST_JSONLD: listJsonLd(),
     NAV: navFor('albums'),
     NAV_CSS: NAV_CSS,

@@ -24,12 +24,16 @@ const isUpcoming = (item) => !!item.upcoming || item.releaseDate > TODAY_ISO;
 const RELEASED_ALBUMS  = ALBUMS.filter((a) => !isUpcoming(a));
 const RELEASED_SINGLES = SINGLES.filter((s) => !isUpcoming(s));
 
-// Pick the most recent RELEASED item for the hero — a pre-release teaser at the
-// top of the array (e.g. an unannounced album with no date) must not hijack it.
-const latestAlbum  = RELEASED_ALBUMS[0];
-const latestSingle = RELEASED_SINGLES[0];
-const latestIsAlbum = latestAlbum.releaseDate >= latestSingle.releaseDate;
-const latest = latestIsAlbum ? latestAlbum : latestSingle;
+// Hero pick: promote a pre-release teaser when one exists (an album announced
+// but not yet on DistroKid), else feature the most recent RELEASED item. On
+// launch the teaser flag drops and the hero auto-reverts to the latest release.
+const teaserAlbum = ALBUMS.find((a) => a.teaser);
+const relAlbum = RELEASED_ALBUMS[0];
+const relSingle = RELEASED_SINGLES[0];
+const releasedIsAlbum = relAlbum.releaseDate >= relSingle.releaseDate;
+const latest = teaserAlbum || (releasedIsAlbum ? relAlbum : relSingle);
+const latestIsAlbum = !!teaserAlbum || releasedIsAlbum;
+const latestTeaser = !!latest.teaser;
 const latestUrl = latestIsAlbum ? `/albums/${latest.slug}` : `/singles/${latest.slug}`;
 const latestCover = latestIsAlbum ? `/album-art/${latest.slug}.jpg` : singleCoverPath(latest.slug);
 const latestType = latestIsAlbum ? 'Album' : 'Single';
@@ -37,18 +41,25 @@ const latestSpotifyUrl = latestIsAlbum
   ? `https://open.spotify.com/album/${latest.spotifyAlbumId}`
   : `https://open.spotify.com/track/${latest.spotifyTrackId}`;
 const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
-// Brand the home with the latest release's accent — fresh look on every drop.
+// Brand the home with the featured release's accent — fresh look on every drop.
 // Falls back to the artist's default brand accent if the release lacks one.
 const BRAND_ACCENT = { color: '#1E90FF', rgb: '30,144,255' };
 const latestAccent = latest.accent || BRAND_ACCENT;
-// Upcoming-release treatment: pulsing "Coming [date]" tag + single pre-save CTA.
 const today = new Date().toISOString().slice(0, 10);
-const latestUpcoming = !!latest.upcoming || latest.releaseDate > today
+const latestUpcoming = latestTeaser || !!latest.upcoming || latest.releaseDate > today
   || (latestIsAlbum ? !latest.spotifyAlbumId : !latest.spotifyTrackId);
-const latestTagBlock = latestUpcoming
+// Teaser → "Coming Soon" + a view-album link (no pre-save, no date).
+// Dated pre-release → "Coming [date]" + pre-save. Released → listen + stream.
+const latestTagBlock = latestTeaser
+  ? `<p class="featured-tag upcoming"><span class="dot"></span>Coming Soon</p>`
+  : latestUpcoming
   ? `<p class="featured-tag upcoming"><span class="dot"></span>Coming ${esc(latest.releaseDisplay)}</p>`
   : `<p class="featured-tag">${esc(latestType)} · ${esc(latest.releaseDisplay)}</p>`;
-const latestListenRow = latestUpcoming
+const latestListenRow = latestTeaser
+  ? `<div class="listen-row">
+          <a class="all-pill" href="${latestUrl}">view album <span class="ext">→</span></a>
+        </div>`
+  : latestUpcoming
   ? `<div class="listen-row">
           <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
         </div>`
@@ -115,6 +126,7 @@ const html = render(HOME_TPL, {
   LATEST_TITLE: esc(latest.title),
   LATEST_DATE: esc(latest.releaseDisplay),
   LATEST_BLURB: esc(latestBlurb),
+  LATEST_FEATURED_LABEL: latestUpcoming ? 'coming soon' : 'latest release',
   LATEST_TAG_BLOCK: latestTagBlock,
   LATEST_LISTEN_ROW: latestListenRow,
   TOTAL_SINGLES: String(RELEASED_SINGLES.length),

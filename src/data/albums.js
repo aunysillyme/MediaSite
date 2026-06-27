@@ -16,6 +16,7 @@ export const ALBUMS = [
     hyperfollowSlug: '',
     upcoming: true,
     teaser: true,
+    vocal: true,
     genre: 'Electronic · Melodic Bass · EDM',
     blurb: 'A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.',
     accent: { color: '#E3B23C', rgb: '227,178,60' },
