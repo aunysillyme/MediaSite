@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- HELD: scaffold not yet launched — keep noindex until real pieces land. -->
+<meta name="robots" content="noindex, nofollow">
+<title>How to Disappear — Poetry by Auny</title>
+<meta name="description" content="How to Disappear — a spoken-word piece by Auny. I got so good at leaving that staying feels like a language I forgot.">
+<meta property="og:type" content="video.other">
+<meta property="og:title" content="How to Disappear — Poetry by Auny">
+<meta property="og:description" content="I got so good at leaving that staying feels like a language I forgot.">
+<meta property="og:image" content="https://www.auny.media/album-art/singles/escape.jpg">
+<meta property="og:url" content="https://www.auny.media/poetry/how-to-disappear">
+<link rel="canonical" href="https://www.auny.media/poetry/how-to-disappear">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preload" href="/fonts/outfit-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--accent:#C29BD6;--accent-rgb:194,155,214;--nav-accent:#C29BD6}
+  html,body{min-height:100%;background:#030308;color:#fff;font-family:'Space Mono',monospace;overflow-x:hidden}
+  .stage-bg{position:fixed;inset:0;z-index:0;background:url('/album-art/singles/escape.jpg') center/cover no-repeat;opacity:.30;filter:saturate(.7) blur(2px)}
+  .stage-veil{position:fixed;inset:0;z-index:1;background:radial-gradient(120% 90% at 50% 38%,transparent 0%,rgba(3,3,8,.55) 55%,#030308 100%)}
+  body::after{content:'';position:fixed;inset:0;z-index:60;pointer-events:none;background-image:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(0,0,0,.10) 3px 4px);opacity:.16}
+/* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
+#atmosphere-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+
+/* Cursor spotlight — soft accent glow that follows the cursor */
+#cursor-spotlight {
+  position: fixed; top: 0; left: 0; z-index: 2;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle,
+    rgba(var(--accent-rgb, 30,144,255), 0.10) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.04) 28%,
+    transparent 65%);
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  #cursor-spotlight { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cursor-spotlight { display: none; }
+}
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.94);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.72);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.site-nav .nav-link:hover {
+  color: #fff;
+  text-shadow:
+    0 0 8px rgba(var(--accent-rgb, 30,144,255), 0.85),
+    0 0 18px rgba(var(--accent-rgb, 30,144,255), 0.4);
+}
+.site-nav .nav-link.disabled:hover {
+  color: rgba(255,255,255,0.32); text-shadow: none;
+}
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-link-stack {
+  display: inline-flex; flex-direction: column; align-items: center;
+  gap: 2px; line-height: 1; padding: 4px 0;
+}
+.site-nav .nav-link-stack .nav-link-sub {
+  font-size: 7px; letter-spacing: 1.8px; opacity: 0.55;
+  text-transform: uppercase;
+}
+.site-nav .nav-link-stack .nav-link-main {
+  font-size: 11px; letter-spacing: 3px;
+}
+.site-nav .nav-link.disabled {
+  cursor: default; color: rgba(255,255,255,0.32);
+}
+.site-nav .nav-link.disabled:hover { color: rgba(255,255,255,0.32); }
+.site-nav .nav-link.disabled .nav-link-sub { color: rgba(255,255,255,0.45); }
+.site-nav .nav-ctas { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-spotify,
+.site-nav .nav-suno {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.site-nav .nav-spotify:hover {
+  color: #1DB954; border-color: #1DB954;
+  box-shadow: 0 0 14px rgba(29,185,84,0.35);
+}
+.site-nav .nav-suno:hover {
+  color: #FF7A29; border-color: #FF7A29;
+  box-shadow: 0 0 14px rgba(255,122,41,0.45);
+}
+
+@media (max-width: 720px) {
+  .site-nav { padding: 10px 14px; }
+  .site-nav .nav-links { gap: 12px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-link-stack .nav-link-sub { font-size: 6px; letter-spacing: 1.4px; }
+  .site-nav .nav-link-stack .nav-link-main { font-size: 9px; letter-spacing: 2px; }
+  .site-nav .nav-ctas { gap: 6px; }
+  .site-nav .nav-spotify,
+  .site-nav .nav-suno { padding: 5px 9px; font-size: 9px; letter-spacing: 2px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+  .back{position:relative;z-index:20;display:inline-flex;align-items:center;gap:8px;margin:14px 0 0 40px;padding:7px 14px;border-radius:8px;
+    background:rgba(3,3,8,.7);border:1px solid rgba(var(--accent-rgb),.3);color:var(--accent);font-size:.7rem;font-weight:700;letter-spacing:.15em;
+    text-transform:uppercase;text-decoration:none;backdrop-filter:blur(10px)}
+  .back:hover{border-color:var(--accent)}
+  .theater{position:relative;z-index:10;max-width:1180px;margin:0 auto;padding:18px 32px 80px;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--accent);opacity:.85;margin-bottom:18px}
+  .piece-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(40px,6vw,82px);line-height:.95;letter-spacing:-2px;margin-bottom:6px;text-shadow:0 0 70px rgba(var(--accent-rgb),.4)}
+  .piece-meta{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:30px}
+  .piece-meta b{color:var(--accent);font-weight:400}
+  .screen{position:relative;width:min(100%,780px);aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+    box-shadow:0 0 0 1px rgba(var(--accent-rgb),.25),0 0 90px rgba(var(--accent-rgb),.22),0 30px 80px rgba(0,0,0,.6)}
+  .screen img,.screen video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85)}
+  .screen::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(3,3,8,.6) 100%)}
+  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:84px;height:84px;border-radius:50%;
+    background:rgba(var(--accent-rgb),.18);border:1.5px solid var(--accent);backdrop-filter:blur(6px);display:grid;place-items:center;box-shadow:0 0 40px rgba(var(--accent-rgb),.5)}
+  .play svg{width:34px;height:34px;margin-left:5px;fill:#fff}
+  .play.locked{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.4);box-shadow:none}
+  .play.locked svg{fill:rgba(255,255,255,.7)}
+  .cc{position:absolute;left:16px;bottom:14px;z-index:3;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.3);border-radius:5px;padding:3px 8px}
+  .soon-note{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7)}
+  .caption{font-family:'Patrick Hand',cursive;font-size:clamp(22px,2.6vw,36px);line-height:1.3;color:#fff;margin:34px auto 0;max-width:640px;text-shadow:0 0 30px rgba(var(--accent-rgb),.3)}
+  .caption .dim{opacity:.32}
+  .program{position:relative;display:flex;gap:34px;justify-content:center;flex-wrap:wrap;margin-top:50px;padding-top:26px;border-top:1px solid rgba(255,255,255,.08);width:100%;max-width:760px}
+  .prog-label{position:absolute;left:50%;transform:translateX(-50%);top:-9px;background:#050509;padding:0 14px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  .prog{display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.62;transition:opacity .2s;text-decoration:none;color:inherit}
+  .prog:hover{opacity:1}
+  .prog .n{font-size:10px;letter-spacing:2px;color:var(--accent)}
+  .prog .t{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px}
+  .prog .d{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.4)}
+  /* ─── Global site footer ──────────────────────────────────────────────
+   Single footer used on every page. Platform links row + copyright.
+   Top border adopts the page accent so it tunes to whatever color the
+   page is wearing today. */
+.site-footer {
+  max-width: 1240px; margin: 24px auto 0; padding: 22px 32px 40px;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+  text-align: center; position: relative; z-index: 4;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+}
+.site-footer .footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+  margin-bottom: 16px;
+}
+.site-footer .footer-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer .footer-links a:hover { color: var(--accent); }
+.site-footer .footer-meta {
+  color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px;
+}
+.site-footer .footer-meta a {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+}
+.site-footer .footer-meta a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .site-footer { padding: 22px 16px 32px; }
+  .site-footer .footer-links { gap: 14px; font-size: 10px; }
+}
+
+</style>
+</head>
+<body>
+<div class="stage-bg"></div><div class="stage-veil"></div>
+
+<canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
+<div id="cursor-spotlight" aria-hidden="true"></div>
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="home" href="/">Home</a>
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Platforms</a>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Collabs — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">collabs</span>
+    </span>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Poetry — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">poetry</span>
+    </span>
+  </div>
+  <div class="nav-ctas">
+    <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+    <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
+  </div>
+</nav>
+<script>
+(function () {
+  var canvas = document.getElementById('atmosphere-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var NOTES = ['♪','♫','♩','♬','♭','♮'];
+
+  function readAccent() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    return v || '#1E90FF';
+  }
+  function readAccentRgb() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+    return v || '30,144,255';
+  }
+  var accent = readAccent();
+  var accentRgb = readAccentRgb();
+
+  var W = 0, H = 0;
+  function resize() {
+    W = canvas.width  = Math.floor(innerWidth  * dpr);
+    H = canvas.height = Math.floor(innerHeight * dpr);
+    canvas.style.width  = innerWidth  + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  resize();
+  addEventListener('resize', resize, { passive: true });
+
+  // ─── Ambient dust particles ──────────────────────────────────
+  var COUNT = reduce ? 22 : (coarse ? 30 : 60);
+  var particles = [];
+  for (var i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (12 + Math.random() * 8.5) * dpr,
+      vx: (Math.random() - 0.5) * 0.4 * dpr,
+      vy: (Math.random() - 0.5) * 0.4 * dpr,
+      opacity: 0.13 + Math.random() * 0.17,
+      rotation: (Math.random() - 0.5) * 0.6,
+      // displacement offset from natural drift — decays back to 0 (spring-back)
+      ox: 0, oy: 0,
+    });
+  }
+
+  var mouseX = -9999, mouseY = -9999;
+  var lastSpawnX = 0, lastSpawnY = 0;
+  var spotlight = document.getElementById('cursor-spotlight');
+
+  // ─── Cursor trail (musical notes that fade behind cursor) ────
+  var trail = [];
+  function spawnTrail(x, y) {
+    if (reduce || coarse) return;
+    trail.push({
+      x: x, y: y,
+      vx: (Math.random() - 0.5) * 0.6 * dpr,
+      vy: 0.2 * dpr + Math.random() * 0.4 * dpr,
+      spawnedAt: performance.now(),
+      maxLife: 1300 + Math.random() * 600,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (10 + Math.random() * 4) * dpr,
+      rot: (Math.random() - 0.5) * 0.5,
+    });
+  }
+
+  if (!reduce && !coarse) {
+    addEventListener('mousemove', function (e) {
+      mouseX = e.clientX * dpr;
+      mouseY = e.clientY * dpr;
+      // Spotlight follows cursor (transform on the div)
+      if (spotlight) {
+        spotlight.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        spotlight.style.opacity = '1';
+      }
+      // Rate-limit trail spawns by distance moved (every ~70 css px)
+      var dxs = e.clientX - lastSpawnX, dys = e.clientY - lastSpawnY;
+      if (dxs * dxs + dys * dys > 70 * 70) {
+        spawnTrail(mouseX, mouseY);
+        lastSpawnX = e.clientX;
+        lastSpawnY = e.clientY;
+      }
+    }, { passive: true });
+    addEventListener('mouseleave', function () {
+      mouseX = mouseY = -9999;
+      if (spotlight) spotlight.style.opacity = '0';
+    }, { passive: true });
+  }
+
+  var REPULSE_RADIUS = 300 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 3.2;
+
+  var running = true;
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(loop);
+  });
+
+  var accentTick = 0;
+  function loop() {
+    if (!running) return;
+    if ((accentTick++ & 31) === 0) {
+      accent = readAccent();
+      accentRgb = readAccentRgb();
+      if (spotlight) {
+        spotlight.style.background =
+          'radial-gradient(circle, rgba(' + accentRgb + ',0.10) 0%, rgba(' + accentRgb + ',0.04) 28%, transparent 65%)';
+      }
+    }
+    ctx.clearRect(0, 0, W, H);
+
+    // ambient dust
+    for (var j = 0; j < particles.length; j++) {
+      var p = particles[j];
+      // Natural drift along the home path
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -24) p.x = W + 24;
+      if (p.x > W + 24) p.x = -24;
+      if (p.y < -24) p.y = H + 24;
+      if (p.y > H + 24) p.y = -24;
+      // Composite position = home path + cursor displacement
+      var fx = p.x + p.ox, fy = p.y + p.oy;
+      // Cursor repulse — accumulates into displacement offset, not position
+      var dx = fx - mouseX, dy = fy - mouseY;
+      var dist2 = dx * dx + dy * dy;
+      var r2 = REPULSE_RADIUS * REPULSE_RADIUS;
+      if (dist2 < r2 && dist2 > 1) {
+        var dist = Math.sqrt(dist2);
+        var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
+        p.ox += (dx / dist) * force * 15;
+        p.oy += (dy / dist) * force * 15;
+      }
+      // Spring back: damp the displacement toward 0 every frame
+      p.ox *= 0.93;
+      p.oy *= 0.93;
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.translate(p.x + p.ox, p.y + p.oy);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = accent;
+      ctx.font = p.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    // cursor trail — very low opacity, fades over lifetime
+    var now = performance.now();
+    for (var b = trail.length - 1; b >= 0; b--) {
+      var tp = trail[b];
+      var age = now - tp.spawnedAt;
+      if (age > tp.maxLife) { trail.splice(b, 1); continue; }
+      tp.x += tp.vx;
+      tp.y += tp.vy;
+      tp.vy += 0.005 * dpr;     // slight gravity drift
+      tp.rot += 0.012;
+      var t = age / tp.maxLife;
+      // Peak opacity capped at ~0.18, then fades out
+      var fadeIn  = Math.min(1, age / 220);
+      var fadeOut = 1 - t;
+      var alpha = 0.13 * fadeIn * fadeOut;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(tp.x, tp.y);
+      ctx.rotate(tp.rot);
+      ctx.fillStyle = accent;
+      ctx.font = tp.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(tp.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+// ─── Slam-bubble hover: cards in horizontal rows push siblings outward ───
+(function () {
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (coarse || reduce) return;
+
+  function initRow(row, opts) {
+    opts = opts || {};
+    var scale     = opts.scale     || 1.18;
+    var pushBase  = opts.pushBase  || 28;
+    var falloff   = opts.falloff   || 8;
+    var shrinkPer = opts.shrinkPer || 0.025;
+    var minShrink = opts.minShrink || 0.88;
+    var skipDisabled = opts.skipDisabled || false;
+
+    var cards = Array.prototype.slice.call(row.children).filter(function (el) {
+      if (el.tagName !== 'A' && el.tagName !== 'DIV' && el.tagName !== 'SPAN') return false;
+      if (skipDisabled && el.classList.contains('disabled')) return false;
+      return true;
+    });
+    cards.forEach(function (card, i) {
+      card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      card.addEventListener('mouseenter', function () {
+        cards.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(' + scale + ')';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, pushBase - (dist - 1) * falloff);
+            var shrink = Math.max(minShrink, 1 - dist * shrinkPer);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      });
+    });
+  }
+
+  // Grid: group cards into visual rows (by Y-center), then apply
+  // the same horizontal-domino push as homepage rows within each row.
+  function initGrid(grid) {
+    var cards = Array.prototype.slice.call(grid.children).filter(function (el) {
+      return el.tagName === 'A' || el.tagName === 'DIV' || el.tagName === 'SPAN';
+    });
+    function refreshRows() {
+      var rows = [];
+      cards.forEach(function (c) {
+        var r = c.getBoundingClientRect();
+        var cy = r.top + r.height / 2;
+        var bucket = rows.find(function (row) { return Math.abs(row.y - cy) < r.height / 2; });
+        if (bucket) bucket.items.push(c);
+        else rows.push({ y: cy, items: [c] });
+      });
+      cards.forEach(function (c) { c._slamRow = null; });
+      rows.forEach(function (r) {
+        var sorted = r.items.sort(function (a, b) {
+          return a.getBoundingClientRect().left - b.getBoundingClientRect().left;
+        });
+        sorted.forEach(function (c) { c._slamRow = sorted; });
+      });
+    }
+    cards.forEach(function (c) {
+      c.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      c.addEventListener('mouseenter', function () {
+        var row = c._slamRow;
+        if (!row) return;
+        var i = row.indexOf(c);
+        row.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(1.18)';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, 28 - (dist - 1) * 8);
+            var shrink = Math.max(0.88, 1 - dist * 0.025);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      c.addEventListener('mouseleave', function () {
+        var row = c._slamRow;
+        if (row) row.forEach(function (o) { o.style.transform = ''; o.style.zIndex = ''; });
+      });
+    });
+    refreshRows();
+    addEventListener('resize', refreshRows, { passive: true });
+  }
+
+  function init() {
+    document.querySelectorAll('.album-row, .series-row').forEach(function (r) { initRow(r); });
+    document.querySelectorAll('.nav-links').forEach(function (r) {
+      initRow(r, { scale: 1.28, pushBase: 18, falloff: 5, shrinkPer: 0.02, minShrink: 0.9, skipDisabled: true });
+    });
+    document.querySelectorAll('.nav-ctas').forEach(function (r) {
+      initRow(r, { scale: 1.18, pushBase: 12, falloff: 4, shrinkPer: 0.02, minShrink: 0.92 });
+    });
+    document.querySelectorAll('.grid').forEach(function (g) { initGrid(g); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+<a class="back" href="/poetry">← &nbsp; poetry</a>
+
+<main class="theater">
+  <p class="eyebrow">✦ &nbsp; poetry · spoken word</p>
+  <h1 class="piece-title">How to Disappear</h1>
+  <p class="piece-meta">spoken word &nbsp;·&nbsp; <b>2:35</b> &nbsp;·&nbsp; video with captions</p>
+  <div class="screen">
+    <img src="/album-art/singles/escape.jpg" alt="How to Disappear still">
+    <div class="play locked" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+    <span class="soon-note">coming soon</span>
+  </div>
+  <p class="caption">I got so good at leaving <span class="dim">that staying feels like a language I forgot.</span></p>
+  <div class="program"><span class="prog-label">the collection</span>
+    <a class="prog" href="/poetry/the-void-speaks-back"><span class="n">01</span><span class="t">The Void Speaks Back</span><span class="d">2:14</span></a>
+    <a class="prog" href="/poetry/letters-i-never-sent"><span class="n">02</span><span class="t">Letters I Never Sent</span><span class="d">1:48</span></a>
+    <a class="prog" href="/poetry/how-to-disappear"><span class="n">03</span><span class="t">How to Disappear</span><span class="d">2:35</span></a>
+  </div>
+</main>
+
+<!-- Global site footer. Identical on every page (home, singles, albums,
+     list pages, links). Per-release info is not in the footer — release
+     date is rendered in the meta block on individual pages. -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/auny/1880511675" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://music.amazon.com/artists/B0GDL275G8/auny" target="_blank" rel="noopener">Amazon Music</a>
+    <a href="https://www.youtube.com/@aunysillyme" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno</a>
+    <a href="/links">all platforms</a>
+    <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">Contact</a>
+  </div>
+  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- HELD: scaffold not yet launched — keep noindex until real pieces land. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Poetry — Auny · Spoken Word, Video &amp; Verse</title>
+<meta name="description" content="Spoken-word poetry by Auny — video and verse. A night sky of little spoken things.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Poetry — Auny">
+<meta property="og:description" content="Spoken word · video · verse.">
+<meta property="og:url" content="https://www.auny.media/poetry">
+<link rel="canonical" href="https://www.auny.media/poetry">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preload" href="/fonts/outfit-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--accent:#9BB4DE;--accent-rgb:155,180,222;--nav-accent:#9BB4DE}
+  html,body{min-height:100%;background:radial-gradient(120% 100% at 70% 8%,#0b1020 0%,#050509 55%,#040407 100%);color:#fff;font-family:'Space Mono',monospace;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;z-index:60;pointer-events:none;background-image:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(0,0,0,.10) 3px 4px);opacity:.12}
+/* Global site nav — included on every static page. */
+/* Responsive cover <picture> wrappers shouldn't add a layout box —
+   let the inner <img> drive sizing exactly as a bare <img> did. */
+picture { display: contents; }
+#atmosphere-canvas {
+  position: fixed; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+
+/* Cursor spotlight — soft accent glow that follows the cursor */
+#cursor-spotlight {
+  position: fixed; top: 0; left: 0; z-index: 2;
+  width: 480px; height: 480px;
+  margin: -240px 0 0 -240px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(circle,
+    rgba(var(--accent-rgb, 30,144,255), 0.10) 0%,
+    rgba(var(--accent-rgb, 30,144,255), 0.04) 28%,
+    transparent 65%);
+  will-change: transform;
+}
+@media (pointer: coarse) {
+  #cursor-spotlight { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #cursor-spotlight { display: none; }
+}
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 28px;
+  background: rgba(3,3,8,0.94);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  font-family: 'Space Mono', monospace;
+}
+.site-nav .brand {
+  display: inline-flex; align-items: baseline; gap: 1px;
+  text-decoration: none; color: #fff;
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 18px; letter-spacing: 1px;
+}
+.site-nav .brand-mark { color: var(--nav-accent, #1E90FF); }
+.site-nav .brand-word { color: #fff; }
+.site-nav .nav-links {
+  display: flex; align-items: center; gap: 28px;
+}
+.site-nav .nav-link {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.72);
+  text-decoration: none; padding: 8px 0; position: relative;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.site-nav .nav-link:hover {
+  color: #fff;
+  text-shadow:
+    0 0 8px rgba(var(--accent-rgb, 30,144,255), 0.85),
+    0 0 18px rgba(var(--accent-rgb, 30,144,255), 0.4);
+}
+.site-nav .nav-link.disabled:hover {
+  color: rgba(255,255,255,0.32); text-shadow: none;
+}
+.site-nav .nav-link.active { color: var(--nav-accent, #1E90FF); }
+.site-nav .nav-link.active::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--nav-accent, #1E90FF);
+}
+.site-nav .nav-link-stack {
+  display: inline-flex; flex-direction: column; align-items: center;
+  gap: 2px; line-height: 1; padding: 4px 0;
+}
+.site-nav .nav-link-stack .nav-link-sub {
+  font-size: 7px; letter-spacing: 1.8px; opacity: 0.55;
+  text-transform: uppercase;
+}
+.site-nav .nav-link-stack .nav-link-main {
+  font-size: 11px; letter-spacing: 3px;
+}
+.site-nav .nav-link.disabled {
+  cursor: default; color: rgba(255,255,255,0.32);
+}
+.site-nav .nav-link.disabled:hover { color: rgba(255,255,255,0.32); }
+.site-nav .nav-link.disabled .nav-link-sub { color: rgba(255,255,255,0.45); }
+.site-nav .nav-ctas { display: flex; align-items: center; gap: 8px; }
+.site-nav .nav-spotify,
+.site-nav .nav-suno {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: rgba(255,255,255,0.62);
+  text-decoration: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.site-nav .nav-spotify:hover {
+  color: #1DB954; border-color: #1DB954;
+  box-shadow: 0 0 14px rgba(29,185,84,0.35);
+}
+.site-nav .nav-suno:hover {
+  color: #FF7A29; border-color: #FF7A29;
+  box-shadow: 0 0 14px rgba(255,122,41,0.45);
+}
+
+@media (max-width: 720px) {
+  .site-nav { padding: 10px 14px; }
+  .site-nav .nav-links { gap: 12px; }
+  .site-nav .nav-link { font-size: 10px; letter-spacing: 2px; }
+  .site-nav .nav-link-stack .nav-link-sub { font-size: 6px; letter-spacing: 1.4px; }
+  .site-nav .nav-link-stack .nav-link-main { font-size: 9px; letter-spacing: 2px; }
+  .site-nav .nav-ctas { gap: 6px; }
+  .site-nav .nav-spotify,
+  .site-nav .nav-suno { padding: 5px 9px; font-size: 9px; letter-spacing: 2px; }
+  .site-nav .brand-word { display: none; }
+  .site-nav .brand { font-size: 22px; }
+}
+
+  .moon{position:fixed;top:-130px;right:-90px;width:440px;height:440px;border-radius:50%;background:radial-gradient(closest-side,rgba(200,215,245,.16),rgba(155,180,222,.05),transparent);z-index:0;pointer-events:none}
+  .stars span{position:fixed;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.5);z-index:0}
+  .ptitle-block{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:70px 48px 0}
+  .ptitle-block .eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--accent);opacity:.85;margin-bottom:12px}
+  .ptitle-block h1{font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(56px,8vw,118px);line-height:.86;letter-spacing:-3px;text-shadow:0 0 80px rgba(var(--accent-rgb),.4)}
+  .ptitle-block .lede{font-family:'Patrick Hand',cursive;font-size:clamp(18px,2vw,24px);color:rgba(255,255,255,.72);margin-top:14px;max-width:320px}
+  /* the field */
+  .field{position:relative;z-index:5;height:min(72vh,760px);max-width:1320px;margin:0 auto;padding:0 48px}
+  .threads{position:absolute;inset:0 48px;width:calc(100% - 96px);height:100%;z-index:4;pointer-events:none}
+  .threads line{stroke:rgba(var(--accent-rgb),.26);stroke-width:.12;stroke-dasharray:.6 .9;vector-effect:non-scaling-stroke}
+  .node{position:absolute;z-index:6;text-decoration:none;color:inherit;transform:translate(-50%,-50%);text-align:center;width:180px}
+  .node .dot{width:66px;height:66px;border-radius:50%;margin:0 auto 10px;overflow:hidden;position:relative;border:1.5px solid rgba(var(--pa-rgb),.7);
+    box-shadow:0 0 26px rgba(var(--pa-rgb),.45);transition:transform .3s,box-shadow .3s}
+  .node .dot img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) brightness(.9)}
+  .node .dot::after{content:'';position:absolute;inset:0;background:radial-gradient(closest-side,transparent 55%,rgba(5,5,12,.55))}
+  .node:hover .dot{transform:scale(1.12);box-shadow:0 0 42px rgba(var(--pa-rgb),.85)}
+  .node .t{font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;line-height:1.05}
+  .node .v{font-family:'Patrick Hand',cursive;font-size:14px;color:rgba(255,255,255,.6);margin-top:3px}
+  .node .d{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--pa);margin-top:5px}
+  .moth{position:absolute;z-index:7;color:rgba(255,255,255,.5);pointer-events:none}
+  .hint{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:8px 48px 40px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  @media (max-width:860px){
+    .field{height:auto;display:flex;flex-direction:column;gap:30px;padding:30px 28px}
+    .threads,.moth{display:none}
+    .node{position:relative!important;left:auto!important;top:auto!important;transform:none;width:100%;display:flex;align-items:center;gap:16px;text-align:left}
+    .node .dot{margin:0}
+  }
+  /* ─── Global site footer ──────────────────────────────────────────────
+   Single footer used on every page. Platform links row + copyright.
+   Top border adopts the page accent so it tunes to whatever color the
+   page is wearing today. */
+.site-footer {
+  max-width: 1240px; margin: 24px auto 0; padding: 22px 32px 40px;
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+  text-align: center; position: relative; z-index: 4;
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.65);
+}
+.site-footer .footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 22px;
+  margin-bottom: 16px;
+}
+.site-footer .footer-links a {
+  color: rgba(255,255,255,0.7); text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer .footer-links a:hover { color: var(--accent); }
+.site-footer .footer-meta {
+  color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px;
+}
+.site-footer .footer-meta a {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+}
+.site-footer .footer-meta a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .site-footer { padding: 22px 16px 32px; }
+  .site-footer .footer-links { gap: 14px; font-size: 10px; }
+}
+
+</style>
+</head>
+<body>
+<div class="moon"></div>
+<div class="stars"><span style="top:18%;left:30%"></span><span style="top:26%;left:62%"></span><span style="top:44%;left:20%"></span><span style="top:60%;left:48%"></span><span style="top:72%;left:80%"></span><span style="top:34%;left:88%"></span><span style="top:80%;left:33%"></span></div>
+
+<canvas id="atmosphere-canvas" aria-hidden="true"></canvas>
+<div id="cursor-spotlight" aria-hidden="true"></div>
+<nav class="site-nav" aria-label="Primary">
+  <a class="brand" href="/" aria-label="Auny — home">
+    <span class="brand-mark">A</span><span class="brand-word">UNY</span>
+  </a>
+  <div class="nav-links">
+    <a class="nav-link" data-section="home" href="/">Home</a>
+    <a class="nav-link" data-section="albums" href="/albums">Albums</a>
+    <a class="nav-link" data-section="singles" href="/singles">Singles</a>
+    <a class="nav-link" data-section="links" href="/links">Platforms</a>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Collabs — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">collabs</span>
+    </span>
+    <span class="nav-link nav-link-stack disabled" aria-disabled="true" title="Poetry — coming soon">
+      <span class="nav-link-sub">coming soon</span>
+      <span class="nav-link-main">poetry</span>
+    </span>
+  </div>
+  <div class="nav-ctas">
+    <a class="nav-spotify" href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify <span aria-hidden="true">↗</span></a>
+    <a class="nav-suno" href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno <span aria-hidden="true">↗</span></a>
+  </div>
+</nav>
+<script>
+(function () {
+  var canvas = document.getElementById('atmosphere-canvas');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var NOTES = ['♪','♫','♩','♬','♭','♮'];
+
+  function readAccent() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+    return v || '#1E90FF';
+  }
+  function readAccentRgb() {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--accent-rgb').trim();
+    return v || '30,144,255';
+  }
+  var accent = readAccent();
+  var accentRgb = readAccentRgb();
+
+  var W = 0, H = 0;
+  function resize() {
+    W = canvas.width  = Math.floor(innerWidth  * dpr);
+    H = canvas.height = Math.floor(innerHeight * dpr);
+    canvas.style.width  = innerWidth  + 'px';
+    canvas.style.height = innerHeight + 'px';
+  }
+  resize();
+  addEventListener('resize', resize, { passive: true });
+
+  // ─── Ambient dust particles ──────────────────────────────────
+  var COUNT = reduce ? 22 : (coarse ? 30 : 60);
+  var particles = [];
+  for (var i = 0; i < COUNT; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (12 + Math.random() * 8.5) * dpr,
+      vx: (Math.random() - 0.5) * 0.4 * dpr,
+      vy: (Math.random() - 0.5) * 0.4 * dpr,
+      opacity: 0.13 + Math.random() * 0.17,
+      rotation: (Math.random() - 0.5) * 0.6,
+      // displacement offset from natural drift — decays back to 0 (spring-back)
+      ox: 0, oy: 0,
+    });
+  }
+
+  var mouseX = -9999, mouseY = -9999;
+  var lastSpawnX = 0, lastSpawnY = 0;
+  var spotlight = document.getElementById('cursor-spotlight');
+
+  // ─── Cursor trail (musical notes that fade behind cursor) ────
+  var trail = [];
+  function spawnTrail(x, y) {
+    if (reduce || coarse) return;
+    trail.push({
+      x: x, y: y,
+      vx: (Math.random() - 0.5) * 0.6 * dpr,
+      vy: 0.2 * dpr + Math.random() * 0.4 * dpr,
+      spawnedAt: performance.now(),
+      maxLife: 1300 + Math.random() * 600,
+      glyph: NOTES[Math.floor(Math.random() * NOTES.length)],
+      size: (10 + Math.random() * 4) * dpr,
+      rot: (Math.random() - 0.5) * 0.5,
+    });
+  }
+
+  if (!reduce && !coarse) {
+    addEventListener('mousemove', function (e) {
+      mouseX = e.clientX * dpr;
+      mouseY = e.clientY * dpr;
+      // Spotlight follows cursor (transform on the div)
+      if (spotlight) {
+        spotlight.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        spotlight.style.opacity = '1';
+      }
+      // Rate-limit trail spawns by distance moved (every ~70 css px)
+      var dxs = e.clientX - lastSpawnX, dys = e.clientY - lastSpawnY;
+      if (dxs * dxs + dys * dys > 70 * 70) {
+        spawnTrail(mouseX, mouseY);
+        lastSpawnX = e.clientX;
+        lastSpawnY = e.clientY;
+      }
+    }, { passive: true });
+    addEventListener('mouseleave', function () {
+      mouseX = mouseY = -9999;
+      if (spotlight) spotlight.style.opacity = '0';
+    }, { passive: true });
+  }
+
+  var REPULSE_RADIUS = 300 * dpr;
+  var REPULSE_STRENGTH = reduce ? 0 : 3.2;
+
+  var running = true;
+  document.addEventListener('visibilitychange', function () {
+    running = !document.hidden;
+    if (running) requestAnimationFrame(loop);
+  });
+
+  var accentTick = 0;
+  function loop() {
+    if (!running) return;
+    if ((accentTick++ & 31) === 0) {
+      accent = readAccent();
+      accentRgb = readAccentRgb();
+      if (spotlight) {
+        spotlight.style.background =
+          'radial-gradient(circle, rgba(' + accentRgb + ',0.10) 0%, rgba(' + accentRgb + ',0.04) 28%, transparent 65%)';
+      }
+    }
+    ctx.clearRect(0, 0, W, H);
+
+    // ambient dust
+    for (var j = 0; j < particles.length; j++) {
+      var p = particles[j];
+      // Natural drift along the home path
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < -24) p.x = W + 24;
+      if (p.x > W + 24) p.x = -24;
+      if (p.y < -24) p.y = H + 24;
+      if (p.y > H + 24) p.y = -24;
+      // Composite position = home path + cursor displacement
+      var fx = p.x + p.ox, fy = p.y + p.oy;
+      // Cursor repulse — accumulates into displacement offset, not position
+      var dx = fx - mouseX, dy = fy - mouseY;
+      var dist2 = dx * dx + dy * dy;
+      var r2 = REPULSE_RADIUS * REPULSE_RADIUS;
+      if (dist2 < r2 && dist2 > 1) {
+        var dist = Math.sqrt(dist2);
+        var force = (1 - dist / REPULSE_RADIUS) * REPULSE_STRENGTH;
+        p.ox += (dx / dist) * force * 15;
+        p.oy += (dy / dist) * force * 15;
+      }
+      // Spring back: damp the displacement toward 0 every frame
+      p.ox *= 0.93;
+      p.oy *= 0.93;
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.translate(p.x + p.ox, p.y + p.oy);
+      ctx.rotate(p.rotation);
+      ctx.fillStyle = accent;
+      ctx.font = p.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    // cursor trail — very low opacity, fades over lifetime
+    var now = performance.now();
+    for (var b = trail.length - 1; b >= 0; b--) {
+      var tp = trail[b];
+      var age = now - tp.spawnedAt;
+      if (age > tp.maxLife) { trail.splice(b, 1); continue; }
+      tp.x += tp.vx;
+      tp.y += tp.vy;
+      tp.vy += 0.005 * dpr;     // slight gravity drift
+      tp.rot += 0.012;
+      var t = age / tp.maxLife;
+      // Peak opacity capped at ~0.18, then fades out
+      var fadeIn  = Math.min(1, age / 220);
+      var fadeOut = 1 - t;
+      var alpha = 0.13 * fadeIn * fadeOut;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(tp.x, tp.y);
+      ctx.rotate(tp.rot);
+      ctx.fillStyle = accent;
+      ctx.font = tp.size + 'px serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(tp.glyph, 0, 0);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+// ─── Slam-bubble hover: cards in horizontal rows push siblings outward ───
+(function () {
+  var coarse = matchMedia('(pointer:coarse)').matches;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (coarse || reduce) return;
+
+  function initRow(row, opts) {
+    opts = opts || {};
+    var scale     = opts.scale     || 1.18;
+    var pushBase  = opts.pushBase  || 28;
+    var falloff   = opts.falloff   || 8;
+    var shrinkPer = opts.shrinkPer || 0.025;
+    var minShrink = opts.minShrink || 0.88;
+    var skipDisabled = opts.skipDisabled || false;
+
+    var cards = Array.prototype.slice.call(row.children).filter(function (el) {
+      if (el.tagName !== 'A' && el.tagName !== 'DIV' && el.tagName !== 'SPAN') return false;
+      if (skipDisabled && el.classList.contains('disabled')) return false;
+      return true;
+    });
+    cards.forEach(function (card, i) {
+      card.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      card.addEventListener('mouseenter', function () {
+        cards.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(' + scale + ')';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, pushBase - (dist - 1) * falloff);
+            var shrink = Math.max(minShrink, 1 - dist * shrinkPer);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      card.addEventListener('mouseleave', function () {
+        cards.forEach(function (c) { c.style.transform = ''; c.style.zIndex = ''; });
+      });
+    });
+  }
+
+  // Grid: group cards into visual rows (by Y-center), then apply
+  // the same horizontal-domino push as homepage rows within each row.
+  function initGrid(grid) {
+    var cards = Array.prototype.slice.call(grid.children).filter(function (el) {
+      return el.tagName === 'A' || el.tagName === 'DIV' || el.tagName === 'SPAN';
+    });
+    function refreshRows() {
+      var rows = [];
+      cards.forEach(function (c) {
+        var r = c.getBoundingClientRect();
+        var cy = r.top + r.height / 2;
+        var bucket = rows.find(function (row) { return Math.abs(row.y - cy) < r.height / 2; });
+        if (bucket) bucket.items.push(c);
+        else rows.push({ y: cy, items: [c] });
+      });
+      cards.forEach(function (c) { c._slamRow = null; });
+      rows.forEach(function (r) {
+        var sorted = r.items.sort(function (a, b) {
+          return a.getBoundingClientRect().left - b.getBoundingClientRect().left;
+        });
+        sorted.forEach(function (c) { c._slamRow = sorted; });
+      });
+    }
+    cards.forEach(function (c) {
+      c.style.transition = 'transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1)';
+      c.addEventListener('mouseenter', function () {
+        var row = c._slamRow;
+        if (!row) return;
+        var i = row.indexOf(c);
+        row.forEach(function (other, j) {
+          if (j === i) {
+            other.style.transform = 'scale(1.18)';
+            other.style.zIndex = '10';
+          } else {
+            var dir = j > i ? 1 : -1;
+            var dist = Math.abs(j - i);
+            var pushPx = dir * Math.max(0, 28 - (dist - 1) * 8);
+            var shrink = Math.max(0.88, 1 - dist * 0.025);
+            other.style.transform = 'translateX(' + pushPx + 'px) scale(' + shrink + ')';
+            other.style.zIndex = '';
+          }
+        });
+      });
+      c.addEventListener('mouseleave', function () {
+        var row = c._slamRow;
+        if (row) row.forEach(function (o) { o.style.transform = ''; o.style.zIndex = ''; });
+      });
+    });
+    refreshRows();
+    addEventListener('resize', refreshRows, { passive: true });
+  }
+
+  function init() {
+    document.querySelectorAll('.album-row, .series-row').forEach(function (r) { initRow(r); });
+    document.querySelectorAll('.nav-links').forEach(function (r) {
+      initRow(r, { scale: 1.28, pushBase: 18, falloff: 5, shrinkPer: 0.02, minShrink: 0.9, skipDisabled: true });
+    });
+    document.querySelectorAll('.nav-ctas').forEach(function (r) {
+      initRow(r, { scale: 1.18, pushBase: 12, falloff: 4, shrinkPer: 0.02, minShrink: 0.92 });
+    });
+    document.querySelectorAll('.grid').forEach(function (g) { initGrid(g); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+
+<header class="ptitle-block">
+  <p class="eyebrow">✦ &nbsp; spoken word · video · verse</p>
+  <h1>Poetry</h1>
+  <p class="lede">a night sky of little spoken things. follow the light.</p>
+</header>
+
+<main class="field">
+  <svg class="threads" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><line x1="56" y1="38" x2="78" y2="30"/><line x1="78" y1="30" x2="50" y2="62"/></svg>
+  <a class="node" style="left:56%;top:38%;--pa:#8FB3D6;--pa-rgb:143,179,214" href="/poetry/the-void-speaks-back">
+      <div class="dot"><img src="/album-art/singles/the-void.jpg" alt="The Void Speaks Back still" loading="lazy"></div>
+      <div class="t">The Void Speaks Back</div>
+      <div class="v">"I called into the dark…"</div>
+      <div class="d">2:14 · video</div>
+    </a>
+  <a class="node" style="left:78%;top:30%;--pa:#D9A441;--pa-rgb:217,164,65" href="/poetry/letters-i-never-sent">
+      <div class="dot"><img src="/album-art/singles/from-the-ashes.jpg" alt="Letters I Never Sent still" loading="lazy"></div>
+      <div class="t">Letters I Never Sent</div>
+      <div class="v">"If silence is a kind…"</div>
+      <div class="d">1:48 · audio</div>
+    </a>
+  <a class="node" style="left:50%;top:62%;--pa:#C29BD6;--pa-rgb:194,155,214" href="/poetry/how-to-disappear">
+      <div class="dot"><img src="/album-art/singles/escape.jpg" alt="How to Disappear still" loading="lazy"></div>
+      <div class="t">How to Disappear</div>
+      <div class="v">"I got so good at…"</div>
+      <div class="d">2:35 · video</div>
+    </a>
+  <span class="moth" style="left:44%;top:18%">✦</span>
+  <span class="moth" style="left:66%;top:82%;font-size:13px">✦</span>
+  <span class="moth" style="left:86%;top:46%;font-size:15px">✦</span>
+</main>
+<p class="hint">click a light to enter</p>
+
+<!-- Global site footer. Identical on every page (home, singles, albums,
+     list pages, links). Per-release info is not in the footer — release
+     date is rendered in the meta block on individual pages. -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" target="_blank" rel="noopener">Spotify</a>
+    <a href="https://music.apple.com/us/artist/auny/1880511675" target="_blank" rel="noopener">Apple Music</a>
+    <a href="https://music.amazon.com/artists/B0GDL275G8/auny" target="_blank" rel="noopener">Amazon Music</a>
+    <a href="https://www.youtube.com/@aunysillyme" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://suno.com/@aunysillyme" target="_blank" rel="noopener">Suno</a>
+    <a href="/links">all platforms</a>
+    <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">Contact</a>
+  </div>
+  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; 11119560 Records DK &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
+</footer>
+
+</body>
+</html>

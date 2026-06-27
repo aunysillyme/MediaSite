@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- HELD: scaffold not yet launched — keep noindex until real pieces land. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Poetry — Auny · Spoken Word, Video &amp; Verse</title>
+<meta name="description" content="Spoken-word poetry by Auny — video and verse. A night sky of little spoken things.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Poetry — Auny">
+<meta property="og:description" content="Spoken word · video · verse.">
+<meta property="og:url" content="https://www.auny.media/poetry">
+<link rel="canonical" href="https://www.auny.media/poetry">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="preload" href="/fonts/outfit-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{--accent:#9BB4DE;--accent-rgb:155,180,222;--nav-accent:#9BB4DE}
+  html,body{min-height:100%;background:radial-gradient(120% 100% at 70% 8%,#0b1020 0%,#050509 55%,#040407 100%);color:#fff;font-family:'Space Mono',monospace;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;z-index:60;pointer-events:none;background-image:repeating-linear-gradient(to bottom,transparent 0 3px,rgba(0,0,0,.10) 3px 4px);opacity:.12}
+{{NAV_CSS}}
+  .moon{position:fixed;top:-130px;right:-90px;width:440px;height:440px;border-radius:50%;background:radial-gradient(closest-side,rgba(200,215,245,.16),rgba(155,180,222,.05),transparent);z-index:0;pointer-events:none}
+  .stars span{position:fixed;width:2px;height:2px;border-radius:50%;background:rgba(255,255,255,.5);z-index:0}
+  .ptitle-block{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:70px 48px 0}
+  .ptitle-block .eyebrow{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--accent);opacity:.85;margin-bottom:12px}
+  .ptitle-block h1{font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(56px,8vw,118px);line-height:.86;letter-spacing:-3px;text-shadow:0 0 80px rgba(var(--accent-rgb),.4)}
+  .ptitle-block .lede{font-family:'Patrick Hand',cursive;font-size:clamp(18px,2vw,24px);color:rgba(255,255,255,.72);margin-top:14px;max-width:320px}
+  /* the field */
+  .field{position:relative;z-index:5;height:min(72vh,760px);max-width:1320px;margin:0 auto;padding:0 48px}
+  .threads{position:absolute;inset:0 48px;width:calc(100% - 96px);height:100%;z-index:4;pointer-events:none}
+  .threads line{stroke:rgba(var(--accent-rgb),.26);stroke-width:.12;stroke-dasharray:.6 .9;vector-effect:non-scaling-stroke}
+  .node{position:absolute;z-index:6;text-decoration:none;color:inherit;transform:translate(-50%,-50%);text-align:center;width:180px}
+  .node .dot{width:66px;height:66px;border-radius:50%;margin:0 auto 10px;overflow:hidden;position:relative;border:1.5px solid rgba(var(--pa-rgb),.7);
+    box-shadow:0 0 26px rgba(var(--pa-rgb),.45);transition:transform .3s,box-shadow .3s}
+  .node .dot img{width:100%;height:100%;object-fit:cover;filter:saturate(.8) brightness(.9)}
+  .node .dot::after{content:'';position:absolute;inset:0;background:radial-gradient(closest-side,transparent 55%,rgba(5,5,12,.55))}
+  .node:hover .dot{transform:scale(1.12);box-shadow:0 0 42px rgba(var(--pa-rgb),.85)}
+  .node .t{font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;line-height:1.05}
+  .node .v{font-family:'Patrick Hand',cursive;font-size:14px;color:rgba(255,255,255,.6);margin-top:3px}
+  .node .d{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--pa);margin-top:5px}
+  .moth{position:absolute;z-index:7;color:rgba(255,255,255,.5);pointer-events:none}
+  .hint{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:8px 48px 40px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+  @media (max-width:860px){
+    .field{height:auto;display:flex;flex-direction:column;gap:30px;padding:30px 28px}
+    .threads,.moth{display:none}
+    .node{position:relative!important;left:auto!important;top:auto!important;transform:none;width:100%;display:flex;align-items:center;gap:16px;text-align:left}
+    .node .dot{margin:0}
+  }
+  {{FOOTER_CSS}}
+</style>
+</head>
+<body>
+<div class="moon"></div>
+<div class="stars"><span style="top:18%;left:30%"></span><span style="top:26%;left:62%"></span><span style="top:44%;left:20%"></span><span style="top:60%;left:48%"></span><span style="top:72%;left:80%"></span><span style="top:34%;left:88%"></span><span style="top:80%;left:33%"></span></div>
+
+{{NAV}}
+
+<header class="ptitle-block">
+  <p class="eyebrow">✦ &nbsp; spoken word · video · verse</p>
+  <h1>Poetry</h1>
+  <p class="lede">a night sky of little spoken things. follow the light.</p>
+</header>
+
+<main class="field">
+  <svg class="threads" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">{{THREADS}}</svg>
+  {{NODES}}
+  <span class="moth" style="left:44%;top:18%">✦</span>
+  <span class="moth" style="left:66%;top:82%;font-size:13px">✦</span>
+  <span class="moth" style="left:86%;top:46%;font-size:15px">✦</span>
+</main>
+<p class="hint">click a light to enter</p>
+
+{{FOOTER_HTML}}
+</body>
+</html>
