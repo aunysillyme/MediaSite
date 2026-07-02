@@ -209,11 +209,12 @@ picture { display: contents; }
     margin-bottom: 24px; max-width: 600px;
   }
 
-  /* color series row */
+  /* color series row — 4 per row, auto-wraps as new colors are added */
   .series-row {
-    display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
     margin-bottom: 80px;
   }
+  @media (max-width: 1024px) { .series-row { grid-template-columns: repeat(3, 1fr); } }
 
   /* standard grid */
   .grid {

@@ -257,9 +257,9 @@
   .mini-card-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; line-height: 1.2; color: #fff; margin-bottom: 2px; }
   .mini-card-meta { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
 
-  /* Color Series row (smaller — tertiary section) */
+  /* Color Series row — 4 per row, auto-wraps as new colors are added */
   .series-row {
-    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
     max-width: 920px; margin: 0 auto;
   }
   .series-row .mini-card .body { padding: 8px 10px 10px; }
@@ -304,11 +304,11 @@
     .hero { grid-template-columns: 1fr; gap: 28px; padding: 80px 24px 24px; }
     .hero-left { order: 2; }
     .featured { order: 1; padding: 0; }
-    .series-row { grid-template-columns: repeat(6, 1fr); gap: 10px; }
+    .series-row { grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .section { padding: 60px 24px; }
   }
   @media (max-width: 540px) {
-    .series-row { grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .series-row { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     .mini-card-title { font-size: 13px; }
     .mini-card-meta { font-size: 8px; }
     .hero-stats { gap: 24px; }
