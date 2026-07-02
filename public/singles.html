@@ -209,12 +209,19 @@ picture { display: contents; }
     margin-bottom: 24px; max-width: 600px;
   }
 
-  /* color series row — 4 per row, auto-wraps as new colors are added */
+  /* color series row — 4 per row, auto-wraps, last (odd) row centers.
+     Flex + justify-center so a partial row isn't left-aligned; --cols drives
+     the responsive step-down. */
   .series-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    --cols: 4; --gap: 18px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: var(--gap);
     margin-bottom: 80px;
   }
-  @media (max-width: 1024px) { .series-row { grid-template-columns: repeat(3, 1fr); } }
+  .series-row > * {
+    flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+    max-width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  }
+  @media (max-width: 1024px) { .series-row { --cols: 3; } }
 
   /* standard grid */
   .grid {
@@ -400,7 +407,7 @@ picture { display: contents; }
   }
 
   @media (max-width: 720px) {
-    .series-row { grid-template-columns: repeat(2, 1fr); }
+    .series-row { --cols: 2; }
     .container { padding: 80px 20px 60px; }
   }
 </style>
