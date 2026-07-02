@@ -48,17 +48,21 @@ const latestAccent = latest.accent || BRAND_ACCENT;
 const today = new Date().toISOString().slice(0, 10);
 const latestUpcoming = latestTeaser || !!latest.upcoming || latest.releaseDate > today
   || (latestIsAlbum ? !latest.spotifyAlbumId : !latest.spotifyTrackId);
-// Teaser → "Coming Soon" + a view-album link (no pre-save, no date).
-// Dated pre-release → "Coming [date]" + pre-save. Released → listen + stream.
-const latestTagBlock = latestTeaser
-  ? `<p class="featured-tag upcoming"><span class="dot"></span>Coming Soon</p>`
-  : latestUpcoming
-  ? `<p class="featured-tag upcoming"><span class="dot"></span>Coming ${esc(latest.releaseDisplay)}</p>`
+// Teaser dateless → "Coming Soon" + view-album link. Teaser dated (submitted)
+// → "Coming [date]" + pre-save. Non-teaser upcoming → "Coming [date]" + pre-save.
+// Released → listen + stream.
+const teaserComing = latest.releaseDate ? `Coming ${esc(latest.releaseDisplay)}` : 'Coming Soon';
+const latestTagBlock = latestUpcoming
+  ? `<p class="featured-tag upcoming"><span class="dot"></span>${teaserComing}</p>`
   : `<p class="featured-tag">${esc(latestType)} · ${esc(latest.releaseDisplay)}</p>`;
 const latestListenRow = latestTeaser
-  ? `<div class="listen-row">
-          <a class="all-pill" href="${latestUrl}">view album <span class="ext">→</span></a>
+  ? (latest.hyperfollowSlug
+    ? `<div class="listen-row">
+          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · follow on all platforms <span class="ext">↗</span></a>
         </div>`
+    : `<div class="listen-row">
+          <a class="all-pill" href="${latestUrl}">view album <span class="ext">→</span></a>
+        </div>`)
   : latestUpcoming
   ? `<div class="listen-row">
           <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>

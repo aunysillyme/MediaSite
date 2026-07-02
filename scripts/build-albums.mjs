@@ -56,11 +56,18 @@ function renderAlbum(album) {
   // so a build after midnight on release day swaps the page treatment.
   const today = new Date().toISOString().slice(0, 10);
   const upcoming = !!album.upcoming || album.releaseDate > today || !album.spotifyAlbumId;
-  // Teaser = pre-distribution (no DistroKid yet): "Coming Soon", no pre-save CTA.
+  // Teaser = shows the disabled album player (not a Spotify embed). A teaser may
+  // be dateless ("Coming Soon", no CTA) OR dated + submitted, in which case it
+  // shows "Coming <date>" and a live pre-save CTA once hyperfollowSlug is set.
   const teaser = !!album.teaser;
-  const comingLabel = teaser ? esc(album.releaseDisplay) : `Coming ${esc(album.releaseDisplay)}`;
+  const comingLabel = album.releaseDate ? `Coming ${esc(album.releaseDisplay)}` : esc(album.releaseDisplay);
+  const kindWord = album.vocal ? 'vocal' : 'instrumental';
   const heroListenBlock = teaser
-    ? ''
+    ? (album.hyperfollowSlug
+      ? `<div class="hero-listen">
+        <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · follow on all platforms <span class="ext">↗</span></a>
+      </div>`
+      : '')
     : upcoming
     ? `<div class="hero-listen">
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
@@ -80,7 +87,7 @@ function renderAlbum(album) {
       <p class="album-player-label">✦ &nbsp; coming soon</p>
       <div class="preview-soon">
         <p class="ps-label">Releases ${esc(album.releaseDisplay)} · 12:00 AM</p>
-        <p class="ps-headline">${album.tracks.length}-track instrumental album. Pre-save now — drops on every platform on release day.</p>
+        <p class="ps-headline">${album.tracks.length}-track ${kindWord} album. Pre-save now — drops on every platform on release day.</p>
         <a class="ps-cta" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms ↗</a>
       </div>
     </section>`

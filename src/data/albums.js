@@ -5,15 +5,16 @@ export const ALBUMS = [
   {
     slug: 'dreams',
     title: 'dreaMs',
-    // Pre-distribution teaser: not on DistroKid yet, so no date, no Spotify ID,
-    // no hyperfollow. `teaser: true` ⇒ "Coming Soon" with no pre-save CTA.
-    // When it goes live: set releaseDate/Display + spotifyAlbumId + hyperfollowSlug
-    // + per-track ids, drop `teaser`/`upcoming`, and it auto-flips to released.
-    releaseDate: '',
-    releaseDisplay: 'Coming Soon',
+    // Submitted to DistroKid for a July 11, 2026 release. Dated pre-release:
+    // keeps the disabled-player "teaser" treatment but now shows the date + a
+    // live pre-save CTA (hyperfollowSlug). Streaming links (spotifyAlbumId +
+    // per-track ids) land post-release once DistroKid delivers, then it
+    // auto-flips to fully released.
+    releaseDate: '2026-07-11',
+    releaseDisplay: 'July 11, 2026',
     year: 2026,
     spotifyAlbumId: '',
-    hyperfollowSlug: '',
+    hyperfollowSlug: 'dreams',
     upcoming: true,
     teaser: true,
     vocal: true,
