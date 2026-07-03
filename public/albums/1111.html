@@ -623,6 +623,25 @@ picture { display: contents; }
   }
   @media (max-width: 720px) { .poem-section { padding: 40px 20px 70px; } }
 
+  /* Album notes — "The Making" + enriched tracklist (opt-in per album). */
+  .notes-section { position: relative; z-index: 4; max-width: 900px; margin: 0 auto; padding: 0 32px; }
+  .notes-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent); opacity: 0.85;
+    margin: 52px 0 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .notes-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--accent-rgb),0.35), transparent); }
+  .making-copy p { font-family: 'Patrick Hand', cursive; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.5; color: rgba(255,255,255,0.82); margin-bottom: 14px; max-width: 760px; }
+  .making-specs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .spec { display: flex; flex-direction: column; gap: 3px; padding: 10px 16px; border: 1px solid rgba(var(--accent-rgb),0.3); border-radius: 10px; background: rgba(var(--accent-rgb),0.05); }
+  .spec .sk { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .spec .sv { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: var(--accent); }
+  .trk { display: grid; grid-template-columns: 32px 1.1fr auto; grid-template-areas: "n t b" "n d d"; column-gap: 16px; row-gap: 2px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.07); align-items: baseline; }
+  .trk .trk-n { grid-area: n; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; color: rgba(var(--accent-rgb),0.55); }
+  .trk .trk-t { grid-area: t; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 19px; color: #fff; }
+  .trk .trk-bpm { grid-area: b; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--accent); border: 1px solid rgba(var(--accent-rgb),0.4); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .trk .trk-desc { grid-area: d; font-family: 'Patrick Hand', cursive; font-size: 17px; line-height: 1.35; color: rgba(255,255,255,0.66); margin-top: 2px; }
+
   /* Orbit system */
   .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
   .planet {
@@ -1111,6 +1130,10 @@ picture { display: contents; }
     <div class="orbit-system" id="orbit"></div>
   </div>
 </div>
+
+
+
+
 
 
 

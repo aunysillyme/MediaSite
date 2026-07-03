@@ -2,8 +2,42 @@
 // Generates /albums + /albums/<slug> pages from src/data/albums.js + templates/
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
+import { ALBUM_NOTES } from '../src/data/album-notes.js';
 import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
 import { join } from 'node:path';
+
+// "The Making" + enriched tracklist — rendered only for albums with a notes entry.
+function makingSectionFor(album) {
+  const n = ALBUM_NOTES[album.slug];
+  if (!n || !n.making) return '';
+  const copy = n.making.map((p) => `<p>${esc(p)}</p>`).join('\n      ');
+  const specs = (n.specs || []).map(([k, v]) =>
+    `<span class="spec"><span class="sk">${esc(k)}</span><span class="sv">${esc(v)}</span></span>`).join('');
+  return `<section class="notes-section" aria-label="How the album was made">
+    <p class="notes-label">the making</p>
+    <div class="making-copy">
+      ${copy}
+      ${specs ? `<div class="making-specs">${specs}</div>` : ''}
+    </div>
+  </section>`;
+}
+
+function tracklistSectionFor(album) {
+  const n = ALBUM_NOTES[album.slug];
+  if (!n || !n.tracks) return '';
+  const rows = album.tracks.map((t) => {
+    const info = n.tracks[t.name] || {};
+    const bpm = info.bpm ? `<span class="trk-bpm">${info.bpm} BPM</span>` : '';
+    const desc = info.vibe ? `<span class="trk-desc">${esc(info.vibe)}</span>` : '';
+    return `<div class="trk"><span class="trk-n">${String(t.num).padStart(2, '0')}</span><span class="trk-t">${esc(t.name)}</span>${bpm}${desc}</div>`;
+  }).join('\n    ');
+  return `<section class="notes-section" aria-label="Tracklist">
+    <p class="notes-label">tracklist · ${album.tracks.length} tracks</p>
+    <div class="tracklist">
+    ${rows}
+    </div>
+  </section>`;
+}
 
 const ALBUM_TPL = tpl('album.html');
 const LIST_TPL  = tpl('albums-list.html');
@@ -99,15 +133,21 @@ function renderAlbum(album) {
     ? `<p class="upcoming-banner"><span class="dot"></span> ${comingLabel}</p>`
     : '';
   const heroLabelSuffix = upcoming ? ' · upcoming' : '';
+  const notes = ALBUM_NOTES[album.slug];
   const tracksJsonLd = JSON.stringify({
     '@type': 'ItemList',
     numberOfItems: album.tracks.length,
     itemListElement: album.tracks.map((t, i) => {
+      const name = typeof t === 'string' ? t : t.name;
       const item = {
         '@type': 'MusicRecording',
-        name: typeof t === 'string' ? t : t.name,
+        name,
         byArtist: { '@type': 'MusicGroup', name: 'Auny' },
       };
+      // Enrich with per-track description + BPM when notes exist (unique content).
+      const info = notes && notes.tracks ? notes.tracks[name] : null;
+      if (info && info.vibe) item.description = info.vibe;
+      if (info && info.bpm) item.additionalProperty = { '@type': 'PropertyValue', name: 'Tempo', value: `${info.bpm} BPM` };
       if (t && t.id) item.sameAs = `https://open.spotify.com/track/${t.id}`;
       return { '@type': 'ListItem', position: i + 1, item };
     }),
@@ -146,6 +186,8 @@ function renderAlbum(album) {
     HERO_LISTEN_BLOCK: heroListenBlock,
     PREVIEW_SECTION: previewSection,
     POEM_SECTION: poemSectionFor(album),
+    MAKING_SECTION: makingSectionFor(album),
+    TRACKLIST_SECTION: tracklistSectionFor(album),
     UPCOMING_BANNER: upcomingBanner,
     HERO_LABEL_SUFFIX: heroLabelSuffix,
     FOOTER_CSS: FOOTER_CSS,
