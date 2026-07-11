@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const BASE = 'https://www.auny.media';
-const today = new Date().toISOString().slice(0, 10);
+const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
 
 const urls = [
   { loc: `${BASE}/`, lastmod: today, changefreq: 'weekly', priority: '1.0' },

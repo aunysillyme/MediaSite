@@ -19,7 +19,7 @@ const MONTHLY_LISTENERS = STATS.spotify.monthlyListeners.toLocaleString('en-US')
 
 // Released-only counters: exclude upcoming albums/singles from portfolio stats
 // (pre-release tracks shouldn't inflate the "Tracks" count on the homepage).
-const TODAY_ISO = new Date().toISOString().slice(0, 10);
+const TODAY_ISO = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
 const isUpcoming = (item) => !!item.upcoming || item.releaseDate > TODAY_ISO;
 const RELEASED_ALBUMS  = ALBUMS.filter((a) => !isUpcoming(a));
 const RELEASED_SINGLES = SINGLES.filter((s) => !isUpcoming(s));
@@ -45,7 +45,7 @@ const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
 // Falls back to the artist's default brand accent if the release lacks one.
 const BRAND_ACCENT = { color: '#1E90FF', rgb: '30,144,255' };
 const latestAccent = latest.accent || BRAND_ACCENT;
-const today = new Date().toISOString().slice(0, 10);
+const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
 const latestUpcoming = latestTeaser || !!latest.upcoming || latest.releaseDate > today
   || (latestIsAlbum ? !latest.spotifyAlbumId : !latest.spotifyTrackId);
 // Teaser dateless → "Coming Soon" + view-album link. Teaser dated (submitted)

@@ -88,7 +88,7 @@ function renderAlbum(album) {
   const palette = album.palette || [album.accent.color, album.accent.color, album.accent.color];
   // Auto-flip from "coming soon" → "released" once the release date passes,
   // so a build after midnight on release day swaps the page treatment.
-  const today = new Date().toISOString().slice(0, 10);
+  const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
   const upcoming = !!album.upcoming || album.releaseDate > today || !album.spotifyAlbumId;
   // Teaser = shows the disabled album player (not a Spotify embed). A teaser may
   // be dateless ("Coming Soon", no CTA) OR dated + submitted, in which case it
@@ -199,7 +199,7 @@ function renderAlbum(album) {
 }
 
 function cardHtml(album) {
-  const today = new Date().toISOString().slice(0, 10);
+  const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
   const isUpcoming = !!album.upcoming || album.releaseDate > today;
   const isTeaser = !!album.teaser;
   const badge = isTeaser
