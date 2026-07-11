@@ -5,19 +5,18 @@ export const ALBUMS = [
   {
     slug: 'dreams',
     title: 'dreaMs',
-    // Submitted to DistroKid for a July 11, 2026 release. Dated pre-release:
-    // keeps the disabled-player "teaser" treatment but now shows the date + a
-    // live pre-save CTA (hyperfollowSlug). Streaming links (spotifyAlbumId +
-    // per-track ids) land post-release once DistroKid delivers, then it
-    // auto-flips to fully released.
+    // Released July 11, 2026. Live on Spotify/Apple/Tidal; YouTube Music, Amazon,
+    // Deezer, Pandora not yet indexed (add as they appear).
     releaseDate: '2026-07-11',
     releaseDisplay: 'July 11, 2026',
     year: 2026,
-    spotifyAlbumId: '',
+    spotifyAlbumId: '0hWVmpuF3gzjtDjAwhFdBi',
     hyperfollowSlug: 'dreams',
-    upcoming: true,
-    teaser: true,
     vocal: true,
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/dreams/6787112426',
+      tidal: 'https://tidal.com/album/539579918',
+    },
     genre: 'Electronic · Melodic Bass · EDM',
     blurb: 'A melodic-bass EDM journey — one instrument and one vocal line per track. Eleven lines that read as a single poem: lost, anchored, then empowered.',
     accent: { color: '#E3B23C', rgb: '227,178,60' },
@@ -26,17 +25,17 @@ export const ALBUMS = [
     // Each track carries one vocal line; read in order they form one poem.
     // `movement` groups them into the album's three-act arc.
     tracks: [
-      { num: 1,  name: 'Map',        id: '', dur: '', movement: 'Lost',      line: 'I lost the map a long time ago.' },
-      { num: 2,  name: "Don't Stop", id: '', dur: '', movement: 'Lost',      line: "Just kept moving so I wouldn't have to stop." },
-      { num: 3,  name: 'Reason',     id: '', dur: '', movement: 'Lost',      line: 'Looking for one reason to keep going.' },
-      { num: 4,  name: 'More',       id: '', dur: '', movement: 'Lost',      line: 'I always wanted to be more than this.' },
-      { num: 5,  name: 'Buried',     id: '', dur: '', movement: 'Anchor',    line: 'You saw the parts I kept buried.' },
-      { num: 6,  name: 'Flinch',     id: '', dur: '', movement: 'Anchor',    line: "You didn't flinch. You didn't hide. You saw me." },
-      { num: 7,  name: 'Weight',     id: '', dur: '', movement: 'Anchor',    line: 'First time the ground held my weight.' },
-      { num: 8,  name: 'Before',     id: '', dur: '', movement: 'Anchor',    line: 'You believed it before I could.' },
-      { num: 9,  name: 'Evolve',     id: '', dur: '', movement: 'Empowered', line: "Push me. I don't break. I evolve." },
-      { num: 10, name: 'Watch',      id: '', dur: '', movement: 'Empowered', line: 'Watch what I do with this.' },
-      { num: 11, name: 'Believe',    id: '', dur: '', movement: 'Empowered', line: 'Turns out all I needed was someone who believes.' },
+      { num: 1,  name: 'Map',        id: '7pgFdD0LB8ASN30tGED3ob', dur: '', movement: 'Lost',      line: 'I lost the map a long time ago.' },
+      { num: 2,  name: "Don't Stop", id: '7baOg81sT5L1d9AS3BXo4s', dur: '', movement: 'Lost',      line: "Just kept moving so I wouldn't have to stop." },
+      { num: 3,  name: 'Reason',     id: '0FNOiUukhGUXqr0njuy4Zt', dur: '', movement: 'Lost',      line: 'Looking for one reason to keep going.' },
+      { num: 4,  name: 'More',       id: '7FA5MU6LCOUni2HFPSus76', dur: '', movement: 'Lost',      line: 'I always wanted to be more than this.' },
+      { num: 5,  name: 'Buried',     id: '07i7RlCod0Wqxm2Iwhc6aV', dur: '', movement: 'Anchor',    line: 'You saw the parts I kept buried.' },
+      { num: 6,  name: 'Flinch',     id: '5zVf6h8hNR9EnTOyPfuNwR', dur: '', movement: 'Anchor',    line: "You didn't flinch. You didn't hide. You saw me." },
+      { num: 7,  name: 'Weight',     id: '185xRdMhMsgIr4NUB1veru', dur: '', movement: 'Anchor',    line: 'First time the ground held my weight.' },
+      { num: 8,  name: 'Before',     id: '2KqX8JmckwTaUwKfmsZ8RB', dur: '', movement: 'Anchor',    line: 'You believed it before I could.' },
+      { num: 9,  name: 'Evolve',     id: '4FqujHrKwIfwZvQeDEMAJu', dur: '', movement: 'Empowered', line: "Push me. I don't break. I evolve." },
+      { num: 10, name: 'Watch',      id: '1thlIr3vfHhqOH366sNkuH', dur: '', movement: 'Empowered', line: 'Watch what I do with this.' },
+      { num: 11, name: 'Believe',    id: '0cxRkeCjsAb1lblw6dDziE', dur: '', movement: 'Empowered', line: 'Turns out all I needed was someone who believes.' },
     ],
   },
   {
