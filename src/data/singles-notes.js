@@ -12,5 +12,28 @@
 // written back to the vault so the two stay consistent.
 
 export const SINGLE_NOTES = {
-  // populated folder-by-folder from the vault — see commit history.
+  // Color-series singles carry documented Suno prompts (BPM + stem recipe);
+  // most narrative singles were Suno auto-tempo with no recorded BPM.
+  'pink': {
+    bpm: 95,
+    note: 'Three stems — dark EDM, rave, and lo-fi — generated at matched tempo in A minor and layered in post.',
+  },
+  'cyan': {
+    bpm: 85,
+    note: 'Dark atmospheric EDM with processed violin (Lindsey Stirling influence), icy layered synths, deep sub-bass.',
+  },
+  'let-go': {
+    bpm: 80,
+    note: 'Dark EDM meets golden-hour warmth in A major — acoustic guitar, crisp xylophone, flute, heartbeat piano.',
+  },
+  'mechanical-screen': {
+    bpm: 151,
+    note: 'Cinematic experimental electronica — two instrumental layers (151 & 125 BPM) under hypnotic, seductive vocals.',
+  },
+  'yellow': {
+    note: 'Dark midtempo EDM — hypnotic, heavy distorted synths, spatial xylophone, whispered call-and-response vocals.',
+  },
+  'story-of-you': {
+    note: 'A two-voice arrangement — a harsh inner-critic vocal answered by a warm, reassuring one.',
+  },
 };
