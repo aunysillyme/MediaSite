@@ -111,6 +111,21 @@
   }
   .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
 
+  .prod-note {
+    display: flex; gap: 10px; align-items: flex-start;
+    max-width: 520px; margin-bottom: 20px;
+    padding: 12px 14px; border-radius: 8px;
+    background: rgba(var(--accent-rgb),0.05);
+    border: 1px solid rgba(var(--accent-rgb),0.18);
+  }
+  .prod-note .pn-label {
+    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; padding-top: 3px;
+  }
+  .prod-note .pn-text {
+    font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
+  }
+
   .listen-now {
  font-family: 'Patrick Hand', cursive; 
     font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
@@ -197,7 +212,7 @@
     "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI"
   },
   "datePublished": "{{RELEASE_ISO}}",
-  "genre": "{{GENRE}}",
+  "genre": "{{GENRE}}",{{NOTE_SCHEMA}}{{TEMPO_SCHEMA}}
   "url": "https://www.auny.media/singles/{{SLUG}}",
   "sameAs": {{SAMEAS_JSONLD}},
   "image": "https://www.auny.media/album-art/singles/{{SLUG}}.{{COVER_EXT}}",
@@ -240,9 +255,10 @@
 
     <div class="meta-block">
       <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">{{RELEASE_DISPLAY}}</span></div>
-      <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">{{GENRE}}</span></div>
+      <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">{{GENRE}}</span></div>{{TEMPO_META_ROW}}
       <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
     </div>
+{{PROD_NOTE_BLOCK}}
 
     <div class="listen-row">
       <a class="listen-now" href="https://open.spotify.com/track/{{SPOTIFY_TRACK_ID}}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
