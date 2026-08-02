@@ -15,6 +15,11 @@ export const ALBUMS = [
     spotifyAlbumId: '',
     hyperfollowSlug: 'dreams-instrumental',
     vocal: false,
+    // Promotes it to the homepage hero as "Coming August 15, 2026" + pre-save,
+    // same treatment the vocal dreaMs ran during its own pre-release window.
+    // REMOVE on release day — build-home picks the teaser over the latest release,
+    // so leaving it set would keep a released album hogging the hero. See AUN-507.
+    teaser: true,
     // Companion cross-link to the vocal twin (rendered as a sibling pill).
     companion: { slug: 'dreams', title: 'dreaMs', kind: 'vocal' },
     platforms: {},
