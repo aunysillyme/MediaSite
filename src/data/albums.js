@@ -3,6 +3,45 @@
 
 export const ALBUMS = [
   {
+    slug: 'dreams-instrumental',
+    title: 'dreaMs (instrumental)',
+    // Submitted to DistroKid Aug 1, 2026. Releases Aug 15, 2026 (9:00 AM ET on
+    // Spotify; ~midnight local elsewhere). Preorder opened Aug 2 on iTunes/Amazon.
+    // No spotifyAlbumId yet → renders pre-release (auto-flips to released on the
+    // first build after the ID + track IDs are filled in post-launch.
+    releaseDate: '2026-08-15',
+    releaseDisplay: 'August 15, 2026',
+    year: 2026,
+    spotifyAlbumId: '',
+    hyperfollowSlug: 'dreams-instrumental',
+    vocal: false,
+    // Companion cross-link to the vocal twin (rendered as a sibling pill).
+    companion: { slug: 'dreams', title: 'dreaMs', kind: 'vocal' },
+    platforms: {},
+    genre: 'Electronic · Electronica / Downtempo · New Age',
+    blurb: 'Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night.',
+    accent: { color: '#A17BE0', rgb: '161,123,224' },
+    bgHue: 265,
+    // plum → amethyst → dawn gold: the album’s lost-to-empowered arc, ending
+    // on the same gold the vocal twin opens with (so the two pages read as siblings).
+    palette: ['#6C4FB0', '#A17BE0', '#E8C36B'],
+    // Same 11 songs as the vocal album, grouped into Izzy’s three-stage arc.
+    // No vocal `line` (instrumental → no poem section) and no track `id` yet.
+    tracks: [
+      { num: 1,  name: 'Map',        movement: 'Lost' },
+      { num: 2,  name: "Don't Stop", movement: 'Lost' },
+      { num: 3,  name: 'Reason',     movement: 'Lost' },
+      { num: 4,  name: 'More',       movement: 'Lost' },
+      { num: 5,  name: 'Buried',     movement: 'Anchor' },
+      { num: 6,  name: 'Flinch',     movement: 'Anchor' },
+      { num: 7,  name: 'Weight',     movement: 'Anchor' },
+      { num: 8,  name: 'Before',     movement: 'Anchor' },
+      { num: 9,  name: 'Evolve',     movement: 'Empowered' },
+      { num: 10, name: 'Watch',      movement: 'Empowered' },
+      { num: 11, name: 'Believe',    movement: 'Empowered' },
+    ],
+  },
+  {
     slug: 'dreams',
     title: 'dreaMs',
     // Released July 11, 2026. Live on Spotify/Apple/Tidal; YouTube Music, Amazon,
@@ -13,6 +52,8 @@ export const ALBUMS = [
     spotifyAlbumId: '0hWVmpuF3gzjtDjAwhFdBi',
     hyperfollowSlug: 'dreams',
     vocal: true,
+    // Companion cross-link to the instrumental twin (Izzy plays the same 11).
+    companion: { slug: 'dreams-instrumental', title: 'dreaMs (instrumental)', kind: 'instrumental' },
     platforms: {
       appleMusic: 'https://music.apple.com/us/album/dreams/6787112426',
       tidal: 'https://tidal.com/album/539579918',

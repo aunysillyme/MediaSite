@@ -39,6 +39,17 @@ function tracklistSectionFor(album) {
   </section>`;
 }
 
+// Sibling cross-link between paired releases (e.g. dreaMs vocal ↔ instrumental).
+// Renders nothing unless the album declares a `companion`.
+function companionBlockFor(album) {
+  const c = album.companion;
+  if (!c) return '';
+  return `<a class="companion-link" href="/albums/${c.slug}">` +
+    `<span class="cl-tag">↔ companion</span>` +
+    `<span class="cl-body">the ${esc(c.kind)} album · <strong>${esc(c.title)}</strong></span>` +
+    `<span class="cl-arrow">→</span></a>`;
+}
+
 const ALBUM_TPL = tpl('album.html');
 const LIST_TPL  = tpl('albums-list.html');
 
@@ -184,6 +195,7 @@ function renderAlbum(album) {
     NAV_CSS: NAV_CSS,
     PLAYER_CSS: PLAYER_CSS,
     HERO_LISTEN_BLOCK: heroListenBlock,
+    COMPANION_BLOCK: companionBlockFor(album),
     PREVIEW_SECTION: previewSection,
     POEM_SECTION: poemSectionFor(album),
     MAKING_SECTION: makingSectionFor(album),

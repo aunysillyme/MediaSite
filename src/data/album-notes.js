@@ -4,6 +4,31 @@
 // enrichment is additive and opt-in (add a slug to light it up).
 
 export const ALBUM_NOTES = {
+  'dreams-instrumental': {
+    making: [
+      "The instrumental twin of dreaMs, and its opposite in the frame. The vocal album personified each instrument as the lone figure; here a real one plays them — Izzy, a lyrical genius and instrument savant who lives inside the music, perpetually melancholy, her face veiled by the song’s flower.",
+      "She carries the album’s arc on her body. Lost across the first four tracks, she plays alone in deep shadow, half-turned away. Anchored through the middle, she steadies and begins to face forward as the palette warms. Empowered across the last three, she commands the machines, the color breaking from fire to a white-gold dawn.",
+      "Same Nocturne register and per-track flower map as the vocal album, so the two read as siblings on a shelf. The vocal record lands the story; this one re-serves the same eleven for focus, study, sync, and the background of a long night.",
+    ],
+    specs: [
+      ["Character", "Izzy"],
+      ["Register", "Nocturne"],
+      ["Arc", "lost → dawn"],
+    ],
+    tracks: {
+      "Map": { vibe: "Solo grand piano in deep shadow, garnet hibiscus over her eyes — the lost opening" },
+      "Don't Stop": { vibe: "Restless acoustic guitar, dusty-blue tulips veiling her face, still turned away" },
+      "Reason": { vibe: "Fragile glockenspiel, lily-of-the-valley over the eyes, searching for one reason" },
+      "More": { vibe: "Aching violin, deep violet iris veil, the deepest point of the shadow" },
+      "Buried": { vibe: "Vintage synthesizer warming, funeral lilies and dead roses — the turn toward light" },
+      "Flinch": { vibe: "Smoky saxophone, amber and rust dahlia, she begins to face forward" },
+      "Weight": { vibe: "Weightless flute, dusky-mauve hellebore, the ground finally holding her" },
+      "Before": { vibe: "Steadying cello, pale snowdrop veil — Izzy’s reveal cover, the album’s quiet center" },
+      "Evolve": { vibe: "She commands the modular synth-bass, black-red snapdragon, palette breaking to fire" },
+      "Watch": { vibe: "Driving Reese-bass machine, crimson-black ranunculus, chin lifted in defiance" },
+      "Believe": { vibe: "Crystalline voice-machine, white-gold lotus, first light — the arc breaks to dawn" },
+    },
+  },
   'flatline': {
     making: [
       "A study in suspended clinical tension and delicate organic realism \u2014 designed to induce a state of \"Intricate Zen\": hyper-focused calm, mental stillness, sensory immersion.",
