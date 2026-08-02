@@ -178,6 +178,9 @@ function renderAlbum(album) {
     SPOTIFY_ALBUM_ID: album.spotifyAlbumId,
     HYPERFOLLOW_SLUG: album.hyperfollowSlug,
     NUM_TRACKS: String(album.tracks.length),
+    // "an 11-track" / "an 18-track", "a 19-track" — English takes "an" before a
+    // numeral that is *read* vowel-initial (8, 11, 18), not one merely spelled so.
+    NUM_TRACKS_ARTICLE: /^(8|11|18)$/.test(String(album.tracks.length)) ? 'an' : 'a',
     ALBUM_KIND: album.vocal ? 'vocal' : 'instrumental',
     TRACKS_JSONLD: tracksJsonLd,
     SAMEAS_JSONLD: JSON.stringify([
