@@ -240,6 +240,28 @@ picture { display: contents; }
     0%, 100% { transform: translateX(0); opacity: 0.65; }
     50% { transform: translateX(6px); opacity: 1; }
   }
+  /* Companion cross-link — sibling release pill (paired albums only) */
+  .companion-link {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
+    padding: 9px 14px; border-radius: 999px;
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    background: rgba(var(--accent-rgb), 0.07);
+    text-decoration: none; color: rgba(255,255,255,0.82);
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    transition: border-color 0.18s, background 0.18s, transform 0.15s;
+  }
+  .companion-link:hover {
+    border-color: rgba(var(--accent-rgb), 0.75);
+    background: rgba(var(--accent-rgb), 0.13); transform: translateY(-1px);
+  }
+  .companion-link .cl-tag {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); opacity: 0.85; white-space: nowrap;
+  }
+  .companion-link .cl-body strong { color: #fff; font-weight: 700; }
+  .companion-link .cl-arrow { color: var(--accent); font-family: 'Space Mono', monospace; }
+  @media (max-width: 760px) { .companion-link { margin-left: auto; margin-right: auto; } }
+
   /* ─── Shared player container ──────────────────────────────────────────────
    Used on single + album pages. Wraps a Spotify embed iframe with a
    cassette-style accent strip + "now playing" indicator. Iframe height
@@ -1079,6 +1101,8 @@ picture { display: contents; }
           <a class="platform-pill" href="https://tidal.com/album/522538611" target="_blank" rel="noopener">Tidal <span class="ext">↗</span></a>
         </div>
       </div>
+
+      
     </div>
 
     <section class="album-player-section" aria-label="Album preview player">

@@ -229,6 +229,21 @@ picture { display: contents; }
   }
   .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
 
+  .prod-note {
+    display: flex; gap: 10px; align-items: flex-start;
+    max-width: 520px; margin-bottom: 20px;
+    padding: 12px 14px; border-radius: 8px;
+    background: rgba(var(--accent-rgb),0.05);
+    border: 1px solid rgba(var(--accent-rgb),0.18);
+  }
+  .prod-note .pn-label {
+    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; padding-top: 3px;
+  }
+  .prod-note .pn-text {
+    font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
+  }
+
   .listen-now {
  font-family: 'Patrick Hand', cursive; 
     font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
@@ -690,6 +705,8 @@ picture { display: contents; }
   },
   "datePublished": "2026-05-04",
   "genre": "Dark EDM · Rave · Lo-Fi Mashup",
+  "description": "Three stems — dark EDM, rave, and lo-fi — generated at matched tempo in A minor and layered in post.",
+  "additionalProperty": { "@type": "PropertyValue", "name": "Tempo", "value": "95 BPM" },
   "url": "https://www.auny.media/singles/pink",
   "sameAs": ["https://open.spotify.com/track/5ECSqc5TWS61BjMA0fY9c5","https://music.apple.com/us/album/pink/6766364463","https://tidal.com/track/521551203","https://www.pandora.com/TR:204522400","https://distrokid.com/hyperfollow/auny1/pink"],
   "image": "https://www.auny.media/album-art/singles/pink.jpg",
@@ -1050,8 +1067,11 @@ picture { display: contents; }
     <div class="meta-block">
       <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">May 4, 2026</span></div>
       <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Dark EDM · Rave · Lo-Fi Mashup</span></div>
+      <div class="meta-row"><span class="meta-key">Tempo</span><span class="meta-val">95 BPM</span></div>
       <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
     </div>
+    <div class="prod-note"><span class="pn-label">Note</span><span class="pn-text">Three stems — dark EDM, rave, and lo-fi — generated at matched tempo in A minor and layered in post.</span></div>
+
 
     <div class="listen-row">
       <a class="listen-now" href="https://open.spotify.com/track/5ECSqc5TWS61BjMA0fY9c5" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>

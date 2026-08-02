@@ -5,6 +5,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
+import { SINGLE_NOTES } from '../src/data/singles-notes.js';
 import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
@@ -84,7 +85,26 @@ function titleHtml(single) {
 // ─── Single page render ─────────────────────────────────────────────────────
 
 function renderSingle(single) {
+  // Opt-in enrichment: Tempo meta-row + production note, rendered only when
+  // src/data/singles-notes.js carries an entry for this slug.
+  const notes = SINGLE_NOTES[single.slug] || {};
+  const tempoMetaRow = notes.bpm
+    ? `\n      <div class="meta-row"><span class="meta-key">Tempo</span><span class="meta-val">${notes.bpm} BPM</span></div>`
+    : '';
+  const prodNoteBlock = notes.note
+    ? `    <div class="prod-note"><span class="pn-label">Note</span><span class="pn-text">${escHtml(notes.note)}</span></div>\n`
+    : '';
+  const tempoSchema = notes.bpm
+    ? `\n  "additionalProperty": { "@type": "PropertyValue", "name": "Tempo", "value": "${notes.bpm} BPM" },`
+    : '';
+  const noteSchema = notes.note
+    ? `\n  "description": ${JSON.stringify(notes.note)},`
+    : '';
   const replacements = {
+    TEMPO_META_ROW: tempoMetaRow,
+    PROD_NOTE_BLOCK: prodNoteBlock,
+    TEMPO_SCHEMA: tempoSchema,
+    NOTE_SCHEMA: noteSchema,
     TITLE: escHtml(single.title),
     TITLE_HTML: titleHtml(single),
     YEAR: String(single.year),

@@ -229,6 +229,21 @@ picture { display: contents; }
   }
   .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
 
+  .prod-note {
+    display: flex; gap: 10px; align-items: flex-start;
+    max-width: 520px; margin-bottom: 20px;
+    padding: 12px 14px; border-radius: 8px;
+    background: rgba(var(--accent-rgb),0.05);
+    border: 1px solid rgba(var(--accent-rgb),0.18);
+  }
+  .prod-note .pn-label {
+    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; padding-top: 3px;
+  }
+  .prod-note .pn-text {
+    font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
+  }
+
   .listen-now {
  font-family: 'Patrick Hand', cursive; 
     font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
@@ -690,6 +705,8 @@ picture { display: contents; }
   },
   "datePublished": "2026-05-29",
   "genre": "Dark Midtempo EDM · Hypnotic · Seductive",
+  "description": "Cinematic experimental electronica — two instrumental layers (151 & 125 BPM) under hypnotic, seductive vocals.",
+  "additionalProperty": { "@type": "PropertyValue", "name": "Tempo", "value": "151 BPM" },
   "url": "https://www.auny.media/singles/mechanical-screen",
   "sameAs": ["https://open.spotify.com/track/41mt25a7hFcMpL6GYDEjcC","https://music.apple.com/us/album/mechanical-screen/6777186353","https://tidal.com/track/529145496","https://distrokid.com/hyperfollow/auny1/mechanical-screen"],
   "image": "https://www.auny.media/album-art/singles/mechanical-screen.jpg",
@@ -1050,8 +1067,11 @@ picture { display: contents; }
     <div class="meta-block">
       <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">May 29, 2026</span></div>
       <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Dark Midtempo EDM · Hypnotic · Seductive</span></div>
+      <div class="meta-row"><span class="meta-key">Tempo</span><span class="meta-val">151 BPM</span></div>
       <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
     </div>
+    <div class="prod-note"><span class="pn-label">Note</span><span class="pn-text">Cinematic experimental electronica — two instrumental layers (151 &amp; 125 BPM) under hypnotic, seductive vocals.</span></div>
+
 
     <div class="listen-row">
       <a class="listen-now" href="https://open.spotify.com/track/41mt25a7hFcMpL6GYDEjcC" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>

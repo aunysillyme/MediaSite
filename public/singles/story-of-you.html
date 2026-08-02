@@ -229,6 +229,21 @@ picture { display: contents; }
   }
   .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
 
+  .prod-note {
+    display: flex; gap: 10px; align-items: flex-start;
+    max-width: 520px; margin-bottom: 20px;
+    padding: 12px 14px; border-radius: 8px;
+    background: rgba(var(--accent-rgb),0.05);
+    border: 1px solid rgba(var(--accent-rgb),0.18);
+  }
+  .prod-note .pn-label {
+    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; padding-top: 3px;
+  }
+  .prod-note .pn-text {
+    font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
+  }
+
   .listen-now {
  font-family: 'Patrick Hand', cursive; 
     font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
@@ -690,6 +705,7 @@ picture { display: contents; }
   },
   "datePublished": "2026-01-13",
   "genre": "Lyrical · Emotional",
+  "description": "A two-voice arrangement — a harsh inner-critic vocal answered by a warm, reassuring one.",
   "url": "https://www.auny.media/singles/story-of-you",
   "sameAs": ["https://open.spotify.com/track/5ucMIdcMVSivPbzRAFOTZW","https://music.apple.com/us/album/story-of-you/1868888200","https://tidal.com/track/489490992","https://www.pandora.com/TR:188839022","https://distrokid.com/hyperfollow/auny1/story-of-you"],
   "image": "https://www.auny.media/album-art/singles/story-of-you.jpg",
@@ -1052,6 +1068,8 @@ picture { display: contents; }
       <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Lyrical · Emotional</span></div>
       <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
     </div>
+    <div class="prod-note"><span class="pn-label">Note</span><span class="pn-text">A two-voice arrangement — a harsh inner-critic vocal answered by a warm, reassuring one.</span></div>
+
 
     <div class="listen-row">
       <a class="listen-now" href="https://open.spotify.com/track/5ucMIdcMVSivPbzRAFOTZW" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>

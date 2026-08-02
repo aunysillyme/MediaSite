@@ -3,30 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F A F O by Auny — Lyrics + Stream · EDM</title>
-<meta name="description" content="F A F O — EDM vocal single by Auny. Releasing control as an act of agency, walking through fear rather than waiting for it to pass · Read the full lyrics and stream on Spotify, Apple Music, YouTube. Released January 2, 2026.">
+<title>dreaMs (instrumental) by Auny — Electronic Album</title>
+<meta name="description" content="dreaMs (instrumental) by Auny — a 11-track Electronic instrumental album. Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night. Stream on Spotify, Apple Music, YouTube.">
 
-<meta property="og:type" content="music.song">
-<meta property="og:title" content="F A F O by Auny">
-<meta property="og:description" content="Releasing control as an act of agency, walking through fear rather than waiting for it to pass">
-<meta property="og:image" content="https://www.auny.media/album-art/singles/fafo.jpg">
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="dreaMs (instrumental) by Auny">
+<meta property="og:description" content="Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night.">
+<meta property="og:image" content="https://www.auny.media/album-art/dreams-instrumental.jpg">
 <meta property="og:image:width" content="640">
 <meta property="og:image:height" content="640">
-<meta property="og:url" content="https://www.auny.media/singles/fafo">
+<meta property="og:url" content="https://www.auny.media/albums/dreams-instrumental">
 <meta property="og:site_name" content="auny.media">
-
-
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@AunySillyMe">
 <meta name="twitter:creator" content="@AunySillyMe">
-<meta name="twitter:title" content="F A F O by Auny">
-<meta name="twitter:description" content="The decision is mine. Consequences aren't leaders — they follow.">
-<meta name="twitter:image" content="https://www.auny.media/album-art/singles/fafo.jpg">
+<meta name="twitter:title" content="dreaMs (instrumental) by Auny">
+<meta name="twitter:description" content="Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night.">
+<meta name="twitter:image" content="https://www.auny.media/album-art/dreams-instrumental.jpg">
 
-<link rel="canonical" href="https://www.auny.media/singles/fafo">
+<link rel="canonical" href="https://www.auny.media/albums/dreams-instrumental">
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/images/favicon-192.png">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <link rel="preload" href="/fonts/outfit-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/space-mono-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -35,14 +32,27 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --accent: #D8623A;
-    --accent-rgb: 216,98,58;
-    --nav-accent: #D8623A;
-    --bg: #030308;
-    --text: #ffffff;
-    --text-soft: rgba(255,255,255,0.86);
-    --text-mute: rgba(255,255,255,0.55);
+    --accent: #A17BE0;
+    --accent-rgb: 161,123,224;
+    --nav-accent: #A17BE0;
   }
+  html, body {
+    min-height: 100%;
+    background: #030308;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: url('/images/background-site-1920x1080.webp') center/cover no-repeat;
+    opacity: 0.22; filter: hue-rotate(265deg) saturate(1.5); z-index: 0; pointer-events: none;
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
+    pointer-events: none; z-index: 50; opacity: 0.2;
+  }
+
 /* Global site nav — included on every static page. */
 /* Responsive cover <picture> wrappers shouldn't add a layout box —
    let the inner <img> drive sizing exactly as a bare <img> did. */
@@ -162,65 +172,44 @@ picture { display: contents; }
   .site-nav .brand { font-size: 22px; }
 }
 
-  html, body { min-height: 100%; background: var(--bg); font-family: 'Space Mono', monospace; color: var(--text); }
-  body::before {
-    content:''; position:fixed; inset:0;
-    background: url('/images/background-site-1920x1080.webp') center/cover no-repeat;
-    opacity: 0.16; filter: hue-rotate(200deg) saturate(1.3); z-index: 0; pointer-events: none;
-  }
-  body::after {
-    content:''; position:fixed; inset:0;
-    background-image: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0,0,0,0.1) 3px 4px);
-    pointer-events: none; z-index: 50; opacity: 0.18;
-  }
-  .bg-blob { position: fixed; border-radius: 50%; z-index: 0; pointer-events: none; }
 
-  .back-btn {
-    position: fixed; top: 1.25rem; left: 1.5rem; z-index: 300;
-    padding: 0.45rem 1rem; border-radius: 8px;
-    background: rgba(3,3,8,0.82);
-    border: 1px solid rgba(var(--accent-rgb),0.33);
-    color: var(--accent);
-    font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700;
-    letter-spacing: 0.15em; text-decoration: none; text-transform: uppercase;
-    backdrop-filter: blur(10px);
-    transition: border-color 0.2s, box-shadow 0.2s;
+  .page {
+    width: 100%; display: flex; flex-direction: row;
+    align-items: stretch; position: relative; padding-top: 64px;
   }
-  .back-btn:hover { border-color: var(--accent); box-shadow: 0 0 14px rgba(var(--accent-rgb),0.3); }
+  .left-panel {
+    width: 42%; min-width: 360px; max-width: 560px;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    padding: 40px 36px 40px 56px; gap: 32px;
+    position: relative; z-index: 4;
+    animation: fadeup 0.6s ease-out both;
+  }
+  .right-panel {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 4; overflow: visible;
+    padding-right: 24px;
+    min-height: calc(100vh - 64px);
+  }
+  .bg-art { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .bg-blob { position: absolute; border-radius: 50%; }
 
-  /* hero */
-  .hero {
-    width: 100%; display: grid;
-    grid-template-columns: 1fr 1.1fr; align-items: center;
-    padding: 88px 64px 36px; position: relative; z-index: 4; gap: 36px;
-  }
-  .hero-left { display: flex; flex-direction: column; justify-content: center; max-width: 540px; }
+  .hero { position: relative; z-index: 4; flex: 1; display: flex; flex-direction: column; justify-content: center; }
   .hero-label {
     font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
-    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 12px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.7; margin-bottom: 14px;
   }
-  .hero-title {
+  .hero-name {
     font-family: 'Outfit', sans-serif; font-weight: 700;
-    font-size: clamp(48px, 6vw, 96px); line-height: 0.92;
-    letter-spacing: -1.5px; margin-bottom: 6px;
-    text-shadow: 0 0 60px rgba(var(--accent-rgb),0.5);
+    font-size: clamp(36px, 4.2vw, 64px); line-height: 0.95; letter-spacing: -0.5px;
+    margin-bottom: 6px; text-shadow: 0 0 40px rgba(var(--accent-rgb),0.4);
   }
-  .hero-byline {
-    font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: 4px;
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 4px;
     color: var(--accent); text-transform: uppercase; opacity: 0.65; margin-bottom: 24px;
   }
-  .pull-quote {
- font-family: 'Patrick Hand', cursive; 
-    font-size: clamp(20px, 2vw, 30px); line-height: 1.22;
-    color: var(--text); margin-bottom: 24px; max-width: 520px;
-    text-shadow: 0 0 24px rgba(var(--accent-rgb),0.3);
-  }
-  .pull-quote::before { content: '\201C'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-right: 4px; }
-  .pull-quote::after  { content: '\201D'; color: var(--accent); font-size: 1.3em; line-height: 0; vertical-align: -0.2em; margin-left: 4px; }
-
   .meta-block {
-    display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;
-    border-left: 2px solid rgba(var(--accent-rgb),0.25); padding-left: 14px;
+    display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;
+    border-left: 2px solid rgba(var(--accent-rgb),0.28); padding-left: 14px;
   }
   .meta-row { display: flex; flex-direction: column; gap: 1px; }
   .meta-key {
@@ -228,28 +217,51 @@ picture { display: contents; }
     color: var(--accent); text-transform: uppercase; opacity: 0.6;
   }
   .meta-val { font-family: 'Space Mono', monospace; font-size: 13px; font-weight: 700; color: #c8c4bc; }
-
-  .prod-note {
-    display: flex; gap: 10px; align-items: flex-start;
-    max-width: 520px; margin-bottom: 20px;
-    padding: 12px 14px; border-radius: 8px;
-    background: rgba(var(--accent-rgb),0.05);
-    border: 1px solid rgba(var(--accent-rgb),0.18);
-  }
-  .prod-note .pn-label {
-    flex: none; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
-    color: var(--accent); text-transform: uppercase; opacity: 0.7; padding-top: 3px;
-  }
-  .prod-note .pn-text {
-    font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
-  }
-
-  .listen-now {
+  .blurb {
  font-family: 'Patrick Hand', cursive; 
-    font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
-    color: var(--accent); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
+    font-size: clamp(18px, 1.6vw, 22px); line-height: 1.35;
+    color: rgba(255,255,255,0.82); margin-bottom: 24px;
   }
+  .hero-accent {
+ font-family: 'Patrick Hand', cursive; 
+    font-size: clamp(22px, 2.8vw, 34px); line-height: 1.2;
+    color: var(--accent);
+    display: inline-flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .orbit-arrow {
+    display: inline-block; font-style: normal; font-family: 'Space Mono', monospace;
+    font-size: 0.72em; color: var(--accent);
+    animation: arrow-nudge 1.6s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb),0.7);
+    line-height: 1;
+  }
+  @keyframes arrow-nudge {
+    0%, 100% { transform: translateX(0); opacity: 0.65; }
+    50% { transform: translateX(6px); opacity: 1; }
+  }
+  /* Companion cross-link — sibling release pill (paired albums only) */
+  .companion-link {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
+    padding: 9px 14px; border-radius: 999px;
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    background: rgba(var(--accent-rgb), 0.07);
+    text-decoration: none; color: rgba(255,255,255,0.82);
+    font-family: 'Space Mono', monospace; font-size: 12px;
+    transition: border-color 0.18s, background 0.18s, transform 0.15s;
+  }
+  .companion-link:hover {
+    border-color: rgba(var(--accent-rgb), 0.75);
+    background: rgba(var(--accent-rgb), 0.13); transform: translateY(-1px);
+  }
+  .companion-link .cl-tag {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); opacity: 0.85; white-space: nowrap;
+  }
+  .companion-link .cl-body strong { color: #fff; font-weight: 700; }
+  .companion-link .cl-arrow { color: var(--accent); font-family: 'Space Mono', monospace; }
+  @media (max-width: 760px) { .companion-link { margin-left: auto; margin-right: auto; } }
+
   /* ─── Shared player container ──────────────────────────────────────────────
    Used on single + album pages. Wraps a Spotify embed iframe with a
    cassette-style accent strip + "now playing" indicator. Iframe height
@@ -455,59 +467,6 @@ picture { display: contents; }
 }
 
 
-  .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
-  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
-
-  /* ─── Color series chip row ────────────────────────────────────────────────
-   Used on every color series single page (BLACK, BLUE, YELLOW, RED, PINK,
-   ORANGE, CYAN, …). Released chips link to the song. Upcoming chips show
-   a dashed border + "SOON" tag and aren't clickable.
-*/
-.color-series-block { margin-top: 16px; }
-.series-label {
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(255,255,255,0.58);
-  margin: 0 0 12px;
-}
-.series-chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.chip {
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-  text-transform: uppercase; padding: 6px 12px; border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.58);
-  text-decoration: none; transition: border-color 0.2s, color 0.2s;
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.chip:hover { border-color: rgba(255,255,255,0.62); color: #fff; }
-.chip.this { border-color: var(--accent); color: var(--accent); }
-.chip.soon {
-  border-style: dashed; border-color: rgba(255,255,255,0.16);
-  color: rgba(255,255,255,0.36); cursor: default;
-}
-.chip.soon:hover { border-color: rgba(255,255,255,0.16); color: rgba(255,255,255,0.36); }
-.chip .soon-tag {
-  font-size: 8px; letter-spacing: 2px;
-  padding: 2px 6px; border-radius: 4px;
-  background: rgba(255,255,255,0.05);
-  color: rgba(255,255,255,0.4);
-}
-.chip.soon.tomorrow .soon-tag {
-  background: rgba(var(--chip-accent-rgb, 255,255,255), 0.15);
-  color: rgb(var(--chip-accent-rgb, 255,255,255));
-  animation: tomorrow-pulse 1.8s ease-in-out infinite;
-}
-@keyframes tomorrow-pulse {
-  0%,100% { opacity: 0.75; }
-  50%     { opacity: 1; }
-}
-.series-note {
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(255,255,255,0.46);
-  margin: 14px 0 0;
-}
-.series-note .type-tag {
-  color: var(--accent); font-weight: 700;
-}
-
   /* ─── Shared "stream on all platforms" CTA ─────────────────────────────
    The pill links out to the DistroKid hyperfollow page. The pill's
    accent border + glow adopts the page's --accent.
@@ -579,143 +538,203 @@ picture { display: contents; }
 }
 .platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
 
-  /* ─── Recent releases strip ──────────────────────────────────────────
-   Bottom-of-page exit-ramp: 4 mini-cards of the most recent singles,
-   excluding the current one. Lifts internal-link equity across the
-   catalog and gives readers a clean way back into the music.
-*/
-.recent-strip {
-  max-width: 1240px; margin: 64px auto 0; padding: 0 32px;
-  position: relative; z-index: 4;
-}
-.recent-strip-label {
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
-  text-transform: uppercase; color: rgba(255,255,255,0.55);
-  margin: 0 0 18px;
-}
-.recent-strip-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); gap: 16px;
-}
-.recent-strip .mini-card {
-  display: block; text-decoration: none; color: inherit;
-  background: rgba(255,255,255,0.025);
-  border-radius: 10px; padding: 8px;
-  border: 1px solid rgba(255,255,255,0.06);
-  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
-}
-.recent-strip .mini-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(var(--accent-rgb), 0.4);
-  background: rgba(255,255,255,0.04);
-}
-.recent-strip .mini-card .cover {
-  position: relative; border-radius: 7px; overflow: hidden;
-  aspect-ratio: 1 / 1;
-}
-.recent-strip .mini-card .cover img {
-  width: 100%; height: 100%; object-fit: cover; display: block;
-}
-.recent-strip .mini-card .body { padding: 10px 4px 4px; }
-.recent-strip .mini-card-title {
-  font-family: 'Outfit', sans-serif; font-weight: 700;
-  font-size: 14px; line-height: 1.2; color: #fff;
-  margin: 0 0 4px;
-  overflow: hidden; text-overflow: ellipsis;
-  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
-}
-.recent-strip .mini-card-meta {
-  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(255,255,255,0.5);
-}
-@media (max-width: 760px) {
-  .recent-strip { margin-top: 48px; padding: 0 20px; }
-  .recent-strip-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-}
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
+  /* Album preview lives inside .left-panel, stacked under the info block. */
+  .album-player-section {
+    position: relative; z-index: 4;
+    width: 100%;
+    display: flex; flex-direction: column; align-items: stretch;
+    animation: fadeup 0.6s 0.3s ease-out both;
+  }
+  .album-player-section .embed-wrap { width: 100%; }
+  .album-player-section .spotify-embed { width: 100%; }
+  .album-player-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px; letter-spacing: 4px;
+    color: var(--accent); text-transform: uppercase; opacity: 0.85;
+    margin: 0 0 16px;
+  }
 
-  /* cover stage */
-  .cover-stage { position: relative; display: flex; align-items: center; justify-content: center; }
-  .cover-wrap {
-    position: relative;
-    width: min(80%, 460px); aspect-ratio: 1/1;
+  /* Upcoming-album treatment (pre-release) */
+  .upcoming-banner {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; margin: 0 0 18px;
+    border-radius: 999px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.5);
+    color: var(--accent);
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(var(--accent-rgb), 0.55);
+    box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.15);
   }
-  .cover-frame {
-    width: 100%; height: 100%; border-radius: 6px; overflow: hidden;
-    box-shadow: 0 0 80px rgba(var(--accent-rgb),0.45), 0 0 200px rgba(var(--accent-rgb),0.18), inset 0 0 0 1px rgba(255,255,255,0.06);
-    position: relative;
+  .upcoming-banner .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse-dot 1.4s ease-in-out infinite;
   }
-  .cover-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .vinyl-small {
-    position: absolute; left: -56px; bottom: -56px;
-    width: 170px; height: 170px;
-    animation: vspin 18s linear infinite;
-    z-index: 5;
-    filter: drop-shadow(0 0 24px rgba(var(--accent-rgb),0.5));
+  @keyframes pulse-dot { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .preview-soon {
+    width: 100%;
+    background: rgba(8,8,16,0.55);
+    border: 1px solid rgba(var(--accent-rgb), 0.32);
+    border-radius: 12px; padding: 22px 24px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
   }
+  .preview-soon .ps-label {
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .preview-soon .ps-headline {
+    font-family: 'Patrick Hand', cursive; font-size: 22px; line-height: 1.25;
+    color: rgba(255,255,255,0.92); margin: 0 0 14px;
+  }
+  .preview-soon .ps-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px; border-radius: 8px;
+    background: var(--accent); color: #030308; font-weight: 700;
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; text-decoration: none;
+    box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.35);
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .preview-soon .ps-cta:hover { transform: translateY(-1px); box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.55); }
+
+  /* The Poem — full-width section under the page (concept albums only).
+     Each track's vocal line read in order forms one continuous poem,
+     grouped into the album's movements. */
+  .poem-section { position: relative; z-index: 4; padding: 56px 24px 90px; display: flex; flex-direction: column; align-items: center; }
+  .poem-head { max-width: 680px; text-align: center; margin-bottom: 44px; }
+  .poem-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent); opacity: 0.85; margin-bottom: 12px;
+  }
+  .poem-title {
+    font-family: 'Outfit', sans-serif; font-weight: 700;
+    font-size: clamp(28px, 3.2vw, 44px); line-height: 1.05; letter-spacing: -0.5px;
+    margin-bottom: 14px; text-shadow: 0 0 40px rgba(var(--accent-rgb), 0.35);
+  }
+  .poem-sub { font-family: 'Patrick Hand', cursive; font-size: clamp(16px, 1.6vw, 20px); line-height: 1.4; color: rgba(255,255,255,0.7); }
+  .poem-body { width: 100%; max-width: 640px; }
+  .poem-movement { margin-bottom: 40px; }
+  .poem-movement:last-child { margin-bottom: 0; }
+  .movement-label {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 22px;
+    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
+    text-transform: uppercase; color: rgba(var(--accent-rgb), 0.85);
+  }
+  .movement-label::before, .movement-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.35), transparent);
+  }
+  .poem-line-block { margin-bottom: 22px; }
+  .poem-line-block:last-child { margin-bottom: 0; }
+  .poem-track {
+    display: block; font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--accent); opacity: 0.55; margin-bottom: 4px;
+  }
+  .poem-line {
+    font-family: 'Patrick Hand', cursive; font-size: clamp(21px, 2.1vw, 30px); line-height: 1.3;
+    color: var(--text, #fff); text-shadow: 0 0 26px rgba(var(--accent-rgb), 0.18);
+  }
+  @media (max-width: 720px) { .poem-section { padding: 40px 20px 70px; } }
+
+  /* Album notes — "The Making" + enriched tracklist (opt-in per album). */
+  .notes-section { position: relative; z-index: 4; max-width: 900px; margin: 0 auto; padding: 0 32px; }
+  .notes-label {
+    font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--accent); opacity: 0.85;
+    margin: 52px 0 18px; display: flex; align-items: center; gap: 12px;
+  }
+  .notes-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--accent-rgb),0.35), transparent); }
+  .making-copy p { font-family: 'Patrick Hand', cursive; font-size: clamp(17px, 1.7vw, 21px); line-height: 1.5; color: rgba(255,255,255,0.82); margin-bottom: 14px; max-width: 760px; }
+  .making-specs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .spec { display: flex; flex-direction: column; gap: 3px; padding: 10px 16px; border: 1px solid rgba(var(--accent-rgb),0.3); border-radius: 10px; background: rgba(var(--accent-rgb),0.05); }
+  .spec .sk { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .spec .sv { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: var(--accent); }
+  .trk { display: grid; grid-template-columns: 32px 1.1fr auto; grid-template-areas: "n t b" "n d d"; column-gap: 16px; row-gap: 2px; padding: 14px 6px; border-bottom: 1px solid rgba(255,255,255,0.07); align-items: baseline; }
+  .trk .trk-n { grid-area: n; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; color: rgba(var(--accent-rgb),0.55); }
+  .trk .trk-t { grid-area: t; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 19px; color: #fff; }
+  .trk .trk-bpm { grid-area: b; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--accent); border: 1px solid rgba(var(--accent-rgb),0.4); border-radius: 999px; padding: 3px 10px; white-space: nowrap; }
+  .trk .trk-desc { grid-area: d; font-family: 'Patrick Hand', cursive; font-size: 17px; line-height: 1.35; color: rgba(255,255,255,0.66); margin-top: 2px; }
+
+  /* Orbit system */
+  .orbit-system { position: relative; z-index: 4; animation: fadeup 0.6s 0.15s ease-out both; }
+  .planet {
+    position: absolute; display: block;
+    cursor: pointer; text-decoration: none; z-index: 6;
+    transition: transform 0.22s ease; transform-origin: center;
+  }
+  .planet:hover { transform: scale(1.25); }
+  .planet-icon {
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    transition: box-shadow 0.22s ease; flex-shrink: 0; background: rgba(3,3,8,0.85);
+  }
+  .planet-name {
+    position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%);
+    font-family: 'Space Mono', monospace; font-size: 8px;
+    white-space: nowrap; opacity: 0; transition: opacity 0.18s ease;
+    pointer-events: none; padding: 2px 5px; border-radius: 3px;
+    color: #fff; letter-spacing: 0.3px; max-width: 120px;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .planet:hover .planet-name { opacity: 1; }
+
+  .ring-track {
+    position: absolute; border-radius: 50%;
+    border: 1.5px solid transparent; pointer-events: none;
+  }
+  .ring-1 { animation: ring-1a 4s ease-in-out infinite; }
+  .ring-2 { animation: ring-2a 4s ease-in-out 1s infinite; }
+  .ring-3 { animation: ring-3a 4s ease-in-out 2s infinite; }
+  @keyframes ring-1a { 0%,100% { border-color: rgba(var(--accent-rgb),0.16); } 50% { border-color: rgba(var(--accent-rgb),0.4); } }
+  @keyframes ring-2a { 0%,100% { border-color: rgba(var(--accent-rgb),0.12); } 50% { border-color: rgba(var(--accent-rgb),0.34); } }
+  @keyframes ring-3a { 0%,100% { border-color: rgba(var(--accent-rgb),0.1); }  50% { border-color: rgba(var(--accent-rgb),0.3); } }
+
+  .vinyl-wrap { position: absolute; z-index: 4; animation: vspin 18s linear infinite; }
   @keyframes vspin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
-  /* lyrics */
-  .lyrics-section { position: relative; z-index: 4; padding: 40px 24px 80px; display: flex; flex-direction: column; align-items: center; }
-  .lyrics-divider {
-    width: 100%; max-width: 720px; display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
-    font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
-    color: rgba(var(--accent-rgb),0.6); text-transform: uppercase;
-  }
-  .lyrics-divider::before, .lyrics-divider::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb),0.3), transparent);
-  }
-  .lyrics-body {
-    max-width: 640px; width: 100%;
- font-family: 'Patrick Hand', cursive; 
-    font-size: clamp(20px, 1.8vw, 26px); line-height: 1.55;
-    color: var(--text-soft); text-align: center;
-    text-shadow: 0 0 18px rgba(var(--accent-rgb),0.18);
-    user-select: text;
-  }
-  .lyrics-body p { margin-bottom: 1.4em; }
-  .lyrics-body p:last-child { margin-bottom: 0; }
-  .lyrics-body .accent { color: var(--accent); }
   @media (prefers-reduced-motion: reduce) {
-    .vinyl-small, .listen-now .arrow { animation: none !important; }
+    .vinyl-wrap, .ring-1, .ring-2, .ring-3, .orbit-arrow, .left-panel, .orbit-system { animation: none !important; }
+    .planet { transition: none !important; }
   }
 
   @media (max-width: 760px) {
-    .hero { grid-template-columns: 1fr; padding: 80px 24px 40px; gap: 32px; }
-    .hero-left { order: 2; max-width: unset; }
-    .cover-stage { order: 1; }
-    .cover-wrap { width: min(88%, 420px); }
-    .vinyl-small { width: 120px; height: 120px; left: -38px; bottom: -38px; }
-    .pull-quote { font-size: 22px; }
-    .lyrics-section { padding: 20px 20px 60px; }
-    .lyrics-body { font-size: 19px; line-height: 1.5; }
+    .page { flex-direction: column; align-items: center; padding-top: 70px; }
+    .left-panel {
+      width: 100%; min-width: unset; max-width: unset; padding: 32px 24px 16px;
+      align-items: center; text-align: center; flex: unset;
+    }
+    .album-player-section { max-width: 480px; align-self: center; }
+    .hero { flex: unset; align-items: center; }
+    .meta-block { align-items: flex-start; width: 100%; max-width: 320px; }
+    .right-panel { width: 100%; padding: 0 0 28px; }
+    @keyframes arrow-nudge {
+      0%,100% { transform: translateY(0); opacity: 0.65; }
+      50% { transform: translateY(6px); opacity: 1; }
+    }
   }
 </style>
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MusicRecording",
-  "name": "F A F O",
-  "byArtist": {
-    "@type": "MusicGroup",
-    "name": "Auny",
-    "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI"
-  },
-  "datePublished": "2026-01-02",
-  "genre": "EDM · Lyrical · Alt-Pop",
-  "url": "https://www.auny.media/singles/fafo",
-  "sameAs": ["https://open.spotify.com/track/3Po9q6nVGurb60uOfVSFfi","https://music.apple.com/us/album/f-a-f-o/1866165504","https://distrokid.com/hyperfollow/auny1/f-a-f-o"],
-  "image": "https://www.auny.media/album-art/singles/fafo.jpg",
-  "recordingOf": {
-    "@type": "MusicComposition",
-    "name": "F A F O",
-    "lyrics": {
-      "@type": "CreativeWork",
-      "text": "I've got a fear of moving forward\nLike every step I take\nMight be a mistake\nAfraid the choice I make today\nLeads me to yesterday\nWarnings of heartbreak\nI stay aware\nScared of failing loudly\nAfraid of getting it wrong... again\n\nThey say you miss every shot you don't take\nDo you really know what you're missing\nIf you never try it?\n\nLetting go\nFunny how it feels like loss\nWhen it's really just control\nSlipping out my fingers\nLetting go\nYeah it messes with my head\nBut I'd rather face the fall\nThan live scared instead\nSo I let go\nmove forward\nI'll figure it out\nI will... F A F O\n\nThe decision is mine\nConsequences aren't leaders\nThey follow\nSo I will lead\n\nLetting go\nI'm done asking what if\nI'll take the risk\nAnd live with it\nSo I let go\nmove forward\nI'll figure it out\nI will... F A F O"
-    }
-  }
+  "@type": "MusicAlbum",
+  "name": "dreaMs (instrumental)",
+  "byArtist": { "@type": "MusicGroup", "name": "Auny", "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI" },
+  "datePublished": "2026-08-15",
+  "genre": "Electronic · Electronica / Downtempo · New Age",
+  "url": "https://www.auny.media/albums/dreams-instrumental",
+  "sameAs": ["https://distrokid.com/hyperfollow/auny1/dreams-instrumental"],
+  "image": "https://www.auny.media/album-art/dreams-instrumental.jpg",
+  "numTracks": 11,
+  "track": {"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Map","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Solo grand piano in deep shadow, garnet hibiscus over her eyes — the lost opening"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Don't Stop","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Restless acoustic guitar, dusty-blue tulips veiling her face, still turned away"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Reason","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Fragile glockenspiel, lily-of-the-valley over the eyes, searching for one reason"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"More","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Aching violin, deep violet iris veil, the deepest point of the shadow"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Buried","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Vintage synthesizer warming, funeral lilies and dead roses — the turn toward light"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Flinch","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Smoky saxophone, amber and rust dahlia, she begins to face forward"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Weight","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Weightless flute, dusky-mauve hellebore, the ground finally holding her"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"Before","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Steadying cello, pale snowdrop veil — Izzy’s reveal cover, the album’s quiet center"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Evolve","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"She commands the modular synth-bass, black-red snapdragon, palette breaking to fire"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Watch","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Driving Reese-bass machine, crimson-black ranunculus, chin lifted in defiance"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Believe","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Crystalline voice-machine, white-gold lotus, first light — the arc breaks to dawn"}}]}
 }
 </script>
 <script type="application/ld+json">
@@ -724,8 +743,8 @@ picture { display: contents; }
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.auny.media/" },
-    { "@type": "ListItem", "position": 2, "name": "Singles", "item": "https://www.auny.media/singles" },
-    { "@type": "ListItem", "position": 3, "name": "F A F O", "item": "https://www.auny.media/singles/fafo" }
+    { "@type": "ListItem", "position": 2, "name": "Albums", "item": "https://www.auny.media/albums" },
+    { "@type": "ListItem", "position": 3, "name": "dreaMs (instrumental)", "item": "https://www.auny.media/albums/dreams-instrumental" }
   ]
 }
 </script>
@@ -1051,182 +1070,79 @@ picture { display: contents; }
 </script>
 
 
-<div class="bg-blob" style="width:380px;height:380px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.16), transparent);top:-100px;left:30%;"></div>
-<div class="bg-blob" style="width:280px;height:280px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.12), transparent);bottom:5%;right:5%;"></div>
-
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-label">✦ &nbsp; single</p>
-    <h1 class="hero-title">F A F O</h1>
-    <p class="hero-byline">Auny &nbsp;·&nbsp; 2026</p>
-
-    <p class="pull-quote">The decision is mine. Consequences aren't leaders — they follow.</p>
-
-    <div class="meta-block">
-      <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">January 2, 2026</span></div>
-      <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">EDM · Lyrical · Alt-Pop</span></div>
-      <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
-    </div>
-
-
-    <div class="listen-row">
-      <a class="listen-now" href="https://open.spotify.com/track/3Po9q6nVGurb60uOfVSFfi" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-      <span class="listen-dot"></span>
-      <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/f-a-f-o" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
-    </div>
-    <div class="platform-row"><span class="pr-label">also on</span>
-          <a class="platform-pill" href="https://music.apple.com/us/album/f-a-f-o/1866165504" target="_blank" rel="noopener">Apple Music <span class="ext">↗</span></a>
-        </div>
-
-    <!-- Shared Spotify player. Renders a lightweight click-to-play facade (cover +
-     play button) instead of the ~2MB Spotify iframe; the iframe is injected
-     only when the visitor clicks. Variables:
-       track   "track" | "album"
-       3Po9q6nVGurb60uOfVSFfi     Spotify ID
-       F A F O  Track/album title (for a11y)
-       /album-art/singles/fafo-640.webp  cover image URL (facade background)
-       embed-wrap   "embed-wrap" for single, "embed-wrap album" for album
--->
-<div class="embed-wrap">
-  <div class="cassette-strip">
-    <span class="left"><span class="live-dot"></span>Now Playing</span>
-    <div class="reels"><span class="reel"></span><span class="reel"></span></div>
-  </div>
-  <button type="button" class="spotify-facade track"
-          data-embed="https://open.spotify.com/embed/track/3Po9q6nVGurb60uOfVSFfi?utm_source=auny_media&theme=0"
-          data-title="F A F O"
-          style="background-image:url('/album-art/singles/fafo-640.webp')"
-          aria-label="Preview F A F O on Spotify">
-    <span class="facade-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
-    <span class="facade-label">Preview on Spotify</span>
-  </button>
-  <p class="embed-note">hit play to preview · plays full on spotify</p>
+<div class="bg-art">
+  <div class="bg-blob" style="width:320px;height:320px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.18), transparent);top:-80px;left:-100px;"></div>
+  <div class="bg-blob" style="width:260px;height:260px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.12), transparent);top:30%;right:-100px;"></div>
+  <div class="bg-blob" style="width:240px;height:240px;background:radial-gradient(closest-side, rgba(var(--accent-rgb),0.1), transparent);bottom:10%;left:-80px;"></div>
 </div>
-<script>
-(function(){
-  if (window.__spotifyFacade) return; window.__spotifyFacade = true;
-  document.addEventListener('click', function(e){
-    var btn = e.target.closest('.spotify-facade'); if (!btn || btn.classList.contains('disabled')) return;
-    var f = document.createElement('iframe');
-    f.className = 'spotify-embed';
-    f.src = btn.getAttribute('data-embed');
-    f.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
-    f.setAttribute('title', 'Spotify player for ' + (btn.getAttribute('data-title') || ''));
-    btn.replaceWith(f);
-  });
-})();
-</script>
 
+<div class="page">
+  <div class="left-panel">
+    <div class="hero">
+      <p class="hero-label">✦ &nbsp; album · upcoming</p>
+      <p class="upcoming-banner"><span class="dot"></span> Coming August 15, 2026</p>
+      <h1 class="hero-name">dreaMs<br>(instrumental)</h1>
+      <p class="hero-subtitle">Auny &nbsp;·&nbsp; 2026</p>
 
-    
-  </div>
+      <p class="blurb">Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night.</p>
 
-  <div class="cover-stage">
-   <div class="cover-wrap">
-    <div class="cover-frame">
-      <picture><source type="image/avif" srcset="/album-art/singles/fafo-320.avif 320w, /album-art/singles/fafo-640.avif 640w" sizes="(max-width:760px) 80vw, 420px"><source type="image/webp" srcset="/album-art/singles/fafo-320.webp 320w, /album-art/singles/fafo-640.webp 640w" sizes="(max-width:760px) 80vw, 420px"><img src="/album-art/singles/fafo.jpg" alt="F A F O cover art by Auny" width="640" height="640" fetchpriority="high" decoding="async"></picture>
+      <div class="meta-block">
+        <div class="meta-row"><span class="meta-key">Tracks</span><span class="meta-val">11 songs</span></div>
+        <div class="meta-row"><span class="meta-key">Released</span><span class="meta-val">August 15, 2026</span></div>
+        <div class="meta-row"><span class="meta-key">Genre</span><span class="meta-val">Electronic · Electronica / Downtempo · New Age</span></div>
+        <div class="meta-row"><span class="meta-key">Label</span><span class="meta-val">AunySillyMe</span></div>
+      </div>
+
+      <div class="hero-listen">
+        <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/dreams-instrumental" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
+      </div>
+
+      <a class="companion-link" href="/albums/dreams"><span class="cl-tag">↔ companion</span><span class="cl-body">the vocal album · <strong>dreaMs</strong></span><span class="cl-arrow">→</span></a>
     </div>
-    <div class="vinyl-small" aria-hidden="true">
-      <svg viewBox="0 0 180 180" width="180" height="180">
-        <defs>
-          <clipPath id="vinyl-label-fafo">
-            <circle cx="90" cy="90" r="40"/>
-          </clipPath>
-        </defs>
-        <circle cx="90" cy="90" r="88" fill="#050510"/>
-        <circle cx="90" cy="90" r="84" fill="none" stroke="#0d1428" stroke-width="1.6"/>
-        <circle cx="90" cy="90" r="78" fill="none" stroke="#0a1224" stroke-width="1"/>
-        <circle cx="90" cy="90" r="72" fill="none" stroke="#0d1428" stroke-width="1.6"/>
-        <circle cx="90" cy="90" r="66" fill="none" stroke="#0a1224" stroke-width="1"/>
-        <circle cx="90" cy="90" r="60" fill="none" stroke="#D8623A" stroke-width="0.8" opacity="0.35"/>
-        <image href="/album-art/singles/fafo.jpg" x="50" y="50" width="80" height="80" clip-path="url(#vinyl-label-fafo)"/>
-        <circle cx="90" cy="90" r="40" fill="none" stroke="#D8623A" stroke-width="1.2" opacity="0.55"/>
-        <circle cx="90" cy="90" r="3.5" fill="#050510"/>
-        <circle cx="90" cy="90" r="1.6" fill="#D8623A" opacity="0.9"/>
-      </svg>
+
+    <section class="album-player-section" aria-label="Album coming soon">
+      <p class="album-player-label">✦ &nbsp; coming soon</p>
+      <div class="preview-soon">
+        <p class="ps-label">Releases August 15, 2026 · 12:00 AM</p>
+        <p class="ps-headline">11-track instrumental album. Pre-save now — drops on every platform on release day.</p>
+        <a class="ps-cta" href="https://distrokid.com/hyperfollow/auny1/dreams-instrumental" target="_blank" rel="noopener">pre-save · stream on all platforms ↗</a>
+      </div>
+    </section>
+  </div>
+
+  <div class="right-panel">
+    <div class="orbit-system" id="orbit"></div>
+  </div>
+</div>
+
+
+
+<section class="notes-section" aria-label="How the album was made">
+    <p class="notes-label">the making</p>
+    <div class="making-copy">
+      <p>The instrumental twin of dreaMs, and its opposite in the frame. The vocal album personified each instrument as the lone figure; here a real one plays them — Izzy, a lyrical genius and instrument savant who lives inside the music, perpetually melancholy, her face veiled by the song’s flower.</p>
+      <p>She carries the album’s arc on her body. Lost across the first four tracks, she plays alone in deep shadow, half-turned away. Anchored through the middle, she steadies and begins to face forward as the palette warms. Empowered across the last three, she commands the machines, the color breaking from fire to a white-gold dawn.</p>
+      <p>Same Nocturne register and per-track flower map as the vocal album, so the two read as siblings on a shelf. The vocal record lands the story; this one re-serves the same eleven for focus, study, sync, and the background of a long night.</p>
+      <div class="making-specs"><span class="spec"><span class="sk">Character</span><span class="sv">Izzy</span></span><span class="spec"><span class="sk">Register</span><span class="sv">Nocturne</span></span><span class="spec"><span class="sk">Arc</span><span class="sv">lost → dawn</span></span></div>
     </div>
-   </div>
-  </div>
-</section>
+  </section>
 
-<section class="lyrics-section" aria-label="Lyrics">
-  <div class="lyrics-divider">lyrics</div>
-  <article class="lyrics-body">
-    <p>I've got a fear of moving forward<br>Like every step I take<br>Might be a mistake<br>Afraid the choice I make today<br>Leads me to yesterday<br>Warnings of heartbreak<br>I stay aware<br>Scared of failing loudly<br>Afraid of getting it wrong... again</p>
-    <p>They say you miss every shot you don't take<br>Do you really know what you're missing<br>If you never try it?</p>
-    <p>Letting go<br>Funny how it feels like loss<br>When it's really just control<br>Slipping out my fingers<br>Letting go<br>Yeah it messes with my head<br>But I'd rather face the fall<br>Than live scared instead<br>So I let go<br>move forward<br>I'll figure it out<br>I will... F A F O</p>
-    <p>The decision is mine<br>Consequences aren't leaders<br>They follow<br>So I will lead</p>
-    <p>Letting go<br>I'm done asking what if<br>I'll take the risk<br>And live with it<br>So I let go<br>move forward<br>I'll figure it out<br>I will... F A F O</p>
-  </article>
-</section>
-
-<!-- "More recent releases" strip — rendered at the bottom of every single
-     page above the lyrics' closing. Shows the N newest singles excluding
-     the current one. Variables:
-       more recent releases →    label text (e.g. "more recent releases →")
-           <a class="mini-card" href="/singles/mechanical-screen">
-      <div class="cover"><img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Mechanical Screen</div>
-        <div class="mini-card-meta">May 29, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/cyan">
-      <div class="cover"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">CYAN</div>
-        <div class="mini-card-meta">May 24, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/let-go">
-      <div class="cover"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Let Go</div>
-        <div class="mini-card-meta">May 16, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/pink">
-      <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">PINK</div>
-        <div class="mini-card-meta">May 4, 2026</div>
-      </div>
-    </a>      pre-rendered mini-card markup
--->
-<section class="recent-strip" aria-label="More recent releases">
-  <p class="recent-strip-label">more recent releases →</p>
-  <div class="recent-strip-row">
-    <a class="mini-card" href="/singles/mechanical-screen">
-      <div class="cover"><img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Mechanical Screen</div>
-        <div class="mini-card-meta">May 29, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/cyan">
-      <div class="cover"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">CYAN</div>
-        <div class="mini-card-meta">May 24, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/let-go">
-      <div class="cover"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Let Go</div>
-        <div class="mini-card-meta">May 16, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/pink">
-      <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">PINK</div>
-        <div class="mini-card-meta">May 4, 2026</div>
-      </div>
-    </a>
-  </div>
-</section>
-
+<section class="notes-section" aria-label="Tracklist">
+    <p class="notes-label">tracklist · 11 tracks</p>
+    <div class="tracklist">
+    <div class="trk"><span class="trk-n">01</span><span class="trk-t">Map</span><span class="trk-desc">Solo grand piano in deep shadow, garnet hibiscus over her eyes — the lost opening</span></div>
+    <div class="trk"><span class="trk-n">02</span><span class="trk-t">Don't Stop</span><span class="trk-desc">Restless acoustic guitar, dusty-blue tulips veiling her face, still turned away</span></div>
+    <div class="trk"><span class="trk-n">03</span><span class="trk-t">Reason</span><span class="trk-desc">Fragile glockenspiel, lily-of-the-valley over the eyes, searching for one reason</span></div>
+    <div class="trk"><span class="trk-n">04</span><span class="trk-t">More</span><span class="trk-desc">Aching violin, deep violet iris veil, the deepest point of the shadow</span></div>
+    <div class="trk"><span class="trk-n">05</span><span class="trk-t">Buried</span><span class="trk-desc">Vintage synthesizer warming, funeral lilies and dead roses — the turn toward light</span></div>
+    <div class="trk"><span class="trk-n">06</span><span class="trk-t">Flinch</span><span class="trk-desc">Smoky saxophone, amber and rust dahlia, she begins to face forward</span></div>
+    <div class="trk"><span class="trk-n">07</span><span class="trk-t">Weight</span><span class="trk-desc">Weightless flute, dusky-mauve hellebore, the ground finally holding her</span></div>
+    <div class="trk"><span class="trk-n">08</span><span class="trk-t">Before</span><span class="trk-desc">Steadying cello, pale snowdrop veil — Izzy’s reveal cover, the album’s quiet center</span></div>
+    <div class="trk"><span class="trk-n">09</span><span class="trk-t">Evolve</span><span class="trk-desc">She commands the modular synth-bass, black-red snapdragon, palette breaking to fire</span></div>
+    <div class="trk"><span class="trk-n">10</span><span class="trk-t">Watch</span><span class="trk-desc">Driving Reese-bass machine, crimson-black ranunculus, chin lifted in defiance</span></div>
+    <div class="trk"><span class="trk-n">11</span><span class="trk-t">Believe</span><span class="trk-desc">Crystalline voice-machine, white-gold lotus, first light — the arc breaks to dawn</span></div>
+    </div>
+  </section>
 
 <!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
 <form class="signup" id="signup-form" novalidate>
@@ -1301,5 +1217,131 @@ picture { display: contents; }
 </script>
 
 
+<script>
+(function () {
+  var RINGS = [[{"num":1,"name":"Map","movement":"Lost"},{"num":2,"name":"Don't Stop","movement":"Lost"},{"num":3,"name":"Reason","movement":"Lost"},{"num":4,"name":"More","movement":"Lost"}],[{"num":5,"name":"Buried","movement":"Anchor"},{"num":6,"name":"Flinch","movement":"Anchor"},{"num":7,"name":"Weight","movement":"Anchor"},{"num":8,"name":"Before","movement":"Anchor"}],[{"num":9,"name":"Evolve","movement":"Empowered"},{"num":10,"name":"Watch","movement":"Empowered"},{"num":11,"name":"Believe","movement":"Empowered"}]];
+  var ALBUM_URL = 'https://open.spotify.com/album/';
+  var ALBUM_ART = '/album-art/dreams-instrumental.jpg';
+  var ACCENTS = ["#6C4FB0","#A17BE0","#E8C36B"];
+
+  var isMobile = window.innerWidth < 760;
+  var vw = isMobile ? window.innerWidth : window.innerWidth * 0.68;
+  var vh = window.innerHeight - 64;
+  var S = Math.max(340, Math.min(820, vw - 24, vh - 40));
+  var ICON = Math.max(30, Math.round(S * 0.078));
+  var HALF = Math.round(ICON / 2);
+  var radii = RINGS.length === 2
+    ? [Math.round(S * 0.24), Math.round(S * 0.44)]
+    : [Math.round(S * 0.18), Math.round(S * 0.33), Math.round(S * 0.47)];
+  var W = (radii[radii.length - 1] + HALF) * 2 + 8;
+  var CX = W / 2, CY = W / 2;
+
+  var orbit = document.getElementById('orbit');
+  orbit.style.width = W + 'px';
+  orbit.style.height = W + 'px';
+  orbit.style.position = 'relative';
+
+  function makeRing(r, cls) {
+    var d = document.createElement('div');
+    d.className = 'ring-track ' + cls;
+    d.style.width = (r * 2) + 'px';
+    d.style.height = (r * 2) + 'px';
+    d.style.left = (CX - r) + 'px';
+    d.style.top = (CY - r) + 'px';
+    orbit.appendChild(d);
+  }
+  for (var k = 0; k < radii.length; k++) makeRing(radii[k], 'ring-' + (k + 1));
+
+  // Spinning vinyl
+  var vsz = Math.round(S * 0.16);
+  var vWrap = document.createElement('div');
+  vWrap.className = 'vinyl-wrap';
+  vWrap.style.cssText = 'width:' + vsz + 'px;height:' + vsz + 'px;margin-left:' + (-(vsz/2)) + 'px;margin-top:' + (-(vsz/2)) + 'px;top:50%;left:50%;';
+  vWrap.innerHTML = '<svg viewBox="0 0 110 110" width="' + vsz + '" height="' + vsz + '">'
+    + '<circle cx="55" cy="55" r="53" fill="#050510"/>'
+    + '<circle cx="55" cy="55" r="51" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="47" fill="none" stroke="#091020" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="43" fill="none" stroke="#0d1428" stroke-width="1.5"/>'
+    + '<circle cx="55" cy="55" r="39" fill="none" stroke="#091020" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="35" fill="none" stroke="#0d1428" stroke-width="1"/>'
+    + '<circle cx="55" cy="55" r="30" fill="none" stroke="#A17BE0" stroke-width="0.8" opacity="0.35"/>'
+    + '<circle cx="55" cy="55" r="24" fill="#050510"/>'
+    + '<circle cx="55" cy="55" r="22" fill="none" stroke="#A17BE0" stroke-width="1.5" opacity="0.7"/>'
+    + '<circle cx="55" cy="55" r="3" fill="#A17BE0" opacity="0.8"/>'
+    + '</svg>';
+  orbit.appendChild(vWrap);
+
+  // Non-spinning album cover at center
+  var lblSize = Math.round(vsz * 0.58);
+  var lblWrap = document.createElement('a');
+  lblWrap.href = ALBUM_URL;
+  lblWrap.target = '_blank';
+  lblWrap.rel = 'noopener';
+  lblWrap.setAttribute('aria-label', 'dreaMs (instrumental) — open full album on Spotify');
+  lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(var(--accent-rgb),0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
+  lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="dreaMs (instrumental) album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
+  orbit.appendChild(lblWrap);
+
+  // Planet factory
+  function makePlanet(p, ringColor) {
+    var a = document.createElement('a');
+    a.href = 'https://open.spotify.com/track/' + p.id;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'planet';
+    a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    var numStr = (p.num < 10 ? '0' : '') + p.num;
+    var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
+      + '<text x="14" y="19" text-anchor="middle" font-family="Space Mono,monospace" font-size="11" font-weight="700" fill="' + ringColor + '" opacity="0.92">' + numStr + '</text>'
+      + '</svg>';
+    a.innerHTML =
+      '<div class="planet-icon" style="width:' + ICON + 'px;height:' + ICON + 'px;border:1.5px solid ' + ringColor + ';box-shadow:0 0 12px ' + ringColor + '55,inset 0 0 18px ' + ringColor + '28;">' + iconSvg + '</div>'
+      + '<span class="planet-name" style="color:' + ringColor + ';">' + p.name + '</span>';
+    orbit.appendChild(a);
+    return a;
+  }
+
+  var els = RINGS.map(function (ring, i) {
+    var color = ACCENTS[Math.min(i, ACCENTS.length - 1)];
+    return ring.map(function (p) { return makePlanet(p, color); });
+  });
+
+  // Animation
+  var phases = RINGS.map(function (_, i) { return (i * Math.PI) / 5; });
+  var dirs = [-1, 1, -1].slice(0, RINGS.length);
+  var periods = [40, 55, 48].slice(0, RINGS.length);
+  var last = null;
+
+  // Only animate while the orbital is on-screen and the tab is visible —
+  // a 60fps DOM-positioning loop is the page's biggest idle CPU cost.
+  var running = false, onScreen = true, rafId = 0;
+  function tick(ts) {
+    if (!last) last = ts;
+    var dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+    for (var i = 0; i < RINGS.length; i++) {
+      phases[i] += dirs[i] * dt * (2 * Math.PI / periods[i]);
+      var R = radii[i];
+      var ring = RINGS[i];
+      for (var j = 0; j < ring.length; j++) {
+        var a = phases[i] + (j / ring.length) * 2 * Math.PI;
+        els[i][j].style.left = (CX + R * Math.cos(a) - HALF) + 'px';
+        els[i][j].style.top  = (CY + R * Math.sin(a) - HALF) + 'px';
+      }
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+  function start() { if (!running && onScreen && !document.hidden) { running = true; last = null; rafId = requestAnimationFrame(tick); } }
+  function stop()  { running = false; if (rafId) cancelAnimationFrame(rafId); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onScreen = es[0].isIntersecting;
+      onScreen ? start() : stop();
+    }, { rootMargin: '120px' }).observe(orbit);
+  }
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  start();
+})();
+</script>
 </body>
 </html>
