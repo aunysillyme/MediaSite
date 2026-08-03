@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
 import { SINGLE_NOTES } from '../src/data/singles-notes.js';
-import { navFor, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
+import { navFor, esc, jsonLd, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -39,7 +39,7 @@ function lyricsToStanzas(text, anchor) {
 }
 
 function lyricsToJsonText(text) {
-  return JSON.stringify(text);
+  return jsonLd(text);
 }
 
 // Per-single background hue rotation off the source PNG (which is already blue-violet)
@@ -98,7 +98,7 @@ function renderSingle(single) {
     ? `\n  "additionalProperty": { "@type": "PropertyValue", "name": "Tempo", "value": "${notes.bpm} BPM" },`
     : '';
   const noteSchema = notes.note
-    ? `\n  "description": ${JSON.stringify(notes.note)},`
+    ? `\n  "description": ${jsonLd(notes.note)},`
     : '';
   const replacements = {
     TEMPO_META_ROW: tempoMetaRow,
@@ -118,7 +118,7 @@ function renderSingle(single) {
     SPOTIFY_TRACK_ID: single.spotifyTrackId,
     HYPERFOLLOW_SLUG: single.hyperfollowSlug,
     PLATFORM_ROW: platformRowFor(single),
-    SAMEAS_JSONLD: JSON.stringify([
+    SAMEAS_JSONLD: jsonLd([
       `https://open.spotify.com/track/${single.spotifyTrackId}`,
       ...platformUrls(single),
       `https://distrokid.com/hyperfollow/auny1/${single.hyperfollowSlug}`,
@@ -186,7 +186,7 @@ function renderList() {
     ...series.filter((s) => s.slug !== 'pink').map((s) => cardHtml(s, { badgeText: s.emoji })),
   ].join('\n');
   const allCards = SINGLES.map((s) => cardHtml(s)).join('\n');
-  const jsonLd = JSON.stringify({
+  const listJsonLd = jsonLd({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     'name': 'Singles — Auny',
@@ -217,7 +217,7 @@ function renderList() {
     .replaceAll('{{SERIES_CARDS}}', seriesCards)
     .replaceAll('{{ALL_CARDS}}', allCards)
     .replaceAll('{{TOTAL_SINGLES}}', String(SINGLES.length))
-    .replaceAll('{{LIST_JSONLD}}', jsonLd)
+    .replaceAll('{{LIST_JSONLD}}', listJsonLd)
     .replaceAll('{{NAV}}', navFor('singles'))
     .replaceAll('{{NAV_CSS}}', NAV_CSS)
     .replaceAll('{{SERIES_CARD_CSS}}', SERIES_CARD_CSS)

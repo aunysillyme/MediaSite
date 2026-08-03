@@ -11,7 +11,6 @@
     "build:albums": "node scripts/build-albums.mjs",
     "build:home": "node scripts/build-home.mjs",
     "build:sitemap": "node scripts/build-sitemap.mjs",
-    "stats:fetch": "node scripts/update-stats.mjs",
     "preview": "vite preview",
     "build:images": "node scripts/optimize-images.mjs",
     "build:poetry": "node scripts/build-poetry.mjs"

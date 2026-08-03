@@ -72,7 +72,7 @@ export function platformRowFor(release) {
   const p = release.platforms || {};
   const pills = PLATFORM_LABELS
     .filter(([key]) => p[key])
-    .map(([key, label]) => `<a class="platform-pill" href="${p[key]}" target="_blank" rel="noopener">${label} <span class="ext">↗</span></a>`);
+    .map(([key, label]) => `<a class="platform-pill" href="${esc(p[key])}" target="_blank" rel="noopener">${label} <span class="ext">↗</span></a>`);
   if (!pills.length) return '';
   return `<div class="platform-row"><span class="pr-label">also on</span>\n          ${pills.join('\n          ')}\n        </div>`;
 }
@@ -176,8 +176,33 @@ export function navFor(section) {
   );
 }
 
+// HTML-escape for text nodes and attribute values. Escapes the single quote too,
+// because some templates use single-quoted attribute syntax (e.g. the player
+// facade's style="background-image:url('...')").
 export function esc(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Serialize a value for embedding inside a <script type="application/ld+json">
+// block. Plain JSON.stringify is NOT safe here: it leaves `<` untouched, so any
+// string containing "</script>" closes the element early and everything after it
+// is parsed as HTML. It also leaves U+2028/U+2029 raw, which are literal line
+// terminators to a JS parser.
+//
+// The < form is still valid JSON and still parses back to the same string,
+// so structured-data consumers see the original text.
+export function jsonLd(value) {
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
 }
 
 // Returns "/album-art/singles/<slug>.jpg" if it exists, else falls back

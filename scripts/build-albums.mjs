@@ -3,7 +3,7 @@
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
 import { ALBUM_NOTES } from '../src/data/album-notes.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
+import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
 import { join } from 'node:path';
 
 // "The Making" + enriched tracklist — rendered only for albums with a notes entry.
@@ -104,8 +104,15 @@ function renderAlbum(album) {
   // Teaser = shows the disabled album player (not a Spotify embed). A teaser may
   // be dateless ("Coming Soon", no CTA) OR dated + submitted, in which case it
   // shows "Coming <date>" and a live pre-save CTA once hyperfollowSlug is set.
-  const teaser = !!album.teaser;
-  const comingLabel = album.releaseDate ? `Coming ${esc(album.releaseDisplay)}` : esc(album.releaseDisplay);
+  // Only honored while the album is genuinely still upcoming — a stale flag must
+  // not keep a released album showing the disabled player. Matches build-home.
+  const teaser = !!album.teaser && (album.releaseDate ? album.releaseDate > today : true);
+  // Never say "Coming" about a date that has already passed.
+  const comingLabel = !album.releaseDate
+    ? esc(album.releaseDisplay)
+    : album.releaseDate > today
+      ? `Coming ${esc(album.releaseDisplay)}`
+      : `Out now · ${esc(album.releaseDisplay)}`;
   const kindWord = album.vocal ? 'vocal' : 'instrumental';
   const heroListenBlock = teaser
     ? (album.hyperfollowSlug
@@ -145,7 +152,7 @@ function renderAlbum(album) {
     : '';
   const heroLabelSuffix = upcoming ? ' · upcoming' : '';
   const notes = ALBUM_NOTES[album.slug];
-  const tracksJsonLd = JSON.stringify({
+  const tracksJsonLd = jsonLd({
     '@type': 'ItemList',
     numberOfItems: album.tracks.length,
     itemListElement: album.tracks.map((t, i) => {
@@ -183,7 +190,7 @@ function renderAlbum(album) {
     NUM_TRACKS_ARTICLE: /^(8|11|18)$/.test(String(album.tracks.length)) ? 'an' : 'a',
     ALBUM_KIND: album.vocal ? 'vocal' : 'instrumental',
     TRACKS_JSONLD: tracksJsonLd,
-    SAMEAS_JSONLD: JSON.stringify([
+    SAMEAS_JSONLD: jsonLd([
       album.spotifyAlbumId ? `https://open.spotify.com/album/${album.spotifyAlbumId}` : null,
       ...platformUrls(album),
       album.hyperfollowSlug ? `https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}` : null,
@@ -192,8 +199,8 @@ function renderAlbum(album) {
     ACCENT_RGB: album.accent.rgb,
     BG_HUE: String(album.bgHue ?? 200),
     BG_COLOR: '#030308',
-    RINGS_JSON: JSON.stringify(rings),
-    PALETTE_JSON: JSON.stringify(palette),
+    RINGS_JSON: jsonLd(rings),
+    PALETTE_JSON: jsonLd(palette),
     NAV: navFor('albums'),
     NAV_CSS: NAV_CSS,
     PLAYER_CSS: PLAYER_CSS,
@@ -240,7 +247,7 @@ function cardHtml(album) {
 }
 
 function listJsonLd() {
-  return JSON.stringify({
+  return jsonLd({
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     'name': 'Albums — Auny',

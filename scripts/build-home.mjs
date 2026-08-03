@@ -12,10 +12,15 @@ import { dirname } from 'node:path';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const HOME_TPL = tpl('home.html');
 
-// Monthly Spotify listeners — read from src/data/stats.json, which is auto-updated
-// weekly by .github/workflows/update-stats.yml (scrapes Spotify's Pathfinder API).
+// Monthly Spotify listeners — read from src/data/stats.json, which is MAINTAINED
+// BY HAND. Update the number from Spotify for Artists when it's worth refreshing.
+//
+// The old weekly scraper (scripts/update-stats.mjs + a GitHub Action) was removed
+// 2026-08-02: it committed an unvalidated third-party value straight to main and
+// auto-deployed it. Album/single/track counts are NOT from here — those derive
+// from src/data/albums.js and singles.js and stay correct on their own.
 const STATS = JSON.parse(readFileSync(join(root, 'src/data/stats.json'), 'utf8'));
-const MONTHLY_LISTENERS = STATS.spotify.monthlyListeners.toLocaleString('en-US');
+const MONTHLY_LISTENERS = esc(Number(STATS.spotify.monthlyListeners).toLocaleString('en-US'));
 
 // Released-only counters: exclude upcoming albums/singles from portfolio stats
 // (pre-release tracks shouldn't inflate the "Tracks" count on the homepage).
@@ -25,15 +30,22 @@ const RELEASED_ALBUMS  = ALBUMS.filter((a) => !isUpcoming(a));
 const RELEASED_SINGLES = SINGLES.filter((s) => !isUpcoming(s));
 
 // Hero pick: promote a pre-release teaser when one exists (an album announced
-// but not yet on DistroKid), else feature the most recent RELEASED item. On
-// launch the teaser flag drops and the hero auto-reverts to the latest release.
-const teaserAlbum = ALBUMS.find((a) => a.teaser);
+// but not yet out), else feature the most recent RELEASED item.
+//
+// The teaser flag is only honored while the album is genuinely still upcoming.
+// Without this guard a stale `teaser: true` outranks everything forever, and the
+// homepage keeps advertising a released album as "Coming <date in the past>"
+// with a dead pre-save CTA — on release day, when the traffic actually matters.
+// Now the hero self-corrects on the first build after release, exactly like the
+// album page does, instead of depending on someone remembering to unset a flag.
+const isStillUpcoming = (a) => a.releaseDate ? a.releaseDate > TODAY_ISO : true;
+const teaserAlbum = ALBUMS.find((a) => a.teaser && isStillUpcoming(a));
 const relAlbum = RELEASED_ALBUMS[0];
 const relSingle = RELEASED_SINGLES[0];
 const releasedIsAlbum = relAlbum.releaseDate >= relSingle.releaseDate;
 const latest = teaserAlbum || (releasedIsAlbum ? relAlbum : relSingle);
 const latestIsAlbum = !!teaserAlbum || releasedIsAlbum;
-const latestTeaser = !!latest.teaser;
+const latestTeaser = !!teaserAlbum;
 const latestUrl = latestIsAlbum ? `/albums/${latest.slug}` : `/singles/${latest.slug}`;
 const latestCover = latestIsAlbum ? `/album-art/${latest.slug}.jpg` : singleCoverPath(latest.slug);
 const latestType = latestIsAlbum ? 'Album' : 'Single';
@@ -51,7 +63,13 @@ const latestUpcoming = latestTeaser || !!latest.upcoming || latest.releaseDate >
 // Teaser dateless → "Coming Soon" + view-album link. Teaser dated (submitted)
 // → "Coming [date]" + pre-save. Non-teaser upcoming → "Coming [date]" + pre-save.
 // Released → listen + stream.
-const teaserComing = latest.releaseDate ? `Coming ${esc(latest.releaseDisplay)}` : 'Coming Soon';
+// Never say "Coming" about a date that has already passed — that state is
+// reachable when a release date lands before its Spotify ID does.
+const teaserComing = !latest.releaseDate
+  ? 'Coming Soon'
+  : latest.releaseDate > today
+    ? `Coming ${esc(latest.releaseDisplay)}`
+    : `Out now · ${esc(latest.releaseDisplay)}`;
 const latestTagBlock = latestUpcoming
   ? `<p class="featured-tag upcoming"><span class="dot"></span>${teaserComing}</p>`
   : `<p class="featured-tag">${esc(latestType)} · ${esc(latest.releaseDisplay)}</p>`;
