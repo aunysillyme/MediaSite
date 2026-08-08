@@ -64,11 +64,11 @@ const latestUpcoming = !isReleased(latest, today);
 // Released → listen + stream.
 // Never say "Coming" about a date that has already passed — that state is
 // reachable when a release date lands before its Spotify ID does.
-const teaserComing = !latest.releaseDate
-  ? 'Coming Soon'
-  : latest.releaseDate > today
-    ? `Coming ${esc(latest.releaseDisplay)}`
-    : `Out now · ${esc(latest.releaseDisplay)}`;
+// Same rule as the album page: this only renders on an upcoming hero, so it
+// must never say "Out now". Derived from state, not re-derived from the date.
+const teaserComing = latest.releaseDate && latest.releaseDate > today
+  ? `Coming ${esc(latest.releaseDisplay)}`
+  : 'Coming Soon';
 const latestTagBlock = latestUpcoming
   ? `<p class="featured-tag upcoming"><span class="dot"></span>${teaserComing}</p>`
   : `<p class="featured-tag">${esc(latestType)} · ${esc(latest.releaseDisplay)}</p>`;

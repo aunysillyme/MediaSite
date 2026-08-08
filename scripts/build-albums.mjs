@@ -105,12 +105,13 @@ function renderAlbum(album) {
   // be dateless ("Coming Soon", no CTA) OR dated + submitted, in which case it
   // shows "Coming <date>" and a live pre-save CTA once hyperfollowSlug is set.
   const teaser = isLiveTeaser(album, today);
-  // Never say "Coming" about a date that has already passed.
-  const comingLabel = !album.releaseDate
-    ? esc(album.releaseDisplay)
-    : album.releaseDate > today
-      ? `Coming ${esc(album.releaseDisplay)}`
-      : `Out now · ${esc(album.releaseDisplay)}`;
+  // Derived from STATE, not from the date. This label only ever renders on an
+  // upcoming page, so it must never say "Out now" — that was reachable when the
+  // date had passed but the release was still UNRELEASED (upcoming flag, or an
+  // empty tracklist), and it contradicted the rest of the page.
+  const comingLabel = album.releaseDate && album.releaseDate > today
+    ? `Coming ${esc(album.releaseDisplay)}`
+    : 'Coming Soon';
   const kindWord = album.vocal ? 'vocal' : 'instrumental';
   // Pre-order is a PURCHASE, not a pre-save, and it is the only pre-release
   // action that produces revenue. iTunes downloads are the single largest
