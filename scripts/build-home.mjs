@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture, todayISO, isReleased, isLiveTeaser, pendingIds } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -24,22 +24,22 @@ const MONTHLY_LISTENERS = esc(Number(STATS.spotify.monthlyListeners).toLocaleStr
 
 // Released-only counters: exclude upcoming albums/singles from portfolio stats
 // (pre-release tracks shouldn't inflate the "Tracks" count on the homepage).
-const TODAY_ISO = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
-const isUpcoming = (item) => !!item.upcoming || item.releaseDate > TODAY_ISO;
-const RELEASED_ALBUMS  = ALBUMS.filter((a) => !isUpcoming(a));
-const RELEASED_SINGLES = SINGLES.filter((s) => !isUpcoming(s));
+// These now use _lib's single source of truth, which also requires the Spotify
+// IDs to exist — previously this keyed off the date alone, so on release day
+// with the IDs unfilled the homepage counted an album the album page itself was
+// still calling "coming soon". See AUN-693.
+const TODAY_ISO = todayISO();
+const RELEASED_ALBUMS  = ALBUMS.filter((a) => isReleased(a, TODAY_ISO));
+const RELEASED_SINGLES = SINGLES.filter((s) => isReleased(s, TODAY_ISO));
 
 // Hero pick: promote a pre-release teaser when one exists (an album announced
 // but not yet out), else feature the most recent RELEASED item.
 //
-// The teaser flag is only honored while the album is genuinely still upcoming.
-// Without this guard a stale `teaser: true` outranks everything forever, and the
-// homepage keeps advertising a released album as "Coming <date in the past>"
-// with a dead pre-save CTA — on release day, when the traffic actually matters.
-// Now the hero self-corrects on the first build after release, exactly like the
-// album page does, instead of depending on someone remembering to unset a flag.
-const isStillUpcoming = (a) => a.releaseDate ? a.releaseDate > TODAY_ISO : true;
-const teaserAlbum = ALBUMS.find((a) => a.teaser && isStillUpcoming(a));
+// The teaser flag is only honored while the album is genuinely still upcoming,
+// so the hero self-corrects on the first build after release instead of
+// depending on someone remembering to unset a flag. Shared with the album page
+// and the /albums card via _lib, so all three cannot drift apart again.
+const teaserAlbum = ALBUMS.find((a) => isLiveTeaser(a, TODAY_ISO));
 const relAlbum = RELEASED_ALBUMS[0];
 const relSingle = RELEASED_SINGLES[0];
 const releasedIsAlbum = relAlbum.releaseDate >= relSingle.releaseDate;
@@ -57,9 +57,8 @@ const latestBlurb = latest.blurb || latest.themes || latest.anchorLyric;
 // Falls back to the artist's default brand accent if the release lacks one.
 const BRAND_ACCENT = { color: '#1E90FF', rgb: '30,144,255' };
 const latestAccent = latest.accent || BRAND_ACCENT;
-const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
-const latestUpcoming = latestTeaser || !!latest.upcoming || latest.releaseDate > today
-  || (latestIsAlbum ? !latest.spotifyAlbumId : !latest.spotifyTrackId);
+const today = TODAY_ISO;
+const latestUpcoming = !isReleased(latest, today);
 // Teaser dateless → "Coming Soon" + view-album link. Teaser dated (submitted)
 // → "Coming [date]" + pre-save. Non-teaser upcoming → "Coming [date]" + pre-save.
 // Released → listen + stream.
@@ -85,9 +84,11 @@ const latestListenRow = latestTeaser
   ? `<div class="listen-row">
           <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
         </div>`
-  : `<div class="listen-row">
+  // Same rule as the album page: no Spotify CTA until the id exists, because
+  // ".../album/" is a dead click. The all-platforms link carries it meanwhile.
+  : `<div class="listen-row">${(latestIsAlbum ? latest.spotifyAlbumId : latest.spotifyTrackId) ? `
           <a class="listen-now" href="${latestSpotifyUrl}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-          <span class="listen-dot"></span>
+          <span class="listen-dot"></span>` : ''}
           <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
         </div>`;
 
@@ -135,6 +136,13 @@ function miniPink() {
       </div>
     </a>`;
 }
+
+// Defence in depth. The homepage already fails SAFE without this — an INCOMPLETE
+// release is not `isReleased`, so it stays out of the counters and keeps the
+// pre-save CTA — but running `npm run build:home` on its own should still be
+// loud about a release whose IDs never got filled, not quietly correct.
+// Covers singles too, which build-singles has no pre-release handling for.
+pendingIds([...ALBUMS, ...SINGLES]);
 
 const html = render(HOME_TPL, {
   LATEST_URL: latestUrl,

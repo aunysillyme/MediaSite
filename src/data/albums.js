@@ -22,7 +22,16 @@ export const ALBUMS = [
     teaser: true,
     // Companion cross-link to the vocal twin (rendered as a sibling pill).
     companion: { slug: 'dreams', title: 'dreaMs', kind: 'vocal' },
-    platforms: {},
+    // Live iTunes pre-order (opened Aug 2). This is a PURCHASE, so it renders as
+    // its own CTA alongside the pre-save rather than as an "also on" pill — it is
+    // the only pre-release action that earns anything, and iTunes downloads are
+    // the largest single revenue line in the catalogue. Verified 2026-08-08:
+    // itunes.apple.com/lookup?id=6797426674 returns "dreaMs (Instrumental)",
+    // artist Auny (1866039713), 11 tracks, releaseDate 2026-08-15T07:00:00Z.
+    preorder: { store: 'iTunes', url: 'https://music.apple.com/us/album/dreams-instrumental/6797426674' },
+    platforms: {
+      appleMusic: 'https://music.apple.com/us/album/dreams-instrumental/6797426674',
+    },
     genre: 'Electronic · Electronica / Downtempo · New Age',
     blurb: 'Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night.',
     accent: { color: '#A17BE0', rgb: '161,123,224' },

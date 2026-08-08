@@ -1326,24 +1326,40 @@ picture { display: contents; }
   orbit.appendChild(vWrap);
 
   // Non-spinning album cover at center
+  // Same rule as the track nodes: no album id yet means no link, not a link to
+  // ".../album/". The cover still renders as the orbit centre.
+  var albumLinked = '0ucHKpYbov1yzO0PyWtyNf' !== '';
   var lblSize = Math.round(vsz * 0.58);
-  var lblWrap = document.createElement('a');
-  lblWrap.href = ALBUM_URL;
-  lblWrap.target = '_blank';
-  lblWrap.rel = 'noopener';
-  lblWrap.setAttribute('aria-label', 'Graveyard Echoes — open full album on Spotify');
+  var lblWrap = document.createElement(albumLinked ? 'a' : 'div');
+  if (albumLinked) {
+    lblWrap.href = ALBUM_URL;
+    lblWrap.target = '_blank';
+    lblWrap.rel = 'noopener';
+    lblWrap.setAttribute('aria-label', 'Graveyard Echoes — open full album on Spotify');
+  } else {
+    lblWrap.setAttribute('aria-label', 'Graveyard Echoes album cover');
+  }
   lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(var(--accent-rgb),0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
   lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="Graveyard Echoes album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
   orbit.appendChild(lblWrap);
 
   // Planet factory
   function makePlanet(p, ringColor) {
-    var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.className = 'planet';
-    a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    // A track with no Spotify id yet renders as a plain node — number and name,
+    // no link. Concatenating an empty id produced ".../track/" and a dead click:
+    // that is exactly how flatline shipped 19 dead links for two days in June.
+    // Track ids get populated after release; the page ships either way.
+    var linked = !!p.id;
+    var a = document.createElement(linked ? 'a' : 'div');
+    if (linked) {
+      a.href = 'https://open.spotify.com/track/' + p.id;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    } else {
+      a.setAttribute('aria-label', p.name + ' — link coming soon');
+    }
+    a.className = 'planet' + (linked ? '' : ' planet-unlinked');
     var numStr = (p.num < 10 ? '0' : '') + p.num;
     var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
       + '<text x="14" y="19" text-anchor="middle" font-family="Space Mono,monospace" font-size="11" font-weight="700" fill="' + ringColor + '" opacity="0.92">' + numStr + '</text>'

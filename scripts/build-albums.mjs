@@ -3,7 +3,7 @@
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
 import { ALBUM_NOTES } from '../src/data/album-notes.js';
-import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
+import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds } from './_lib.mjs';
 import { join } from 'node:path';
 
 // "The Making" + enriched tracklist — rendered only for albums with a notes entry.
@@ -97,16 +97,14 @@ function poemSectionFor(album) {
 function renderAlbum(album) {
   const rings = ringsFor(album.tracks);
   const palette = album.palette || [album.accent.color, album.accent.color, album.accent.color];
-  // Auto-flip from "coming soon" → "released" once the release date passes,
-  // so a build after midnight on release day swaps the page treatment.
-  const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
-  const upcoming = !!album.upcoming || album.releaseDate > today || !album.spotifyAlbumId;
+  // Release state comes from _lib's single source of truth. Do not re-derive it
+  // here — three surfaces disagreeing on this is exactly what AUN-693 fixed.
+  const today = todayISO();
+  const upcoming = isUpcomingFn(album, today);
   // Teaser = shows the disabled album player (not a Spotify embed). A teaser may
   // be dateless ("Coming Soon", no CTA) OR dated + submitted, in which case it
   // shows "Coming <date>" and a live pre-save CTA once hyperfollowSlug is set.
-  // Only honored while the album is genuinely still upcoming — a stale flag must
-  // not keep a released album showing the disabled player. Matches build-home.
-  const teaser = !!album.teaser && (album.releaseDate ? album.releaseDate > today : true);
+  const teaser = isLiveTeaser(album, today);
   // Never say "Coming" about a date that has already passed.
   const comingLabel = !album.releaseDate
     ? esc(album.releaseDisplay)
@@ -114,18 +112,38 @@ function renderAlbum(album) {
       ? `Coming ${esc(album.releaseDisplay)}`
       : `Out now · ${esc(album.releaseDisplay)}`;
   const kindWord = album.vocal ? 'vocal' : 'instrumental';
+  // Pre-order is a PURCHASE, not a pre-save, and it is the only pre-release
+  // action that produces revenue. iTunes downloads are the single largest
+  // revenue line in the catalogue, and the site had no buy surface at all, so a
+  // live pre-order gets its own CTA rather than being folded into the platform
+  // pills. Rendered only while upcoming — after release the normal listen/buy
+  // row takes over. Data-driven via `preorder: { store, url }` so this is not
+  // hardcoded to one shop.
+  const preorderCta = album.preorder
+    ? `\n        <a class="hero-accent" href="${esc(album.preorder.url)}" target="_blank" rel="noopener">pre-order on ${esc(album.preorder.store)} <span class="ext">↗</span></a>`
+    : '';
+  // Order mirrors the released state: the accent CTA leads, the pill sits under
+  // it. Pre-order is the accent because it is the only pre-release action that
+  // earns anything; pre-save is the secondary pill, exactly as "stream on all
+  // platforms" sits under "listen on spotify" after release.
+  const presaveCta = album.hyperfollowSlug
+    ? `\n        <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · follow on all platforms <span class="ext">↗</span></a>`
+    : '';
   const heroListenBlock = teaser
-    ? (album.hyperfollowSlug
-      ? `<div class="hero-listen">
-        <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · follow on all platforms <span class="ext">↗</span></a>
+    ? (album.hyperfollowSlug || album.preorder
+      ? `<div class="hero-listen">${preorderCta}${presaveCta}
       </div>`
       : '')
     : upcoming
-    ? `<div class="hero-listen">
+    ? `<div class="hero-listen">${preorderCta}
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
       </div>`
-    : `<div class="hero-listen">
-        <a class="hero-accent" href="https://open.spotify.com/album/${album.spotifyAlbumId}" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>
+    // Released. The Spotify CTA appears only once the album id exists — on
+    // release day it often does not yet, and linking to ".../album/" is a dead
+    // click. Until then the platform pills and the all-platforms link carry it,
+    // so the page still ships and still converts.
+    : `<div class="hero-listen">${album.spotifyAlbumId ? `
+        <a class="hero-accent" href="https://open.spotify.com/album/${esc(album.spotifyAlbumId)}" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>` : ''}
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
         ${platformRowFor(album)}
       </div>`;
@@ -143,9 +161,13 @@ function renderAlbum(album) {
         <a class="ps-cta" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms ↗</a>
       </div>
     </section>`
+    // Released. The embed needs a real album id — without one the iframe URL is
+    // ".../embed/album/?" and renders a Spotify error inside the page. Show the
+    // disabled facade until the id lands, then it becomes a live player on the
+    // next build with no template change.
     : `<section class="album-player-section" aria-label="Album preview player">
       <p class="album-player-label">✦ &nbsp; preview the album</p>
-      ${playerFor({ kind: 'album', id: album.spotifyAlbumId, title: album.title, cover: `/album-art/${album.slug}-640.webp` })}
+      ${playerFor({ kind: 'album', id: album.spotifyAlbumId || '', title: album.title, cover: `/album-art/${album.slug}-640.webp`, disabled: !album.spotifyAlbumId })}
     </section>`;
   const upcomingBanner = upcoming
     ? `<p class="upcoming-banner"><span class="dot"></span> ${comingLabel}</p>`
@@ -221,9 +243,12 @@ function renderAlbum(album) {
 }
 
 function cardHtml(album) {
-  const today = (process.env.BUILD_DATE || new Date().toISOString().slice(0, 10));
-  const isUpcoming = !!album.upcoming || album.releaseDate > today;
-  const isTeaser = !!album.teaser;
+  // Same single source as the detail page and the homepage. This card used to
+  // key off the date alone, and `isTeaser` had no date guard at all, so its
+  // badge would still read as a teaser after the album had shipped.
+  const today = todayISO();
+  const isUpcoming = isUpcomingFn(album, today);
+  const isTeaser = isLiveTeaser(album, today);
   const badge = isTeaser
     ? `<span class="badge upcoming"><span class="dot"></span>${esc(album.releaseDisplay)}</span>`
     : isUpcoming
@@ -286,6 +311,12 @@ function renderList() {
     FOOTER_HTML: footerFor(), FOOTER_CSS,
   });
 }
+
+// Gate before writing anything: a release whose date has passed with IDs still
+// missing has no honest page, so refuse the build rather than emit one. Vercel
+// keeps the last good deploy, which is the pre-release page — strictly better
+// than shipping "Out now" over dead links.
+pendingIds(ALBUMS);
 
 let count = 0;
 for (const album of ALBUMS) {

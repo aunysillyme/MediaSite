@@ -18,6 +18,77 @@ export const LISTEN_CSS = tpl('_listen.css');
 export const RECENT_STRIP_HTML = tpl('_recent-strip.html');
 export const RECENT_STRIP_CSS = tpl('_recent-strip.css');
 
+// ---------------------------------------------------------------------------
+// RELEASE STATE — the single source of truth. Do not re-derive this inline.
+//
+// Before 2026-08-08 three builders each computed "upcoming" their own way, and
+// they disagreed precisely on release day: the homepage and the /albums card
+// keyed off the date alone, while the album page also required a Spotify ID. On
+// a release day with the ID not yet pasted in, the homepage counted the album as
+// released and could print "Out now" beside a pre-save button while the album's
+// own page still said coming soon.
+//
+// That is not hypothetical. `flatline` shipped 2026-06-05 with all 19 track IDs
+// still placeholders, every track link dead, and stayed broken for two days
+// until a listener reported it (commit e20b207). See AUN-693 and
+// `📐 Claude Protocols/15_music_site_release_protocol.md`.
+//
+// Three states, and only three:
+//   UNRELEASED — flagged upcoming, or dated in the future, or undated.
+//                Renders the pre-release treatment.
+//   RELEASED   — dated in the past. The page ships.
+//
+// Missing Spotify IDs do NOT hold a release back. Shipping the page on release
+// day is the point; the IDs arrive when they arrive and get filled in after.
+// The dead-link problem flatline had is solved where it actually lives — at the
+// render — by never emitting a link for an empty id (see album.html makePlanet,
+// and the CTA guards in build-albums). A missing id costs you a link, not a
+// launch. `pendingIds` reports what is still outstanding as a build warning.
+// ---------------------------------------------------------------------------
+
+export const todayISO = () => process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
+
+export function releaseStatus(release, today = todayISO()) {
+  if (release.upcoming) return 'UNRELEASED';
+  if (!release.releaseDate) return 'UNRELEASED';
+  if (release.releaseDate > today) return 'UNRELEASED';
+  return 'RELEASED';
+}
+
+export const isUpcoming = (release, today) => releaseStatus(release, today) !== 'RELEASED';
+export const isReleased = (release, today) => releaseStatus(release, today) === 'RELEASED';
+
+// A teaser only holds the hero while the release is genuinely still ahead of us.
+// Without this a stale flag outranks everything forever and keeps advertising a
+// released album as "Coming <date in the past>" with a dead pre-save CTA.
+export const isLiveTeaser = (release, today = todayISO()) =>
+  !!release.teaser && releaseStatus(release, today) === 'UNRELEASED';
+
+// Reports released items still missing Spotify IDs. WARNS, never throws — a
+// missing id must never block a launch. The links simply do not render until
+// the ids are filled in, so this is a to-do list, not a gate.
+export function pendingIds(releases, today = todayISO()) {
+  const pending = [];
+  for (const r of releases) {
+    if (releaseStatus(r, today) !== 'RELEASED') continue;
+    const isAlbum = Array.isArray(r.tracks);
+    const noTop = isAlbum ? !r.spotifyAlbumId : !r.spotifyTrackId;
+    const missingTracks = isAlbum ? r.tracks.filter((t) => !t.id).length : 0;
+    if (noTop || missingTracks) {
+      pending.push(`  - ${r.slug}: `
+        + [noTop && `${isAlbum ? 'spotifyAlbumId' : 'spotifyTrackId'} empty`,
+           missingTracks && `${missingTracks} track link(s) pending`]
+          .filter(Boolean).join(', '));
+    }
+  }
+  if (pending.length) {
+    console.warn(`\n⚠ Spotify IDs still pending on ${pending.length} released item(s):\n`
+      + `${pending.join('\n')}\n`
+      + `  Those links are omitted, not broken. Fill them in when they exist.\n`);
+  }
+  return pending;
+}
+
 // Renders the "more recent releases →" strip for single pages.
 // Picks the N newest singles (by releaseDate desc) excluding currentSlug.
 // `all` is the SINGLES array; caller passes it to avoid a circular import.

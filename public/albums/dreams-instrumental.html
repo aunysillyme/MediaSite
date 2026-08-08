@@ -731,7 +731,7 @@ picture { display: contents; }
   "datePublished": "2026-08-15",
   "genre": "Electronic · Electronica / Downtempo · New Age",
   "url": "https://www.auny.media/albums/dreams-instrumental",
-  "sameAs": ["https://distrokid.com/hyperfollow/auny1/dreams-instrumental"],
+  "sameAs": ["https://music.apple.com/us/album/dreams-instrumental/6797426674","https://distrokid.com/hyperfollow/auny1/dreams-instrumental"],
   "image": "https://www.auny.media/album-art/dreams-instrumental.jpg",
   "numTracks": 11,
   "track": {"@type":"ItemList","numberOfItems":11,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"MusicRecording","name":"Map","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Solo grand piano in deep shadow, garnet hibiscus over her eyes — the lost opening"}},{"@type":"ListItem","position":2,"item":{"@type":"MusicRecording","name":"Don't Stop","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Restless acoustic guitar, dusty-blue tulips veiling her face, still turned away"}},{"@type":"ListItem","position":3,"item":{"@type":"MusicRecording","name":"Reason","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Fragile glockenspiel, lily-of-the-valley over the eyes, searching for one reason"}},{"@type":"ListItem","position":4,"item":{"@type":"MusicRecording","name":"More","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Aching violin, deep violet iris veil, the deepest point of the shadow"}},{"@type":"ListItem","position":5,"item":{"@type":"MusicRecording","name":"Buried","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Vintage synthesizer warming, funeral lilies and dead roses — the turn toward light"}},{"@type":"ListItem","position":6,"item":{"@type":"MusicRecording","name":"Flinch","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Smoky saxophone, amber and rust dahlia, she begins to face forward"}},{"@type":"ListItem","position":7,"item":{"@type":"MusicRecording","name":"Weight","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Weightless flute, dusky-mauve hellebore, the ground finally holding her"}},{"@type":"ListItem","position":8,"item":{"@type":"MusicRecording","name":"Before","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Steadying cello, pale snowdrop veil — Izzy’s reveal cover, the album’s quiet center"}},{"@type":"ListItem","position":9,"item":{"@type":"MusicRecording","name":"Evolve","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"She commands the modular synth-bass, black-red snapdragon, palette breaking to fire"}},{"@type":"ListItem","position":10,"item":{"@type":"MusicRecording","name":"Watch","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Driving Reese-bass machine, crimson-black ranunculus, chin lifted in defiance"}},{"@type":"ListItem","position":11,"item":{"@type":"MusicRecording","name":"Believe","byArtist":{"@type":"MusicGroup","name":"Auny"},"description":"Crystalline voice-machine, white-gold lotus, first light — the arc breaks to dawn"}}]}
@@ -1094,6 +1094,7 @@ picture { display: contents; }
       </div>
 
       <div class="hero-listen">
+        <a class="hero-accent" href="https://music.apple.com/us/album/dreams-instrumental/6797426674" target="_blank" rel="noopener">pre-order on iTunes <span class="ext">↗</span></a>
         <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/dreams-instrumental" target="_blank" rel="noopener">pre-save · follow on all platforms <span class="ext">↗</span></a>
       </div>
 
@@ -1284,24 +1285,40 @@ picture { display: contents; }
   orbit.appendChild(vWrap);
 
   // Non-spinning album cover at center
+  // Same rule as the track nodes: no album id yet means no link, not a link to
+  // ".../album/". The cover still renders as the orbit centre.
+  var albumLinked = '' !== '';
   var lblSize = Math.round(vsz * 0.58);
-  var lblWrap = document.createElement('a');
-  lblWrap.href = ALBUM_URL;
-  lblWrap.target = '_blank';
-  lblWrap.rel = 'noopener';
-  lblWrap.setAttribute('aria-label', 'dreaMs (instrumental) — open full album on Spotify');
+  var lblWrap = document.createElement(albumLinked ? 'a' : 'div');
+  if (albumLinked) {
+    lblWrap.href = ALBUM_URL;
+    lblWrap.target = '_blank';
+    lblWrap.rel = 'noopener';
+    lblWrap.setAttribute('aria-label', 'dreaMs (instrumental) — open full album on Spotify');
+  } else {
+    lblWrap.setAttribute('aria-label', 'dreaMs (instrumental) album cover');
+  }
   lblWrap.style.cssText = 'position:absolute;top:50%;left:50%;width:' + lblSize + 'px;height:' + lblSize + 'px;margin-left:' + (-(lblSize/2)) + 'px;margin-top:' + (-(lblSize/2)) + 'px;border-radius:50%;background:#050510;z-index:8;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 24px rgba(var(--accent-rgb),0.45),inset 0 0 8px rgba(0,0,0,0.6);cursor:pointer;';
   lblWrap.innerHTML = '<img src="' + ALBUM_ART + '" alt="dreaMs (instrumental) album cover" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;"/>';
   orbit.appendChild(lblWrap);
 
   // Planet factory
   function makePlanet(p, ringColor) {
-    var a = document.createElement('a');
-    a.href = 'https://open.spotify.com/track/' + p.id;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.className = 'planet';
-    a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    // A track with no Spotify id yet renders as a plain node — number and name,
+    // no link. Concatenating an empty id produced ".../track/" and a dead click:
+    // that is exactly how flatline shipped 19 dead links for two days in June.
+    // Track ids get populated after release; the page ships either way.
+    var linked = !!p.id;
+    var a = document.createElement(linked ? 'a' : 'div');
+    if (linked) {
+      a.href = 'https://open.spotify.com/track/' + p.id;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('aria-label', p.name + ' — open track on Spotify');
+    } else {
+      a.setAttribute('aria-label', p.name + ' — link coming soon');
+    }
+    a.className = 'planet' + (linked ? '' : ' planet-unlinked');
     var numStr = (p.num < 10 ? '0' : '') + p.num;
     var iconSvg = '<svg viewBox="0 0 28 28" width="28" height="28">'
       + '<text x="14" y="19" text-anchor="middle" font-family="Space Mono,monospace" font-size="11" font-weight="700" fill="' + ringColor + '" opacity="0.92">' + numStr + '</text>'
