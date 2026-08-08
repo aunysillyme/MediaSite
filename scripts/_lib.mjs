@@ -48,6 +48,29 @@ export const RECENT_STRIP_CSS = tpl('_recent-strip.css');
 
 export const todayISO = () => process.env.BUILD_DATE || new Date().toISOString().slice(0, 10);
 
+// Returns the URL only if it is a well-formed http(s) URL, else ''. `esc()`
+// prevents attribute breakout but says nothing about the SCHEME, so a
+// `javascript:` value would render an executable href, and a missing field
+// renders the string "undefined". Both are authoring mistakes rather than
+// attacks — Auny writes this data — but they ship silently, which is the part
+// worth removing. A bad URL costs the link and logs, it never blocks the build.
+export function safeUrl(value, context = 'link') {
+  if (typeof value !== 'string' || !value) {
+    console.warn(`⚠ ${context}: missing or non-string URL, link omitted`);
+    return '';
+  }
+  let u;
+  try { u = new URL(value); } catch {
+    console.warn(`⚠ ${context}: unparseable URL ${JSON.stringify(value)}, link omitted`);
+    return '';
+  }
+  if (u.protocol !== 'http:' && u.protocol !== 'https:') {
+    console.warn(`⚠ ${context}: refusing ${u.protocol} URL, link omitted`);
+    return '';
+  }
+  return value;
+}
+
 export function releaseStatus(release, today = todayISO()) {
   if (release.upcoming) return 'UNRELEASED';
   if (!release.releaseDate) return 'UNRELEASED';

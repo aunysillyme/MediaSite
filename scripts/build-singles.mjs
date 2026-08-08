@@ -116,13 +116,21 @@ function renderSingle(single) {
     GENRE_HEAD: escHtml(singleGenreHead(single.genre)),
     HERO_PICTURE: coverPicture({ base: singleCoverPath(single.slug).replace(/\.jpg$/, ''), alt: `${escAttr(single.title)} cover art by Auny`, sizes: '(max-width:760px) 80vw, 420px', eager: true }),
     SPOTIFY_TRACK_ID: single.spotifyTrackId,
+    // Omitted entirely until the id exists, rather than linking to ".../track/".
+    SPOTIFY_LISTEN_BLOCK: single.spotifyTrackId
+      ? `<a class="listen-now" href="https://open.spotify.com/track/${escAttr(single.spotifyTrackId)}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
+      <span class="listen-dot"></span>`
+      : '',
     HYPERFOLLOW_SLUG: single.hyperfollowSlug,
     PLATFORM_ROW: platformRowFor(single),
+    // Same rule as albums: no link against an empty id. Singles get released
+    // immediately, which is exactly when the Spotify id does not exist yet, so
+    // this is the likeliest place to reproduce the flatline dead-link bug.
     SAMEAS_JSONLD: jsonLd([
-      `https://open.spotify.com/track/${single.spotifyTrackId}`,
+      single.spotifyTrackId ? `https://open.spotify.com/track/${single.spotifyTrackId}` : null,
       ...platformUrls(single),
       `https://distrokid.com/hyperfollow/auny1/${single.hyperfollowSlug}`,
-    ]),
+    ].filter(Boolean)),
     THEMES: escHtml(single.themes),
     ANCHOR_LYRIC: escHtml(single.anchorLyric),
     ACCENT_COLOR: single.accent.color,
@@ -135,7 +143,9 @@ function renderSingle(single) {
     NAV: navFor('singles'),
     NAV_CSS: NAV_CSS,
     PLAYER_CSS: PLAYER_CSS,
-    PLAYER_HTML: playerFor({ kind: 'track', id: single.spotifyTrackId, title: single.title, cover: singleCoverPath(single.slug).replace(/\.jpg$/, '-640.webp') }),
+    // Disabled facade until the id exists — an empty id yields ".../embed/track/?"
+    // which renders a Spotify error inside the page.
+    PLAYER_HTML: playerFor({ kind: 'track', id: single.spotifyTrackId || '', title: single.title, cover: singleCoverPath(single.slug).replace(/\.jpg$/, '-640.webp'), disabled: !single.spotifyTrackId }),
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
     COLOR_CHIPS_CSS: COLOR_CHIPS_CSS,

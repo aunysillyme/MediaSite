@@ -3,7 +3,7 @@
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
 import { ALBUM_NOTES } from '../src/data/album-notes.js';
-import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds } from './_lib.mjs';
+import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl } from './_lib.mjs';
 import { join } from 'node:path';
 
 // "The Making" + enriched tracklist — rendered only for albums with a notes entry.
@@ -119,8 +119,17 @@ function renderAlbum(album) {
   // pills. Rendered only while upcoming — after release the normal listen/buy
   // row takes over. Data-driven via `preorder: { store, url }` so this is not
   // hardcoded to one shop.
-  const preorderCta = album.preorder
-    ? `\n        <a class="hero-accent" href="${esc(album.preorder.url)}" target="_blank" rel="noopener">pre-order on ${esc(album.preorder.store)} <span class="ext">↗</span></a>`
+  // Both fields must be present and the URL must be a real http(s) URL. Without
+  // this, `{ store: 'iTunes' }` rendered href="undefined" and `{ url }` alone
+  // rendered "pre-order on undefined" — a silently broken revenue CTA. Flagged
+  // by the codex pass on this change.
+  const preorderUrl = album.preorder ? safeUrl(album.preorder.url, `${album.slug} preorder`) : '';
+  const preorderStore = album.preorder && typeof album.preorder.store === 'string' ? album.preorder.store : '';
+  if (album.preorder && (!preorderUrl || !preorderStore)) {
+    console.warn(`⚠ ${album.slug}: preorder is malformed (needs { store, url }), CTA omitted`);
+  }
+  const preorderCta = preorderUrl && preorderStore
+    ? `\n        <a class="hero-accent" href="${esc(preorderUrl)}" target="_blank" rel="noopener">pre-order on ${esc(preorderStore)} <span class="ext">↗</span></a>`
     : '';
   // Order mirrors the released state: the accent CTA leads, the pill sits under
   // it. Pre-order is the accent because it is the only pre-release action that
