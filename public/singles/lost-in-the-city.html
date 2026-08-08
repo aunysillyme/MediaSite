@@ -700,8 +700,9 @@ picture { display: contents; }
   "name": "Lost in the City",
   "byArtist": {
     "@type": "MusicGroup",
+    "@id": "https://www.auny.media/#artist",
     "name": "Auny",
-    "url": "https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI"
+    "url": "https://www.auny.media/"
   },
   "datePublished": "2026-02-03",
   "genre": "Lyrical · Lo-fi",
@@ -1258,7 +1259,13 @@ picture { display: contents; }
     <a href="/links">all platforms</a>
     <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">Contact</a>
   </div>
-  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; AunySillyMe &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
+  <!-- "AunySillyMe" links to the business site on purpose. It is the reciprocal
+       half of the sameAs claim each site makes about the other, and the anchor
+       text carries the entity rather than a generic label — auny.media ranks for
+       "auny" where aunysillyme.com does not, so this is the page passing the
+       signal, not receiving it. Keep it as attribution in the meta line; it is
+       deliberately not a call to action. -->
+  <p class="footer-meta">© 2026 Auny &nbsp;·&nbsp; <a href="https://www.aunysillyme.com/" target="_blank" rel="noopener">AunySillyMe</a> &nbsp;·&nbsp; <a href="https://x.com/AunySillyMe" target="_blank" rel="noopener">@AunySillyMe</a></p>
 </footer>
 
 
