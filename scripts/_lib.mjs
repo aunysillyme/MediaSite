@@ -75,6 +75,17 @@ export function releaseStatus(release, today = todayISO()) {
   if (release.upcoming) return 'UNRELEASED';
   if (!release.releaseDate) return 'UNRELEASED';
   if (release.releaseDate > today) return 'UNRELEASED';
+  // CONTENT vs LINKS. These are different things and they get opposite answers:
+  //
+  //   Missing LINKS  (Spotify ids)  -> still RELEASED. Ship the page, omit the
+  //                                    links. A link is not the release.
+  //   Missing CONTENT (no tracks)   -> UNRELEASED. There is nothing to release,
+  //                                    so the page must not claim it is out.
+  //
+  // An album whose tracklist has not been filled in yet is a work in progress,
+  // and "Out now" over an empty tracklist is a lie the visitor can see. It reads
+  // as coming soon until the tracks exist.
+  if (Array.isArray(release.tracks) && release.tracks.length === 0) return 'UNRELEASED';
   return 'RELEASED';
 }
 
