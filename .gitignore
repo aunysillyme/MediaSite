@@ -3,3 +3,9 @@ dist/
 .DS_Store
 *.local
 .vercel/
+
+# Local-only: scratch audit briefs, editor state, and an unused font
+# that keeps getting swept into commits by accident.
+.claude/
+AUDIT_BRIEF.md
+public/orbitron.ttf
