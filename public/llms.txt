@@ -1,0 +1,70 @@
+# Auny - music
+
+> Auny is an independent artist releasing instrumental and vocal electronic music:
+> dark EDM, lo-fi, ambient, downtempo, and the Color Series. This site is the
+> official catalogue. Every release links out to Spotify, Apple Music and the
+> other streaming platforms.
+
+Artist: Auny (also written AunySillyMe). Label: AunySillyMe.
+
+## Albums
+- [dreaMs](https://www.auny.media/albums/dreams): July 11, 2026, 11 tracks. Electronic
+- [Flatline](https://www.auny.media/albums/flatline): June 5, 2026, 19 tracks. Electronic
+- [Midnight Glitch](https://www.auny.media/albums/midnight-glitch): May 6, 2026, 23 tracks. Hard Techno
+- [Graveyard Echoes](https://www.auny.media/albums/graveyard-echoes): April 20, 2026, 21 tracks. Instrumental
+- [Afterglow](https://www.auny.media/albums/afterglow): March 30, 2026, 20 tracks. Instrumental
+- [Blue Lightning](https://www.auny.media/albums/blue-lightning): March 25, 2026, 26 tracks. Instrumental
+- [Focus with Me](https://www.auny.media/albums/focus-with-me): March 14, 2026, 24 tracks. Instrumental
+- [11:11](https://www.auny.media/albums/1111): March 9, 2026, 12 tracks. Instrumental
+- [Work with Me](https://www.auny.media/albums/work-with-me): February 24, 2026, 10 tracks. Instrumental
+
+## Singles
+- [Mechanical Screen](https://www.auny.media/singles/mechanical-screen): May 29, 2026. Dark Midtempo EDM
+- [CYAN](https://www.auny.media/singles/cyan): May 24, 2026. Dark Atmospheric EDM
+- [Let Go](https://www.auny.media/singles/let-go): May 16, 2026. Lyrical
+- [PINK](https://www.auny.media/singles/pink): May 4, 2026. Dark EDM
+- [YELLOW](https://www.auny.media/singles/yellow): April 29, 2026. Dark Midtempo EDM
+- [Run Away](https://www.auny.media/singles/run-away): March 13, 2026. Lyrical
+- [Drowning](https://www.auny.media/singles/drowning): February 20, 2026. Lyrical
+- [Why Do We Pretend?](https://www.auny.media/singles/why-do-we-pretend): February 11, 2026. Lyrical
+- [Tick Tock](https://www.auny.media/singles/tick-tock): February 5, 2026. EDM
+- [Lost in the City](https://www.auny.media/singles/lost-in-the-city): February 3, 2026. Lyrical
+- [Candy-Coated Smile](https://www.auny.media/singles/candy-coated-smile): January 28, 2026. EDM
+- [BLUE](https://www.auny.media/singles/blue): January 24, 2026. EDM
+- [You in a Song](https://www.auny.media/singles/you-in-a-song): January 21, 2026. Lyrical
+- [From The Ashes](https://www.auny.media/singles/from-the-ashes): January 18, 2026. Lyrical
+- [Love is...](https://www.auny.media/singles/love-is): January 17, 2026. Lyrical
+- [ORANGE](https://www.auny.media/singles/orange): January 15, 2026. EDM
+- [Story of You](https://www.auny.media/singles/story-of-you): January 13, 2026. Lyrical
+- [RED](https://www.auny.media/singles/red): January 12, 2026. EDM
+- [ESCAPE](https://www.auny.media/singles/escape): January 11, 2026. EDM
+- [Dreams That Run Away](https://www.auny.media/singles/dreams-that-run-away): January 10, 2026. Lyrical
+- [BLACK](https://www.auny.media/singles/black): January 8, 2026. EDM
+- [Feel Again, Pt. 2](https://www.auny.media/singles/feel-again-pt-2): January 7, 2026. Lyrical
+- [Monster No One Sees](https://www.auny.media/singles/monster-no-one-sees): January 7, 2026. Lyrical
+- [The Void](https://www.auny.media/singles/the-void): January 5, 2026. Lyrical
+- [Heart Inside of Me, Pt. 2](https://www.auny.media/singles/heart-inside-2): January 4, 2026. Lyrical
+- [F A F O](https://www.auny.media/singles/fafo): January 2, 2026. EDM
+
+## Upcoming
+- [dreaMs (instrumental)](https://www.auny.media/albums/dreams-instrumental): releases August 15, 2026. Pre-order on iTunes: https://music.apple.com/us/album/dreams-instrumental/6797426674
+
+## Browse
+- [All albums](https://www.auny.media/albums)
+- [All singles](https://www.auny.media/singles)
+- [Every streaming platform](https://www.auny.media/links)
+
+## Listen
+- [Spotify](https://open.spotify.com/artist/2HSQl7HB2BksGuCU8f39hI)
+- [Apple Music](https://music.apple.com/us/artist/auny/1866039713)
+- [Amazon Music](https://music.amazon.com/artists/B0GDL275G8/auny)
+- [YouTube](https://www.youtube.com/@aunysillyme)
+
+## Elsewhere
+- [Consulting and content work at aunysillyme.com](https://www.aunysillyme.com/) - the same person, different site. Content strategy, AI workflows, paid social.
+- [X](https://x.com/AunySillyMe)
+
+## Notes for agents
+- Release facts on this site are generated from a single data layer, so titles, dates and track counts here match the pages.
+- A release with no streaming link yet is one whose platform IDs have not been published. The music is out; the link is pending.
+- Lyrics are on the individual single pages where they exist.
