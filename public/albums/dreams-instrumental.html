@@ -538,6 +538,36 @@ picture { display: contents; }
 }
 .platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
 
+  /* The character block. Shared by album and single pages, so it carries its own
+   class names rather than leaning on .notes-section, which only album pages
+   define. Same visual language either way: mono label, handwritten body. */
+.char-section { position: relative; z-index: 4; max-width: 900px; margin: 0 auto; padding: 0 32px; }
+.char-label {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--accent); opacity: 0.85;
+  margin: 52px 0 18px; display: flex; align-items: center; gap: 12px;
+}
+.char-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--accent-rgb),0.35), transparent); }
+.char-name {
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; color: #fff; margin: 0 0 4px;
+}
+.char-role {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(var(--accent-rgb),0.85); margin: 0 0 18px;
+}
+.char-copy p {
+  font-family: 'Patrick Hand', cursive; font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.5; color: rgba(255,255,255,0.82); margin-bottom: 14px; max-width: 760px;
+}
+.char-arc {
+  display: inline-flex; flex-direction: column; gap: 3px; margin-top: 8px;
+  padding: 10px 16px; border: 1px solid rgba(var(--accent-rgb),0.3);
+  border-radius: 10px; background: rgba(var(--accent-rgb),0.05);
+}
+.char-arc .sk { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.char-arc .sv { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: var(--accent); }
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1124,13 +1154,23 @@ picture { display: contents; }
 
 
 
+<section class="char-section" aria-label="The character behind this release">
+    <p class="char-label">the character</p>
+    <p class="char-name">Izzy</p>
+    <p class="char-role">plays every track</p>
+    <div class="char-copy">
+      <p>A lyrical genius and instrument savant who lives inside the music, perpetually melancholy, her face veiled by each song’s flower. The vocal album personified each instrument as the lone figure; here a real one plays them.</p>
+      <p>She carries the arc on her body. Lost across the first four tracks, she plays alone in deep shadow, half-turned away. Anchored through the middle, she steadies and begins to face forward as the palette warms. Empowered across the last three, she commands the machines, the color breaking from fire to a white-gold dawn.</p>
+      <div class="char-arc"><span class="sk">Arc</span><span class="sv">lost → dawn</span></div>
+    </div>
+  </section>
+
 <section class="notes-section" aria-label="How the album was made">
     <p class="notes-label">the making</p>
     <div class="making-copy">
-      <p>The instrumental twin of dreaMs, and its opposite in the frame. The vocal album personified each instrument as the lone figure; here a real one plays them — Izzy, a lyrical genius and instrument savant who lives inside the music, perpetually melancholy, her face veiled by the song’s flower.</p>
-      <p>She carries the album’s arc on her body. Lost across the first four tracks, she plays alone in deep shadow, half-turned away. Anchored through the middle, she steadies and begins to face forward as the palette warms. Empowered across the last three, she commands the machines, the color breaking from fire to a white-gold dawn.</p>
+      <p>The instrumental twin of dreaMs, and its opposite in the frame. The vocal album personified each instrument as the lone figure; here a real one plays them.</p>
       <p>Same Nocturne register and per-track flower map as the vocal album, so the two read as siblings on a shelf. The vocal record lands the story; this one re-serves the same eleven for focus, study, sync, and the background of a long night.</p>
-      <div class="making-specs"><span class="spec"><span class="sk">Character</span><span class="sv">Izzy</span></span><span class="spec"><span class="sk">Register</span><span class="sv">Nocturne</span></span><span class="spec"><span class="sk">Arc</span><span class="sv">lost → dawn</span></span></div>
+      <div class="making-specs"><span class="spec"><span class="sk">Register</span><span class="sv">Nocturne</span></span></div>
     </div>
   </section>
 

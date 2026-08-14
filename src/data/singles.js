@@ -38,6 +38,8 @@ export const SINGLES = [
   {
     slug: 'mechanical-screen',
     title: 'Mechanical Screen',
+    // Annalise is the body in the song. Copy in src/data/characters.js.
+    character: 'Annalise',
     releaseDate: '2026-05-29',
     releaseDisplay: 'May 29, 2026',
     year: 2026,

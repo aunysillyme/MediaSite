@@ -5,6 +5,8 @@ export const ALBUMS = [
   {
     slug: 'dreams-instrumental',
     title: 'dreaMs (instrumental)',
+    // Izzy plays every track. Copy in src/data/characters.js.
+    character: 'Izzy',
     // Submitted to DistroKid Aug 1, 2026. Releases Aug 15, 2026 (9:00 AM ET on
     // Spotify; ~midnight local elsewhere). Preorder opened Aug 2 on iTunes/Amazon.
     // No spotifyAlbumId yet → renders pre-release (auto-flips to released on the
@@ -96,6 +98,8 @@ export const ALBUMS = [
   {
     slug: 'flatline',
     title: 'Flatline',
+    // Told through Caelle across all 19 tracks. Copy in src/data/characters.js.
+    character: 'Caelle',
     releaseDate: '2026-06-05',
     releaseDisplay: 'June 5, 2026',
     year: 2026,

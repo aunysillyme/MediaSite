@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
 import { SINGLE_NOTES } from '../src/data/singles-notes.js';
-import { navFor, esc, jsonLd, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture } from './_lib.mjs';
+import { navFor, esc, jsonLd, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture, CHARACTER_CSS, characterSectionFor } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -101,6 +101,8 @@ function renderSingle(single) {
     ? `\n  "description": ${jsonLd(notes.note)},`
     : '';
   const replacements = {
+    CHARACTER_SECTION: characterSectionFor(single),
+    CHARACTER_CSS,
     TEMPO_META_ROW: tempoMetaRow,
     PROD_NOTE_BLOCK: prodNoteBlock,
     TEMPO_SCHEMA: tempoSchema,

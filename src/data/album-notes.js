@@ -5,15 +5,15 @@
 
 export const ALBUM_NOTES = {
   'dreams-instrumental': {
+    // Izzy's story moved to src/data/characters.js so it could be shared with
+    // the singles pages. Keep this section about the record, not the figure —
+    // the character block above it already carries her.
     making: [
-      "The instrumental twin of dreaMs, and its opposite in the frame. The vocal album personified each instrument as the lone figure; here a real one plays them — Izzy, a lyrical genius and instrument savant who lives inside the music, perpetually melancholy, her face veiled by the song’s flower.",
-      "She carries the album’s arc on her body. Lost across the first four tracks, she plays alone in deep shadow, half-turned away. Anchored through the middle, she steadies and begins to face forward as the palette warms. Empowered across the last three, she commands the machines, the color breaking from fire to a white-gold dawn.",
+      "The instrumental twin of dreaMs, and its opposite in the frame. The vocal album personified each instrument as the lone figure; here a real one plays them.",
       "Same Nocturne register and per-track flower map as the vocal album, so the two read as siblings on a shelf. The vocal record lands the story; this one re-serves the same eleven for focus, study, sync, and the background of a long night.",
     ],
     specs: [
-      ["Character", "Izzy"],
       ["Register", "Nocturne"],
-      ["Arc", "lost → dawn"],
     ],
     tracks: {
       "Map": { vibe: "Solo grand piano in deep shadow, garnet hibiscus over her eyes — the lost opening" },

@@ -538,6 +538,36 @@ picture { display: contents; }
 }
 .platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
 
+  /* The character block. Shared by album and single pages, so it carries its own
+   class names rather than leaning on .notes-section, which only album pages
+   define. Same visual language either way: mono label, handwritten body. */
+.char-section { position: relative; z-index: 4; max-width: 900px; margin: 0 auto; padding: 0 32px; }
+.char-label {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--accent); opacity: 0.85;
+  margin: 52px 0 18px; display: flex; align-items: center; gap: 12px;
+}
+.char-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(var(--accent-rgb),0.35), transparent); }
+.char-name {
+  font-family: 'Outfit', sans-serif; font-weight: 800;
+  font-size: clamp(28px, 3.4vw, 44px); line-height: 1.1; color: #fff; margin: 0 0 4px;
+}
+.char-role {
+  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(var(--accent-rgb),0.85); margin: 0 0 18px;
+}
+.char-copy p {
+  font-family: 'Patrick Hand', cursive; font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.5; color: rgba(255,255,255,0.82); margin-bottom: 14px; max-width: 760px;
+}
+.char-arc {
+  display: inline-flex; flex-direction: column; gap: 3px; margin-top: 8px;
+  padding: 10px 16px; border: 1px solid rgba(var(--accent-rgb),0.3);
+  border-radius: 10px; background: rgba(var(--accent-rgb),0.05);
+}
+.char-arc .sk { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+.char-arc .sv { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: var(--accent); }
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1157,6 +1187,18 @@ picture { display: contents; }
 </div>
 
 
+
+<section class="char-section" aria-label="The character behind this release">
+    <p class="char-label">the character</p>
+    <p class="char-name">Caelle</p>
+    <p class="char-role">the figure in all nineteen tracks</p>
+    <div class="char-copy">
+      <p>A boy who flatlined once and came back. He is alive on borrowed time, and across the record he slowly loses it again. He does not die in a burst; he winds down.</p>
+      <p>The decay is mechanical, never gory. Doll-pale skin veined with cracks that glow cyan from beneath, clockwork where his heart used to beat, a stillness that reads as android rather than dead. He is the cover made into a person: the cyan flatline, the gold gears, the crimson-and-bluebell bloom, all carried on his body and all of it fading from organic to mechanism as the album plays.</p>
+      <p>A seam of neon-cyan light runs across his chest, and it is his readout in every scene. It blooms roses and bluebells while he can still feel, spikes when something breaks through, turns to gold clockwork as life gives way to mechanism, and finally goes flat.</p>
+      <div class="char-arc"><span class="sk">Arc</span><span class="sv">alive → clockwork revenant</span></div>
+    </div>
+  </section>
 
 <section class="notes-section" aria-label="How the album was made">
     <p class="notes-label">the making</p>

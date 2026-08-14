@@ -2,6 +2,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { CHARACTERS } from '../src/data/characters.js';
 
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8');
@@ -204,6 +205,35 @@ export function coverPicture({ base, alt, sizes = '240px', eager = false, imgCla
 }
 
 export const SERIES_CARD_CSS = tpl('_series-card.css');
+export const CHARACTER_CSS = tpl('_character.css');
+
+// The character block, shared by album and single pages.
+//
+// A release opts in with `character: '<Name>'`; anything without one renders
+// nothing, so this stays additive. Both page types call this same function so
+// the two cannot drift apart the way the three release-state predicates did.
+export function characterSectionFor(release) {
+  const c = release.character ? CHARACTERS[release.character] : null;
+  if (!c) {
+    if (release.character) {
+      console.warn(`⚠ ${release.slug}: unknown character "${release.character}", block omitted`);
+    }
+    return '';
+  }
+  const copy = (c.story || []).map((p) => `<p>${esc(p)}</p>`).join('\n      ');
+  const arc = c.arc
+    ? `<div class="char-arc"><span class="sk">Arc</span><span class="sv">${esc(c.arc)}</span></div>`
+    : '';
+  return `<section class="char-section" aria-label="The character behind this release">
+    <p class="char-label">the character</p>
+    <p class="char-name">${esc(c.name)}</p>
+    ${c.role ? `<p class="char-role">${esc(c.role)}</p>` : ''}
+    <div class="char-copy">
+      ${copy}
+      ${arc}
+    </div>
+  </section>`;
+}
 export const SIGNUP_HTML = tpl('_signup.html');
 export const SIGNUP_CSS = tpl('_signup.css');
 export const SIGNUP_JS = tpl('_signup.js');
