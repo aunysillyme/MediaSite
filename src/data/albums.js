@@ -7,32 +7,28 @@ export const ALBUMS = [
     title: 'dreaMs (instrumental)',
     // Izzy plays every track. Copy in src/data/characters.js.
     character: 'Izzy',
-    // Submitted to DistroKid Aug 1, 2026. Releases Aug 15, 2026 (9:00 AM ET on
-    // Spotify; ~midnight local elsewhere). Preorder opened Aug 2 on iTunes/Amazon.
-    // No spotifyAlbumId yet → renders pre-release (auto-flips to released on the
-    // first build after the ID + track IDs are filled in post-launch.
+    // Released Aug 15, 2026. Live on Spotify, Apple and Tidal; YouTube Music,
+    // Amazon, Deezer and Pandora were not indexed yet on release day (add as
+    // they appear). Boomplay is live too but the site renders no Boomplay pill.
     releaseDate: '2026-08-15',
     releaseDisplay: 'August 15, 2026',
     year: 2026,
-    spotifyAlbumId: '',
+    spotifyAlbumId: '5Qs7MfE0KQfhZ35PvOObId',
     hyperfollowSlug: 'dreams-instrumental',
     vocal: false,
-    // Promotes it to the homepage hero as "Coming August 15, 2026" + pre-save,
-    // same treatment the vocal dreaMs ran during its own pre-release window.
-    // REMOVE on release day — build-home picks the teaser over the latest release,
-    // so leaving it set would keep a released album hogging the hero. See AUN-507.
-    teaser: true,
+    // `teaser: true` lived here through the pre-release window and was removed on
+    // release day. It was already inert by then — isLiveTeaser() only honors the
+    // flag while the release is still UNRELEASED, so the homepage hero self-corrects
+    // rather than depending on anyone remembering. Deleted because a teaser flag on
+    // a released album is misleading data, not because it would have broken. AUN-507.
+    //
+    // The iTunes `preorder` CTA was removed for the same reason: the album is out,
+    // so the purchase link is just the Apple Music platform pill below.
     // Companion cross-link to the vocal twin (rendered as a sibling pill).
     companion: { slug: 'dreams', title: 'dreaMs', kind: 'vocal' },
-    // Live iTunes pre-order (opened Aug 2). This is a PURCHASE, so it renders as
-    // its own CTA alongside the pre-save rather than as an "also on" pill — it is
-    // the only pre-release action that earns anything, and iTunes downloads are
-    // the largest single revenue line in the catalogue. Verified 2026-08-08:
-    // itunes.apple.com/lookup?id=6797426674 returns "dreaMs (Instrumental)",
-    // artist Auny (1866039713), 11 tracks, releaseDate 2026-08-15T07:00:00Z.
-    preorder: { store: 'iTunes', url: 'https://music.apple.com/us/album/dreams-instrumental/6797426674' },
     platforms: {
       appleMusic: 'https://music.apple.com/us/album/dreams-instrumental/6797426674',
+      tidal: 'https://tidal.com/album/548751720',
     },
     genre: 'Electronic · Electronica / Downtempo · New Age',
     blurb: 'Izzy plays every track, her face veiled by each song’s flower — the same music as the vocal album, re-served for focus, study, and the background of a long night.',
@@ -41,20 +37,20 @@ export const ALBUMS = [
     // plum → amethyst → dawn gold: the album’s lost-to-empowered arc, ending
     // on the same gold the vocal twin opens with (so the two pages read as siblings).
     palette: ['#6C4FB0', '#A17BE0', '#E8C36B'],
-    // Same 11 songs as the vocal album, grouped into Izzy’s three-stage arc.
-    // No vocal `line` (instrumental → no poem section) and no track `id` yet.
+    // Same 11 songs as the vocal album, grouped into Izzy's three-stage arc.
+    // No vocal `line` — instrumental, so no poem section.
     tracks: [
-      { num: 1,  name: 'Map',        movement: 'Lost' },
-      { num: 2,  name: "Don't Stop", movement: 'Lost' },
-      { num: 3,  name: 'Reason',     movement: 'Lost' },
-      { num: 4,  name: 'More',       movement: 'Lost' },
-      { num: 5,  name: 'Buried',     movement: 'Anchor' },
-      { num: 6,  name: 'Flinch',     movement: 'Anchor' },
-      { num: 7,  name: 'Weight',     movement: 'Anchor' },
-      { num: 8,  name: 'Before',     movement: 'Anchor' },
-      { num: 9,  name: 'Evolve',     movement: 'Empowered' },
-      { num: 10, name: 'Watch',      movement: 'Empowered' },
-      { num: 11, name: 'Believe',    movement: 'Empowered' },
+      { num: 1, name: 'Map',        id: '3H6vv6sGHsDn3fLig7ZZp5', movement: 'Lost' },
+      { num: 2, name: "Don't Stop", id: '5XnNEVOz7QhK12dpSO6ykz', movement: 'Lost' },
+      { num: 3, name: 'Reason',     id: '4HFVelIawMUmfrfJ8Ev2TT', movement: 'Lost' },
+      { num: 4, name: 'More',       id: '5F4omvCIvf1XZoQPFdVW8V', movement: 'Lost' },
+      { num: 5, name: 'Buried',     id: '7JH44NvAUwdNgyeBnO41XY', movement: 'Anchor' },
+      { num: 6, name: 'Flinch',     id: '5qQVYCMw3gAUASrMGxJr15', movement: 'Anchor' },
+      { num: 7, name: 'Weight',     id: '1jEy18RnJOjvB6Iu31epVV', movement: 'Anchor' },
+      { num: 8, name: 'Before',     id: '2acKYYoJLokSyVQoIoKp17', movement: 'Anchor' },
+      { num: 9, name: 'Evolve',     id: '0wMsVicEcAO7VqJP3E6bDE', movement: 'Empowered' },
+      { num: 10, name: 'Watch',     id: '4F360crsTamj47nsMuKSxP', movement: 'Empowered' },
+      { num: 11, name: 'Believe',   id: '0gOQCo7CEIQKlBXtGApO9V', movement: 'Empowered' },
     ],
   },
   {
