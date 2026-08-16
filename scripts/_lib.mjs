@@ -207,13 +207,19 @@ export function listenRowFor(release, { spotifyUrl = '', hyperfollowSlug = '' } 
     p.itunes = p.appleMusic + (p.appleMusic.includes('?') ? '&' : '?') + 'app=itunes';
   }
 
+  // Author-supplied URLs go through safeUrl(), http(s) only — esc() stops an
+  // attribute breakout but happily renders `javascript:`. The old platformRowFor
+  // used esc() alone; that gap was carried into this renderer and closed on
+  // 2026-08-16 rather than inherited further. A rejected URL warns and drops the
+  // chip, matching the preorder CTA's behaviour.
   const chips = PLATFORM_ICONS
-    .filter((icon) => p[icon.key])
-    .map((icon) => {
+    .map((icon) => ({ icon, url: p[icon.key] ? safeUrl(p[icon.key], `${release.slug} ${icon.key}`) : '' }))
+    .filter(({ url }) => url)
+    .map(({ icon, url }) => {
       // iTunes' mark already contains a ring; a chip border would draw a
       // second one concentric with it. See _listen-row.css.
       const ringless = icon.key === 'itunes' ? ' lo-ringless' : '';
-      return `<a class="lo-chip${ringless}" href="${esc(p[icon.key])}" target="_blank" rel="noopener" style="--brand:${icon.colour}">`
+      return `<a class="lo-chip${ringless}" href="${esc(url)}" target="_blank" rel="noopener" style="--brand:${icon.colour}">`
         + `<span class="lo-glyph">${icon.svg}</span>`
         + `<span class="lo-cap">${esc(icon.label)}</span></a>`;
     });
