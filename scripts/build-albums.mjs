@@ -3,7 +3,7 @@
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
 import { ALBUM_NOTES } from '../src/data/album-notes.js';
-import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, platformRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl, CHARACTER_CSS, characterSectionFor } from './_lib.mjs';
+import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, LISTEN_ROW_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, listenRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl, CHARACTER_CSS, characterSectionFor } from './_lib.mjs';
 import { join } from 'node:path';
 
 // "The Making" + enriched tracklist — rendered only for albums with a notes entry.
@@ -152,11 +152,10 @@ function renderAlbum(album) {
     // release day it often does not yet, and linking to ".../album/" is a dead
     // click. Until then the platform pills and the all-platforms link carry it,
     // so the page still ships and still converts.
-    : `<div class="hero-listen">${album.spotifyAlbumId ? `
-        <a class="hero-accent" href="https://open.spotify.com/album/${esc(album.spotifyAlbumId)}" target="_blank" rel="noopener">listen on spotify <span class="orbit-arrow">→</span></a>` : ''}
-        <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${album.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
-        ${platformRowFor(album)}
-      </div>`;
+    : listenRowFor(album, {
+        spotifyUrl: album.spotifyAlbumId ? `https://open.spotify.com/album/${album.spotifyAlbumId}` : '',
+        hyperfollowSlug: album.hyperfollowSlug,
+      });
   const previewSection = teaser
     ? `<section class="album-player-section" aria-label="Album coming soon">
       <p class="album-player-label">✦ &nbsp; coming soon</p>
@@ -249,6 +248,7 @@ function renderAlbum(album) {
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: album.releaseDisplay }),
     LISTEN_CSS: LISTEN_CSS,
+    LISTEN_ROW_CSS: LISTEN_ROW_CSS,
     HYPERFOLLOW_SLUG: album.hyperfollowSlug,
     SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
   });

@@ -3,6 +3,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CHARACTERS } from '../src/data/characters.js';
+import { PLATFORM_ICONS, DISTROKID_GLYPH } from '../src/data/platform-icons.js';
 
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8');
@@ -16,6 +17,7 @@ export const FOOTER_CSS = tpl('_footer.css');
 export const COLOR_CHIPS_HTML = tpl('_color-chips.html');
 export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
 export const LISTEN_CSS = tpl('_listen.css');
+export const LISTEN_ROW_CSS = tpl('_listen-row.css');
 export const RECENT_STRIP_HTML = tpl('_recent-strip.html');
 export const RECENT_STRIP_CSS = tpl('_recent-strip.css');
 
@@ -181,6 +183,78 @@ export function platformRowFor(release) {
     .map(([key, label]) => `<a class="platform-pill" href="${esc(p[key])}" target="_blank" rel="noopener">${label} <span class="ext">↗</span></a>`);
   if (!pills.length) return '';
   return `<div class="platform-row"><span class="pr-label">also on</span>\n          ${pills.join('\n          ')}\n        </div>`;
+}
+
+// ─── "listen on:" row (albums + singles) ──────────────────────────────
+// One chip per platform that has a URL, then a DistroKid catch-all. The
+// lineup is DATA-DRIVEN on purpose: most singles only carry Apple and
+// Tidal, and a fixed Spotify/Apple/YouTube/Amazon row would render dead
+// icons on them. Spotify is not in `platforms` — it comes from the album
+// or track id, and is omitted when that id does not exist yet, which is
+// the normal state on release day.
+//
+// `spotifyUrl` is passed in rather than derived here because albums key
+// off spotifyAlbumId and singles off spotifyTrackId.
+export function listenRowFor(release, { spotifyUrl = '', hyperfollowSlug = '' } = {}) {
+  const p = { ...(release.platforms || {}) };
+  if (spotifyUrl) p.spotify = spotifyUrl;
+
+  // iTunes is not a separate URL anywhere — not in the vault, not in the
+  // data. Apple's own convention is the same album page with ?app=itunes,
+  // which opens the iTunes Store rather than Apple Music, so it is derived
+  // rather than stored. Set `itunes` explicitly on a release to override.
+  if (p.appleMusic && !p.itunes) {
+    p.itunes = p.appleMusic + (p.appleMusic.includes('?') ? '&' : '?') + 'app=itunes';
+  }
+
+  const chips = PLATFORM_ICONS
+    .filter((icon) => p[icon.key])
+    .map((icon) => {
+      // iTunes' mark already contains a ring; a chip border would draw a
+      // second one concentric with it. See _listen-row.css.
+      const ringless = icon.key === 'itunes' ? ' lo-ringless' : '';
+      return `<a class="lo-chip${ringless}" href="${esc(p[icon.key])}" target="_blank" rel="noopener" style="--brand:${icon.colour}">`
+        + `<span class="lo-glyph">${icon.svg}</span>`
+        + `<span class="lo-cap">${esc(icon.label)}</span></a>`;
+    });
+
+  // Nothing to link to at all — render nothing rather than an empty heading.
+  if (!chips.length && !hyperfollowSlug) return '';
+
+  const row2 = hyperfollowSlug
+    ? `\n      <div class="lo-row2">
+        <span class="lo-row2-label">all other platforms</span>
+        <span class="lo-row2-arrow">&rarr;</span>
+        <a class="lo-chip lo-dk" href="https://distrokid.com/hyperfollow/auny1/${esc(hyperfollowSlug)}" target="_blank" rel="noopener">
+          <span class="lo-glyph">${DISTROKID_GLYPH}</span>
+          <span class="lo-cap">DistroKid</span>
+        </a>
+      </div>`
+    : '';
+
+  return `<div class="listen-on">
+      <p class="listen-on-label">listen on:</p>
+      <div class="lo-row">
+        ${chips.join('\n        ')}
+      </div>${row2}
+    </div>`;
+}
+
+// Pre-release counterpart to listenRowFor: there are no store links yet, so
+// the DistroKid chip is the whole control. Same chip, same hover, so a page
+// does not change shape when the release lands — the row just fills in.
+export function presaveRowFor(hyperfollowSlug, { label = 'pre-save here' } = {}) {
+  if (!hyperfollowSlug) return '';
+  return `<div class="listen-on">
+      <div class="lo-row2 lo-row2-solo">
+        <span class="lo-row2-label">${esc(label)}</span>
+        <span class="lo-row2-arrow">&rarr;</span>
+        <a class="lo-chip lo-dk" href="https://distrokid.com/hyperfollow/auny1/${esc(hyperfollowSlug)}" target="_blank" rel="noopener">
+          <span class="lo-glyph">${DISTROKID_GLYPH}</span>
+          <span class="lo-cap">DistroKid</span>
+        </a>
+      </div>
+    </div>`;
 }
 
 export function platformUrls(release) {

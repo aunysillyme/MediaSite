@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER, COLOR_TYPE_INFO, colorSeriesMembers } from '../src/data/singles.js';
 import { SINGLE_NOTES } from '../src/data/singles-notes.js';
-import { navFor, esc, jsonLd, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, platformRowFor, platformUrls, coverPicture, CHARACTER_CSS, characterSectionFor } from './_lib.mjs';
+import { navFor, esc, jsonLd, NAV_CSS, PLAYER_CSS, FOOTER_CSS, FOOTER_HTML, COLOR_CHIPS_CSS, LISTEN_ROW_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, RECENT_STRIP_CSS, playerFor, footerFor, colorChipsFor, recentStripFor, registerColorTypeInfo, singleCoverPath, seriesBadge, singleGenreHead, listenRowFor, platformUrls, coverPicture, CHARACTER_CSS, characterSectionFor } from './_lib.mjs';
 
 registerColorTypeInfo(COLOR_TYPE_INFO);
 
@@ -119,12 +119,12 @@ function renderSingle(single) {
     HERO_PICTURE: coverPicture({ base: singleCoverPath(single.slug).replace(/\.jpg$/, ''), alt: `${escAttr(single.title)} cover art by Auny`, sizes: '(max-width:760px) 80vw, 420px', eager: true }),
     SPOTIFY_TRACK_ID: single.spotifyTrackId,
     // Omitted entirely until the id exists, rather than linking to ".../track/".
-    SPOTIFY_LISTEN_BLOCK: single.spotifyTrackId
-      ? `<a class="listen-now" href="https://open.spotify.com/track/${escAttr(single.spotifyTrackId)}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-      <span class="listen-dot"></span>`
-      : '',
+
     HYPERFOLLOW_SLUG: single.hyperfollowSlug,
-    PLATFORM_ROW: platformRowFor(single),
+    LISTEN_ROW: listenRowFor(single, {
+      spotifyUrl: single.spotifyTrackId ? `https://open.spotify.com/track/${single.spotifyTrackId}` : '',
+      hyperfollowSlug: single.hyperfollowSlug,
+    }),
     // Same rule as albums: no link against an empty id. Singles get released
     // immediately, which is exactly when the Spotify id does not exist yet, so
     // this is the likeliest place to reproduce the flatline dead-link bug.
@@ -151,7 +151,7 @@ function renderSingle(single) {
     FOOTER_CSS: FOOTER_CSS,
     FOOTER_HTML: footerFor({ releaseDisplay: single.releaseDisplay }),
     COLOR_CHIPS_CSS: COLOR_CHIPS_CSS,
-    LISTEN_CSS: LISTEN_CSS,
+    LISTEN_ROW_CSS: LISTEN_ROW_CSS,
     SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
     RECENT_STRIP_CSS,
     RECENT_STRIP_HTML: recentStripFor({ all: SINGLES, currentSlug: single.slug }),

@@ -126,20 +126,12 @@
     font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
   }
 
-  .listen-now {
- font-family: 'Patrick Hand', cursive; 
-    font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
-    color: var(--accent); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
-  }
   {{PLAYER_CSS}}
   {{FOOTER_CSS}}
   {{SIGNUP_CSS}}
-  .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
-  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
 
   {{COLOR_CHIPS_CSS}}
-  {{LISTEN_CSS}}
+  {{LISTEN_ROW_CSS}}
   {{CHARACTER_CSS}}
   {{RECENT_STRIP_CSS}}
 
@@ -187,7 +179,7 @@
   .lyrics-body p:last-child { margin-bottom: 0; }
   .lyrics-body .accent { color: var(--accent); }
   @media (prefers-reduced-motion: reduce) {
-    .vinyl-small, .listen-now .arrow { animation: none !important; }
+    .vinyl-small { animation: none !important; }
   }
 
   @media (max-width: 760px) {
@@ -262,11 +254,7 @@
     </div>
 {{PROD_NOTE_BLOCK}}
 
-    <div class="listen-row">
-      {{SPOTIFY_LISTEN_BLOCK}}
-      <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/{{HYPERFOLLOW_SLUG}}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
-    </div>
-    {{PLATFORM_ROW}}
+    {{LISTEN_ROW}}
 
     {{PLAYER_HTML}}
 

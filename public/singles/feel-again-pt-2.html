@@ -244,12 +244,6 @@ picture { display: contents; }
     font-family: 'Space Mono', monospace; font-size: 12.5px; line-height: 1.5; color: var(--text-soft);
   }
 
-  .listen-now {
- font-family: 'Patrick Hand', cursive; 
-    font-size: clamp(20px, 1.9vw, 28px); line-height: 1.2;
-    color: var(--accent); text-decoration: none;
-    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
-  }
   /* ─── Shared player container ──────────────────────────────────────────────
    Used on single + album pages. Wraps a Spotify embed iframe with a
    cassette-style accent strip + "now playing" indicator. Iframe height
@@ -455,8 +449,6 @@ picture { display: contents; }
 }
 
 
-  .listen-now .arrow { display: inline-block; font-style: normal; font-family: 'Space Mono', monospace; font-size: 0.7em; animation: nudge 1.6s ease-in-out infinite; }
-  @keyframes nudge { 0%,100% { transform: translateX(0); opacity: 0.7; } 50% { transform: translateX(6px); opacity: 1; } }
 
   /* ─── Color series chip row ────────────────────────────────────────────────
    Used on every color series single page (BLACK, BLUE, YELLOW, RED, PINK,
@@ -508,76 +500,118 @@ picture { display: contents; }
   color: var(--accent); font-weight: 700;
 }
 
-  /* ─── Shared "stream on all platforms" CTA ─────────────────────────────
-   The pill links out to the DistroKid hyperfollow page. The pill's
-   accent border + glow adopts the page's --accent.
+  /* ─── "listen on:" platform row (albums + singles) ─────────────────────
+   Replaces the old spotify-link + all-pill + "also on" text pills.
 
-   On singles: pill sits inline next to "listen on spotify" with a dot.
-   On albums: pill sits below the large "listen on spotify" hero link.
+   Row 1 is one chip per platform that actually has a URL — never a fixed
+   lineup, or a release with two links renders four dead icons.
+   Row 2 is the DistroKid hyperfollow catch-all.
+
+   Chips are NEUTRAL at rest so the cover art keeps the eye; the brand
+   colour, border and glow arrive only on hover, via the per-chip --brand
+   set inline by listenRowFor().
+
+   SIZING: the full six-platform lineup has to fit on ONE line inside the
+   hero's left column, which is roughly 290px. That is what fixes the chip
+   at 38px with a 12px gap and the caption at 8px — six chips plus five
+   gaps is 288px. Widen the chip or lengthen a caption and the row wraps.
 */
-.listen-row {
-  display: inline-flex; align-items: center; gap: 14px;
-  margin-bottom: 14px; flex-wrap: wrap;
-}
-.listen-row .listen-now { margin-bottom: 0 !important; }
-.listen-dot {
-  width: 4px; height: 4px; border-radius: 50%;
-  background: rgba(255,255,255,0.28);
-}
-.all-pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 7px 14px; border-radius: 999px;
-  background: rgba(var(--accent-rgb), 0.08);
-  border: 1px solid rgba(var(--accent-rgb), 0.45);
-  color: var(--accent);
-  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px;
-  text-transform: uppercase; text-decoration: none;
-  box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.18);
-  transition: box-shadow 0.25s, background 0.25s, transform 0.2s;
-}
-.all-pill:hover {
-  background: rgba(var(--accent-rgb), 0.18);
-  box-shadow: 0 0 26px rgba(var(--accent-rgb), 0.45);
-  transform: translateY(-1px);
-}
-.all-pill .ext { font-size: 0.85em; opacity: 0.85; }
+.listen-on { margin: 0 0 26px; }
 
-/* Album hero variant — stacked layout */
-.hero-listen { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 24px; }
-.hero-listen .hero-accent { margin: 0; }
-
-/* ─── "Also on" per-platform direct links ──────────────────────────────
-   Secondary row under the main CTAs. Quieter than .all-pill (neutral
-   border, no glow) so Spotify + hyperfollow stay the primary actions;
-   pills adopt the page accent on hover. Renders only platforms that
-   have a URL in the album's `platforms` map.
-*/
-.platform-row {
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  margin-top: 2px;
-}
-.platform-row .pr-label {
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(255,255,255,0.38);
-  margin-right: 2px;
-}
-.platform-pill {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 5px 11px; border-radius: 999px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.72);
-  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1.5px;
-  text-transform: uppercase; text-decoration: none;
-  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.2s;
-}
-.platform-pill:hover {
-  border-color: rgba(var(--accent-rgb), 0.6);
+.listen-on-label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: clamp(21px, 2vw, 27px);
   color: var(--accent);
-  background: rgba(var(--accent-rgb), 0.08);
-  transform: translateY(-1px);
+  margin: 0 0 14px;
 }
-.platform-pill .ext { font-size: 0.85em; opacity: 0.7; }
+
+.lo-row {
+  display: flex; align-items: flex-start; flex-wrap: wrap;
+  gap: 12px;
+}
+
+.lo-chip {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+.lo-chip .lo-glyph {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.6);
+  transition: background 0.22s ease, border-color 0.22s ease,
+              color 0.22s ease, box-shadow 0.22s ease;
+}
+.lo-chip .lo-glyph svg { width: 50%; height: 50%; display: block; }
+.lo-chip .lo-cap {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px; letter-spacing: 0.3px; white-space: nowrap;
+  color: #ffffff; opacity: 0.5;
+  transition: opacity 0.18s ease, color 0.18s ease;
+}
+.lo-chip:hover { transform: translateY(-3px); }
+.lo-chip:hover .lo-glyph {
+  background: color-mix(in srgb, var(--brand) 12%, transparent);
+  border-color: var(--brand);
+  color: var(--brand);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brand) 45%, transparent);
+}
+.lo-chip:hover .lo-cap { opacity: 1; color: var(--brand); }
+
+/* iTunes ships its own thin ring as part of the mark — one compound path,
+   so the ring cannot be split out of the SVG. Clipping the glyph to a 46%
+   circle crops the ring away and leaves the note untouched (measured: the
+   ring's inner edge sits at ~46.3%, the note's outer extent at ~40%). The
+   chip then draws the ONE ring, exactly like the other five. Tighten the
+   clip below ~44% and the top-right of the beam starts getting cut. */
+.lo-chip.lo-ringless .lo-glyph svg {
+  width: 62%; height: 62%;
+  clip-path: circle(46% at 50% 50%);
+}
+
+/* Row 2 — the catch-all */
+.lo-row2 {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 14px;
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+/* Pre-release: the DistroKid chip is the only control, so there is no row
+   above it to be divided from. */
+.lo-row2.lo-row2-solo {
+  margin-top: 0; padding-top: 0; border-top: none;
+}
+.lo-row2-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+}
+.lo-row2-arrow { color: var(--accent); }
+
+.lo-chip.lo-dk .lo-glyph {
+  background: rgba(var(--accent-rgb), 0.07);
+  border-color: rgba(var(--accent-rgb), 0.42);
+  color: var(--accent);
+  font-size: 17px; letter-spacing: 1px; line-height: 1;
+}
+.lo-chip.lo-dk:hover .lo-glyph {
+  background: rgba(var(--accent-rgb), 0.16);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.45);
+}
+.lo-chip.lo-dk .lo-cap { color: var(--accent); opacity: 0.6; }
+.lo-chip.lo-dk:hover .lo-cap { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lo-chip, .lo-chip .lo-glyph, .lo-chip .lo-cap { transition: none; }
+  .lo-chip:hover { transform: none; }
+}
+
+@media (max-width: 560px) {
+  .lo-row { gap: 10px; }
+  .lo-chip .lo-glyph { width: 36px; height: 36px; }
+}
 
   /* The character block. Shared by album and single pages, so it carries its own
    class names rather than leaning on .notes-section, which only album pages
@@ -708,7 +742,7 @@ picture { display: contents; }
   .lyrics-body p:last-child { margin-bottom: 0; }
   .lyrics-body .accent { color: var(--accent); }
   @media (prefers-reduced-motion: reduce) {
-    .vinyl-small, .listen-now .arrow { animation: none !important; }
+    .vinyl-small { animation: none !important; }
   }
 
   @media (max-width: 760px) {
@@ -737,7 +771,7 @@ picture { display: contents; }
   "datePublished": "2026-01-07",
   "genre": "Lyrical · Acoustic · Stripped",
   "url": "https://www.auny.media/singles/feel-again-pt-2",
-  "sameAs": ["https://open.spotify.com/track/45HllYwWEtFM4QMZasx7rQ","https://music.apple.com/us/album/feel-again-pt-2/1867296769","https://tidal.com/track/487934983","https://www.pandora.com/TR:188026007","https://distrokid.com/hyperfollow/auny1/feel-again-pt-2"],
+  "sameAs": ["https://open.spotify.com/track/45HllYwWEtFM4QMZasx7rQ","https://music.apple.com/us/album/feel-again-pt-2/1867296769","https://music.youtube.com/browse/MPREb_wPCKCrx5wci","https://tidal.com/track/487934983","https://www.deezer.com/album/892889662","https://www.pandora.com/TR:188026007","https://distrokid.com/hyperfollow/auny1/feel-again-pt-2"],
   "image": "https://www.auny.media/album-art/singles/feel-again-pt-2.jpg",
   "recordingOf": {
     "@type": "MusicComposition",
@@ -1100,16 +1134,24 @@ picture { display: contents; }
     </div>
 
 
-    <div class="listen-row">
-      <a class="listen-now" href="https://open.spotify.com/track/45HllYwWEtFM4QMZasx7rQ" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-      <span class="listen-dot"></span>
-      <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/feel-again-pt-2" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
+    <div class="listen-on">
+      <p class="listen-on-label">listen on:</p>
+      <div class="lo-row">
+        <a class="lo-chip" href="https://open.spotify.com/track/45HllYwWEtFM4QMZasx7rQ" target="_blank" rel="noopener" style="--brand:#1ED760"><span class="lo-glyph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></span><span class="lo-cap">Spotify</span></a>
+        <a class="lo-chip" href="https://music.apple.com/us/album/feel-again-pt-2/1867296769" target="_blank" rel="noopener" style="--brand:#FA243C"><span class="lo-glyph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043a5.022 5.022 0 00-1.877-.726 10.496 10.496 0 00-1.564-.15c-.04-.003-.083-.01-.124-.013H5.986c-.152.01-.303.017-.455.026-.747.043-1.49.123-2.193.4-1.336.53-2.3 1.452-2.865 2.78-.192.448-.292.925-.363 1.408-.056.392-.088.785-.1 1.18 0 .032-.007.062-.01.093v12.223c.01.14.017.283.027.424.05.815.154 1.624.497 2.373.65 1.42 1.738 2.353 3.234 2.801.42.127.856.187 1.293.228.555.053 1.11.06 1.667.06h11.03a12.5 12.5 0 001.57-.1c.822-.106 1.596-.35 2.295-.81a5.046 5.046 0 001.88-2.207c.186-.42.293-.87.37-1.324.113-.675.138-1.358.137-2.04-.002-3.8 0-7.595-.003-11.393zm-6.423 3.99v5.712c0 .417-.058.827-.244 1.206-.29.59-.76.962-1.388 1.14-.35.1-.706.157-1.07.173-.95.045-1.773-.6-1.943-1.536a1.88 1.88 0 011.038-2.022c.323-.16.67-.25 1.018-.324.378-.082.758-.153 1.134-.24.274-.063.457-.23.51-.516a.904.904 0 00.02-.193c0-1.815 0-3.63-.002-5.443a.725.725 0 00-.026-.185c-.04-.15-.15-.243-.304-.234-.16.01-.318.035-.475.066-.76.15-1.52.303-2.28.456l-2.325.47-1.374.278c-.016.003-.032.01-.048.013-.277.077-.377.203-.39.49-.002.042 0 .086 0 .13-.002 2.602 0 5.204-.003 7.805 0 .42-.047.836-.215 1.227-.278.64-.77 1.04-1.434 1.233-.35.1-.71.16-1.075.172-.96.036-1.755-.6-1.92-1.544-.14-.812.23-1.685 1.154-2.075.357-.15.73-.232 1.108-.31.287-.06.575-.116.86-.177.383-.083.583-.323.6-.714v-.15c0-2.96 0-5.922.002-8.882 0-.123.013-.25.042-.37.07-.285.273-.448.546-.518.255-.066.515-.112.774-.165.733-.15 1.466-.296 2.2-.444l2.27-.46c.67-.134 1.34-.27 2.01-.403.22-.043.442-.088.663-.106.31-.025.523.17.554.482.008.073.012.148.012.223.002 1.91.002 3.822 0 5.732z"/></svg></span><span class="lo-cap">Apple</span></a>
+        <a class="lo-chip lo-ringless" href="https://music.apple.com/us/album/feel-again-pt-2/1867296769?app=itunes" target="_blank" rel="noopener" style="--brand:#FB5BC5"><span class="lo-glyph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.977 23.999c-2.483 0-4.898-.777-6.954-2.262a11.928 11.928 0 01-4.814-7.806A11.954 11.954 0 012.3 4.994 11.85 11.85 0 0110.08.159a11.831 11.831 0 018.896 2.104 11.933 11.933 0 014.815 7.807 11.958 11.958 0 01-2.091 8.937 11.855 11.855 0 01-7.78 4.835 12.17 12.17 0 01-1.943.157zm-6.474-2.926a11.022 11.022 0 008.284 1.96 11.044 11.044 0 007.246-4.504c3.583-5.003 2.445-12.003-2.538-15.603a11.022 11.022 0 00-8.284-1.96A11.046 11.046 0 002.966 5.47C-.618 10.474.521 17.473 5.503 21.073zm10.606-3.552a2.08 2.08 0 001.458-1.468l.062-.216.008-5.786c.006-4.334 0-5.814-.024-5.895a.535.535 0 00-.118-.214.514.514 0 00-.276-.073c-.073 0-.325.035-.56.078-1.041.19-7.176 1.411-7.281 1.45a.786.786 0 00-.399.354l-.065.128s-.031 9.07-.078 9.172a.7.7 0 01-.376.35 9.425 9.425 0 01-.609.137c-1.231.245-1.688.421-2.075.801-.22.216-.382.51-.453.82-.067.294-.045.736.051 1.005.1.281.262.521.473.71.192.148.419.258.674.324.563.144 1.618-.016 2.158-.328a2.36 2.36 0 00.667-.629c.06-.089.15-.268.2-.399.176-.456.181-8.581.204-8.683a.44.44 0 01.32-.344c.147-.04 6.055-1.207 6.222-1.23.146-.02.284.027.36.12a.29.29 0 01.109.096c.048.07.051.213.058 2.785.008 2.96.012 2.892-.149 3.079-.117.136-.263.189-.864.31-.914.188-1.226.276-1.576.447-.437.213-.679.446-.867.835a1.58 1.58 0 00-.182.754c.001.49.169.871.55 1.245.035.034.069.066.104.097.192.148.387.238.633.294.37.082 1.124.025 1.641-.126z"/></svg></span><span class="lo-cap">iTunes</span></a>
+        <a class="lo-chip" href="https://music.youtube.com/browse/MPREb_wPCKCrx5wci" target="_blank" rel="noopener" style="--brand:#FF0000"><span class="lo-glyph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896s7.104 3.18 7.104 7.104-3.18 7.104-7.104 7.104zm0-13.332c-3.432 0-6.228 2.796-6.228 6.228S8.568 18.228 12 18.228s6.228-2.796 6.228-6.228S15.432 5.772 12 5.772zM9.684 15.54V8.46L15.816 12l-6.132 3.54z"/></svg></span><span class="lo-cap">YT Music</span></a>
+        <a class="lo-chip" href="https://tidal.com/track/487934983" target="_blank" rel="noopener" style="--brand:#E7E7EA"><span class="lo-glyph"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996 4.004 12l4.004-4.004L12.012 12l-4.004 4.004 4.004 4.004 4.004-4.004L12.012 12l4.004-4.004-4.004-4.004zM16.042 7.996l3.979-3.979L24 7.996l-3.979 3.979z"/></svg></span><span class="lo-cap">Tidal</span></a>
+      </div>
+      <div class="lo-row2">
+        <span class="lo-row2-label">all other platforms</span>
+        <span class="lo-row2-arrow">&rarr;</span>
+        <a class="lo-chip lo-dk" href="https://distrokid.com/hyperfollow/auny1/feel-again-pt-2" target="_blank" rel="noopener">
+          <span class="lo-glyph">•••</span>
+          <span class="lo-cap">DistroKid</span>
+        </a>
+      </div>
     </div>
-    <div class="platform-row"><span class="pr-label">also on</span>
-          <a class="platform-pill" href="https://music.apple.com/us/album/feel-again-pt-2/1867296769" target="_blank" rel="noopener">Apple Music <span class="ext">↗</span></a>
-          <a class="platform-pill" href="https://tidal.com/track/487934983" target="_blank" rel="noopener">Tidal <span class="ext">↗</span></a>
-          <a class="platform-pill" href="https://www.pandora.com/TR:188026007" target="_blank" rel="noopener">Pandora <span class="ext">↗</span></a>
-        </div>
 
     <!-- Shared Spotify player. Renders a lightweight click-to-play facade (cover +
      play button) instead of the ~2MB Spotify iframe; the iframe is injected

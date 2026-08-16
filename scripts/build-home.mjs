@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture, todayISO, isReleased, isLiveTeaser, pendingIds } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, LISTEN_ROW_CSS, listenRowFor, presaveRowFor, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture, todayISO, isReleased, isLiveTeaser, pendingIds } from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -72,25 +72,21 @@ const teaserComing = latest.releaseDate && latest.releaseDate > today
 const latestTagBlock = latestUpcoming
   ? `<p class="featured-tag upcoming"><span class="dot"></span>${teaserComing}</p>`
   : `<p class="featured-tag">${esc(latestType)} · ${esc(latest.releaseDisplay)}</p>`;
-const latestListenRow = latestTeaser
+const latestListenRow = latestTeaser || latestUpcoming
+  // Pre-release: nothing to link to yet, so the hyperfollow chip is the whole
+  // control. A teaser with no slug at all falls back to the album page.
   ? (latest.hyperfollowSlug
-    ? `<div class="listen-row">
-          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · follow on all platforms <span class="ext">↗</span></a>
-        </div>`
+    ? presaveRowFor(latest.hyperfollowSlug)
     : `<div class="listen-row">
-          <a class="all-pill" href="${latestUrl}">view album <span class="ext">→</span></a>
+          <a class="all-pill" href="${latestUrl}">view album <span class="ext">&rarr;</span></a>
         </div>`)
-  : latestUpcoming
-  ? `<div class="listen-row">
-          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">pre-save · stream on all platforms <span class="ext">↗</span></a>
-        </div>`
-  // Same rule as the album page: no Spotify CTA until the id exists, because
-  // ".../album/" is a dead click. The all-platforms link carries it meanwhile.
-  : `<div class="listen-row">${(latestIsAlbum ? latest.spotifyAlbumId : latest.spotifyTrackId) ? `
-          <a class="listen-now" href="${latestSpotifyUrl}" target="_blank" rel="noopener">listen on spotify <span class="arrow">→</span></a>
-          <span class="listen-dot"></span>` : ''}
-          <a class="all-pill" href="https://distrokid.com/hyperfollow/auny1/${latest.hyperfollowSlug}" target="_blank" rel="noopener">stream on all platforms <span class="ext">↗</span></a>
-        </div>`;
+  // Released: the same lineup the release page shows, from the same renderer,
+  // so the two cannot drift. Spotify is omitted until its id exists, because
+  // ".../album/" is a dead click.
+  : listenRowFor(latest, {
+      spotifyUrl: (latestIsAlbum ? latest.spotifyAlbumId : latest.spotifyTrackId) ? latestSpotifyUrl : '',
+      hyperfollowSlug: latest.hyperfollowSlug,
+    });
 
 function miniAlbum(a) {
   return `    <a class="mini-card" href="/albums/${a.slug}">
@@ -171,6 +167,7 @@ const html = render(HOME_TPL, {
   SERIES_TOTAL: String(COLOR_SERIES.length),
   SERIES_CARD_CSS,
   LISTEN_CSS,
+  LISTEN_ROW_CSS,
   SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
   FOOTER_HTML, FOOTER_CSS,
   NAV: navFor(),

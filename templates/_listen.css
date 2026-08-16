@@ -1,9 +1,12 @@
-/* ─── Shared "stream on all platforms" CTA ─────────────────────────────
-   The pill links out to the DistroKid hyperfollow page. The pill's
-   accent border + glow adopts the page's --accent.
+/* ─── Pre-release "pre-save / follow on all platforms" CTA ─────────────
+   The pill links out to the DistroKid hyperfollow page and adopts the
+   page's --accent for its border + glow.
 
-   On singles: pill sits inline next to "listen on spotify" with a dot.
-   On albums: pill sits below the large "listen on spotify" hero link.
+   SCOPE: teaser and upcoming ALBUMS only, plus home.html's own pills.
+   Once a release is out, the CTA is replaced by the platform row in
+   _listen-row.css, so `.listen-row`, `.listen-now`, `.platform-pill` and
+   `.platform-row` below are reachable only from the pre-release branches
+   of build-albums.mjs. Singles no longer load this file at all.
 */
 .listen-row {
   display: inline-flex; align-items: center; gap: 14px;
