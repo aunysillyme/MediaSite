@@ -684,6 +684,70 @@ picture { display: contents; }
 .char-arc .sk { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 .char-arc .sv { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: var(--accent); }
 
+  /* ─── Recent releases strip ──────────────────────────────────────────
+   Bottom-of-page exit-ramp: 4 mini-cards of the most recent releases,
+   excluding the current one. Lifts internal-link equity across the
+   catalog and gives readers a clean way back into the music.
+
+   Loaded by BOTH single and album pages from one partial, so the two
+   cannot drift; recentStripFor() only swaps the href prefix and the
+   cover markup.
+
+   SIZING: the row is capped at 1008px rather than filling the 1240px
+   section, which lands each card at 240px — 15% down from the 282px a
+   full-width 4-up gave. Below that cap the columns still flex, so the
+   card is a ceiling, not a fixed width.
+*/
+.recent-strip {
+  max-width: 1240px; margin: 64px auto 0; padding: 0 32px;
+  position: relative; z-index: 4;
+}
+.recent-strip-label {
+  font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+  margin: 0 0 18px;
+}
+.recent-strip-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;
+  max-width: 1008px;
+}
+.recent-strip .mini-card {
+  display: block; text-decoration: none; color: inherit;
+  background: rgba(255,255,255,0.025);
+  border-radius: 10px; padding: 8px;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+.recent-strip .mini-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--accent-rgb), 0.4);
+  background: rgba(255,255,255,0.04);
+}
+.recent-strip .mini-card .cover {
+  position: relative; border-radius: 7px; overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.recent-strip .mini-card .cover img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.recent-strip .mini-card .body { padding: 10px 4px 4px; }
+.recent-strip .mini-card-title {
+  font-family: 'Outfit', sans-serif; font-weight: 700;
+  font-size: 14px; line-height: 1.2; color: #fff;
+  margin: 0 0 4px;
+  overflow: hidden; text-overflow: ellipsis;
+  display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;
+}
+.recent-strip .mini-card-meta {
+  font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+}
+@media (max-width: 760px) {
+  .recent-strip { margin-top: 48px; padding: 0 20px; }
+  .recent-strip-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
   @keyframes fadeup {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -1349,6 +1413,50 @@ picture { display: contents; }
     <div class="trk"><span class="trk-n">11</span><span class="trk-t">Believe</span><span class="trk-desc">Crystalline voice-machine, white-gold lotus, first light — the arc breaks to dawn</span></div>
     </div>
   </section>
+
+<!-- "More recent releases" strip — rendered at the bottom of every single
+     and album page. Shows the N newest releases of that same kind,
+     excluding the current one. Filled by recentStripFor() in _lib.mjs.
+
+     Variables: HEADING (label text) and CARDS (pre-rendered mini-cards).
+     Do NOT write those names in brace form here — render() replaceAll's
+     across the whole file, comments included, so a documented placeholder
+     gets substituted and ships a duplicate card block inside this comment.
+-->
+<section class="recent-strip" aria-label="More recent releases">
+  <p class="recent-strip-label">more recent releases →</p>
+  <div class="recent-strip-row">
+    <a class="mini-card" href="/albums/dreams">
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/dreams-320.avif 320w, /album-art/dreams-640.avif 640w" sizes="(max-width:760px) 45vw, 240px"><source type="image/webp" srcset="/album-art/dreams-320.webp 320w, /album-art/dreams-640.webp 640w" sizes="(max-width:760px) 45vw, 240px"><img src="/album-art/dreams.jpg" alt="dreaMs cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
+      <div class="body">
+        <div class="mini-card-title">dreaMs</div>
+        <div class="mini-card-meta">July 11, 2026</div>
+      </div>
+    </a>
+    <a class="mini-card" href="/albums/flatline">
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/flatline-320.avif 320w, /album-art/flatline-640.avif 640w" sizes="(max-width:760px) 45vw, 240px"><source type="image/webp" srcset="/album-art/flatline-320.webp 320w, /album-art/flatline-640.webp 640w" sizes="(max-width:760px) 45vw, 240px"><img src="/album-art/flatline.jpg" alt="Flatline cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
+      <div class="body">
+        <div class="mini-card-title">Flatline</div>
+        <div class="mini-card-meta">June 5, 2026</div>
+      </div>
+    </a>
+    <a class="mini-card" href="/albums/midnight-glitch">
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/midnight-glitch-320.avif 320w, /album-art/midnight-glitch-640.avif 640w" sizes="(max-width:760px) 45vw, 240px"><source type="image/webp" srcset="/album-art/midnight-glitch-320.webp 320w, /album-art/midnight-glitch-640.webp 640w" sizes="(max-width:760px) 45vw, 240px"><img src="/album-art/midnight-glitch.jpg" alt="Midnight Glitch cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
+      <div class="body">
+        <div class="mini-card-title">Midnight Glitch</div>
+        <div class="mini-card-meta">May 6, 2026</div>
+      </div>
+    </a>
+    <a class="mini-card" href="/albums/graveyard-echoes">
+      <div class="cover"><picture><source type="image/avif" srcset="/album-art/graveyard-echoes-320.avif 320w, /album-art/graveyard-echoes-640.avif 640w" sizes="(max-width:760px) 45vw, 240px"><source type="image/webp" srcset="/album-art/graveyard-echoes-320.webp 320w, /album-art/graveyard-echoes-640.webp 640w" sizes="(max-width:760px) 45vw, 240px"><img src="/album-art/graveyard-echoes.jpg" alt="Graveyard Echoes cover" width="640" height="640" loading="lazy" decoding="async"></picture></div>
+      <div class="body">
+        <div class="mini-card-title">Graveyard Echoes</div>
+        <div class="mini-card-meta">April 20, 2026</div>
+      </div>
+    </a>
+  </div>
+</section>
+
 
 <!-- Newsletter signup — minimal one-line form. Posts to /api/subscribe → beehiiv. -->
 <form class="signup" id="signup-form" novalidate>

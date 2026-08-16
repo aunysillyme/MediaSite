@@ -126,20 +126,31 @@ export function pendingIds(releases, today = todayISO()) {
   return pending;
 }
 
-// Renders the "more recent releases →" strip for single pages.
-// Picks the N newest singles (by releaseDate desc) excluding currentSlug.
-// `all` is the SINGLES array; caller passes it to avoid a circular import.
-export function recentStripFor({ all, currentSlug, limit = 4, heading = 'more recent releases →' }) {
+// Renders the "more recent releases →" strip at the bottom of a release page.
+// Picks the N newest items (by releaseDate desc) excluding currentSlug.
+// `all` is the SINGLES or ALBUMS array; the caller passes it to avoid a
+// circular import.
+//
+// ONE function serves both page types, on purpose — a single page's strip and
+// an album page's strip drifting apart is exactly the failure `releaseStatus()`
+// and `listenRowFor()` were consolidated to prevent. `kind` only switches the
+// href prefix and the cover markup: singles ship one flat jpg/svg, albums ship
+// a responsive avif/webp set.
+export function recentStripFor({ all, currentSlug, kind = 'single', limit = 4, heading = 'more recent releases →' }) {
+  const isAlbum = kind === 'album';
   const ordered = [...all]
-    .filter((s) => s.slug !== currentSlug)
+    .filter((r) => r.slug !== currentSlug)
     .sort((a, b) => (a.releaseDate < b.releaseDate ? 1 : -1))
     .slice(0, limit);
-  const cards = ordered.map((s) => {
-    return `    <a class="mini-card" href="/singles/${s.slug}">
-      <div class="cover"><img src="${singleCoverPath(s.slug)}" alt="${esc(s.title)} cover" loading="lazy" width="640" height="640"></div>
+  const cards = ordered.map((r) => {
+    const cover = isAlbum
+      ? coverPicture({ base: `/album-art/${r.slug}`, alt: `${esc(r.title)} cover`, sizes: '(max-width:760px) 45vw, 240px' })
+      : `<img src="${singleCoverPath(r.slug)}" alt="${esc(r.title)} cover" loading="lazy" width="640" height="640">`;
+    return `    <a class="mini-card" href="/${isAlbum ? 'albums' : 'singles'}/${r.slug}">
+      <div class="cover">${cover}</div>
       <div class="body">
-        <div class="mini-card-title">${esc(s.title)}</div>
-        <div class="mini-card-meta">${esc(s.releaseDisplay)}</div>
+        <div class="mini-card-title">${esc(r.title)}</div>
+        <div class="mini-card-meta">${esc(r.releaseDisplay)}</div>
       </div>
     </a>`;
   }).join('\n');

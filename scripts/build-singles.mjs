@@ -154,7 +154,7 @@ function renderSingle(single) {
     LISTEN_ROW_CSS: LISTEN_ROW_CSS,
     SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS,
     RECENT_STRIP_CSS,
-    RECENT_STRIP_HTML: recentStripFor({ all: SINGLES, currentSlug: single.slug }),
+    RECENT_STRIP_HTML: recentStripFor({ all: SINGLES, currentSlug: single.slug, kind: 'single' }),
   };
   return Object.entries(replacements).reduce(
     (html, [key, val]) => html.replaceAll(`{{${key}}}`, val),

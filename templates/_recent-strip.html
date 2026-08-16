@@ -1,8 +1,11 @@
 <!-- "More recent releases" strip — rendered at the bottom of every single
-     page above the lyrics' closing. Shows the N newest singles excluding
-     the current one. Variables:
-       {{HEADING}}    label text (e.g. "more recent releases →")
-       {{CARDS}}      pre-rendered mini-card markup
+     and album page. Shows the N newest releases of that same kind,
+     excluding the current one. Filled by recentStripFor() in _lib.mjs.
+
+     Variables: HEADING (label text) and CARDS (pre-rendered mini-cards).
+     Do NOT write those names in brace form here — render() replaceAll's
+     across the whole file, comments included, so a documented placeholder
+     gets substituted and ships a duplicate card block inside this comment.
 -->
 <section class="recent-strip" aria-label="More recent releases">
   <p class="recent-strip-label">{{HEADING}}</p>

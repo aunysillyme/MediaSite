@@ -3,7 +3,7 @@
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
 import { ALBUM_NOTES } from '../src/data/album-notes.js';
-import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, LISTEN_ROW_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, listenRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl, CHARACTER_CSS, characterSectionFor } from './_lib.mjs';
+import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, LISTEN_ROW_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, listenRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl, CHARACTER_CSS, characterSectionFor, RECENT_STRIP_CSS, recentStripFor } from './_lib.mjs';
 import { join } from 'node:path';
 
 // "The Making" + enriched tracklist — rendered only for albums with a notes entry.
@@ -243,6 +243,8 @@ function renderAlbum(album) {
     CHARACTER_CSS,
     MAKING_SECTION: makingSectionFor(album),
     TRACKLIST_SECTION: tracklistSectionFor(album),
+    RECENT_STRIP_CSS,
+    RECENT_STRIP_HTML: recentStripFor({ all: ALBUMS, currentSlug: album.slug, kind: 'album' }),
     UPCOMING_BANNER: upcomingBanner,
     HERO_LABEL_SUFFIX: heroLabelSuffix,
     FOOTER_CSS: FOOTER_CSS,

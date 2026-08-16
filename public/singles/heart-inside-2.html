@@ -644,9 +644,18 @@ picture { display: contents; }
 .char-arc .sv { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 15px; color: var(--accent); }
 
   /* ─── Recent releases strip ──────────────────────────────────────────
-   Bottom-of-page exit-ramp: 4 mini-cards of the most recent singles,
+   Bottom-of-page exit-ramp: 4 mini-cards of the most recent releases,
    excluding the current one. Lifts internal-link equity across the
    catalog and gives readers a clean way back into the music.
+
+   Loaded by BOTH single and album pages from one partial, so the two
+   cannot drift; recentStripFor() only swaps the href prefix and the
+   cover markup.
+
+   SIZING: the row is capped at 1008px rather than filling the 1240px
+   section, which lands each card at 240px — 15% down from the 282px a
+   full-width 4-up gave. Below that cap the columns still flex, so the
+   card is a ceiling, not a fixed width.
 */
 .recent-strip {
   max-width: 1240px; margin: 64px auto 0; padding: 0 32px;
@@ -659,7 +668,8 @@ picture { display: contents; }
 }
 .recent-strip-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); gap: 16px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px;
+  max-width: 1008px;
 }
 .recent-strip .mini-card {
   display: block; text-decoration: none; color: inherit;
@@ -1239,37 +1249,13 @@ picture { display: contents; }
 
 
 <!-- "More recent releases" strip — rendered at the bottom of every single
-     page above the lyrics' closing. Shows the N newest singles excluding
-     the current one. Variables:
-       more recent releases →    label text (e.g. "more recent releases →")
-           <a class="mini-card" href="/singles/mechanical-screen">
-      <div class="cover"><img src="/album-art/singles/mechanical-screen.jpg" alt="Mechanical Screen cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Mechanical Screen</div>
-        <div class="mini-card-meta">May 29, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/cyan">
-      <div class="cover"><img src="/album-art/singles/cyan.jpg" alt="CYAN cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">CYAN</div>
-        <div class="mini-card-meta">May 24, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/let-go">
-      <div class="cover"><img src="/album-art/singles/let-go.jpg" alt="Let Go cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">Let Go</div>
-        <div class="mini-card-meta">May 16, 2026</div>
-      </div>
-    </a>
-    <a class="mini-card" href="/singles/pink">
-      <div class="cover"><img src="/album-art/singles/pink.jpg" alt="PINK cover" loading="lazy" width="640" height="640"></div>
-      <div class="body">
-        <div class="mini-card-title">PINK</div>
-        <div class="mini-card-meta">May 4, 2026</div>
-      </div>
-    </a>      pre-rendered mini-card markup
+     and album page. Shows the N newest releases of that same kind,
+     excluding the current one. Filled by recentStripFor() in _lib.mjs.
+
+     Variables: HEADING (label text) and CARDS (pre-rendered mini-cards).
+     Do NOT write those names in brace form here — render() replaceAll's
+     across the whole file, comments included, so a documented placeholder
+     gets substituted and ships a duplicate card block inside this comment.
 -->
 <section class="recent-strip" aria-label="More recent releases">
   <p class="recent-strip-label">more recent releases →</p>
