@@ -4,6 +4,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CHARACTERS } from '../src/data/characters.js';
 import { PLATFORM_ICONS, DISTROKID_GLYPH } from '../src/data/platform-icons.js';
+import { OG_CARDS } from '../src/data/og-cards.js';
 
 export const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const tpl = (name) => readFileSync(join(root, 'templates', name), 'utf8');
@@ -19,6 +20,21 @@ export const COLOR_CHIPS_CSS = tpl('_color-chips.css');
 export const LISTEN_CSS = tpl('_listen.css');
 export const LISTEN_ROW_CSS = tpl('_listen-row.css');
 export const RECENT_STRIP_HTML = tpl('_recent-strip.html');
+
+// Absolute URL of a page's link-preview card, carrying the content hash written
+// by scripts/build-og.mjs. The hash is the point: scrapers cache OG images hard,
+// so a redesign that reuses the filename keeps showing the old card for months.
+// Album and single pages do NOT use this — they preview with their own artwork.
+export function ogImage(name) {
+  const v = OG_CARDS[name];
+  if (!v) {
+    throw new Error(
+      `No link-preview card named "${name}". Known: ${Object.keys(OG_CARDS).join(', ')}. `
+      + 'Run `npm run build:og` if you added a card.'
+    );
+  }
+  return `https://www.auny.media/images/og/${name}.png?v=${v}`;
+}
 export const RECENT_STRIP_CSS = tpl('_recent-strip.css');
 
 // ---------------------------------------------------------------------------

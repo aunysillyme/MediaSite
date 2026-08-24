@@ -14,7 +14,8 @@
     "preview": "vite preview",
     "build:images": "node scripts/optimize-images.mjs",
     "build:poetry": "node scripts/build-poetry.mjs",
-    "build:llms": "node scripts/build-llms.mjs"
+    "build:llms": "node scripts/build-llms.mjs",
+    "build:og": "node scripts/build-og.mjs"
   },
   "devDependencies": {
     "sharp": "^0.35.0",

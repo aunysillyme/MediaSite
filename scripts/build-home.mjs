@@ -3,7 +3,7 @@
 
 import { ALBUMS } from '../src/data/albums.js';
 import { SINGLES, COLOR_SERIES, COLOR_SERIES_ORDER } from '../src/data/singles.js';
-import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, LISTEN_ROW_CSS, listenRowFor, presaveRowFor, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture, todayISO, isReleased, isLiveTeaser, pendingIds } from './_lib.mjs';
+import { tpl, navFor, esc, writeOut, render, NAV_CSS, LISTEN_CSS, LISTEN_ROW_CSS, listenRowFor, presaveRowFor, SERIES_CARD_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, FOOTER_HTML, FOOTER_CSS, singleCoverPath, seriesBadge, coverPicture, todayISO, isReleased, isLiveTeaser, pendingIds , ogImage} from './_lib.mjs';
 import { writeFileSync, readFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -141,6 +141,7 @@ function miniPink() {
 pendingIds([...ALBUMS, ...SINGLES]);
 
 const html = render(HOME_TPL, {
+    OG_IMAGE: ogImage('home'),
   LATEST_URL: latestUrl,
   LATEST_COVER: latestCover,
   LATEST_PICTURE: coverPicture({ base: latestCover.replace(/\.jpg$/, ''), alt: `${esc(latest.title)} cover`, sizes: '(max-width:860px) 90vw, 460px', eager: true }),
@@ -184,6 +185,7 @@ const LINKS_TPL = tpl('links.html');
 // shows every platform, and adding signup/global-footer breaks the
 // centered flex layout. Keep nav only.
 const linksHtml = render(LINKS_TPL, {
+  OG_IMAGE: ogImage('links'),
   NAV: navFor('links'),
   NAV_CSS: NAV_CSS,
 });

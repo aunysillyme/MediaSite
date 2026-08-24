@@ -3,7 +3,7 @@
 
 import { ALBUMS, ringsFor } from '../src/data/albums.js';
 import { ALBUM_NOTES } from '../src/data/album-notes.js';
-import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, LISTEN_ROW_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, listenRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl, CHARACTER_CSS, characterSectionFor, RECENT_STRIP_CSS, recentStripFor } from './_lib.mjs';
+import { tpl, navFor, esc, jsonLd, writeOut, render, NAV_CSS, PLAYER_CSS, FOOTER_CSS, LISTEN_CSS, LISTEN_ROW_CSS, SIGNUP_HTML, SIGNUP_CSS, SIGNUP_JS, playerFor, footerFor, albumGenreHead, listenRowFor, platformUrls, coverPicture, todayISO, isUpcoming as isUpcomingFn, isLiveTeaser, pendingIds, safeUrl, CHARACTER_CSS, characterSectionFor, RECENT_STRIP_CSS, recentStripFor , ogImage} from './_lib.mjs';
 import { join } from 'node:path';
 
 // "The Making" + enriched tracklist — rendered only for albums with a notes entry.
@@ -316,6 +316,7 @@ function listJsonLd() {
 
 function renderList() {
   return render(LIST_TPL, {
+    OG_IMAGE: ogImage('albums'),
     ALBUM_CARDS: ALBUMS.map(cardHtml).join('\n'),
     ALBUM_COUNT: String(ALBUMS.length),
     LIST_JSONLD: listJsonLd(),
