@@ -98,12 +98,10 @@
     letter-spacing: -3px; margin-bottom: 12px;
     text-shadow: 0 0 80px rgba(var(--accent-rgb),0.45);
   }
-  .hero-tagline {
- font-family: 'Patrick Hand', cursive; 
-    font-size: clamp(18px, 2vw, 28px); line-height: 1.25;
-    color: rgba(255,255,255,0.92); margin-bottom: 14px; max-width: 540px;
-  }
   .hero-subline {
+    /* Sat under .hero-tagline until 2026-08-24; the tagline carried the gap
+       below the wordmark, so that spacing moved here when it was cut. */
+    margin-top: 8px;
     font-family: 'Space Mono', monospace; font-size: 13px; line-height: 1.5;
     color: rgba(255,255,255,0.7); margin-bottom: 24px; max-width: 540px;
   }
@@ -337,7 +335,6 @@
   <div class="hero-left">
     <p class="hero-label">✦ &nbsp; auny · music · lyrics · the lighthouse</p>
     <h1 class="hero-name">AUNY</h1>
-    <p class="hero-tagline">Music for the in-between hours. Drive music. Focus. The void. The warm light that survives it.</p>
     <p class="hero-subline">Dark EDM, lo-fi, ambient instrumentals and vocal singles. For late nights, long drives, focus, and feeling seen.</p>
     <div class="hero-stats">
       <div class="stat"><span class="stat-num">{{TOTAL_ALBUMS}}</span><span class="stat-label">Albums</span></div>
