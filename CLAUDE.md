@@ -14,7 +14,8 @@ These apply to every Claude session working on auny.media. Read them before acti
 
 - Static multi-page site, deploys from `main` via Vercel project `media-site` (team `aunysillymes-projects`).
 - Domain `auny.media` (+ `www`), behind Cloudflare proxy (zone in "Auny on Cloud9"). Registrar is Name.com via Vercel reseller.
-- Build pipeline: `npm run build:site` chains `optimize-images → singles → albums → home → sitemap`. All builders read from `src/data/{albums,singles}.js` and templates in `templates/`.
+- Build pipeline: `npm run build:site` chains `optimize-images → singles → albums → home → poetry → go → llms → sitemap`. All builders read from `src/data/{albums,singles}.js` and templates in `templates/`.
+- `/go/<slug>/apple` are ad-tracking bounce pages (`scripts/build-go.mjs`, `templates/go.html`), one per release, carrying the X pixel `od2kw` and forwarding to Apple Music. They exist because the pixel cannot run on Apple's domain. `noindex`, absent from the sitemap, linked from nowhere. Their CSP is a SEPARATE `vercel.json` block; the global rule excludes `/go/` via `/((?!go/).*)` so exactly one CSP header is emitted per response — two matching rules would emit two CSP headers and browsers enforce the intersection.
 - Image pipeline ships 320/640 AVIF+WebP per cover via `coverPicture()` in `scripts/_lib.mjs`; master JPEG remains the `<picture>` fallback + `og:image`.
 - Fonts self-hosted under `public/fonts/` (5 latin woff2 faces). Don't re-add Google Fonts.
 - CSP lives in `vercel.json` headers (not Cloudflare Transform Rules — they'd duplicate).

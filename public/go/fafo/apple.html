@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F A F O by Auny — listen on Apple Music</title>
+<meta name="description" content="F A F O by Auny. Opening on Apple Music.">
+
+<!-- Per-release OG is the whole reason these are pages and not one query-param
+     route: her ads are promoted organic posts, so X SCRAPES the link card and a
+     single shared route would show the same card for all 36 releases. -->
+<meta property="og:type" content="music.album">
+<meta property="og:title" content="F A F O by Auny">
+<meta property="og:description" content="Listen on Apple Music.">
+<meta property="og:image" content="https://www.auny.media/album-art/singles/fafo.jpg">
+<meta property="og:url" content="https://www.auny.media/go/fafo/apple">
+<meta property="og:site_name" content="auny.media">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AunySillyMe">
+<meta name="twitter:creator" content="@AunySillyMe">
+<meta name="twitter:title" content="F A F O by Auny">
+<meta name="twitter:description" content="Listen on Apple Music.">
+<meta name="twitter:image" content="https://www.auny.media/album-art/singles/fafo.jpg">
+
+<!-- These pages exist to measure a click and hand it on. They must never be
+     indexed, never enter the sitemap, and never compete with the real release
+     page for the same query. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://www.auny.media/singles/fafo">
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+<!-- X conversion tracking base code -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+twq('config','od2kw');
+</script>
+<!-- End X conversion tracking base code -->
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --accent: #D8623A; --bg: #07070a; --fg: #f4f4f6; --dim: #9a9aa6; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Space Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem 1.25rem; text-align: center;
+  }
+  .wrap { max-width: 22rem; width: 100%; }
+  .cover {
+    width: 12rem; height: 12rem; margin: 0 auto 1.5rem;
+    border-radius: 0.75rem; overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 1.5rem 3rem rgba(0,0,0,0.6);
+  }
+  .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  h1 { font-family: 'Outfit', system-ui, sans-serif; font-size: 1.35rem; line-height: 1.25; margin-bottom: 0.4rem; }
+  .sub { color: var(--dim); font-size: 0.8rem; letter-spacing: 0.04em; margin-bottom: 1.75rem; }
+  .cta {
+    display: inline-block; width: 100%; padding: 0.9rem 1.25rem;
+    background: var(--accent); color: #07070a; text-decoration: none;
+    font-family: 'Outfit', system-ui, sans-serif; font-weight: 700;
+    border-radius: 0.6rem; font-size: 0.95rem;
+  }
+  .cta:hover { filter: brightness(1.08); }
+  .back { display: inline-block; margin-top: 1.1rem; color: var(--dim); font-size: 0.72rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.15); }
+  .back:hover { color: var(--fg); }
+  @media (prefers-reduced-motion: no-preference) {
+    .sub::after { content: '…'; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="cover"><img src="/album-art/singles/fafo.jpg" alt="F A F O cover art by Auny" width="192" height="192"></div>
+    <h1>F A F O</h1>
+    <p class="sub">opening Apple Music</p>
+
+    <!-- rel="noopener" ONLY. Adding noreferrer strips the origin and kills
+         auny.media attribution inside Spotify for Artists / partner reporting.
+         Canon: 🌐 auny.media/site_architecture.md, "Gotchas worth remembering". -->
+    <a class="cta" id="go" href="https://music.apple.com/us/album/f-a-f-o/1866165504" rel="noopener">open Apple Music →</a>
+
+    <a class="back" href="/singles/fafo">or see the full release page</a>
+  </main>
+
+<script>
+  // The pixel is async. Redirecting on load would race uwt.js and the click
+  // would go unrecorded, which is the exact silent failure that made Cloudflare
+  // Web Analytics report zero for weeks (⚙️ SEO Settings/aunymedia/manifest.md).
+  // So: hand the visitor a real button immediately, and auto-forward only after
+  // the tag has had time to fire. Anyone impatient clicks through and the
+  // pageview request has already gone out.
+  (function () {
+    var dest = document.getElementById('go').href;
+    setTimeout(function () { window.location.replace(dest); }, 1800);
+  })();
+</script>
+</body>
+</html>
